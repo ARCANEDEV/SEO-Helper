@@ -1,12 +1,14 @@
 <?php namespace Arcanedev\SeoHelper\Contracts\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
 /**
  * Interface  TitleTagInterface
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface TitleTagInterface
+interface TitleTagInterface extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -85,6 +87,17 @@ interface TitleTagInterface
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Make a TitleTag instance.
+     *
+     * @param  string  $title
+     * @param  string  $siteName
+     * @param  string  $separator
+     *
+     * @return self
+     */
+    public static function make($title, $siteName = '', $separator = '-');
+
     /**
      * Get the evaluated contents of the object.
      *

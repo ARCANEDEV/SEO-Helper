@@ -2,7 +2,6 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\TitleTagInterface;
 use Arcanedev\SeoHelper\Exceptions\TitleException;
-use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Class     TitleTag
@@ -10,7 +9,7 @@ use Illuminate\Contracts\Support\Renderable;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TitleTag implements TitleTagInterface, Renderable
+class TitleTag implements TitleTagInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -184,7 +183,26 @@ class TitleTag implements TitleTagInterface, Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the evaluated contents of the object.
+     * Make a TitleTag instance.
+     *
+     * @param  string  $title
+     * @param  string  $siteName
+     * @param  string  $separator
+     *
+     * @return self
+     */
+    public static function make($title, $siteName = '', $separator = '-')
+    {
+        return new self([
+            'default'   => $title,
+            'site-name' => $siteName,
+            'separator' => $separator,
+            'first'     => true
+        ]);
+    }
+
+    /**
+     * Render the tag.
      *
      * @return string
      */

@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\TitleTag;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -42,7 +43,8 @@ class TitleTagTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(TitleTag::class, $this->title);
+        $this->assertInstanceOf(TitleTag::class,   $this->title);
+        $this->assertInstanceOf(Renderable::class, $this->title);
     }
 
     /** @test */
@@ -182,6 +184,27 @@ class TitleTagTest extends TestCase
         $this->title->setLast();
 
         $this->assertEquals("<title>$siteName $title</title>", $this->title->render());
+    }
+
+    /** @test */
+    public function it_can_make_title_tag()
+    {
+        $title     = 'Awesome title';
+        $siteName  = 'Company Name';
+        $separator = '|';
+
+        $this->title = TitleTag::make($title, $siteName, $separator);
+
+        $this->assertInstanceOf(TitleTag::class, $this->title);
+
+        $this->assertEquals($title,     $this->title->getTitle());
+        $this->assertEquals($siteName,  $this->title->getSiteName());
+        $this->assertEquals($separator, $this->title->getSeparator());
+
+        $this->assertEquals(
+            '<title>Awesome title | Company Name</title>',
+            $this->title->render()
+        );
     }
 
     /**
