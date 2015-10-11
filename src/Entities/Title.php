@@ -252,7 +252,7 @@ class Title implements TitleInterface
             ? $this->renderTitleFirst($separator)
             : $this->renderTitleLast($separator);
 
-        return '<title>' . str_limit(implode('', $output), $this->max) . '</title>';
+        return '<title>' . str_limit(implode('', $output), $this->getMax()) . '</title>';
     }
 
     /* ------------------------------------------------------------------------------------------------
