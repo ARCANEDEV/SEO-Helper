@@ -3,12 +3,12 @@
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  TitleTagInterface
+ * Interface  TitleInterface
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface TitleTagInterface extends Renderable
+interface TitleInterface extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -104,7 +104,7 @@ interface TitleTagInterface extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make a TitleTag instance.
+     * Make a Title instance.
      *
      * @param  string  $title
      * @param  string  $siteName

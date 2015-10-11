@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
-use Arcanedev\SeoHelper\Entities\TitleTag;
+use Arcanedev\SeoHelper\Entities\Title;
 use Illuminate\Config\Repository as Config;
 
 /**
@@ -19,7 +19,7 @@ class SeoMeta implements SeoMetaInterface
     /**
      * Title tag instance.
      *
-     * @var  TitleTag
+     * @var  Title
      */
     protected $title;
 
@@ -42,7 +42,7 @@ class SeoMeta implements SeoMetaInterface
     public function __construct(Config $config)
     {
         $this->config = $config;
-        $this->title  = new TitleTag($this->config->get('seo-helper.title'));
+        $this->title  = new Title($this->config->get('seo-helper.title'));
     }
 
     /* ------------------------------------------------------------------------------------------------

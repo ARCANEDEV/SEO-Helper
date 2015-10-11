@@ -1,15 +1,15 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\TitleTagInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
 use Arcanedev\SeoHelper\Exceptions\TitleException;
 
 /**
- * Class     TitleTag
+ * Class     Title
  *
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TitleTag implements TitleTagInterface
+class Title implements TitleInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -55,7 +55,7 @@ class TitleTag implements TitleTagInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make TitleTag instance.
+     * Make Title instance.
      *
      * @param  array  $config
      */
@@ -220,7 +220,7 @@ class TitleTag implements TitleTagInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make a TitleTag instance.
+     * Make a Title instance.
      *
      * @param  string  $title
      * @param  string  $siteName

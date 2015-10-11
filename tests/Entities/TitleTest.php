@@ -1,22 +1,22 @@
 <?php namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
-use Arcanedev\SeoHelper\Entities\TitleTag;
+use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
 /**
- * Class     TitleTagTest
+ * Class     TitleTest
  *
  * @package  Arcanedev\SeoHelper\Tests\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TitleTagTest extends TestCase
+class TitleTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var TitleTag */
+    /** @var Title */
     protected $title;
 
     /* ------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ class TitleTagTest extends TestCase
         parent::setUp();
 
         $config      = $this->getTitleConfig();
-        $this->title = new TitleTag($config);
+        $this->title = new Title($config);
     }
 
     public function tearDown()
@@ -43,7 +43,7 @@ class TitleTagTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(TitleTag::class,   $this->title);
+        $this->assertInstanceOf(Title::class,   $this->title);
         $this->assertInstanceOf(Renderable::class, $this->title);
     }
 
@@ -193,9 +193,9 @@ class TitleTagTest extends TestCase
         $siteName  = 'Company Name';
         $separator = '|';
 
-        $this->title = TitleTag::make($title, $siteName, $separator);
+        $this->title = Title::make($title, $siteName, $separator);
 
-        $this->assertInstanceOf(TitleTag::class, $this->title);
+        $this->assertInstanceOf(Title::class, $this->title);
 
         $this->assertEquals($title,     $this->title->getTitle());
         $this->assertEquals($siteName,  $this->title->getSiteName());
