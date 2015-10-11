@@ -67,4 +67,14 @@ abstract class TestCase extends BaseTestCase
     {
         //
     }
+
+    /**
+     * Get Config instance.
+     *
+     * @return \Illuminate\Config\Repository
+     */
+    protected function config()
+    {
+        return  $this->app['config'];
+    }
 }

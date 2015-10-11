@@ -286,10 +286,7 @@ class TitleTest extends TestCase
      */
     private function getTitleConfig()
     {
-        /** @var \Illuminate\Config\Repository $config */
-        $config = $this->app['config'];
-
-        return $config->get('seo-helper.title', []);
+        return $this->config()->get('seo-helper.title', []);
     }
 
     /**
