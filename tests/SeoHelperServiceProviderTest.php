@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests;
+
 use Arcanedev\SeoHelper\SeoHelperServiceProvider;
 
 /**
@@ -24,6 +25,7 @@ class SeoHelperServiceProviderTest extends TestCase
     {
         parent::setUp();
 
+        $this->app->loadDeferredProviders();
         $this->provider = $this->app->getProvider(SeoHelperServiceProvider::class);
     }
 
