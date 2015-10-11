@@ -230,7 +230,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_max_lenght()
+    public function it_can_set_and_get_max_length()
     {
         $max = 50;
 
@@ -329,7 +329,7 @@ class TitleTest extends TestCase
     }
 
     /**
-     * Get title max lenght.
+     * Get title max length.
      *
      * @param  int  $default
      *

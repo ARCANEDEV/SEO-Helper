@@ -190,7 +190,7 @@ class Title implements TitleInterface
     }
 
     /**
-     * Get title max lenght.
+     * Get title max length.
      *
      * @return int
      */
@@ -200,7 +200,7 @@ class Title implements TitleInterface
     }
 
     /**
-     * Set title max lenght.
+     * Set title max length.
      *
      * @param  int  $max
      *
@@ -286,7 +286,7 @@ class Title implements TitleInterface
     }
 
     /**
-     * Check title max lenght.
+     * Check title max length.
      *
      * @param  int  $max
      *
