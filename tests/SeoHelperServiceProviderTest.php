@@ -25,7 +25,6 @@ class SeoHelperServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->app->loadDeferredProviders();
         $this->provider = $this->app->getProvider(SeoHelperServiceProvider::class);
     }
 

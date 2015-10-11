@@ -17,6 +17,8 @@ abstract class TestCase extends BaseTestCase
     public function setUp()
     {
         parent::setUp();
+
+        $this->app->loadDeferredProviders();
     }
 
     public function tearDown()
