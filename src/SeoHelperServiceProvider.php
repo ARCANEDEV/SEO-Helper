@@ -28,6 +28,13 @@ class SeoHelperServiceProvider extends ServiceProvider
      */
     protected $package = 'seo-helper';
 
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
@@ -52,6 +59,8 @@ class SeoHelperServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+
+        $this->registerSeoMetaService();
     }
 
     /**
@@ -69,6 +78,25 @@ class SeoHelperServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [
+            'arcanedev.seo-helper.meta',
+        ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Services Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Register SeoMeta service.
+     */
+    private function registerSeoMetaService()
+    {
+        $this->singleton('arcanedev.seo-helper.meta', function ($app) {
+            /** @var  \Illuminate\Config\Repository  $config */
+            $config = $app['config'];
+
+            return new SeoMeta($config);
+        });
     }
 }

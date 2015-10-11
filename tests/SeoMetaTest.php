@@ -1,20 +1,20 @@
 <?php namespace Arcanedev\SeoHelper\Tests;
-use Arcanedev\SeoHelper\SeoHelperServiceProvider;
+use Arcanedev\SeoHelper\SeoMeta;
 
 /**
- * Class     SeoHelperServiceProviderTest
+ * Class     SeoMetaTest
  *
  * @package  Arcanedev\SeoHelper\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoHelperServiceProviderTest extends TestCase
+class SeoMetaTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var SeoHelperServiceProvider */
-    private $provider;
+    /** @var SeoMeta */
+    private $seoMeta;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -24,14 +24,14 @@ class SeoHelperServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->provider = $this->app->getProvider(SeoHelperServiceProvider::class);
+        $this->seoMeta = new SeoMeta($this->app['config']);
     }
 
     public function tearDown()
     {
         parent::tearDown();
 
-        unset($this->provider);
+        unset($this->seoMeta);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -39,18 +39,8 @@ class SeoHelperServiceProviderTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_can_get_service_provider()
+    public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(\Illuminate\Support\ServiceProvider::class, $this->provider);
-        $this->assertInstanceOf(\Arcanedev\Support\ServiceProvider::class, $this->provider);
-        $this->assertInstanceOf(\Arcanedev\Support\PackageServiceProvider::class, $this->provider);
-    }
-
-    /** @test */
-    public function it_can_get_provides()
-    {
-        $this->assertEquals([
-            'arcanedev.seo-helper.meta',
-        ], $this->provider->provides());
+        $this->assertInstanceOf(SeoMeta::class, $this->seoMeta);
     }
 }
