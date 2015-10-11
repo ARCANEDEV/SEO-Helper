@@ -6,7 +6,7 @@
  * @package   Arcanedev\SeoHelper\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface SeoMetaInterface
+interface SeoMetaInterface extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
