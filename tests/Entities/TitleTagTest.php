@@ -26,7 +26,7 @@ class TitleTagTest extends TestCase
     {
         parent::setUp();
 
-        $config    = $this->getTitleConfig();
+        $config      = $this->getTitleConfig();
         $this->title = new TitleTag($config);
     }
 
@@ -217,7 +217,10 @@ class TitleTagTest extends TestCase
      */
     private function getTitleConfig()
     {
-        return config('seo-helper.title', []);
+        /** @var \Illuminate\Config\Repository $config */
+        $config = $this->app['config'];
+
+        return $config->get('seo-helper.title', []);
     }
 
     /**
