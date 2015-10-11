@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
-use Arcanedev\SeoHelper\Exceptions\TitleException;
+use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 
 /**
  * Class     Title
@@ -264,14 +264,14 @@ class Title implements TitleInterface
      *
      * @param  string  $title
      *
-     * @throws \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      */
     private function checkTitle(&$title)
     {
         if ( ! is_string($title)) {
             $type = gettype($title);
 
-            throw new TitleException(
+            throw new InvalidArgumentException(
                 "The title must be a string value, [$type] is given."
             );
         }
@@ -279,7 +279,7 @@ class Title implements TitleInterface
         $title = trim($title);
 
         if (empty($title)) {
-            throw new TitleException(
+            throw new InvalidArgumentException(
                 "The title is required and must not be empty."
             );
         }
@@ -290,18 +290,18 @@ class Title implements TitleInterface
      *
      * @param  int  $max
      *
-     * @throws \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      */
     private function checkMax($max)
     {
         if ( ! is_int($max)) {
-            throw new TitleException(
+            throw new InvalidArgumentException(
                 'The title maximum lenght must be integer.'
             );
         }
 
         if ($max <= 0) {
-            throw new TitleException(
+            throw new InvalidArgumentException(
                 'The title maximum lenght must be greater 0.'
             );
         }

@@ -210,7 +210,7 @@ class TitleTest extends TestCase
     /**
      * @test
      *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      * @expectedExceptionMessage  The title must be a string value, [NULL] is given.
      */
     public function it_must_throw_title_exception_on_invalid_type()
@@ -221,7 +221,7 @@ class TitleTest extends TestCase
     /**
      * @test
      *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      * @expectedExceptionMessage  The title is required and must not be empty.
      */
     public function it_must_throw_title_exception_on_empty_title()
@@ -256,7 +256,7 @@ class TitleTest extends TestCase
     /**
      * @test
      *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      * @expectedExceptionMessage  The title maximum lenght must be integer.
      */
     public function it_must_throw_invalid_max_lenght_type()
@@ -267,7 +267,7 @@ class TitleTest extends TestCase
     /**
      * @test
      *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      * @expectedExceptionMessage  The title maximum lenght must be greater 0.
      */
     public function it_must_throw_invalid_max_lenght_value()

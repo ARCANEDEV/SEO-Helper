@@ -1,9 +1,9 @@
 <?php namespace Arcanedev\SeoHelper\Exceptions;
 
 /**
- * Class     TitleException
+ * Class     InvalidArgumentException
  *
  * @package  Arcanedev\SeoHelper\Exceptions
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class TitleException extends SeoHelperException {}
+class InvalidArgumentException extends SeoHelperException {}
