@@ -229,6 +229,52 @@ class TitleTagTest extends TestCase
         $this->title->setTitle('  ');
     }
 
+    /** @test */
+    public function it_can_set_and_get_max_lenght()
+    {
+        $max = 50;
+
+        $this->title->setMax($max);
+
+        $this->assertEquals($max, $this->title->getMax());
+    }
+
+    /** @test */
+    public function it_can_render_long_title()
+    {
+        $title = 'This is my long and awesome title that gonna blown your mind.';
+        $max   = $this->getDefaultMax();
+
+        $this->title->setTitle($title)->setMax($max);
+
+        $this->assertEquals(
+            '<title>' . str_limit($title, $max) . '</title>',
+            $this->title->render()
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @expectedExceptionMessage  The title maximum lenght must be integer.
+     */
+    public function it_must_throw_invalid_max_lenght_type()
+    {
+        $this->title->setMax(null);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\TitleException
+     * @expectedExceptionMessage  The title maximum lenght must be greater 0.
+     */
+    public function it_must_throw_invalid_max_lenght_value()
+    {
+        $this->title->setMax(0);
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
@@ -280,5 +326,17 @@ class TitleTagTest extends TestCase
     private function getDefaultSeparator($default = '-')
     {
         return array_get($this->getTitleConfig(), 'separator', $default);
+    }
+
+    /**
+     * Get title max lenght.
+     *
+     * @param  int  $default
+     *
+     * @return int
+     */
+    private function getDefaultMax($default = 55)
+    {
+        return array_get($this->getTitleConfig(), 'max', $default);
     }
 }

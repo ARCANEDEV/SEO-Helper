@@ -37,9 +37,18 @@ class TitleTag implements TitleTagInterface
     protected $separator    = '-';
 
     /**
+     * Display the title first.
+     *
      * @var bool
      */
     protected $titleFirst   = true;
+
+    /**
+     * Maximum title length.
+     *
+     * @var int
+     */
+    protected $max          = 55;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -55,6 +64,8 @@ class TitleTag implements TitleTagInterface
         $this->setTitle(array_get($config, 'default', ''));
         $this->setSiteName(array_get($config, 'site-name', ''));
         $this->setSeparator(array_get($config, 'separator', '-'));
+        $this->switchPosition(array_get($config, 'first', true));
+        $this->setMax(array_get($config, 'max', 55));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -163,7 +174,7 @@ class TitleTag implements TitleTagInterface
      */
     private function switchPosition($first)
     {
-        $this->titleFirst = $first;
+        $this->titleFirst = boolval($first);
 
         return $this;
     }
@@ -176,6 +187,32 @@ class TitleTag implements TitleTagInterface
     public function isTitleFirst()
     {
         return $this->titleFirst;
+    }
+
+    /**
+     * Get title max lenght.
+     *
+     * @return int
+     */
+    public function getMax()
+    {
+        return $this->max;
+    }
+
+    /**
+     * Set title max lenght.
+     *
+     * @param  int  $max
+     *
+     * @return self
+     */
+    public function setMax($max)
+    {
+        $this->checkMax($max);
+
+        $this->max = $max;
+
+        return $this;
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -215,7 +252,7 @@ class TitleTag implements TitleTagInterface
             ? $this->renderTitleFirst($separator)
             : $this->renderTitleLast($separator);
 
-        return '<title>' . implode('', $output) . '</title>';
+        return '<title>' . str_limit(implode('', $output), $this->max) . '</title>';
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -244,6 +281,28 @@ class TitleTag implements TitleTagInterface
         if (empty($title)) {
             throw new TitleException(
                 "The title is required and must not be empty."
+            );
+        }
+    }
+
+    /**
+     * Check title max lenght.
+     *
+     * @param  int  $max
+     *
+     * @throws \Arcanedev\SeoHelper\Exceptions\TitleException
+     */
+    private function checkMax($max)
+    {
+        if ( ! is_int($max)) {
+            throw new TitleException(
+                'The title maximum lenght must be integer.'
+            );
+        }
+
+        if ($max <= 0) {
+            throw new TitleException(
+                'The title maximum lenght must be greater 0.'
             );
         }
     }

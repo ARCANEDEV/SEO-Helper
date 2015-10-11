@@ -83,6 +83,22 @@ interface TitleTagInterface extends Renderable
      */
     public function isTitleFirst();
 
+    /**
+     * Get title max lenght.
+     *
+     * @return int
+     */
+    public function getMax();
+
+    /**
+     * Set title max lenght.
+     *
+     * @param  int  $max
+     *
+     * @return self
+     */
+    public function setMax($max);
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------

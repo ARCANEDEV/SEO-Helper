@@ -10,5 +10,6 @@ return [
         'site-name' => '',
         'separator' => '-',
         'first'     => true,
+        'max'       => 55,
     ]
 ];
