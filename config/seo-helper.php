@@ -29,4 +29,15 @@ return [
     'keywords'  => [
         'default'   => [],
     ],
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Miscellaneous
+     | ------------------------------------------------------------------------------------------------
+     */
+    'misc'      => [
+        'canonical' => true,
+        'robots'    => ! app()->environment('production'),  // Tell robots not to index the content if it's not on production
+        'author'    => '', // https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]
+        'publisher' => '', // https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]
+    ],
 ];
