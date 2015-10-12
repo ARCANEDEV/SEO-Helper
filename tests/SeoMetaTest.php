@@ -99,4 +99,29 @@ class SeoMetaTest extends TestCase
             $this->seoMeta->renderDescription()
         );
     }
+
+    /** @test */
+    public function it_can_set_and_get_and_render_keywords()
+    {
+        $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
+
+        $this->seoMeta->setKeywords($keywords);
+
+        $this->assertEquals($keywords, $this->seoMeta->getKeywords());
+        $this->assertEquals(
+            '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
+            $this->seoMeta->renderKeywords()
+        );
+
+        $this->seoMeta->setKeywords(implode(',', $keywords));
+
+        $this->assertEquals($keywords, $this->seoMeta->getKeywords());
+        $this->assertEquals(
+            '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
+            $this->seoMeta->renderKeywords()
+        );
+
+        $this->seoMeta->setKeywords(null);
+        $this->assertEmpty($this->seoMeta->renderKeywords());
+    }
 }

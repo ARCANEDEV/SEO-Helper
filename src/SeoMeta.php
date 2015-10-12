@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
 use Arcanedev\SeoHelper\Entities\Description;
+use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Entities\Title;
 use Illuminate\Config\Repository as Config;
 
@@ -20,16 +21,23 @@ class SeoMeta implements SeoMetaInterface
     /**
      * Title instance.
      *
-     * @var  Title
+     * @var Title
      */
     protected $title;
 
     /**
      * Description instance.
      *
-     * @var  Description
+     * @var Description
      */
     protected $description;
+
+    /**
+     * Description instance.
+     *
+     * @var Keywords
+     */
+    protected $keywords;
 
     /**
      * Illuminate Config repository.
@@ -50,8 +58,17 @@ class SeoMeta implements SeoMetaInterface
     public function __construct(Config $config)
     {
         $this->config      = $config;
+        $this->init();
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init()
+    {
         $this->title       = new Title($this->config->get('seo-helper.title'));
         $this->description = new Description($this->config->get('seo-helper.description'));
+        $this->keywords    = new Keywords($this->config->get('seo-helper.keywords'));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -69,7 +86,7 @@ class SeoMeta implements SeoMetaInterface
     }
 
     /**
-     * Set title.
+     * Set the title.
      *
      * @param  string  $title
      * @param  string  $siteName
@@ -93,7 +110,7 @@ class SeoMeta implements SeoMetaInterface
     }
 
     /**
-     * Get description content.
+     * Get the description content.
      *
      * @return string
      */
@@ -103,7 +120,7 @@ class SeoMeta implements SeoMetaInterface
     }
 
     /**
-     * Set description content.
+     * Set the description content.
      *
      * @param  string  $content
      *
@@ -112,6 +129,30 @@ class SeoMeta implements SeoMetaInterface
     public function setDescription($content)
     {
         $this->description->setContent($content);
+
+        return $this;
+    }
+
+    /**
+     * Get the keywords content.
+     *
+     * @return array
+     */
+    public function getKeywords()
+    {
+        return $this->keywords->getContent();
+    }
+
+    /**
+     * Set the keywords content.
+     *
+     * @param  array|string  $content
+     *
+     * @return self
+     */
+    public function setKeywords($content)
+    {
+        $this->keywords->setContent($content);
 
         return $this;
     }
@@ -127,12 +168,11 @@ class SeoMeta implements SeoMetaInterface
      */
     public function render()
     {
-        $tags = [
+        return implode(PHP_EOL, array_filter([
             $this->renderTitle(),
             $this->renderDescription(),
-        ];
-
-        return implode(PHP_EOL, array_filter($tags));
+            $this->renderKeywords(),
+        ]));
     }
 
     /**
@@ -155,8 +195,13 @@ class SeoMeta implements SeoMetaInterface
         return $this->description->render();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /**
+     * Render keywords tag.
+     *
+     * @return string
      */
+    public function renderKeywords()
+    {
+        return $this->keywords->render();
+    }
 }
