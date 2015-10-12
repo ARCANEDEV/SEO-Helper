@@ -61,6 +61,7 @@ class SeoHelperServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerSeoMetaService();
+        $this->registerSeoHelperService();
     }
 
     /**
@@ -79,6 +80,7 @@ class SeoHelperServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
+            'arcanedev.seo-helper',
             'arcanedev.seo-helper.meta',
         ];
     }
@@ -97,6 +99,19 @@ class SeoHelperServiceProvider extends ServiceProvider
             $config = $app['config'];
 
             return new SeoMeta($config->get('seo-helper'));
+        });
+    }
+
+    /**
+     * Register SeoMeta service.
+     */
+    private function registerSeoHelperService()
+    {
+        $this->singleton('arcanedev.seo-helper', function ($app) {
+            /** @var \Arcanedev\SeoHelper\Contracts\SeoMetaInterface $seoMeta */
+            $seoMeta = $app['arcanedev.seo-helper.meta'];
+
+            return new SeoHelper($seoMeta);
         });
     }
 }
