@@ -61,4 +61,22 @@ interface SeoMetaInterface extends Renderable
      * @return self
      */
     public function setKeywords($content);
+
+    /**
+     * Add a keyword.
+     *
+     * @param  string  $keyword
+     *
+     * @return self
+     */
+    public function addKeyword($keyword);
+
+    /**
+     * Set the current URL.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function setUrl($url);
 }

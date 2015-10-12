@@ -3,6 +3,7 @@
 use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Entities\Keywords;
+use Arcanedev\SeoHelper\Entities\MiscTags;
 use Arcanedev\SeoHelper\Entities\Title;
 
 /**
@@ -39,6 +40,20 @@ class SeoMeta implements SeoMetaInterface
     protected $keywords;
 
     /**
+     * MiscTags instance.
+     *
+     * @var MiscTags
+     */
+    protected $misc;
+
+    /**
+     * Current URL.
+     *
+     * @var string
+     */
+    protected $currentUrl = '';
+
+    /**
      * SEO Helper configs.
      *
      * @var array
@@ -68,6 +83,7 @@ class SeoMeta implements SeoMetaInterface
         $this->title       = new Title($this->getConfig('title', []));
         $this->description = new Description($this->getConfig('description', []));
         $this->keywords    = new Keywords($this->getConfig('keywords', []));
+        $this->misc        = new MiscTags($this->getConfig('misc', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -156,6 +172,35 @@ class SeoMeta implements SeoMetaInterface
         return $this;
     }
 
+    /**
+     * Add a keyword.
+     *
+     * @param  string  $keyword
+     *
+     * @return self
+     */
+    public function addKeyword($keyword)
+    {
+        $this->keywords->add($keyword);
+
+        return $this;
+    }
+
+    /**
+     * Set the current URL.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        $this->currentUrl = $url;
+        $this->misc->setUrl($url);
+
+        return $this;
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -171,6 +216,7 @@ class SeoMeta implements SeoMetaInterface
             $this->renderTitle(),
             $this->renderDescription(),
             $this->renderKeywords(),
+            $this->renderMisc(),
         ]));
     }
 
@@ -202,6 +248,16 @@ class SeoMeta implements SeoMetaInterface
     public function renderKeywords()
     {
         return $this->keywords->render();
+    }
+
+    /**
+     * Render Miscellaneous tags.
+     *
+     * @return string
+     */
+    public function renderMisc()
+    {
+        return $this->misc->render();
     }
 
     /* ------------------------------------------------------------------------------------------------

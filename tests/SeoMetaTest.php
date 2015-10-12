@@ -26,6 +26,8 @@ class SeoMetaTest extends TestCase
 
         $configs       = $this->app['config']->get('seo-helper');
         $this->seoMeta = new SeoMeta($configs);
+
+        $this->seoMeta->setUrl($this->baseUrl);
     }
 
     public function tearDown()
@@ -124,5 +126,19 @@ class SeoMetaTest extends TestCase
 
         $this->seoMeta->setKeywords(null);
         $this->assertEmpty($this->seoMeta->renderKeywords());
+    }
+
+    /** @test */
+    public function it_can_add_one_keyword()
+    {
+        $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
+        $this->seoMeta->setKeywords($keywords);
+
+        $this->assertEquals($keywords, $this->seoMeta->getKeywords());
+
+        $keywords[] = $keyword = 'keyword-6';
+        $this->seoMeta->addKeyword($keyword);
+
+        $this->assertEquals($keywords, $this->seoMeta->getKeywords());
     }
 }
