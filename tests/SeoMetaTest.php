@@ -46,6 +46,15 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
+    public function it_can_be_instantiated_by_container()
+    {
+        $this->seoMeta = $this->app['arcanedev.seo-helper.meta'];
+
+        $this->assertInstanceOf(SeoMeta::class, $this->seoMeta);
+        $this->assertNotEmpty($this->seoMeta->render());
+    }
+
+    /** @test */
     public function it_can_set_and_get_and_render_title()
     {
         $title = 'Awesome Title';
@@ -74,6 +83,20 @@ class SeoMetaTest extends TestCase
         $this->assertEquals(
             "<title>$title $separator $siteName</title>",
             $this->seoMeta->renderTitle()
+        );
+    }
+
+    /** @test */
+    public function it_can_set_and_get_and_render_description()
+    {
+        $description = 'Awesome Description';
+
+        $this->seoMeta->setDescription($description);
+
+        $this->assertEquals($description, $this->seoMeta->getDescription());
+        $this->assertEquals(
+            '<meta name="description" content="' . $description . '">',
+            $this->seoMeta->renderDescription()
         );
     }
 }

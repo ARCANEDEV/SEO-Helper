@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
+use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Entities\Title;
 use Illuminate\Config\Repository as Config;
 
@@ -17,11 +18,18 @@ class SeoMeta implements SeoMetaInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Title tag instance.
+     * Title instance.
      *
      * @var  Title
      */
     protected $title;
+
+    /**
+     * Description instance.
+     *
+     * @var  Description
+     */
+    protected $description;
 
     /**
      * Illuminate Config repository.
@@ -41,8 +49,9 @@ class SeoMeta implements SeoMetaInterface
      */
     public function __construct(Config $config)
     {
-        $this->config = $config;
-        $this->title  = new Title($this->config->get('seo-helper.title'));
+        $this->config      = $config;
+        $this->title       = new Title($this->config->get('seo-helper.title'));
+        $this->description = new Description($this->config->get('seo-helper.description'));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -83,6 +92,30 @@ class SeoMeta implements SeoMetaInterface
         return $this;
     }
 
+    /**
+     * Get description content.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description->getContent();
+    }
+
+    /**
+     * Set description content.
+     *
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function setDescription($content)
+    {
+        $this->description->setContent($content);
+
+        return $this;
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -94,9 +127,12 @@ class SeoMeta implements SeoMetaInterface
      */
     public function render()
     {
-        return implode(PHP_EOL, [
+        $tags = [
             $this->renderTitle(),
-        ]);
+            $this->renderDescription(),
+        ];
+
+        return implode(PHP_EOL, array_filter($tags));
     }
 
     /**
@@ -107,6 +143,16 @@ class SeoMeta implements SeoMetaInterface
     public function renderTitle()
     {
         return $this->title->render();
+    }
+
+    /**
+     * Render description tag.
+     *
+     * @return string
+     */
+    public function renderDescription()
+    {
+        return $this->description->render();
     }
 
     /* ------------------------------------------------------------------------------------------------
