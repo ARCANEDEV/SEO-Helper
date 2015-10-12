@@ -49,7 +49,7 @@ class Keywords implements KeywordsInterface
     /**
      * Get content.
      *
-     * @return string
+     * @return array
      */
     public function getContent()
     {
@@ -59,7 +59,7 @@ class Keywords implements KeywordsInterface
     /**
      * Set description content.
      *
-     * @param  string  $content
+     * @param  array|string  $content
      *
      * @return self
      */

@@ -17,14 +17,14 @@ interface KeywordsInterface extends Renderable
     /**
      * Get content.
      *
-     * @return string
+     * @return array
      */
     public function getContent();
 
     /**
      * Set description content.
      *
-     * @param  string  $content
+     * @param  array|string  $content
      *
      * @return self
      */
