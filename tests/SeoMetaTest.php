@@ -24,7 +24,8 @@ class SeoMetaTest extends TestCase
     {
         parent::setUp();
 
-        $this->seoMeta = new SeoMeta($this->app['config']);
+        $configs       = $this->app['config']->get('seo-helper');
+        $this->seoMeta = new SeoMeta($configs);
     }
 
     public function tearDown()

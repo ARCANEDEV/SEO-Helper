@@ -96,7 +96,7 @@ class SeoHelperServiceProvider extends ServiceProvider
             /** @var  \Illuminate\Config\Repository  $config */
             $config = $app['config'];
 
-            return new SeoMeta($config);
+            return new SeoMeta($config->get('seo-helper'));
         });
     }
 }

@@ -4,7 +4,6 @@ use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Entities\Title;
-use Illuminate\Config\Repository as Config;
 
 /**
  * Class     SeoMeta
@@ -40,11 +39,11 @@ class SeoMeta implements SeoMetaInterface
     protected $keywords;
 
     /**
-     * Illuminate Config repository.
+     * SEO Helper configs.
      *
-     * @var Config
+     * @var array
      */
-    private $config;
+    private $configs = [];
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -53,11 +52,11 @@ class SeoMeta implements SeoMetaInterface
     /**
      * Make SeoMeta instance.
      *
-     * @param  Config  $config
+     * @param  array  $configs
      */
-    public function __construct(Config $config)
+    public function __construct(array $configs)
     {
-        $this->config      = $config;
+        $this->configs  = $configs;
         $this->init();
     }
 
@@ -66,9 +65,9 @@ class SeoMeta implements SeoMetaInterface
      */
     private function init()
     {
-        $this->title       = new Title($this->config->get('seo-helper.title'));
-        $this->description = new Description($this->config->get('seo-helper.description'));
-        $this->keywords    = new Keywords($this->config->get('seo-helper.keywords'));
+        $this->title       = new Title($this->getConfig('title', []));
+        $this->description = new Description($this->getConfig('description', []));
+        $this->keywords    = new Keywords($this->getConfig('keywords', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -203,5 +202,22 @@ class SeoMeta implements SeoMetaInterface
     public function renderKeywords()
     {
         return $this->keywords->render();
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get config.
+     *
+     * @param  string      $key
+     * @param  mixed|null  $default
+     *
+     * @return mixed
+     */
+    private function getConfig($key, $default = null)
+    {
+        return array_get($this->configs, $key, $default);
     }
 }
