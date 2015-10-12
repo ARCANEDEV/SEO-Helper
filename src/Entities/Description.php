@@ -40,6 +40,11 @@ class Description implements DescriptionInterface
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Make Description instance.
+     *
+     * @param  array  $config
+     */
     public function __construct(array $config = [])
     {
         $this->setContent(array_get($config, 'default', ''));
@@ -115,7 +120,7 @@ class Description implements DescriptionInterface
             return '';
         }
 
-        return '<meta name="' . $this->name . '" content="' . str_limit($this->content, $this->getMax()) . '">';
+        return '<meta name="' . $this->name . '" content="' . str_limit($this->getContent(), $this->getMax()) . '">';
     }
 
     /* ------------------------------------------------------------------------------------------------
