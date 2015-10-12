@@ -65,7 +65,10 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        //
+        // Keywords
+        $app['config']->set('seo-helper.keywords', [
+            'default' => ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5']
+        ]);
     }
 
     /**
