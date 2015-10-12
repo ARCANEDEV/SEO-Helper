@@ -54,6 +54,7 @@ class KeywordsTest extends TestCase
     {
         $content = $this->getDefaultContent();
 
+        $this->assertCount(count($content), $this->keywords->getContent());
         $this->assertEquals($content, $this->keywords->getContent());
     }
 
@@ -64,20 +65,41 @@ class KeywordsTest extends TestCase
 
         $this->keywords->setContent($content);
 
+        $this->assertCount(count($content), $this->keywords->getContent());
         $this->assertEquals($content, $this->keywords->getContent());
 
         $this->keywords->setContent(implode(',', $content));
 
+        $this->assertCount(count($content), $this->keywords->getContent());
         $this->assertEquals($content, $this->keywords->getContent());
 
         $keyword = 'one-keyword';
         $this->keywords->setContent($keyword);
 
+        $this->assertCount(1, $this->keywords->getContent());
         $this->assertEquals([$keyword], $this->keywords->getContent());
 
         $this->keywords->setContent(null);
 
+        $this->assertCount(0, $this->keywords->getContent());
         $this->assertEmpty($this->keywords->getContent());
+    }
+
+    /** @test */
+    public function it_can_add_a_keyword()
+    {
+        $content = $this->getDefaultContent();
+
+        $this->keywords->setContent($content);
+
+        $this->assertCount(count($content), $this->keywords->getContent());
+        $this->assertEquals($content, $this->keywords->getContent());
+
+        $content[] = $keyword = 'keyword-6';
+        $this->keywords->add($keyword);
+
+        $this->assertCount(count($content), $this->keywords->getContent());
+        $this->assertEquals($content, $this->keywords->getContent());
     }
 
     /** @test */

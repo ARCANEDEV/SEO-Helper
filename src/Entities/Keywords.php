@@ -78,6 +78,20 @@ class Keywords implements KeywordsInterface
         return $this;
     }
 
+    /**
+     * Add a keyword to the content.
+     *
+     * @param  string  $keyword
+     *
+     * @return self
+     */
+    public function add($keyword)
+    {
+        $this->content[] = $keyword;
+
+        return $this;
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------

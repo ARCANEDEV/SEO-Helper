@@ -29,4 +29,13 @@ interface KeywordsInterface extends Renderable
      * @return self
      */
     public function setContent($content);
+
+    /**
+     * Add a keyword to the content.
+     *
+     * @param  string  $keyword
+     *
+     * @return self
+     */
+    public function add($keyword);
 }
