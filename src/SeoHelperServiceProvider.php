@@ -19,21 +19,21 @@ class SeoHelperServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $vendor  = 'arcanedev';
+    protected $vendor   = 'arcanedev';
 
     /**
      * Package name.
      *
      * @var string
      */
-    protected $package = 'seo-helper';
+    protected $package  = 'seo-helper';
 
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
-    protected $defer = true;
+    protected $defer    = true;
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -115,5 +115,7 @@ class SeoHelperServiceProvider extends ServiceProvider
 
             return new SeoHelper($seoMeta);
         });
+
+        $this->app->bind(Contracts\SeoHelper::class, 'arcanedev.seo-helper');
     }
 }

@@ -41,7 +41,8 @@ class SeoHelperTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(SeoHelper::class, $this->seoHelper);
+        $this->assertInstanceOf(\Arcanedev\SeoHelper\SeoHelper::class,           $this->seoHelper);
+        $this->assertInstanceOf(\Arcanedev\SeoHelper\Contracts\SeoHelper::class, $this->seoHelper);
     }
 
     /** @test */
@@ -51,5 +52,13 @@ class SeoHelperTest extends TestCase
 
         $this->assertInstanceOf(\Arcanedev\SeoHelper\SeoMeta::class,           $seoMeta);
         $this->assertInstanceOf(\Arcanedev\SeoHelper\Contracts\SeoMeta::class, $seoMeta);
+    }
+
+    /** @test */
+    public function it_can_render_all()
+    {
+        $output = $this->seoHelper->render();
+
+        $this->assertNotEmpty($output);
     }
 }

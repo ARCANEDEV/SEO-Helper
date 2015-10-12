@@ -1,14 +1,12 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaInterface;
-
 /**
  * Class     SeoHelper
  *
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoHelper
+class SeoHelper implements Contracts\SeoHelper
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -17,7 +15,7 @@ class SeoHelper
     /**
      * The SeoMeta instance.
      *
-     * @var SeoMetaInterface
+     * @var Contracts\SeoMeta
      */
     private $seoMeta;
 
@@ -30,7 +28,7 @@ class SeoHelper
      *
      * @param  Contracts\SeoMeta  $seoMeta
      */
-    public function __construct(SeoMetaInterface $seoMeta)
+    public function __construct(Contracts\SeoMeta $seoMeta)
     {
         $this->seoMeta = $seoMeta;
     }
@@ -47,5 +45,17 @@ class SeoHelper
     public function meta()
     {
         return $this->seoMeta;
+    }
+
+    /**
+     * Render all seo tags.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return implode(PHP_EOL, [
+            $this->meta()->render(),
+        ]);
     }
 }
