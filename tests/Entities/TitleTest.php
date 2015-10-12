@@ -43,7 +43,7 @@ class TitleTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(Title::class,   $this->title);
+        $this->assertInstanceOf(Title::class,      $this->title);
         $this->assertInstanceOf(Renderable::class, $this->title);
     }
 
