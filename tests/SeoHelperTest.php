@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests;
+
 use Arcanedev\SeoHelper\SeoHelper;
 
 /**

@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests\Entities;
+
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -143,26 +144,30 @@ class DescriptionTest extends TestCase
      */
     private function getDescriptionConfig()
     {
-        return $this->config()->get('seo-helper.description');
+        return $this->getSeoHelperConfig('description', []);
     }
 
     /**
      * Get default description content.
      *
+     * @param  string  $default
+     *
      * @return string
      */
-    private function getDefaultContent()
+    private function getDefaultContent($default = '')
     {
-        return array_get($this->getDescriptionConfig(), 'default', '');
+        return $this->getSeoHelperConfig('description.default', $default);
     }
 
     /**
      * Get default description max length.
      *
+     * @param  int  $default
+     *
      * @return int
      */
-    private function getDefaultMax()
+    private function getDefaultMax($default = 155)
     {
-        return array_get($this->getDescriptionConfig(), 'max', 155);
+        return $this->getSeoHelperConfig('description.max', $default);
     }
 }

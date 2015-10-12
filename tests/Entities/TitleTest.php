@@ -286,7 +286,7 @@ class TitleTest extends TestCase
      */
     private function getTitleConfig()
     {
-        return $this->config()->get('seo-helper.title', []);
+        return $this->getSeoHelperConfig('title', []);
     }
 
     /**
@@ -298,7 +298,7 @@ class TitleTest extends TestCase
      */
     private function getDefaultTitle($default = '')
     {
-        return array_get($this->getTitleConfig(), 'default', $default);
+        return $this->getSeoHelperConfig('title.default', $default);
     }
 
     /**
@@ -310,7 +310,7 @@ class TitleTest extends TestCase
      */
     private function getDefaultSiteName($default = '')
     {
-        return array_get($this->getTitleConfig(), 'site-name', $default);
+        return $this->getSeoHelperConfig('title.site-name', $default);
     }
 
     /**
@@ -322,7 +322,7 @@ class TitleTest extends TestCase
      */
     private function getDefaultSeparator($default = '-')
     {
-        return array_get($this->getTitleConfig(), 'separator', $default);
+        return $this->getSeoHelperConfig('title.separator', $default);
     }
 
     /**
@@ -334,6 +334,6 @@ class TitleTest extends TestCase
      */
     private function getDefaultMax($default = 55)
     {
-        return array_get($this->getTitleConfig(), 'max', $default);
+        return $this->getSeoHelperConfig('title.max', $default);
     }
 }

@@ -142,7 +142,7 @@ class KeywordsTest extends TestCase
      */
     private function getKeywordsConfig()
     {
-        return $this->config()->get('seo-helper.keywords', []);
+        return $this->getSeoHelperConfig('keywords', []);
     }
 
     /**
@@ -152,6 +152,6 @@ class KeywordsTest extends TestCase
      */
     private function getDefaultContent()
     {
-        return array_get($this->getKeywordsConfig(), 'default', []);
+        return $this->getSeoHelperConfig('keywords.default', []);
     }
 }

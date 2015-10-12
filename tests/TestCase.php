@@ -80,4 +80,22 @@ abstract class TestCase extends BaseTestCase
     {
         return  $this->app['config'];
     }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get SeoHelper config.
+     *
+     * @return array
+     */
+    protected function getSeoHelperConfig($name = null, $default = null)
+    {
+        if (is_null($name)) {
+            return $this->config()->get('seo-helper', []);
+        }
+
+        return $this->config()->get("seo-helper.$name", $default);
+    }
 }

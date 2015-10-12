@@ -159,6 +159,6 @@ class MiscTagsTest extends TestCase
      */
     private function getMiscConfig()
     {
-        return array_get($this->config()->get('seo-helper'), 'misc', []);
+        return $this->getSeoHelperConfig('misc', []);
     }
 }

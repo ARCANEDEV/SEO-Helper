@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests;
+
 use Arcanedev\SeoHelper\SeoMeta;
 
 /**
@@ -24,7 +25,7 @@ class SeoMetaTest extends TestCase
     {
         parent::setUp();
 
-        $configs       = $this->app['config']->get('seo-helper');
+        $configs       = $this->getSeoHelperConfig();
         $this->seoMeta = new SeoMeta($configs);
 
         $this->seoMeta->setUrl($this->baseUrl);
