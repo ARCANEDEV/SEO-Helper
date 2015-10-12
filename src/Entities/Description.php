@@ -134,7 +134,7 @@ class Description implements DescriptionInterface
      */
     private function hasContent()
     {
-        return ! empty($this->content);
+        return ! empty($this->getContent());
     }
 
     /**
