@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Entities\MiscTags;
@@ -12,7 +11,7 @@ use Arcanedev\SeoHelper\Entities\Title;
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoMeta implements SeoMetaInterface
+class SeoMeta implements Contracts\SeoMeta
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties

@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\SeoMetaInterface;
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaInterface;
 
 /**
  * Class     SeoHelper
@@ -15,6 +15,8 @@ class SeoHelper
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * The SeoMeta instance.
+     *
      * @var SeoMetaInterface
      */
     private $seoMeta;
@@ -26,7 +28,7 @@ class SeoHelper
     /**
      * Make SeoHelper instance.
      *
-     * @param  SeoMetaInterface  $seoMeta
+     * @param  Contracts\SeoMeta  $seoMeta
      */
     public function __construct(SeoMetaInterface $seoMeta)
     {
@@ -37,4 +39,13 @@ class SeoHelper
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Get SeoMeta instance.
+     *
+     * @return Contracts\SeoMeta
+     */
+    public function meta()
+    {
+        return $this->seoMeta;
+    }
 }

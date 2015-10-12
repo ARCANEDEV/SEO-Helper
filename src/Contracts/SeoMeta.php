@@ -1,12 +1,12 @@
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
 /**
- * Interface  SeoMetaInterface
+ * Interface  SeoMeta
  *
  * @package   Arcanedev\SeoHelper\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface SeoMetaInterface extends Renderable
+interface SeoMeta extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters

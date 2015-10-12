@@ -100,6 +100,8 @@ class SeoHelperServiceProvider extends ServiceProvider
 
             return new SeoMeta($config->get('seo-helper'));
         });
+
+        $this->app->bind(Contracts\SeoMeta::class, 'arcanedev.seo-helper.meta');
     }
 
     /**
@@ -108,7 +110,7 @@ class SeoHelperServiceProvider extends ServiceProvider
     private function registerSeoHelperService()
     {
         $this->singleton('arcanedev.seo-helper', function ($app) {
-            /** @var \Arcanedev\SeoHelper\Contracts\SeoMetaInterface $seoMeta */
+            /** @var Contracts\SeoMeta $seoMeta */
             $seoMeta = $app['arcanedev.seo-helper.meta'];
 
             return new SeoHelper($seoMeta);
