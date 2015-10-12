@@ -43,4 +43,13 @@ class SeoHelperTest extends TestCase
     {
         $this->assertInstanceOf(SeoHelper::class, $this->seoHelper);
     }
+
+    /** @test */
+    public function it_can_get_seo_meta()
+    {
+        $seoMeta = $this->seoHelper->meta();
+
+        $this->assertInstanceOf(\Arcanedev\SeoHelper\SeoMeta::class,           $seoMeta);
+        $this->assertInstanceOf(\Arcanedev\SeoHelper\Contracts\SeoMeta::class, $seoMeta);
+    }
 }
