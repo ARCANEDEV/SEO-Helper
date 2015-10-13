@@ -70,6 +70,8 @@ class SeoHelperServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        $this->publishConfig();
     }
 
     /**
@@ -117,5 +119,15 @@ class SeoHelperServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(Contracts\SeoHelper::class, 'arcanedev.seo-helper');
+    }
+
+    /**
+     * Publish the seo-helper config file.
+     */
+    private function publishConfig()
+    {
+        $this->publishes([
+            $this->getConfigFile() => config_path("{$this->package}.php"),
+        ], 'config');
     }
 }
