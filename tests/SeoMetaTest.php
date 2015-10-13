@@ -45,7 +45,15 @@ class SeoMetaTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(SeoMeta::class, $this->seoMeta);
+        $expectations = [
+            \Arcanedev\SeoHelper\Bases\Seo::class,
+            \Arcanedev\SeoHelper\SeoMeta::class
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->seoMeta);
+        }
+
         $this->assertNotEmpty($this->seoMeta->render());
     }
 
