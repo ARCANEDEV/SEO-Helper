@@ -9,7 +9,7 @@
 interface SeoHelper extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
+     |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
     /**
@@ -18,4 +18,25 @@ interface SeoHelper extends Renderable
      * @return SeoMeta
      */
     public function meta();
+
+    /**
+     * Get SeoTwitter instance.
+     *
+     * @return SeoOpenGraph
+     */
+    public function openGraph();
+
+    /**
+     * Get SeoTwitter instance (alias).
+     *
+     * @return SeoOpenGraph
+     */
+    public function og();
+
+    /**
+     * Get SeoTwitter instance.
+     *
+     * @return SeoTwitter
+     */
+    public function twitter();
 }

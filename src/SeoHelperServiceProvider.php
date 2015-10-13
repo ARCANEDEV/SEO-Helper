@@ -61,6 +61,8 @@ class SeoHelperServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerSeoMetaService();
+        $this->registerSeoOpenGraphService();
+        $this->registerSeoTwitterService();
         $this->registerSeoHelperService();
     }
 
@@ -71,7 +73,10 @@ class SeoHelperServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        $this->publishConfig();
+        // Publish the config file.
+        $this->publishes([
+            $this->getConfigFile() => config_path("{$this->package}.php"),
+        ], 'config');
     }
 
     /**
@@ -84,6 +89,12 @@ class SeoHelperServiceProvider extends ServiceProvider
         return [
             'arcanedev.seo-helper',
             'arcanedev.seo-helper.meta',
+            'arcanedev.seo-helper.open-graph',
+            'arcanedev.seo-helper.twitter',
+            Contracts\SeoHelper::class,
+            Contracts\SeoMeta::class,
+            Contracts\SeoOpenGraph::class,
+            Contracts\SeoTwitter::class,
         ];
     }
 
@@ -107,27 +118,53 @@ class SeoHelperServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register SeoOpenGraph service.
+     */
+    private function registerSeoOpenGraphService()
+    {
+        $this->singleton('arcanedev.seo-helper.open-graph', function ($app) {
+            /** @var  \Illuminate\Config\Repository  $config */
+            $config = $app['config'];
+
+            return new SeoOpenGraph($config->get('seo-helper'));
+        });
+
+        $this->app->bind(Contracts\SeoOpenGraph::class, 'arcanedev.seo-helper.open-graph');
+    }
+
+    /**
+     * Register SeoTwitter service.
+     */
+    private function registerSeoTwitterService()
+    {
+        $this->singleton('arcanedev.seo-helper.twitter', function ($app) {
+            /** @var  \Illuminate\Config\Repository  $config */
+            $config = $app['config'];
+
+            return new SeoTwitter($config->get('seo-helper'));
+        });
+
+        $this->app->bind(Contracts\SeoTwitter::class, 'arcanedev.seo-helper.twitter');
+    }
+
+    /**
      * Register SeoMeta service.
      */
     private function registerSeoHelperService()
     {
         $this->singleton('arcanedev.seo-helper', function ($app) {
-            /** @var Contracts\SeoMeta $seoMeta */
-            $seoMeta = $app['arcanedev.seo-helper.meta'];
+            /**
+             * @var  Contracts\SeoMeta       $seoMeta
+             * @var  Contracts\SeoOpenGraph  $seoOpenGraph
+             * @var  Contracts\SeoTwitter    $seoTwitter
+             */
+            $seoMeta      = $app['arcanedev.seo-helper.meta'];
+            $seoOpenGraph = $app['arcanedev.seo-helper.open-graph'];
+            $seoTwitter   = $app['arcanedev.seo-helper.twitter'];
 
-            return new SeoHelper($seoMeta);
+            return new SeoHelper($seoMeta, $seoOpenGraph, $seoTwitter);
         });
 
         $this->app->bind(Contracts\SeoHelper::class, 'arcanedev.seo-helper');
-    }
-
-    /**
-     * Publish the seo-helper config file.
-     */
-    private function publishConfig()
-    {
-        $this->publishes([
-            $this->getConfigFile() => config_path("{$this->package}.php"),
-        ], 'config');
     }
 }

@@ -42,9 +42,16 @@ class SeoHelperServiceProviderTest extends TestCase
     /** @test */
     public function it_can_get_service_provider()
     {
-        $this->assertInstanceOf(\Illuminate\Support\ServiceProvider::class, $this->provider);
-        $this->assertInstanceOf(\Arcanedev\Support\ServiceProvider::class, $this->provider);
-        $this->assertInstanceOf(\Arcanedev\Support\PackageServiceProvider::class, $this->provider);
+        $expectations = [
+            \Illuminate\Support\ServiceProvider::class,
+            \Arcanedev\Support\ServiceProvider::class,
+            \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->provider);
+        }
     }
 
     /** @test */
@@ -53,6 +60,12 @@ class SeoHelperServiceProviderTest extends TestCase
         $this->assertEquals([
             'arcanedev.seo-helper',
             'arcanedev.seo-helper.meta',
+            'arcanedev.seo-helper.open-graph',
+            'arcanedev.seo-helper.twitter',
+            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ], $this->provider->provides());
     }
 }
