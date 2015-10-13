@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 
 /**
@@ -24,7 +25,7 @@ class MiscTags implements MiscTagsInterface
     /**
      * Meta collection.
      *
-     * @var MetaCollection
+     * @var MetaCollectionInterface
      */
     protected $metas;
 
@@ -143,7 +144,19 @@ class MiscTags implements MiscTagsInterface
      */
     public function removeMeta($names)
     {
-        $this->metas->forget($names);
+        $this->metas->remove($names);
+
+        return $this;
+    }
+
+    /**
+     * Reset the meta collection.
+     *
+     * @return self
+     */
+    public function reset()
+    {
+        $this->metas->reset();
 
         return $this;
     }

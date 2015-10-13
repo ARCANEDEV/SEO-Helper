@@ -54,4 +54,11 @@ interface MiscTagsInterface extends Renderable
      * @return self
      */
     public function removeMeta($names);
+
+    /**
+     * Reset the meta collection.
+     *
+     * @return self
+     */
+    public function reset();
 }
