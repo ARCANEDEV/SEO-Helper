@@ -1,9 +1,9 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Entities\Description;
-use Arcanedev\SeoHelper\Entities\Keywords;
-use Arcanedev\SeoHelper\Entities\MiscTags;
-use Arcanedev\SeoHelper\Entities\Title;
+use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
 
 /**
  * Class     SeoMeta
@@ -18,39 +18,39 @@ class SeoMeta implements Contracts\SeoMeta
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Current URL.
+     *
+     * @var string
+     */
+    protected $currentUrl = '';
+
+    /**
      * Title instance.
      *
-     * @var Title
+     * @var TitleInterface
      */
     protected $title;
 
     /**
      * Description instance.
      *
-     * @var Description
+     * @var DescriptionInterface
      */
     protected $description;
 
     /**
      * Description instance.
      *
-     * @var Keywords
+     * @var KeywordsInterface
      */
     protected $keywords;
 
     /**
      * MiscTags instance.
      *
-     * @var MiscTags
+     * @var MiscTagsInterface
      */
     protected $misc;
-
-    /**
-     * Current URL.
-     *
-     * @var string
-     */
-    protected $currentUrl = '';
 
     /**
      * SEO Helper configs.
@@ -70,19 +70,13 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function __construct(array $configs)
     {
-        $this->configs  = $configs;
-        $this->init();
-    }
+        $this->configs     = $configs;
 
-    /**
-     * Start the engine.
-     */
-    private function init()
-    {
-        $this->title       = new Title($this->getConfig('title', []));
-        $this->description = new Description($this->getConfig('description', []));
-        $this->keywords    = new Keywords($this->getConfig('keywords', []));
-        $this->misc        = new MiscTags($this->getConfig('misc', []));
+        // Init the entities
+        $this->title       = new Entities\Title($this->getConfig('title', []));
+        $this->description = new Entities\Description($this->getConfig('description', []));
+        $this->keywords    = new Entities\Keywords($this->getConfig('keywords', []));
+        $this->misc        = new Entities\MiscTags($this->getConfig('misc', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -200,6 +194,25 @@ class SeoMeta implements Contracts\SeoMeta
         return $this;
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Render all seo tags.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return implode(PHP_EOL, array_filter([
+            $this->title->render(),
+            $this->description->render(),
+            $this->keywords->render(),
+            $this->misc->render(),
+        ]));
+    }
+
     /**
      * Add a meta tag.
      *
@@ -243,63 +256,16 @@ class SeoMeta implements Contracts\SeoMeta
         return $this;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
-     * Render all seo tags.
+     * Reset the meta collection except the description and keywords metas.
      *
-     * @return string
+     * @return self
      */
-    public function render()
+    public function resetMetas()
     {
-        return implode(PHP_EOL, array_filter([
-            $this->renderTitle(),
-            $this->renderDescription(),
-            $this->renderKeywords(),
-            $this->renderMisc(),
-        ]));
-    }
+        $this->misc->reset();
 
-    /**
-     * Render title tag.
-     *
-     * @return string
-     */
-    public function renderTitle()
-    {
-        return $this->title->render();
-    }
-
-    /**
-     * Render description tag.
-     *
-     * @return string
-     */
-    public function renderDescription()
-    {
-        return $this->description->render();
-    }
-
-    /**
-     * Render keywords tag.
-     *
-     * @return string
-     */
-    public function renderKeywords()
-    {
-        return $this->keywords->render();
-    }
-
-    /**
-     * Render Miscellaneous tags.
-     *
-     * @return string
-     */
-    public function renderMisc()
-    {
-        return $this->misc->render();
+        return $this;
     }
 
     /* ------------------------------------------------------------------------------------------------

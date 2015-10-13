@@ -66,27 +66,27 @@ class SeoMetaTest extends TestCase
         $this->seoMeta->setTitle($title);
 
         $this->assertEquals($title, $this->seoMeta->getTitle());
-        $this->assertEquals(
+        $this->assertContains(
             '<title>' . $title . '</title>',
-            $this->seoMeta->renderTitle()
+            $this->seoMeta->render()
         );
 
         $siteName = 'Company name';
         $this->seoMeta->setTitle($title, $siteName);
 
         $this->assertEquals($title, $this->seoMeta->getTitle());
-        $this->assertEquals(
+        $this->assertContains(
             '<title>' . $title . ' - ' . $siteName . '</title>',
-            $this->seoMeta->renderTitle()
+            $this->seoMeta->render()
         );
 
         $separator = '|';
         $this->seoMeta->setTitle($title, $siteName, $separator);
 
         $this->assertEquals($title, $this->seoMeta->getTitle());
-        $this->assertEquals(
+        $this->assertContains(
             "<title>$title $separator $siteName</title>",
-            $this->seoMeta->renderTitle()
+            $this->seoMeta->render()
         );
     }
 
@@ -98,9 +98,9 @@ class SeoMetaTest extends TestCase
         $this->seoMeta->setDescription($description);
 
         $this->assertEquals($description, $this->seoMeta->getDescription());
-        $this->assertEquals(
+        $this->assertContains(
             '<meta name="description" content="' . $description . '">',
-            $this->seoMeta->renderDescription()
+            $this->seoMeta->render()
         );
     }
 
@@ -112,21 +112,21 @@ class SeoMetaTest extends TestCase
         $this->seoMeta->setKeywords($keywords);
 
         $this->assertEquals($keywords, $this->seoMeta->getKeywords());
-        $this->assertEquals(
+        $this->assertContains(
             '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
-            $this->seoMeta->renderKeywords()
+            $this->seoMeta->render()
         );
 
         $this->seoMeta->setKeywords(implode(',', $keywords));
 
         $this->assertEquals($keywords, $this->seoMeta->getKeywords());
-        $this->assertEquals(
+        $this->assertContains(
             '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
-            $this->seoMeta->renderKeywords()
+            $this->seoMeta->render()
         );
 
         $this->seoMeta->setKeywords(null);
-        $this->assertEmpty($this->seoMeta->renderKeywords());
+        $this->assertNotContains('name="keywords"', $this->seoMeta->render());
     }
 
     /** @test */
@@ -144,7 +144,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_remove_and_render_a_misc_tag()
+    public function it_can_add_remove_reset_and_render_a_misc_tag()
     {
         $output = $this->seoMeta->render();
 
@@ -196,5 +196,16 @@ class SeoMetaTest extends TestCase
             '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
             $this->seoMeta->render()
         );
+
+        $this->seoMeta->addMetas([
+            'copyright' => 'ARCANEDEV',
+            'expires'   => 'never',
+        ]);
+
+        $this->seoMeta->resetMetas();
+
+        foreach (['viewport', 'copyright', 'expires'] as $blacklisted) {
+            $this->assertNotContains($blacklisted, $this->seoMeta->render());
+        }
     }
 }
