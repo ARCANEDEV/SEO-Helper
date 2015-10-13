@@ -200,6 +200,49 @@ class SeoMeta implements Contracts\SeoMeta
         return $this;
     }
 
+    /**
+     * Add a meta tag.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content)
+    {
+        $this->misc->addMeta($name, $content);
+
+        return $this;
+    }
+
+    /**
+     * Add many meta tags.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas)
+    {
+        $this->misc->addMetas($metas);
+
+        return $this;
+    }
+
+    /**
+     * Remove a meta from the meta collection by key.
+     *
+     * @param  string|array  $names
+     *
+     * @return self
+     */
+    public function removeMeta($names)
+    {
+        $this->misc->removeMeta($names);
+
+        return $this;
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------

@@ -142,4 +142,59 @@ class SeoMetaTest extends TestCase
 
         $this->assertEquals($keywords, $this->seoMeta->getKeywords());
     }
+
+    /** @test */
+    public function it_can_add_remove_and_render_a_misc_tag()
+    {
+        $output = $this->seoMeta->render();
+
+        $this->assertContains(
+            '<meta name="robots" content="noindex, nofollow">', $output
+        );
+
+        $this->assertContains(
+            '<link rel="canonical" href="' . $this->baseUrl . '">', $output
+        );
+
+        $this->seoMeta->removeMeta(['robots', 'canonical']);
+        $output = $this->seoMeta->render();
+
+        $this->assertNotContains(
+            '<meta name="robots" content="noindex, nofollow">', $output
+        );
+        $this->assertNotContains(
+            '<link rel="canonical" href="' . $this->baseUrl . '">', $output
+        );
+
+        $this->seoMeta->addMetas([
+            'copyright' => 'ARCANEDEV',
+            'expires'   => 'never',
+        ]);
+
+        $output = $this->seoMeta->render();
+
+        $this->assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
+        $this->assertContains('<meta name="expires" content="never">', $output);
+
+        $this->seoMeta->removeMeta('copyright');
+
+        $this->assertNotContains(
+            '<meta name="copyright" content="ARCANEDEV">',
+            $this->seoMeta->render()
+        );
+
+        $this->seoMeta->removeMeta('expires');
+
+        $this->assertNotContains(
+            '<meta name="expires" content="never">',
+            $this->seoMeta->render()
+        );
+
+        $this->seoMeta->addMeta('viewport', 'width=device-width, initial-scale=1.0');
+
+        $this->assertContains(
+            '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+            $this->seoMeta->render()
+        );
+    }
 }
