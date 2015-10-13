@@ -1,48 +1,70 @@
-<?php namespace Arcanedev\SeoHelper;
+<?php namespace Arcanedev\SeoHelper\Bases;
 
 /**
- * Class     SeoOpenGraph
+ * Class     Seo
  *
- * @package  Arcanedev\SeoHelper
+ * @package  Arcanedev\SeoHelper\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoOpenGraph extends Bases\Seo implements Contracts\SeoOpenGraph
+abstract class Seo
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * SEO configs.
+     *
+     * @var array
+     */
+    protected $configs = [];
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make SeoOpenGraph instance.
+     * Make SeoMeta instance.
      *
      * @param  array  $configs
      */
     public function __construct(array $configs)
     {
-        parent::__construct($configs);
+        $this->setConfigs($configs);
     }
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Set the config array.
+     *
+     * @param  array  $configs
+     *
+     * @return self
+     */
+    private function setConfigs(array $configs)
+    {
+        $this->configs = $configs;
+
+        return $this;
+    }
 
     /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
+     |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Render the tag.
+     * Get config.
      *
-     * @return string
+     * @param  string      $key
+     * @param  mixed|null  $default
+     *
+     * @return mixed
      */
-    public function render()
+    protected function getConfig($key, $default = null)
     {
-        //
+        return array_get($this->configs, $key, $default);
     }
 }

@@ -6,7 +6,7 @@
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoTwitter implements Contracts\SeoTwitter
+class SeoTwitter extends Bases\Seo implements Contracts\SeoTwitter
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -24,7 +24,7 @@ class SeoTwitter implements Contracts\SeoTwitter
      */
     public function __construct(array $configs)
     {
-        //
+        parent::__construct($configs);
     }
 
     /* ------------------------------------------------------------------------------------------------

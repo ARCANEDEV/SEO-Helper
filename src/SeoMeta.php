@@ -11,7 +11,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoMeta implements Contracts\SeoMeta
+class SeoMeta extends Bases\Seo implements Contracts\SeoMeta
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -52,13 +52,6 @@ class SeoMeta implements Contracts\SeoMeta
      */
     protected $misc;
 
-    /**
-     * SEO Helper configs.
-     *
-     * @var array
-     */
-    private $configs = [];
-
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -70,7 +63,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function __construct(array $configs)
     {
-        $this->configs     = $configs;
+        parent::__construct($configs);
 
         // Init the entities
         $this->title       = new Entities\Title($this->getConfig('title', []));
@@ -266,22 +259,5 @@ class SeoMeta implements Contracts\SeoMeta
         $this->misc->reset();
 
         return $this;
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get config.
-     *
-     * @param  string      $key
-     * @param  mixed|null  $default
-     *
-     * @return mixed
-     */
-    private function getConfig($key, $default = null)
-    {
-        return array_get($this->configs, $key, $default);
     }
 }
