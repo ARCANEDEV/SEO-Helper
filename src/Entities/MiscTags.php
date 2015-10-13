@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Entities\MetaCollection;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 
 /**
@@ -49,6 +48,7 @@ class MiscTags implements MiscTagsInterface
     {
         $this->config = $config;
         $this->metas  = new MetaCollection;
+
         $this->init();
     }
 
@@ -57,8 +57,8 @@ class MiscTags implements MiscTagsInterface
      */
     private function init()
     {
-        $this->addRobotsMeta();
         $this->addCanonical();
+        $this->addRobotsMeta();
         $this->addMetas($this->getDefault());
     }
 
