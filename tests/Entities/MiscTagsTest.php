@@ -110,10 +110,13 @@ class MiscTagsTest extends TestCase
     {
         $robots     = '<meta name="robots" content="noindex, nofollow">';
         $canonical  = '<link rel="canonical" href="' . $this->baseUrl . '">';
+        $viewport   = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
-        $this->assertEquals(implode(PHP_EOL, [
-            $robots, $canonical,
-        ]), $this->misc->render());
+        $output = $this->misc->render();
+
+        foreach (compact('robots', 'canonical', 'viewport') as $expected) {
+            $this->assertContains($expected, $output);
+        }
 
         $author     = 'https://plus.google.com/+AuthorProfile';
         $publisher  = 'https://plus.google.com/+PublisherProfile';
@@ -144,28 +147,25 @@ class MiscTagsTest extends TestCase
     {
         $this->assertNotEmpty($this->misc->render());
 
+        $robots     = '<meta name="robots" content="noindex, nofollow">';
+        $canonical  = '<link rel="canonical" href="' . $this->baseUrl . '">';
+        $viewport   = '<meta name="viewport" content="width=device-width, initial-scale=1">';
+
         $output = $this->misc->render();
 
-        $this->assertContains(
-            '<meta name="robots" content="noindex, nofollow">', $output
-        );
-        $this->assertContains(
-            '<link rel="canonical" href="' . $this->baseUrl . '">', $output
-        );
+        foreach (compact('robots', 'canonical', 'viewport') as $expected) {
+            $this->assertContains($expected, $output);
+        }
 
         $this->misc->removeMeta('robots');
 
-        $this->assertNotContains(
-            '<meta name="robots" content="noindex, nofollow">',
-            $this->misc->render()
-        );
+        $this->assertNotContains($robots, $this->misc->render());
 
         $this->misc->removeMeta('canonical');
 
-        $this->assertNotContains(
-            '<link rel="canonical" href="' . $this->baseUrl . '">',
-            $this->misc->render()
-        );
+        $this->assertNotContains($canonical, $this->misc->render());
+
+        $this->misc->removeMeta('viewport');
 
         $this->assertEmpty($this->misc->render());
 

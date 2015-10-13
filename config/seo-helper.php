@@ -38,6 +38,7 @@ return [
         'canonical' => true,
         'robots'    => ! app()->environment('production'),  // Tell robots not to index the content if it's not on production
         'default'   => [
+            'viewport'  => 'width=device-width, initial-scale=1', // Responsive design thing
             'author'    => '', // https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]
             'publisher' => '', // https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]
         ],
