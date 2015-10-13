@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Renderable;
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\Support\Collection;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\Support\Collection;
  * @package  Arcanedev\SeoHelper\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class MetaCollection extends Collection implements Renderable
+class MetaCollection extends Collection implements MetaCollectionInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -31,16 +31,6 @@ class MetaCollection extends Collection implements Renderable
         'description', 'keywords'
     ];
 
-    /**
-     * List of links tags instead of metas tags.
-     *
-     * @var array
-     */
-    protected $links = [
-        'alternate', 'archives', 'author', 'canonical', 'first', 'help', 'icon', 'index', 'last',
-        'license', 'next', 'nofollow', 'noreferrer', 'pingback', 'prefetch', 'prev', 'publisher'
-    ];
-
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -55,13 +45,11 @@ class MetaCollection extends Collection implements Renderable
      */
     public function add($name, $content)
     {
-        $name = strtolower($name);
+        $meta = Meta::make($name, $content);
 
-        if (empty($content) || $this->isIgnored($name)) {
-            return $this;
+        if ($meta->isValid() && ! $this->isIgnored($name)) {
+            $this->put($meta->key(), $meta);
         }
-
-        $this->put($name, $content);
 
         return $this;
     }
@@ -83,51 +71,33 @@ class MetaCollection extends Collection implements Renderable
     }
 
     /**
+     * Remove a meta from the meta collection by key.
+     *
+     * @param  array|string  $names
+     *
+     * @return self
+     */
+    public function remove($names)
+    {
+        $names = $this->prepareName($names);
+
+        $this->forget($names);
+
+        return $this;
+    }
+
+    /**
      * Render the tag.
      *
      * @return string
      */
     public function render()
     {
-        $output = [];
-
-        foreach ($this->items as $name => $content) {
-            $output[] = $this->isLink($name)
-                ? $this->renderLink($name, $content)
-                : $this->renderMeta($name, $content);
-        }
+        $output = $this->map(function (Meta $meta) {
+            return $meta->render();
+        })->toArray();
 
         return implode(PHP_EOL, $output);
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Render Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Render the meta tag.
-     *
-     * @param  string  $name
-     * @param  string  $content
-     *
-     * @return string
-     */
-    protected function renderMeta($name, $content)
-    {
-        return '<meta name="' . $name . '" content="' . $content . '">';
-    }
-
-    /**
-     * Render the link tag.
-     *
-     * @param  string  $name
-     * @param  string  $content
-     *
-     * @return string
-     */
-    protected function renderLink($name, $content)
-    {
-        return '<link rel="' . $name . '" href="' . $content . '">';
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -146,15 +116,23 @@ class MetaCollection extends Collection implements Renderable
         return in_array($name, $this->ignored);
     }
 
-    /**
-     * Check if meta is a link tag.
-     *
-     * @param  string  $name
-     *
-     * @return bool
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
      */
-    protected function isLink($name)
+    /**
+     * Prepare names.
+     *
+     * @param  array|string  $names
+     *
+     * @return array
+     */
+    private function prepareName($names)
     {
-        return in_array($name, $this->links);
+        $prepared = array_map(function ($name) {
+            return strtolower(trim($name));
+        }, (array) $names);
+
+        return $prepared;
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Bases;
+<?php namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\MetaCollection;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -43,9 +43,16 @@ class MetaCollectionTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(MetaCollection::class, $this->metas);
-        $this->assertInstanceOf(\Arcanedev\Support\Collection::class, $this->metas);
-        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $this->metas);
+        $expectations = [
+            \Arcanedev\SeoHelper\Entities\MetaCollection::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface::class,
+            \Arcanedev\Support\Collection::class,
+            \Illuminate\Support\Collection::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->metas);
+        }
 
         $this->assertCount(0, $this->metas);
     }
