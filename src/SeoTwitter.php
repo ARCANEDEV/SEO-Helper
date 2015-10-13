@@ -1,5 +1,11 @@
 <?php namespace Arcanedev\SeoHelper;
 
+/**
+ * Class     SeoTwitter
+ *
+ * @package  Arcanedev\SeoHelper
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class SeoTwitter implements Contracts\SeoTwitter
 {
     /* ------------------------------------------------------------------------------------------------
