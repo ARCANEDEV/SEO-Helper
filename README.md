@@ -11,7 +11,6 @@
 [![Packagist Release][badge_release]](https://packagist.org/packages/arcanedev/seo-helper)
 [![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanedev/seo-helper)
 
-[badge_laravel]:   https://img.shields.io/badge/for%20Laravel-5.0%7C5.1-orange.svg?style=flat-square
 [badge_license]:   https://img.shields.io/packagist/l/arcanedev/seo-helper.svg?style=flat-square
 [badge_build]:     https://img.shields.io/travis/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_hhvm]:      https://img.shields.io/hhvm/arcanedev/seo-helper.svg?style=flat-square
@@ -29,6 +28,8 @@ SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
 
 ### Features
 
+  * Easy setup &amp; configuration.
+  * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
   * Made with :heart: &amp; :coffee:.
 
@@ -43,6 +44,7 @@ SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
 
   - [ ] Adding Twitter Cards support.
   - [ ] Adding Open Graph support.
+  - [ ] Complete the documentation.
   - [ ] Framework agnostic package.
 
 ## DONE
