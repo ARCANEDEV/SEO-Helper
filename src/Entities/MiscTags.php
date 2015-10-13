@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
+use Arcanedev\SeoHelper\Entities\MetaCollection;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 
 /**
@@ -22,11 +23,18 @@ class MiscTags implements MiscTagsInterface
     protected $currentUrl = '';
 
     /**
+     * Meta collection.
+     *
+     * @var MetaCollection
+     */
+    protected $metas;
+
+    /**
      * The misc tags config.
      *
      * @var array
      */
-    protected $config = [];
+    protected $config     = [];
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -40,6 +48,18 @@ class MiscTags implements MiscTagsInterface
     public function __construct(array $config = [])
     {
         $this->config = $config;
+        $this->metas  = new MetaCollection;
+        $this->init();
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init()
+    {
+        $this->addRobotsMeta();
+        $this->addCanonical();
+        $this->addMetas($this->getDefault());
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -66,8 +86,19 @@ class MiscTags implements MiscTagsInterface
     public function setUrl($url)
     {
         $this->currentUrl = $url;
+        $this->addCanonical();
 
         return $this;
+    }
+
+    /**
+     * Get default tags.
+     *
+     * @return array
+     */
+    private function getDefault()
+    {
+        return array_get($this->config, 'default', []);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -75,74 +106,82 @@ class MiscTags implements MiscTagsInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Add a meta tag.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content)
+    {
+        $this->metas->add($name, $content);
+
+        return $this;
+    }
+
+    /**
+     * Add many meta tags.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas)
+    {
+        $this->metas->addMany($metas);
+
+        return $this;
+    }
+
+    /**
+     * Remove a meta from the meta collection by key.
+     *
+     * @param  string|array  $names
+     *
+     * @return self
+     */
+    public function removeMeta($names)
+    {
+        $this->metas->forget($names);
+
+        return $this;
+    }
+
+    /**
      * Render the tag.
      *
      * @return string
      */
     public function render()
     {
-        return implode(PHP_EOL, array_filter([
-            $this->renderRobots(),
-            $this->renderAuthor(),
-            $this->renderPublisher(),
-            $this->renderCanonical(),
-        ]));
+        return $this->metas->render();
     }
 
     /**
-     * @return string
-     */
-    public function renderCanonical()
-    {
-        if ($this->isCanonicalEnabled() && $this->hasUrl()) {
-            return '<link rel="canonical" href="' . $this->getUrl() .'">'; // HTML 5
-        }
-
-        return '';
-    }
-
-    /**
-     * Blocking robots to index the content.
+     * Add the robots meta.
      *
-     * @return string
+     * @return self
      */
-    public function renderRobots()
+    private function addRobotsMeta()
     {
         if ($this->isRobotsEnabled()) {
-            return '<meta name="robots" content="noindex, nofollow">';
+            $this->addMeta('robots', 'noindex, nofollow');
         }
 
-        return '';
+        return $this;
     }
 
     /**
-     * Render the author tag.
+     * Add the canonical link.
      *
-     * @return string
+     * @return self
      */
-    public function renderAuthor()
+    private function addCanonical()
     {
-        $author = array_get($this->config, 'author', '');
-
-        if (empty($author)) {
-            return '';
+        if ($this->isCanonicalEnabled() && $this->hasUrl()) {
+            $this->addMeta('canonical', $this->currentUrl);
         }
-
-        return '<meta name="author" content="' . $author . '">';
-    }
-
-    /**
-     * Render the publisher tag.
-     *
-     * @return string
-     */
-    public function renderPublisher()
-    {
-        if (empty($publisher = array_get($this->config, 'publisher', ''))) {
-            return '';
-        }
-
-        return '<link rel="publisher" href="' . $publisher . '">';
     }
 
     /* ------------------------------------------------------------------------------------------------

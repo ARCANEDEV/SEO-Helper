@@ -54,63 +54,54 @@ class MiscTagsTest extends TestCase
     /** @test */
     public function it_can_render_canonical()
     {
-        $this->assertEquals(
-            '<link rel="canonical" href="' . $this->baseUrl . '">',
-            $this->misc->renderCanonical()
-        );
-
         $url = 'http://laravel.com';
 
         $this->misc->setUrl($url);
 
-        $this->assertEquals(
+        $this->assertContains(
             '<link rel="canonical" href="' . $url . '">',
-            $this->misc->renderCanonical()
+            $this->misc->render()
         );
 
         $this->misc = new MiscTags(['canonical' => false]);
 
-        $this->assertEmpty($this->misc->renderCanonical());
+        $this->assertEmpty($this->misc->render());
     }
 
     /** @test */
     public function it_can_render_robots()
     {
-        $this->assertEquals(
+        $this->assertContains(
             '<meta name="robots" content="noindex, nofollow">',
-            $this->misc->renderRobots()
+            $this->misc->render()
         );
 
         $this->misc = new MiscTags(['robots' => false]);
 
-        $this->assertEmpty($this->misc->renderRobots());
+        $this->assertEmpty($this->misc->render());
     }
 
     /** @test */
     public function it_can_render_author()
     {
-        $this->assertEmpty($this->misc->renderAuthor());
-
         $author     = 'https://plus.google.com/+AuthorProfile';
-        $this->misc = new MiscTags(compact('author'));
+        $this->misc = new MiscTags(['default' => compact('author')]);
 
         $this->assertEquals(
-            '<meta name="author" content="' . $author . '">',
-            $this->misc->renderAuthor()
+            '<link rel="author" href="' . $author . '">',
+            $this->misc->render()
         );
     }
 
     /** @test */
     public function it_can_render_publisher()
     {
-        $this->assertEmpty($this->misc->renderPublisher());
-
-        $publisher     = 'https://plus.google.com/+PublisherProfile';
-        $this->misc = new MiscTags(compact('publisher'));
+        $publisher  = 'https://plus.google.com/+PublisherProfile';
+        $this->misc = new MiscTags(['default' => compact('publisher')]);
 
         $this->assertEquals(
             '<link rel="publisher" href="' . $publisher . '">',
-            $this->misc->renderPublisher()
+            $this->misc->render()
         );
     }
 
@@ -129,12 +120,12 @@ class MiscTagsTest extends TestCase
 
         $this->misc = new MiscTags(array_merge(
             $this->getMiscConfig(),
-            compact('author', 'publisher')
+            ['default' => compact('author', 'publisher')]
         ));
 
         $this->assertEquals(implode(PHP_EOL, [
             $robots,
-            '<meta name="author" content="' . $author . '">',
+            '<link rel="author" href="' . $author . '">',
             '<link rel="publisher" href="' . $publisher . '">',
         ]), $this->misc->render());
 
@@ -142,10 +133,66 @@ class MiscTagsTest extends TestCase
 
         $this->assertEquals(implode(PHP_EOL, [
             $robots,
-            '<meta name="author" content="' . $author . '">',
+            '<link rel="author" href="' . $author . '">',
             '<link rel="publisher" href="' . $publisher . '">',
             '<link rel="canonical" href="' . $this->baseUrl . '">',
         ]), $this->misc->render());
+    }
+
+    /** @test */
+    public function it_can_add_and_remove_tags()
+    {
+        $this->assertNotEmpty($this->misc->render());
+
+        $output = $this->misc->render();
+
+        $this->assertContains(
+            '<meta name="robots" content="noindex, nofollow">', $output
+        );
+        $this->assertContains(
+            '<link rel="canonical" href="' . $this->baseUrl . '">', $output
+        );
+
+        $this->misc->removeMeta('robots');
+
+        $this->assertNotContains(
+            '<meta name="robots" content="noindex, nofollow">',
+            $this->misc->render()
+        );
+
+        $this->misc->removeMeta('canonical');
+
+        $this->assertNotContains(
+            '<link rel="canonical" href="' . $this->baseUrl . '">',
+            $this->misc->render()
+        );
+
+        $this->assertEmpty($this->misc->render());
+
+        $this->misc->addMeta('document-rating', 'Safe For Work');
+
+        $this->assertEquals(
+            '<meta name="document-rating" content="Safe For Work">',
+            $this->misc->render()
+        );
+
+        $this->misc->removeMeta('document-rating');
+
+        $this->assertEmpty($this->misc->render());
+
+        $this->misc->addMetas([
+            'copyright' => 'ARCANEDEV',
+            'expires'   => 'never',
+        ]);
+
+        $output = $this->misc->render();
+
+        $this->assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
+        $this->assertContains('<meta name="expires" content="never">', $output);
+
+        $this->misc->removeMeta(['copyright', 'expires']);
+
+        $this->assertEmpty($this->misc->render());
     }
 
     /* ------------------------------------------------------------------------------------------------
