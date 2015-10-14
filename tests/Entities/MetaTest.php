@@ -83,4 +83,13 @@ class MetaTest extends TestCase
             Meta::make('author', 'https://plus.google.com/+ArcanedevNetMaroc')->render()
         );
     }
+
+    /** @test */
+    public function it_can_make_meta_with_prefix()
+    {
+        $this->assertEquals(
+            '<meta name="say:hello" content="Hello World">',
+            Meta::make('hello', 'Hello World', 'say:')->render()
+        );
+    }
 }

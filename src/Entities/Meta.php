@@ -15,6 +15,13 @@ class Meta implements MetaInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Meta prefix name.
+     *
+     * @var string
+     */
+    protected $prefix  = '';
+
+    /**
      * Meta name.
      *
      * @var string
@@ -47,9 +54,11 @@ class Meta implements MetaInterface
      *
      * @param  string  $name
      * @param  string  $content
+     * @param  string  $prefix
      */
-    public function __construct($name, $content)
+    public function __construct($name, $content, $prefix = '')
     {
+        $this->setPrefix($prefix);
         $this->setName($name);
         $this->setContent($content);
     }
@@ -66,6 +75,30 @@ class Meta implements MetaInterface
     public function key()
     {
         return $this->name;
+    }
+
+    /**
+     * Set the meta prefix name.
+     *
+     * @param  string  $prefix
+     *
+     * @return self
+     */
+    private function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * Get the meta name.
+     *
+     * @return string
+     */
+    private function getName()
+    {
+        return $this->prefix . $this->name;
     }
 
     /**
@@ -109,12 +142,13 @@ class Meta implements MetaInterface
      *
      * @param  string  $name
      * @param  string  $content
+     * @param  string  $prefix
      *
      * @return self
      */
-    public static function make($name, $content)
+    public static function make($name, $content, $prefix = '')
     {
-        return new self($name, $content);
+        return new self($name, $content, $prefix);
     }
 
     /**
@@ -148,7 +182,7 @@ class Meta implements MetaInterface
      */
     private function renderMeta()
     {
-        return '<meta name="' . $this->name . '" content="' . $this->content . '">';
+        return '<meta name="' . $this->getName() . '" content="' . $this->content . '">';
     }
 
     /* ------------------------------------------------------------------------------------------------
