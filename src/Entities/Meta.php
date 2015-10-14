@@ -94,11 +94,19 @@ class Meta implements MetaInterface
     /**
      * Get the meta name.
      *
+     * @param  bool  $prefixed
+     *
      * @return string
      */
-    private function getName()
+    private function getName($prefixed = true)
     {
-        return $this->prefix . $this->name;
+        $name = $this->name;
+
+        if ($prefixed) {
+            $name = $this->prefix . $name;
+        }
+
+        return $this->clean($name);
     }
 
     /**
@@ -110,11 +118,19 @@ class Meta implements MetaInterface
      */
     private function setName($name)
     {
-        $name = strtolower(trim($name));
-
-        $this->name = $name;
+        $this->name = strtolower(trim($name));
 
         return $this;
+    }
+
+    /**
+     * Get the meta content.
+     *
+     * @return string
+     */
+    private function getContent()
+    {
+        return $this->clean($this->content);
     }
 
     /**
@@ -172,7 +188,7 @@ class Meta implements MetaInterface
      */
     private function renderLink()
     {
-        return '<link rel="' . $this->name . '" href="' . $this->content . '">';
+        return '<link rel="' . $this->getName(false) . '" href="' . $this->getContent() . '">';
     }
 
     /**
@@ -182,7 +198,7 @@ class Meta implements MetaInterface
      */
     private function renderMeta()
     {
-        return '<meta name="' . $this->getName() . '" content="' . $this->content . '">';
+        return '<meta name="' . $this->getName() . '" content="' . $this->getContent() . '">';
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -207,5 +223,21 @@ class Meta implements MetaInterface
     public function isValid()
     {
         return ! empty($this->content);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Clean all the inputs.
+     *
+     * @param  string  $value
+     *
+     * @return string
+     */
+    public function clean($value)
+    {
+        return htmlentities(strip_tags($value));
     }
 }
