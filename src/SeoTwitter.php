@@ -131,6 +131,8 @@ class SeoTwitter extends Bases\Seo implements Contracts\SeoTwitter
      */
     public function reset()
     {
-        return $this->card->reset();
+        $this->card->reset();
+
+        return $this;
     }
 }
