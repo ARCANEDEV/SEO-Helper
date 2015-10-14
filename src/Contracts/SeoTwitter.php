@@ -1,5 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
+use \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
+
 /**
  * Interface  SeoTwitter
  *
@@ -12,6 +14,15 @@ interface SeoTwitter extends Renderable
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Set the twitter card instance.
+     *
+     * @param  Entities\TwitterCardInterface  $card
+     *
+     * @return self
+     */
+    public function setCard(TwitterCardInterface $card);
+
     /**
      * Set the card type.
      *

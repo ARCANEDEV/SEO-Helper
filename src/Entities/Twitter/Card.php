@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities\Twitter;
 
-use Arcanedev\SeoHelper\Contracts\Entities\Twitter\CardInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
  * @package  Arcanedev\SeoHelper\Entities\Twitter
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Card implements CardInterface
+class Card implements TwitterCardInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties

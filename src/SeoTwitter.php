@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\Entities\Twitter\CardInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
 
 /**
  * Class     SeoTwitter
@@ -16,7 +16,11 @@ class SeoTwitter extends Bases\Seo implements Contracts\SeoTwitter
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var CardInterface */
+    /**
+     * The Twitter Card instance.
+     *
+     * @var TwitterCardInterface
+     */
     protected $card;
 
     /* ------------------------------------------------------------------------------------------------
@@ -32,13 +36,29 @@ class SeoTwitter extends Bases\Seo implements Contracts\SeoTwitter
     {
         parent::__construct($configs);
 
-        $this->card = new Entities\Twitter\Card($this->getConfig('twitter', []));
+        $this->setCard(
+            new Entities\Twitter\Card($this->getConfig('twitter', []))
+        );
     }
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Set the twitter card instance.
+     *
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface  $card
+     *
+     * @return self
+     */
+    public function setCard(TwitterCardInterface $card)
+    {
+        $this->card = $card;
+
+        return $this;
+    }
+
     /**
      * Set the card type.
      *

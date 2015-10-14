@@ -45,7 +45,7 @@ class CardTest extends TestCase
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Twitter\Card::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Twitter\CardInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 

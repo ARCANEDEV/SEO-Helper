@@ -1,14 +1,14 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities\Twitter;
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  CardInterface
+ * Interface  TwitterCardInterface
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities\Twitter
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface CardInterface extends Renderable
+interface TwitterCardInterface extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
