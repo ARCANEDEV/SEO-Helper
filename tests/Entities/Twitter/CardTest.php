@@ -25,7 +25,8 @@ class CardTest extends TestCase
     {
         parent::setUp();
 
-        $this->card = new Card();
+        $config     = $this->getSeoHelperConfig('twitter');
+        $this->card = new Card($config);
     }
 
     public function tearDown()
@@ -44,6 +45,7 @@ class CardTest extends TestCase
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Twitter\Card::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Twitter\CardInterface::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 
@@ -140,5 +142,53 @@ class CardTest extends TestCase
         $this->card->setSite($site);
 
         $this->assertContains($excepted, $this->card->render());
+    }
+
+    /** @test */
+    public function it_can_add_and_render_one_image()
+    {
+        $avatar = 'http://example.com/img/avatar.png';
+
+        $this->card->addImage($avatar);
+
+        $this->assertContains(
+            '<meta name="twitter:image" content="' . $avatar . '">',
+            $this->card->render()
+        );
+    }
+
+    /** @test */
+    public function it_can_add_and_render_multiple_images()
+    {
+        $avatar = 'http://example.com/img/avatar.png';
+        $number = range(0, 4);
+
+        foreach ($number as $v) {
+            $this->card->addImage($avatar);
+        }
+
+        $output = $this->card->render();
+
+        foreach (range(0, 3) as $expected) {
+            $this->assertContains('twitter:image' . $expected, $output);
+        }
+
+        $this->assertNotContains('twitter:image4', $output);
+    }
+
+    /** @test */
+    public function it_can_reset()
+    {
+        $expected = $this->card->render();
+
+        $this->card->setType('app');
+        $this->card->setDescription('Twitter card description');
+        $this->card->addImage('http://example.com/img/avatar.png');
+
+        $this->assertNotEquals($expected, $this->card->render());
+
+        $this->card->reset();
+
+        $this->assertEquals($expected, $this->card->render());
     }
 }
