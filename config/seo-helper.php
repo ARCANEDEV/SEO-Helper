@@ -58,5 +58,8 @@ return [
      */
     'twitter' => [
         'prefix' => 'twitter:',
+
+        // Supported Types : 'summary', 'summary_large_image', 'photo', 'gallery', 'app', 'product'.
+        'card'   => 'summary',
     ],
 ];
