@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities\Twitter;
 
-use Arcanedev\SeoHelper\Contracts\Renderable;
+use Arcanedev\SeoHelper\Contracts\Entities\Twitter\CardInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
  * @package  Arcanedev\SeoHelper\Entities\Twitter
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Card implements Renderable
+class Card implements CardInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -29,6 +29,20 @@ class Card implements Renderable
      */
     protected $metas;
 
+    /**
+     * Card images.
+     *
+     * @var array
+     */
+    protected $images  = [];
+
+    /**
+     * Twitter Card configs.
+     *
+     * @var array
+     */
+    protected $configs = [];
+
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -36,13 +50,29 @@ class Card implements Renderable
     /**
      * Make the twitter card instance.
      *
-     * @param  array  $config
+     * @param  array  $configs
      */
-    public function __construct(array $config = [])
+    public function __construct(array $configs = [])
     {
-        $this->metas = new MetaCollection;
-        $this->setPrefix(array_get($config, 'prefix', 'twitter:'));
-        $this->setType(array_get($config, 'card', 'summary'));
+        $this->configs = $configs;
+        $this->metas   = new MetaCollection;
+
+        $this->init();
+    }
+
+    /**
+     * Start the engine.
+     *
+     * @return self
+     */
+    private function init()
+    {
+        $this->setPrefix($this->getConfig('prefix', 'twitter:'));
+        $this->setType($this->getConfig('card', 'summary'));
+        $this->setSite($this->getConfig('site', ''));
+        $this->setTitle($this->getConfig('title', ''));
+
+        return $this;
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -74,7 +104,7 @@ class Card implements Renderable
         $this->checkType($type);
 
         $this->type = $type;
-        $this->metas->add('card', $type);
+        $this->addMeta('card', $type);
 
         return $this;
     }
@@ -89,7 +119,7 @@ class Card implements Renderable
     public function setSite($site)
     {
         $this->checkSite($site);
-        $this->metas->add('site', $site);
+        $this->addMeta('site', $site);
 
         return $this;
     }
@@ -103,7 +133,7 @@ class Card implements Renderable
      */
     public function setTitle($title)
     {
-        $this->metas->add('title', $title);
+        $this->addMeta('title', $title);
 
         return $this;
     }
@@ -117,7 +147,38 @@ class Card implements Renderable
      */
     public function setDescription($description)
     {
-        $this->metas->add('description', $description);
+        $this->addMeta('description', $description);
+
+        return $this;
+    }
+
+    /**
+     * Add image to the card.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function addImage($url)
+    {
+        if (count($this->images) < 4) {
+            $this->images[] = $url;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a meta to the card.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content)
+    {
+        $this->metas->add($name, $content);
 
         return $this;
     }
@@ -133,7 +194,40 @@ class Card implements Renderable
      */
     public function render()
     {
+        if ( ! empty($this->images)) {
+            $this->loadImages();
+        }
+
         return $this->metas->render();
+    }
+
+    /**
+     * Render card images.
+     */
+    private function loadImages()
+    {
+        if (count($this->images) == 1) {
+            $this->addMeta('image', $this->images[0]);
+
+            return;
+        }
+
+        foreach ($this->images as $number => $url) {
+            $this->addMeta("image{$number}", $url);
+        }
+    }
+
+    /**
+     * Reset the card.
+     *
+     * @return self
+     */
+    public function reset()
+    {
+        $this->metas->reset();
+        $this->images = [];
+
+        return $this->init();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -188,6 +282,10 @@ class Card implements Renderable
         $site = $this->prepareUsername($site);
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Prepare username.
      *
@@ -202,5 +300,18 @@ class Card implements Renderable
         }
 
         return $username;
+    }
+
+    /**
+     * Get a config value.
+     *
+     * @param  string      $key
+     * @param  mixed|null  $default
+     *
+     * @return mixed
+     */
+    private function getConfig($key, $default = null)
+    {
+        return array_get($this->configs, $key, $default);
     }
 }
