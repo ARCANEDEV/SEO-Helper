@@ -61,23 +61,6 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Add a meta to collection.
-     *
-     * @param  string  $name
-     * @param  string  $content
-     *
-     * @return self
-     */
-    public function add($name, $content)
-    {
-        $meta = Meta::make($name, $content, $this->prefix);
-
-        $this->put($meta->key(), $meta);
-
-        return $this;
-    }
-
-    /**
      * Add many meta tags.
      *
      * @param  array  $metas
@@ -89,6 +72,40 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
         foreach ($metas as $name => $content) {
             $this->add($name, $content);
         }
+
+        return $this;
+    }
+
+    /**
+     * Add a meta to collection.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function add($name, $content)
+    {
+        if ( ! empty($name) && ! empty($content)) {
+            $this->addMeta($name, $content);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Make a meta and add it to collection.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    protected function addMeta($name, $content)
+    {
+        $meta = Meta::make($name, $content, $this->prefix);
+
+        $this->put($meta->key(), $meta);
 
         return $this;
     }
