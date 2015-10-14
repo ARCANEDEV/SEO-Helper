@@ -55,11 +55,12 @@ return [
     /* ------------------------------------------------------------------------------------------------
      |  Twitter
      | ------------------------------------------------------------------------------------------------
+     |  Supported card types : 'summary', 'summary_large_image', 'photo', 'gallery', 'app', 'product'.
      */
     'twitter' => [
         'prefix' => 'twitter:',
-
-        // Supported Types : 'summary', 'summary_large_image', 'photo', 'gallery', 'app', 'product'.
         'card'   => 'summary',
+        'site'   => 'Username',
+        'title'  => 'Default title',
     ],
 ];
