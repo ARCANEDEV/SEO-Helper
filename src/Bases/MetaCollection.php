@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Bases;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\MetaInterface;
+use Arcanedev\SeoHelper\Contracts\Helpers\MetaInterface;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Collection;

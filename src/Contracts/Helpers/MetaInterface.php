@@ -1,4 +1,4 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php namespace Arcanedev\SeoHelper\Contracts\Helpers;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 

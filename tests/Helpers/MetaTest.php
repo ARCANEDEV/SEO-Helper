@@ -24,7 +24,7 @@ class MetaTest extends TestCase
         ];
         $expectations = [
             \Arcanedev\SeoHelper\Helpers\Meta::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\MetaInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Helpers\MetaInterface::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 
