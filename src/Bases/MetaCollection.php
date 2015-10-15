@@ -3,7 +3,7 @@
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MetaInterface;
 use Arcanedev\SeoHelper\Contracts\Renderable;
-use Arcanedev\SeoHelper\Entities\Meta;
+use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Collection;
 
 /**

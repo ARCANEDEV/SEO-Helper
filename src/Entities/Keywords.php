@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
+use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**

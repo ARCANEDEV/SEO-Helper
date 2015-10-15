@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
+use Arcanedev\SeoHelper\Helpers\Meta;
 
 /**
  * Class     MetaCollection

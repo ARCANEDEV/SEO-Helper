@@ -1,4 +1,4 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php namespace Arcanedev\SeoHelper\Helpers;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;

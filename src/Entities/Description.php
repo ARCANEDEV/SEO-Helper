@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
+use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**

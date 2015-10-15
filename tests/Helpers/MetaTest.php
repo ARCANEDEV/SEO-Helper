@@ -1,6 +1,6 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php namespace Arcanedev\SeoHelper\Tests\Helpers;
 
-use Arcanedev\SeoHelper\Entities\Meta;
+use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
 /**
@@ -23,7 +23,7 @@ class MetaTest extends TestCase
             new Meta('name', 'Hello world'),
         ];
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\Meta::class,
+            \Arcanedev\SeoHelper\Helpers\Meta::class,
             \Arcanedev\SeoHelper\Contracts\Entities\MetaInterface::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
