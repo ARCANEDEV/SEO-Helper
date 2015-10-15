@@ -92,4 +92,16 @@ class MetaTest extends TestCase
             Meta::make('hello', 'Hello World', 'say:')->render()
         );
     }
+
+    /** @test */
+    public function it_can_clean_and_render()
+    {
+        $name    = '<b>Awesome name</b>';
+        $content = 'Harmless <script>alert("Danger Zone");</script>';
+
+        $this->assertEquals(
+            '<meta name="awesome-name" content="Harmless alert(&quot;Danger Zone&quot;);">',
+            Meta::make($name, $content)->render()
+        );
+    }
 }

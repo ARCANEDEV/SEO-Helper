@@ -118,7 +118,7 @@ class Meta implements MetaInterface
      */
     private function setName($name)
     {
-        $this->name = strtolower(trim($name));
+        $this->name = str_slug(strip_tags($name));
 
         return $this;
     }
