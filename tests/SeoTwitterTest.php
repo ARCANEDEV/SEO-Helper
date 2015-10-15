@@ -62,7 +62,7 @@ class SeoTwitterTest extends TestCase
         $expectations = [
             '<meta name="twitter:card" content="summary">',
             '<meta name="twitter:site" content="@Username">',
-            '<meta name="twitter:title" content="Default title">',
+            '<meta name="twitter:title" content="Default Twitter Card title">',
         ];
 
         foreach ($expectations as $expected) {

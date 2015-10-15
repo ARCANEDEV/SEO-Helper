@@ -49,7 +49,10 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'open-graph' => [
-        'prefix' => 'og:',
+        'prefix'      => 'og:',
+        'type'        => 'website',
+        'title'       => 'Default Open Graph title',
+        'description' => 'Default Open Graph description',
     ],
 
     /* ------------------------------------------------------------------------------------------------
@@ -61,6 +64,6 @@ return [
         'prefix' => 'twitter:',
         'card'   => 'summary',
         'site'   => 'Username',
-        'title'  => 'Default title',
+        'title'  => 'Default Twitter Card title',
     ],
 ];
