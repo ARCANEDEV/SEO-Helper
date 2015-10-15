@@ -1,20 +1,21 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php namespace Arcanedev\SeoHelper\Tests\Providers;
 
-use Arcanedev\SeoHelper\SeoHelperServiceProvider;
+use Arcanedev\SeoHelper\Providers\UtilityServiceProvider;
+use Arcanedev\SeoHelper\Tests\TestCase;
 
 /**
- * Class     SeoHelperServiceProviderTest
+ * Class     UtilityServiceProviderTest
  *
- * @package  Arcanedev\SeoHelper\Tests
+ * @package  Arcanedev\SeoHelper\Tests\Providers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoHelperServiceProviderTest extends TestCase
+class UtilityServiceProviderTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var SeoHelperServiceProvider */
+    /** @var UtilityServiceProvider */
     private $provider;
 
     /* ------------------------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ class SeoHelperServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->provider = $this->app->getProvider(SeoHelperServiceProvider::class);
+        $this->provider = $this->app->getProvider(UtilityServiceProvider::class);
     }
 
     public function tearDown()
@@ -40,13 +41,12 @@ class SeoHelperServiceProviderTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_can_get_service_provider()
+    public function it_can_be_instantiated()
     {
         $expectations = [
-            \Illuminate\Support\ServiceProvider::class,
+            \Arcanedev\SeoHelper\Providers\UtilityServiceProvider::class,
             \Arcanedev\Support\ServiceProvider::class,
-            \Arcanedev\Support\PackageServiceProvider::class,
-            \Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
+            \Illuminate\Support\ServiceProvider::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -55,11 +55,19 @@ class SeoHelperServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_provides()
+    public function it_can_provide()
     {
-        $this->assertEquals([
+        $expected = [
             'arcanedev.seo-helper',
+            'arcanedev.seo-helper.meta',
+            'arcanedev.seo-helper.open-graph',
+            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-        ], $this->provider->provides());
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
+        ];
+
+        $this->assertEquals($expected, $this->provider->provides());
     }
 }
