@@ -18,6 +18,7 @@
 [badge_quality]:   https://img.shields.io/scrutinizer/g/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_insight]:   https://img.shields.io/sensiolabs/i/73e1a779-7ca7-4a75-b6d3-452d7852187e.svg?style=flat-square
 [badge_issues]:    https://img.shields.io/github/issues/ARCANEDEV/SEO-Helper.svg?style=flat-square
+
 [badge_package]:   https://img.shields.io/badge/package-arcanedev/seo--helper-blue.svg?style=flat-square
 [badge_release]:   https://img.shields.io/packagist/v/arcanedev/seo-helper.svg?style=flat-square
 [badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/seo-helper.svg?style=flat-square
@@ -39,6 +40,8 @@ SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
   2. [Installation and Setup](_docs/2-Installation-and-Setup.md)
   3. [Configuration](_docs/3-Configuration.md)
   4. [Usage](_docs/4-Usage.md)
+  5. [API](_docs/5-API.md)
+  6. [Extras](_docs/6-Extras.md)
 
 ## TODOS
 
