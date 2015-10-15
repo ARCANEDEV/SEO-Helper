@@ -112,7 +112,7 @@ class MetaTest extends TestCase
         $content = 'Harmless <script>alert("Danger Zone");</script>';
 
         $this->assertEquals(
-            '<meta name="awesome-name" content="Harmless alert(&quot;Danger Zone&quot;);">',
+            '<meta name="Awesome-name" content="Harmless alert(&quot;Danger Zone&quot;);">',
             Meta::make($name, $content)->render()
         );
     }

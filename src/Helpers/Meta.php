@@ -43,16 +43,6 @@ class Meta implements MetaInterface
      */
     protected $content = '';
 
-    /**
-     * List of links tags instead of metas tags.
-     *
-     * @var array
-     */
-    protected $links = [
-        'alternate', 'archives', 'author', 'canonical', 'first', 'help', 'icon', 'index', 'last',
-        'license', 'next', 'nofollow', 'noreferrer', 'pingback', 'prefetch', 'prev', 'publisher'
-    ];
-
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -143,7 +133,8 @@ class Meta implements MetaInterface
      */
     private function setName($name)
     {
-        $this->name = str_slug(strip_tags($name));
+        $name       = trim(strip_tags($name));
+        $this->name = str_replace([' '], '-', $name);
 
         return $this;
     }
@@ -252,7 +243,10 @@ class Meta implements MetaInterface
      */
     protected function isLink()
     {
-        return in_array($this->name, $this->links);
+        return in_array($this->name, [
+            'alternate', 'archives', 'author', 'canonical', 'first', 'help', 'icon', 'index', 'last',
+            'license', 'next', 'nofollow', 'noreferrer', 'pingback', 'prefetch', 'prev', 'publisher'
+        ]);
     }
 
     /**
