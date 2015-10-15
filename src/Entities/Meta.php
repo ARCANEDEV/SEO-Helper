@@ -231,6 +231,16 @@ class Meta implements MetaInterface
         return '<meta ' . implode(' ', $output) . '>';
     }
 
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Check Functions
      | ------------------------------------------------------------------------------------------------

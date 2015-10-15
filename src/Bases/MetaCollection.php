@@ -25,6 +25,13 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
     protected $prefix = '';
 
     /**
+     * Meta tag name property.
+     *
+     * @var string
+     */
+    protected $nameProperty = 'name';
+
+    /**
      * The items contained in the collection.
      *
      * @var array
@@ -103,7 +110,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      */
     protected function addMeta($name, $content)
     {
-        $meta = Meta::make($name, $content, $this->prefix);
+        $meta = Meta::make($name, $content, $this->prefix, $this->nameProperty);
 
         $this->put($meta->key(), $meta);
 
@@ -138,6 +145,16 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
         })->toArray();
 
         return implode(PHP_EOL, array_filter($output));
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 
     /* ------------------------------------------------------------------------------------------------
