@@ -2,7 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
-use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\Support\Traits\Configurable;
 
 /**
  * Class     MiscTags

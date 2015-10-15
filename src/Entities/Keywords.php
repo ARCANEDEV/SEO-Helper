@@ -2,7 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
 use Arcanedev\SeoHelper\Helpers\Meta;
-use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\Support\Traits\Configurable;
 
 /**
  * Class     Keywords

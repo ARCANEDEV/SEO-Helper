@@ -4,7 +4,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
-use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\Support\Traits\Configurable;
 
 /**
  * Class     SeoMeta

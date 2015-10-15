@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
-use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\Support\Traits\Configurable;
 
 /**
  * Class     SeoOpenGraph

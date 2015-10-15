@@ -2,7 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
-use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\Support\Traits\Configurable;
 
 /**
  * Class     Title

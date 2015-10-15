@@ -2,7 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
-use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\Support\Traits\Configurable;
 
 /**
  * Class     Card
