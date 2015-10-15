@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     SeoTwitter
@@ -10,8 +11,14 @@ use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
  *
  * @link     https://dev.twitter.com/cards/overview
  */
-class SeoTwitter extends Bases\Seo implements Contracts\SeoTwitter
+class SeoTwitter implements Contracts\SeoTwitter
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -34,7 +41,7 @@ class SeoTwitter extends Bases\Seo implements Contracts\SeoTwitter
      */
     public function __construct(array $configs)
     {
-        parent::__construct($configs);
+        $this->setConfigs($configs);
 
         $this->setCard(
             new Entities\Twitter\Card($this->getConfig('twitter', []))

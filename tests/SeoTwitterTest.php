@@ -44,8 +44,8 @@ class SeoTwitterTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Bases\Seo::class,
             \Arcanedev\SeoHelper\SeoTwitter::class,
+            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 
