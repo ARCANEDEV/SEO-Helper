@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     MiscTags
@@ -11,6 +12,12 @@ use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
  */
 class MiscTags implements MiscTagsInterface
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -29,13 +36,6 @@ class MiscTags implements MiscTagsInterface
      */
     protected $metas;
 
-    /**
-     * The misc tags config.
-     *
-     * @var array
-     */
-    protected $config     = [];
-
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -43,12 +43,12 @@ class MiscTags implements MiscTagsInterface
     /**
      * Make MiscTags instance.
      *
-     * @param  array  $config
+     * @param  array  $configs
      */
-    public function __construct(array $config = [])
+    public function __construct(array $configs = [])
     {
-        $this->config = $config;
-        $this->metas  = new MetaCollection;
+        $this->setConfigs($configs);
+        $this->metas   = new MetaCollection;
 
         $this->init();
     }
@@ -99,7 +99,7 @@ class MiscTags implements MiscTagsInterface
      */
     private function getDefault()
     {
-        return array_get($this->config, 'default', []);
+        return $this->getConfig('default', []);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ class MiscTags implements MiscTagsInterface
      */
     private function isCanonicalEnabled()
     {
-        return (bool) array_get($this->config, 'canonical', false);
+        return (bool) $this->getConfig('canonical', false);
     }
 
     /**
@@ -228,6 +228,6 @@ class MiscTags implements MiscTagsInterface
      */
     private function isRobotsEnabled()
     {
-        return (bool) array_get($this->config, 'robots', false);
+        return (bool) $this->getConfig('robots', false);
     }
 }

@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Description
@@ -11,6 +12,12 @@ use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
  */
 class Description implements DescriptionInterface
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -43,12 +50,13 @@ class Description implements DescriptionInterface
     /**
      * Make Description instance.
      *
-     * @param  array  $config
+     * @param  array  $configs
      */
-    public function __construct(array $config = [])
+    public function __construct(array $configs = [])
     {
-        $this->setContent(array_get($config, 'default', ''));
-        $this->setMax(array_get($config, 'max', 55));
+        $this->setConfigs($configs);
+        $this->setContent($this->getConfig('default', ''));
+        $this->setMax($this->getConfig('max', 55));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -62,7 +70,7 @@ class Description implements DescriptionInterface
      */
     public function getContent()
     {
-        return $this->content;
+        return str_limit($this->content, $this->getMax());
     }
 
     /**
@@ -120,7 +128,7 @@ class Description implements DescriptionInterface
             return '';
         }
 
-        return '<meta name="' . $this->name . '" content="' . str_limit($this->getContent(), $this->getMax()) . '">';
+        return Meta::make($this->name, $this->getContent())->render();
     }
 
     /* ------------------------------------------------------------------------------------------------

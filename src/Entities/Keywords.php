@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Keywords
@@ -10,6 +11,12 @@ use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
  */
 class Keywords implements KeywordsInterface
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
     |  Properties
     | ------------------------------------------------------------------------------------------------
@@ -35,11 +42,12 @@ class Keywords implements KeywordsInterface
     /**
      * Make Keywords instance.
      *
-     * @param  array  $config
+     * @param  array  $configs
      */
-    public function __construct(array $config = [])
+    public function __construct(array $configs = [])
     {
-        $this->setContent(array_get($config, 'default', []));
+        $this->setConfigs($configs);
+        $this->setContent($this->getConfig('default', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -107,7 +115,7 @@ class Keywords implements KeywordsInterface
             return '';
         }
 
-        return '<meta name="' . $this->name . '" content="' . implode(', ', $this->getContent()) . '">';
+        return Meta::make($this->name, implode(', ', $this->getContent()))->render();
     }
 
     /* ------------------------------------------------------------------------------------------------

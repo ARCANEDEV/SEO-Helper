@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Card
@@ -11,6 +12,12 @@ use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
  */
 class Card implements TwitterCardInterface
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -36,13 +43,6 @@ class Card implements TwitterCardInterface
      */
     protected $images  = [];
 
-    /**
-     * Twitter Card configs.
-     *
-     * @var array
-     */
-    protected $configs = [];
-
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class Card implements TwitterCardInterface
      */
     public function __construct(array $configs = [])
     {
-        $this->configs = $configs;
+        $this->setConfigs($configs);
         $this->metas   = new MetaCollection;
 
         $this->init();
@@ -300,18 +300,5 @@ class Card implements TwitterCardInterface
         }
 
         return $username;
-    }
-
-    /**
-     * Get a config value.
-     *
-     * @param  string      $key
-     * @param  mixed|null  $default
-     *
-     * @return mixed
-     */
-    private function getConfig($key, $default = null)
-    {
-        return array_get($this->configs, $key, $default);
     }
 }
