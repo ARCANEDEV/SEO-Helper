@@ -57,9 +57,19 @@ class SeoHelperServiceProviderTest extends TestCase
     /** @test */
     public function it_can_get_provides()
     {
-        $this->assertEquals([
+        $expected = [
             'arcanedev.seo-helper',
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-        ], $this->provider->provides());
+
+            // Utilities
+            'arcanedev.seo-helper.meta',
+            'arcanedev.seo-helper.open-graph',
+            'arcanedev.seo-helper.twitter',
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
+        ];
+
+        $this->assertEquals($expected, $this->provider->provides());
     }
 }
