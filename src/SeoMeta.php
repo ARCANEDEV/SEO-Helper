@@ -4,6 +4,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -32,32 +33,39 @@ class SeoMeta implements Contracts\SeoMeta
     protected $currentUrl = '';
 
     /**
-     * Title instance.
+     * The Title instance.
      *
      * @var TitleInterface
      */
     protected $title;
 
     /**
-     * Description instance.
+     * The Description instance.
      *
      * @var DescriptionInterface
      */
     protected $description;
 
     /**
-     * Description instance.
+     * The Keywords instance.
      *
      * @var KeywordsInterface
      */
     protected $keywords;
 
     /**
-     * MiscTags instance.
+     * The MiscTags instance.
      *
      * @var MiscTagsInterface
      */
     protected $misc;
+
+    /**
+     * The Webmasters instance.
+     *
+     * @var MiscTagsInterface
+     */
+    protected $webmasters;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -71,18 +79,105 @@ class SeoMeta implements Contracts\SeoMeta
     public function __construct(array $configs)
     {
         $this->setConfigs($configs);
+        $this->init();
+    }
 
-        // Init the entities
-        $this->title       = new Entities\Title($this->getConfig('title', []));
-        $this->description = new Entities\Description($this->getConfig('description', []));
-        $this->keywords    = new Entities\Keywords($this->getConfig('keywords', []));
-        $this->misc        = new Entities\MiscTags($this->getConfig('misc', []));
+    /**
+     * Start the engine.
+     */
+    private function init()
+    {
+        $this->title(
+            new Entities\Title($this->getConfig('title', []))
+        );
+        $this->description(
+            new Entities\Description($this->getConfig('description', []))
+        );
+        $this->keywords(
+            new Entities\Keywords($this->getConfig('keywords', []))
+        );
+        $this->misc(
+            new Entities\MiscTags($this->getConfig('misc', []))
+        );
+        $this->webmasters(
+            new Entities\Webmasters($this->getConfig('webmasters', []))
+        );
     }
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Set the Title instance.
+     *
+     * @param  Contracts\Entities\TitleInterface  $title
+     *
+     * @return self
+     */
+    public function title(TitleInterface $title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Set the Description instance.
+     *
+     * @param  Contracts\Entities\DescriptionInterface  $description
+     *
+     * @return self
+     */
+    public function description(DescriptionInterface $description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Set the Keywords instance.
+     *
+     * @param  Contracts\Entities\KeywordsInterface  $keywords
+     *
+     * @return self
+     */
+    public function keywords(KeywordsInterface $keywords)
+    {
+        $this->keywords = $keywords;
+
+        return $this;
+    }
+
+    /**
+     * Set the MiscTags instance.
+     *
+     * @param  Contracts\Entities\MiscTagsInterface  $misc
+     *
+     * @return self
+     */
+    public function misc(MiscTagsInterface $misc)
+    {
+        $this->misc = $misc;
+
+        return $this;
+    }
+
+    /**
+     * Set the Webmasters instance.
+     *
+     * @param  Contracts\Entities\WebmastersInterface  $webmasters
+     *
+     * @return self
+     */
+    public function webmasters(WebmastersInterface $webmasters)
+    {
+        $this->webmasters = $webmasters;
+
+        return $this;
+    }
+
     /**
      * Set the title.
      *

@@ -13,6 +13,51 @@ interface SeoMeta extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Set the Title instance.
+     *
+     * @param  Entities\TitleInterface  $title
+     *
+     * @return self
+     */
+    public function title(Entities\TitleInterface $title);
+
+    /**
+     * Set the Description instance.
+     *
+     * @param  Entities\DescriptionInterface  $description
+     *
+     * @return self
+     */
+    public function description(Entities\DescriptionInterface $description);
+
+    /**
+     * Set the Keywords instance.
+     *
+     * @param  Entities\KeywordsInterface  $keywords
+     *
+     * @return self
+     */
+    public function keywords(Entities\KeywordsInterface $keywords);
+
+    /**
+     * Set the MiscTags instance.
+     *
+     * @param  Entities\MiscTagsInterface  $misc
+     *
+     * @return self
+     */
+    public function misc(Entities\MiscTagsInterface $misc);
+
+    /**
+     * Set the Webmasters instance.
+     *
+     * @param  Entities\WebmastersInterface  $webmasters
+     *
+     * @return self
+     */
+    public function webmasters(Entities\WebmastersInterface $webmasters);
+
+    /**
      * Set the title.
      *
      * @param  string  $title
