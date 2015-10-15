@@ -63,7 +63,7 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * The Webmasters instance.
      *
-     * @var MiscTagsInterface
+     * @var WebmastersInterface
      */
     protected $webmasters;
 
