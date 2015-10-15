@@ -38,7 +38,12 @@ And for the Facade:
 
 'aliases' => [
     ...
-    'SeoHelper' => Arcanedev\SeoHelper\Facades\SeoHelper::class,
+    'SeoHelper'    => Arcanedev\SeoHelper\Facades\SeoHelper::class,
+    
+    // OR, by choosing a specific SEO Helper.
+    'SeoMeta'      => Arcanedev\SeoHelper\Facades\SeoMeta::class,
+    'SeoOpenGraph' => Arcanedev\SeoHelper\Facades\SeoOpenGraph::class,
+    'SeoTwitter'   => Arcanedev\SeoHelper\Facades\SeoTwitter::class,
 ];
 ```
 
