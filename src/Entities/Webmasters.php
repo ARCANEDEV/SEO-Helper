@@ -80,9 +80,13 @@ class Webmasters implements WebmastersInterface
      *
      * @return string
      */
-    private function getName($webmaster)
+    private function getWebmasterName($webmaster)
     {
-        return $this->supported[$webmaster];
+        if ($this->isSupported($webmaster)) {
+            return $this->supported[$webmaster];
+        }
+
+        return null;
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -99,8 +103,8 @@ class Webmasters implements WebmastersInterface
      */
     private function add($webmaster, $content)
     {
-        if ($this->isSupported($webmaster)) {
-            $this->metas->add($this->getName($webmaster), $content);
+        if ( ! is_null($name = $this->getWebmasterName($webmaster))) {
+            $this->metas->add($name, $content);
         }
 
         return $this;
@@ -125,7 +129,6 @@ class Webmasters implements WebmastersInterface
     {
         return $this->render();
     }
-
 
     /* ------------------------------------------------------------------------------------------------
      |  Check Functions

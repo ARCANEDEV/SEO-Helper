@@ -71,4 +71,14 @@ class WebmastersTest extends TestCase
             $this->assertContains($excepted, (string) $this->webmasters);
         }
     }
+
+    /** @test */
+    public function it_can_skip_unsupported_webmasters()
+    {
+        $this->webmasters = new Webmasters([
+            'duckduckgo'  => 'site-verification-code'
+        ]);
+
+        $this->assertEmpty($this->webmasters->render());
+    }
 }
