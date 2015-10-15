@@ -74,6 +74,11 @@ class MetaTest extends TestCase
         );
 
         $this->assertEquals(
+            '<meta name="name" content="Hello world">',
+            (string) Meta::make('name', 'Hello world')
+        );
+
+        $this->assertEquals(
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             Meta::make('viewport', 'width=device-width, initial-scale=1')->render()
         );

@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Bases;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\MetaInterface;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Meta;
 use Arcanedev\Support\Collection;
@@ -59,6 +60,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
+        $this->refresh();
 
         return $this;
     }
@@ -177,6 +179,18 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Refresh meta collection items.
+     */
+    private function refresh()
+    {
+        $this->map(function (MetaInterface $meta) {
+            $meta->setPrefix($this->prefix);
+
+            return $meta;
+        });
+    }
+
     /**
      * Prepare names.
      *

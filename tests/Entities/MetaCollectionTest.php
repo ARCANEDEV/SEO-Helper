@@ -78,6 +78,11 @@ class MetaCollectionTest extends TestCase
             '<meta name="robots" content="noindex, nofollow">',
             $this->metas->render()
         );
+
+        $this->assertEquals(
+            '<meta name="robots" content="noindex, nofollow">',
+            (string) $this->metas
+        );
     }
 
     /** @test */
