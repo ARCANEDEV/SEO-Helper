@@ -49,9 +49,9 @@ class SeoHelper implements Contracts\SeoHelper
         Contracts\SeoOpenGraph $seoOpenGraph,
         Contracts\SeoTwitter   $seoTwitter
     ) {
-        $this->seoMeta      = $seoMeta;
-        $this->seoOpenGraph = $seoOpenGraph;
-        $this->seoTwitter   = $seoTwitter;
+        $this->setSeoMeta($seoMeta);
+        $this->setSeoOpenGraph($seoOpenGraph);
+        $this->setSeoTwitter($seoTwitter);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -69,9 +69,23 @@ class SeoHelper implements Contracts\SeoHelper
     }
 
     /**
-     * Get SeoTwitter instance.
+     * Set SeoMeta instance.
      *
-     * @return Contracts\SeoTwitter
+     * @param  Contracts\SeoMeta  $seoMeta
+     *
+     * @return self
+     */
+    public function setSeoMeta(Contracts\SeoMeta $seoMeta)
+    {
+        $this->seoMeta = $seoMeta;
+
+        return $this;
+    }
+
+    /**
+     * Get SeoOpenGraph instance.
+     *
+     * @return Contracts\SeoOpenGraph
      */
     public function openGraph()
     {
@@ -79,15 +93,29 @@ class SeoHelper implements Contracts\SeoHelper
     }
 
     /**
-     * Get SeoTwitter instance (alias).
+     * Get SeoOpenGraph instance (alias).
      *
      * @see    \Arcanedev\SeoHelper\SeoHelper::openGraph()
      *
-     * @return Contracts\SeoTwitter
+     * @return Contracts\SeoOpenGraph
      */
     public function og()
     {
         return $this->openGraph();
+    }
+
+    /**
+     * Get SeoOpenGraph instance.
+     *
+     * @param  Contracts\SeoOpenGraph  $seoOpenGraph
+     *
+     * @return self
+     */
+    public function setSeoOpenGraph(Contracts\SeoOpenGraph $seoOpenGraph)
+    {
+        $this->seoOpenGraph = $seoOpenGraph;
+
+        return $this;
     }
 
     /**
@@ -98,6 +126,20 @@ class SeoHelper implements Contracts\SeoHelper
     public function twitter()
     {
         return $this->seoTwitter;
+    }
+
+    /**
+     * Set SeoTwitter instance.
+     *
+     * @param  Contracts\SeoTwitter  $seoTwitter
+     *
+     * @return self
+     */
+    public function setSeoTwitter(Contracts\SeoTwitter $seoTwitter)
+    {
+        $this->seoTwitter = $seoTwitter;
+
+        return $this;
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -111,10 +153,10 @@ class SeoHelper implements Contracts\SeoHelper
      */
     public function render()
     {
-        return implode(PHP_EOL, [
+        return implode(PHP_EOL, array_filter([
             $this->meta()->render(),
             $this->og()->render(),
             $this->twitter()->render(),
-        ]);
+        ]));
     }
 }

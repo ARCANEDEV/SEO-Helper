@@ -1,4 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
+
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
@@ -19,6 +21,12 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * The Open Graph instance.
+     *
+     * @var OpenGraphInterface
+     */
+    protected $openGraph;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -32,12 +40,29 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     public function __construct(array $configs)
     {
         $this->setConfigs($configs);
+
+        $this->setOpenGraph(
+            new Entities\OpenGraph\Graph($this->getConfig('open-graph', []))
+        );
     }
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Set the Open Graph instance.
+     *
+     * @param  OpenGraphInterface  $openGraph
+     *
+     * @return self
+     */
+    public function setOpenGraph(OpenGraphInterface $openGraph)
+    {
+        $this->openGraph = $openGraph;
+
+        return $this;
+    }
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -50,6 +75,6 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function render()
     {
-        //
+        return $this->openGraph->render();
     }
 }
