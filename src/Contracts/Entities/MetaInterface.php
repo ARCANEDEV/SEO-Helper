@@ -21,6 +21,24 @@ interface MetaInterface extends Renderable
      */
     public function key();
 
+    /**
+     * Set the meta prefix name.
+     *
+     * @param  string  $prefix
+     *
+     * @return self
+     */
+    public function setPrefix($prefix);
+
+    /**
+     * Set the meta property name.
+     *
+     * @param  string  $nameProperty
+     *
+     * @return self
+     */
+    public function setNameProperty($nameProperty);
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------

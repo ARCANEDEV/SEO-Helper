@@ -91,6 +91,13 @@ class MetaTest extends TestCase
             '<meta name="say:hello" content="Hello World">',
             Meta::make('hello', 'Hello World', 'say:')->render()
         );
+
+        $meta = Meta::make('hello', 'Hello World');
+
+        $this->assertEquals(
+            '<meta name="say:hello" content="Hello World">',
+            $meta->setPrefix('say:')->render()
+        );
     }
 
     /** @test */
@@ -103,5 +110,47 @@ class MetaTest extends TestCase
             '<meta name="awesome-name" content="Harmless alert(&quot;Danger Zone&quot;);">',
             Meta::make($name, $content)->render()
         );
+    }
+
+    /** @test */
+    public function it_can_make_meta_with_custom_name_property()
+    {
+        $this->assertEquals(
+            '<meta property="og:title" content="Hello World">',
+            Meta::make('title', 'Hello World', 'og:', 'property')->render()
+        );
+    }
+
+    /** @test */
+    public function it_can_set_name_property()
+    {
+        $meta = Meta::make('title', 'Hello World', 'og:');
+
+        $this->assertEquals(
+            '<meta property="og:title" content="Hello World">',
+            $meta->setNameProperty('property')->render()
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
+     * @expectedExceptionMessage  The meta name property is must be a string value, NULL is given.
+     */
+    public function it_must_throw_an_invalid_argument_exception_on_invalid_type()
+    {
+        Meta::make('title', 'Hello World')->setNameProperty(null);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
+     * @expectedExceptionMessage  The meta name property [foo] is not supported, the allowed name properties are ['name', 'property'].
+     */
+    public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name()
+    {
+        Meta::make('title', 'Hello World')->setNameProperty('foo');
     }
 }

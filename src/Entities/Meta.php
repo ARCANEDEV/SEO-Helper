@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaInterface;
+use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 
 /**
  * Class     Meta
@@ -20,6 +21,13 @@ class Meta implements MetaInterface
      * @var string
      */
     protected $prefix  = '';
+
+    /**
+     * The meta name property.
+     *
+     * @var string
+     */
+    protected $nameProperty = 'name';
 
     /**
      * Meta name.
@@ -55,12 +63,14 @@ class Meta implements MetaInterface
      * @param  string  $name
      * @param  string  $content
      * @param  string  $prefix
+     * @param  string  $propertyName
      */
-    public function __construct($name, $content, $prefix = '')
+    public function __construct($name, $content, $prefix = '', $propertyName = 'name')
     {
         $this->setPrefix($prefix);
         $this->setName($name);
         $this->setContent($content);
+        $this->setNameProperty($propertyName);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -84,9 +94,24 @@ class Meta implements MetaInterface
      *
      * @return self
      */
-    private function setPrefix($prefix)
+    public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * Set the meta property name.
+     *
+     * @param  string  $nameProperty
+     *
+     * @return self
+     */
+    public function setNameProperty($nameProperty)
+    {
+        $this->checkNameProperty($nameProperty);
+        $this->nameProperty = $nameProperty;
 
         return $this;
     }
@@ -159,12 +184,13 @@ class Meta implements MetaInterface
      * @param  string  $name
      * @param  string  $content
      * @param  string  $prefix
+     * @param  string  $propertyName
      *
      * @return self
      */
-    public static function make($name, $content, $prefix = '')
+    public static function make($name, $content, $prefix = '', $propertyName = 'name')
     {
-        return new self($name, $content, $prefix);
+        return new self($name, $content, $prefix, $propertyName);
     }
 
     /**
@@ -198,7 +224,11 @@ class Meta implements MetaInterface
      */
     private function renderMeta()
     {
-        return '<meta name="' . $this->getName() . '" content="' . $this->getContent() . '">';
+        $output   = [];
+        $output[] = $this->nameProperty . '="' . $this->getName() . '"';
+        $output[] = 'content="' . $this->getContent() . '"';
+
+        return '<meta ' . implode(' ', $output) . '>';
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -223,6 +253,34 @@ class Meta implements MetaInterface
     public function isValid()
     {
         return ! empty($this->content);
+    }
+
+    /**
+     * Check the name property.
+     *
+     * @param  string  $nameProperty
+     *
+     * @throws InvalidArgumentException
+     */
+    private function checkNameProperty(&$nameProperty)
+    {
+        if ( ! is_string($nameProperty)) {
+            throw new InvalidArgumentException(
+                'The meta name property is must be a string value, ' . gettype($nameProperty) . ' is given.'
+            );
+        }
+
+        $name    = str_slug($nameProperty);
+        $allowed = ['name', 'property'];
+
+        if ( ! in_array($name, $allowed)) {
+            throw new InvalidArgumentException(
+                "The meta name property [$name] is not supported, ".
+                "the allowed name properties are ['". implode("', '", $allowed) . "']."
+            );
+        }
+
+        $nameProperty = $name;
     }
 
     /* ------------------------------------------------------------------------------------------------
