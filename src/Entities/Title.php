@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Title
@@ -12,25 +13,31 @@ use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 class Title implements TitleInterface
 {
     /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
+    /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Title.
+     * The title content.
      *
      * @var string
      */
     protected $title        = '';
 
     /**
-     * Site name.
+     * The site name.
      *
      * @var string
      */
     protected $siteName     = '';
 
     /**
-     * Title separator.
+     * The title separator.
      *
      * @var string
      */
@@ -44,7 +51,7 @@ class Title implements TitleInterface
     protected $titleFirst   = true;
 
     /**
-     * Maximum title length.
+     * The maximum title length.
      *
      * @var int
      */
@@ -55,17 +62,27 @@ class Title implements TitleInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make Title instance.
+     * Make the Title instance.
      *
-     * @param  array  $config
+     * @param  array  $configs
      */
-    public function __construct(array $config = [])
+    public function __construct(array $configs = [])
     {
-        $this->setTitle(array_get($config, 'default', ''));
-        $this->setSiteName(array_get($config, 'site-name', ''));
-        $this->setSeparator(array_get($config, 'separator', '-'));
-        $this->switchPosition(array_get($config, 'first', true));
-        $this->setMax(array_get($config, 'max', 55));
+        $this->setConfigs($configs);
+
+        $this->init();
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init()
+    {
+        $this->setTitle($this->getConfig('default', ''));
+        $this->setSiteName($this->getConfig('site-name', ''));
+        $this->setSeparator($this->getConfig('separator', '-'));
+        $this->switchPosition($this->getConfig('first', true));
+        $this->setMax($this->getConfig('max', 55));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -245,14 +262,15 @@ class Title implements TitleInterface
      */
     public function render()
     {
-        $separator = ' ';
-        $separator = empty($this->getSeparator()) ? $separator : ' ' . $this->getSeparator() . ' ';
+        $separator = empty($this->getSeparator()) ? ' ' : ' ' . $this->getSeparator() . ' ';
 
         $output    = $this->isTitleFirst()
             ? $this->renderTitleFirst($separator)
             : $this->renderTitleLast($separator);
 
-        return '<title>' . str_limit(implode('', $output), $this->getMax()) . '</title>';
+        $output    = e(strip_tags($output));
+
+        return '<title>' . str_limit($output, $this->getMax()) . '</title>';
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -280,7 +298,7 @@ class Title implements TitleInterface
 
         if (empty($title)) {
             throw new InvalidArgumentException(
-                "The title is required and must not be empty."
+                'The title is required and must not be empty.'
             );
         }
     }
@@ -316,7 +334,7 @@ class Title implements TitleInterface
      *
      * @param  string  $separator
      *
-     * @return array
+     * @return string
      */
     private function renderTitleFirst($separator)
     {
@@ -328,7 +346,7 @@ class Title implements TitleInterface
             $output[] = $this->getSiteName();
         }
 
-        return $output;
+        return implode('', $output);
     }
 
     /**
@@ -336,7 +354,7 @@ class Title implements TitleInterface
      *
      * @param  string  $separator
      *
-     * @return array
+     * @return string
      */
     private function renderTitleLast($separator)
     {
@@ -349,7 +367,7 @@ class Title implements TitleInterface
 
         $output[] = $this->getTitle();
 
-        return $output;
+        return implode('', $output);
     }
 
     /**
