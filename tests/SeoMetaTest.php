@@ -46,8 +46,9 @@ class SeoMetaTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Bases\Seo::class,
-            \Arcanedev\SeoHelper\SeoMeta::class
+            \Arcanedev\SeoHelper\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 
         foreach ($expectations as $expected) {

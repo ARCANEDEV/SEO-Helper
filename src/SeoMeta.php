@@ -4,6 +4,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     SeoMeta
@@ -11,8 +12,14 @@ use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoMeta extends Bases\Seo implements Contracts\SeoMeta
+class SeoMeta implements Contracts\SeoMeta
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -63,7 +70,7 @@ class SeoMeta extends Bases\Seo implements Contracts\SeoMeta
      */
     public function __construct(array $configs)
     {
-        parent::__construct($configs);
+        $this->setConfigs($configs);
 
         // Init the entities
         $this->title       = new Entities\Title($this->getConfig('title', []));
