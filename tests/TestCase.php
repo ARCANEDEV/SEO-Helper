@@ -67,7 +67,18 @@ abstract class TestCase extends BaseTestCase
     {
         // Keywords
         $app['config']->set('seo-helper.keywords', [
-            'default' => ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5']
+            'default'   => [
+                'keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'
+            ],
+        ]);
+
+        // Webmasters
+        $app['config']->set('seo-helper.webmasters', [
+            'google'    => 'site-verification-code',
+            'bing'      => 'site-verification-code',
+            'alexa'     => 'site-verification-code',
+            'pinterest' => 'site-verification-code',
+            'yandex'    => 'site-verification-code',
         ]);
     }
 
