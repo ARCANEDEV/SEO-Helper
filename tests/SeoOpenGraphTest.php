@@ -44,8 +44,9 @@ class SeoOpenGraphTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Bases\Seo::class,
-            \Arcanedev\SeoHelper\SeoOpenGraph::class
+            \Arcanedev\SeoHelper\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 
         foreach ($expectations as $expected) {

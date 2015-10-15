@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\SeoHelper;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     SeoOpenGraph
@@ -6,8 +7,14 @@
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoOpenGraph extends Bases\Seo implements Contracts\SeoOpenGraph
+class SeoOpenGraph implements Contracts\SeoOpenGraph
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Configurable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -24,7 +31,7 @@ class SeoOpenGraph extends Bases\Seo implements Contracts\SeoOpenGraph
      */
     public function __construct(array $configs)
     {
-        parent::__construct($configs);
+        $this->setConfigs($configs);
     }
 
     /* ------------------------------------------------------------------------------------------------
