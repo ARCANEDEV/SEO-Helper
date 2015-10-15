@@ -1,21 +1,22 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php namespace Arcanedev\SeoHelper\Tests\Entities\OpenGraph;
 
-use Arcanedev\SeoHelper\SeoOpenGraph;
+use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
+use Arcanedev\SeoHelper\Tests\TestCase;
 
 /**
- * Class     SeoOpenGraphTest
+ * Class     GraphTest
  *
- * @package  Arcanedev\SeoHelper\Tests
+ * @package  Arcanedev\SeoHelper\Tests\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoOpenGraphTest extends TestCase
+class GraphTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var SeoOpenGraph */
-    private $seoOpenGraph;
+    /** @var Graph */
+    private $og;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -25,15 +26,15 @@ class SeoOpenGraphTest extends TestCase
     {
         parent::setUp();
 
-        $configs            = $this->getSeoHelperConfig();
-        $this->seoOpenGraph = new SeoOpenGraph($configs);
+        $config   = $this->getSeoHelperConfig('open-graph');
+        $this->og = new Graph($config);
     }
 
     public function tearDown()
     {
         parent::tearDown();
 
-        unset($this->seoOpenGraph);
+        unset($this->og);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -44,43 +45,25 @@ class SeoOpenGraphTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Arcanedev\SeoHelper\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Entities\OpenGraph\Graph::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->seoOpenGraph);
+            $this->assertInstanceOf($expected, $this->og);
         }
     }
 
     /** @test */
     public function it_can_render_defaults()
     {
-        $output       = $this->seoOpenGraph->render();
+        $output       = $this->og->render();
         $expectations = [
             '<meta property="og:type" content="website">',
             '<meta property="og:title" content="Default Open Graph title">',
             '<meta property="og:description" content="Default Open Graph description">',
         ];
-
-        foreach ($expectations as $expected) {
-            $this->assertContains($expected, $output);
-        }
-    }
-
-    /** @test */
-    public function it_can_set_and_render_prefix()
-    {
-        $this->seoOpenGraph->setPrefix('open-graph:');
-
-        $expectations = [
-            '<meta property="open-graph:type" content="website">',
-            '<meta property="open-graph:title" content="Default Open Graph title">',
-            '<meta property="open-graph:description" content="Default Open Graph description">',
-        ];
-
-        $output = $this->seoOpenGraph->render();
 
         foreach ($expectations as $expected) {
             $this->assertContains($expected, $output);
@@ -98,11 +81,11 @@ class SeoOpenGraphTest extends TestCase
         ];
 
         foreach ($types as $type) {
-            $this->seoOpenGraph->setType($type);
+            $this->og->setType($type);
 
             $this->assertContains(
                 '<meta property="og:type" content="' . $type . '">',
-                $this->seoOpenGraph->render()
+                $this->og->render()
             );
         }
     }
@@ -112,11 +95,11 @@ class SeoOpenGraphTest extends TestCase
     {
         $title = 'Hello World';
 
-        $this->seoOpenGraph->setTitle($title);
+        $this->og->setTitle($title);
 
         $this->assertContains(
             '<meta property="og:title" content="' . $title . '">',
-            $this->seoOpenGraph->render()
+            $this->og->render()
         );
     }
 
@@ -125,11 +108,11 @@ class SeoOpenGraphTest extends TestCase
     {
         $description = 'Hello World detailed description.';
 
-        $this->seoOpenGraph->setDescription($description);
+        $this->og->setDescription($description);
 
         $this->assertContains(
             '<meta property="og:description" content="' . $description . '">',
-            $this->seoOpenGraph->render()
+            $this->og->render()
         );
     }
 
@@ -138,11 +121,11 @@ class SeoOpenGraphTest extends TestCase
     {
         $url = 'http://www.imdb.com/title/tt0080339/';
 
-        $this->seoOpenGraph->setUrl($url);
+        $this->og->setUrl($url);
 
         $this->assertContains(
             '<meta property="og:url" content="' . $url . '">',
-            $this->seoOpenGraph->render()
+            $this->og->render()
         );
     }
 
@@ -151,28 +134,11 @@ class SeoOpenGraphTest extends TestCase
     {
         $image = 'http://ia.media-imdb.com/images/M/MV5BNDU2MjE4MTcwNl5BMl5BanBnXkFtZTgwNDExOTMxMDE@._V1_UY1200_CR90,0,630,1200_AL_.jpg';
 
-        $this->seoOpenGraph->setImage($image);
+        $this->og->setImage($image);
 
         $this->assertContains(
             '<meta property="og:image" content="' . $image . '">',
-            $this->seoOpenGraph->render()
+            $this->og->render()
         );
-    }
-
-    /** @test */
-    public function it_can_add_and_render_property()
-    {
-        $locales = [
-            'ar', 'en', 'en_US', 'es', 'fr', 'fr_FR',
-        ];
-
-        foreach ($locales as $locale) {
-            $this->seoOpenGraph->addProperty('locale', $locale);
-
-            $this->assertContains(
-                '<meta property="og:locale" content="' . $locale . '">',
-                $this->seoOpenGraph->render()
-            );
-        }
     }
 }

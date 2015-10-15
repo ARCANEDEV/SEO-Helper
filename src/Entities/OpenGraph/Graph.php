@@ -1,15 +1,15 @@
-<?php namespace Arcanedev\SeoHelper;
+<?php namespace Arcanedev\SeoHelper\Entities\OpenGraph;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
- * Class     SeoOpenGraph
+ * Class     Graph
  *
- * @package  Arcanedev\SeoHelper
+ * @package  Arcanedev\SeoHelper\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoOpenGraph implements Contracts\SeoOpenGraph
+class Graph implements OpenGraphInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -22,58 +22,54 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * The Open Graph instance.
+     * The Open Graph meta collection.
      *
-     * @var OpenGraphInterface
+     * @var MetaCollection
      */
-    protected $openGraph;
+    protected $metas;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make SeoOpenGraph instance.
+     * Make Graph instance.
      *
      * @param  array  $configs
      */
-    public function __construct(array $configs)
+    public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
+        $this->metas = new MetaCollection;
 
-        $this->setOpenGraph(
-            new Entities\OpenGraph\Graph($this->getConfig('open-graph', []))
-        );
+        $this->init();
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init()
+    {
+        $this->setPrefix($this->getConfig('prefix', 'og:'));
+        $this->setType($this->getConfig('type', ''));
+        $this->setTitle($this->getConfig('title', ''));
+        $this->setDescription($this->getConfig('description', ''));
     }
 
     /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
+     |  Properties
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Set the Open Graph instance.
-     *
-     * @param  OpenGraphInterface  $openGraph
-     *
-     * @return self
-     */
-    public function setOpenGraph(OpenGraphInterface $openGraph)
-    {
-        $this->openGraph = $openGraph;
-
-        return $this;
-    }
-
-    /**
      * Set the open graph prefix.
      *
-     * @param  string $prefix
+     * @param  string  $prefix
      *
      * @return self
      */
     public function setPrefix($prefix)
     {
-        $this->openGraph->setPrefix($prefix);
+        $this->metas->setPrefix($prefix);
 
         return $this;
     }
@@ -81,13 +77,13 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set type property.
      *
-     * @param  string $type
+     * @param  string  $type
      *
      * @return self
      */
     public function setType($type)
     {
-        $this->openGraph->setType($type);
+        $this->addProperty('type', $type);
 
         return $this;
     }
@@ -101,7 +97,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function setTitle($title)
     {
-        $this->openGraph->setTitle($title);
+        $this->addProperty('title', $title);
 
         return $this;
     }
@@ -109,13 +105,13 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set description property.
      *
-     * @param  string $description
+     * @param  string  $description
      *
      * @return self
      */
     public function setDescription($description)
     {
-        $this->openGraph->setDescription($description);
+        $this->addProperty('description', $description);
 
         return $this;
     }
@@ -129,7 +125,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function setUrl($url)
     {
-        $this->openGraph->setUrl($url);
+        $this->addProperty('url', $url);
 
         return $this;
     }
@@ -137,13 +133,13 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set image property.
      *
-     * @param  string $image
+     * @param  string  $image
      *
      * @return self
      */
     public function setImage($image)
     {
-        $this->openGraph->setImage($image);
+        $this->addProperty('image', $image);
 
         return $this;
     }
@@ -158,7 +154,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function addProperty($property, $content)
     {
-        $this->openGraph->addProperty($property, $content);
+        $this->metas->add($property, $content);
 
         return $this;
     }
@@ -174,6 +170,6 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function render()
     {
-        return $this->openGraph->render();
+        return $this->metas->render();
     }
 }
