@@ -84,16 +84,6 @@ class SeoMeta implements Contracts\SeoMeta
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the title.
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title->getTitle();
-    }
-
-    /**
      * Set the title.
      *
      * @param  string  $title
@@ -118,16 +108,6 @@ class SeoMeta implements Contracts\SeoMeta
     }
 
     /**
-     * Get the description content.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description->getContent();
-    }
-
-    /**
      * Set the description content.
      *
      * @param  string  $content
@@ -139,16 +119,6 @@ class SeoMeta implements Contracts\SeoMeta
         $this->description->setContent($content);
 
         return $this;
-    }
-
-    /**
-     * Get the keywords content.
-     *
-     * @return array
-     */
-    public function getKeywords()
-    {
-        return $this->keywords->getContent();
     }
 
     /**

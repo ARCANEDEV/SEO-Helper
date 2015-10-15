@@ -13,13 +13,6 @@ interface SeoMeta extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the title.
-     *
-     * @return string
-     */
-    public function getTitle();
-
-    /**
      * Set the title.
      *
      * @param  string  $title
@@ -31,13 +24,6 @@ interface SeoMeta extends Renderable
     public function setTitle($title, $siteName = null, $separator = null);
 
     /**
-     * Get the description content.
-     *
-     * @return string
-     */
-    public function getDescription();
-
-    /**
      * Set the description content.
      *
      * @param  string  $content
@@ -45,13 +31,6 @@ interface SeoMeta extends Renderable
      * @return self
      */
     public function setDescription($content);
-
-    /**
-     * Get the keywords content.
-     *
-     * @return array
-     */
-    public function getKeywords();
 
     /**
      * Set the keywords content.
