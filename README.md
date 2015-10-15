@@ -46,13 +46,13 @@ SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
 ## TODOS
 
   - [ ] Complete the documentation.
-  - [ ] Adding Webmaster tools support.
   - [ ] Framework agnostic package.
 
 ## DONE
 
   - [x] Open Graph supported.
   - [x] Twitter Cards supported.
+  - [x] Webmaster tools supported.
 
 ## Contribution
 
