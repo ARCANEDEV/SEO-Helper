@@ -99,6 +99,22 @@ class Keywords implements KeywordsInterface
         return $this;
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make Keywords instance.
+     *
+     * @param  array|string  $keywords
+     *
+     * @return self
+     */
+    public static function make($keywords)
+    {
+        return new self(['default' => $keywords]);
+    }
+
     /**
      * Add a keyword to the content.
      *
@@ -113,10 +129,6 @@ class Keywords implements KeywordsInterface
         return $this;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Render the tag.
      *
@@ -166,7 +178,7 @@ class Keywords implements KeywordsInterface
      *
      * @return string
      */
-    public function clean($value)
+    private function clean($value)
     {
         return trim(strip_tags($value));
     }

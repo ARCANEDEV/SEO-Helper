@@ -30,6 +30,19 @@ interface KeywordsInterface extends Renderable
      */
     public function set($content);
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make Keywords instance.
+     *
+     * @param  array|string  $keywords
+     *
+     * @return self
+     */
+    public static function make($keywords);
+
     /**
      * Add a keyword to the content.
      *

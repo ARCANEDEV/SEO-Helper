@@ -137,6 +137,19 @@ class KeywordsTest extends TestCase
         $this->assertEmpty((string) $this->keywords);
     }
 
+    /** @test */
+    public function it_can_make()
+    {
+        $keywords       = $this->getDefaultContent();
+        $this->keywords = Keywords::make($keywords);
+
+        $expected       = '<meta name="keywords" content="' . implode(', ', $keywords) .'">';
+
+        $this->assertEquals($keywords, $this->keywords->getContent());
+        $this->assertEquals($expected, $this->keywords->render());
+        $this->assertEquals($expected, (string) $this->keywords);
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
