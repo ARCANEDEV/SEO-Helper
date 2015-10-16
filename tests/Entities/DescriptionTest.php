@@ -53,6 +53,7 @@ class DescriptionTest extends TestCase
     public function it_can_get_default_description()
     {
         $content = $this->getDefaultContent();
+
         $this->assertEquals($content, $this->description->getContent());
     }
 
@@ -61,7 +62,7 @@ class DescriptionTest extends TestCase
     {
         $content = 'Cool description about this package';
 
-        $this->description->setContent($content);
+        $this->description->set($content);
 
         $this->assertEquals($content, $this->description->getContent());
     }
@@ -103,20 +104,21 @@ class DescriptionTest extends TestCase
     {
         $description = 'Cool description about this package';
 
-        $this->description->setContent($description);
+        $this->description->set($description);
 
-        $this->assertEquals(
-            '<meta name="description" content="' . $description .'">',
-            $this->description->render()
-        );
+        $expected = '<meta name="description" content="' . $description .'">';
+
+        $this->assertEquals($expected, $this->description->render());
+        $this->assertEquals($expected, (string) $this->description);
     }
 
     /** @test */
     public function it_can_render_empty_description()
     {
-        $this->description->setContent('');
+        $this->description->set('');
 
         $this->assertEmpty($this->description->render());
+        $this->assertEmpty((string) $this->description);
     }
 
     /** @test */
@@ -125,12 +127,12 @@ class DescriptionTest extends TestCase
         $content = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ullamco laboris aliquip commodo.';
         $max     = $this->getDefaultMax();
 
-        $this->description->setContent($content)->setMax($max);
+        $this->description->set($content)->setMax($max);
 
-        $this->assertEquals(
-            '<meta name="description" content="' . str_limit($content, $max) . '">',
-            $this->description->render()
-        );
+        $expected = '<meta name="description" content="' . str_limit($content, $max) . '">';
+
+        $this->assertEquals($expected, $this->description->render());
+        $this->assertEquals($expected, (string) $this->description);
     }
 
     /* ------------------------------------------------------------------------------------------------

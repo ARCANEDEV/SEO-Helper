@@ -56,7 +56,7 @@ class Description implements DescriptionInterface
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-        $this->setContent($this->getConfig('default', ''));
+        $this->set($this->getConfig('default', ''));
         $this->setMax($this->getConfig('max', 55));
     }
 
@@ -65,13 +65,23 @@ class Description implements DescriptionInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get content.
+     * Get raw description content.
      *
      * @return string
      */
     public function getContent()
     {
-        return str_limit($this->content, $this->getMax());
+        return $this->content;
+    }
+
+    /**
+     * Get description content.
+     *
+     * @return string
+     */
+    public function get()
+    {
+        return str_limit($this->getContent(), $this->getMax());
     }
 
     /**
@@ -81,9 +91,9 @@ class Description implements DescriptionInterface
      *
      * @return self
      */
-    public function setContent($content)
+    public function set($content)
     {
-        $this->content = trim($content);
+        $this->content = trim(strip_tags($content));
 
         return $this;
     }
@@ -129,7 +139,17 @@ class Description implements DescriptionInterface
             return '';
         }
 
-        return Meta::make($this->name, $this->getContent())->render();
+        return Meta::make($this->name, $this->get())->render();
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -143,7 +163,7 @@ class Description implements DescriptionInterface
      */
     private function hasContent()
     {
-        return ! empty($this->getContent());
+        return ! empty($this->get());
     }
 
     /**

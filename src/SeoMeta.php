@@ -211,7 +211,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function setDescription($content)
     {
-        $this->description->setContent($content);
+        $this->description->set($content);
 
         return $this;
     }

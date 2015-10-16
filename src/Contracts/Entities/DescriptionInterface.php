@@ -15,11 +15,18 @@ interface DescriptionInterface extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get content.
+     * Get raw description content.
      *
      * @return string
      */
     public function getContent();
+
+    /**
+     * Get description content.
+     *
+     * @return string
+     */
+    public function get();
 
     /**
      * Set description content.
@@ -28,7 +35,7 @@ interface DescriptionInterface extends Renderable
      *
      * @return self
      */
-    public function setContent($content);
+    public function set($content);
 
     /**
      * Get description max length.
