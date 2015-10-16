@@ -83,10 +83,10 @@ class GraphTest extends TestCase
         foreach ($types as $type) {
             $this->og->setType($type);
 
-            $this->assertContains(
-                '<meta property="og:type" content="' . $type . '">',
-                $this->og->render()
-            );
+            $expected = '<meta property="og:type" content="' . $type . '">';
+
+            $this->assertContains($expected, $this->og->render());
+            $this->assertContains($expected, (string) $this->og);
         }
     }
 
@@ -97,10 +97,10 @@ class GraphTest extends TestCase
 
         $this->og->setTitle($title);
 
-        $this->assertContains(
-            '<meta property="og:title" content="' . $title . '">',
-            $this->og->render()
-        );
+        $expected = '<meta property="og:title" content="' . $title . '">';
+
+        $this->assertContains($expected, $this->og->render());
+        $this->assertContains($expected, (string) $this->og);
     }
 
     /** @test */
@@ -110,10 +110,10 @@ class GraphTest extends TestCase
 
         $this->og->setDescription($description);
 
-        $this->assertContains(
-            '<meta property="og:description" content="' . $description . '">',
-            $this->og->render()
-        );
+        $expected = '<meta property="og:description" content="' . $description . '">';
+
+        $this->assertContains($expected, $this->og->render());
+        $this->assertContains($expected, (string) $this->og);
     }
 
     /** @test */
@@ -123,10 +123,10 @@ class GraphTest extends TestCase
 
         $this->og->setUrl($url);
 
-        $this->assertContains(
-            '<meta property="og:url" content="' . $url . '">',
-            $this->og->render()
-        );
+        $expected = '<meta property="og:url" content="' . $url . '">';
+
+        $this->assertContains($expected, $this->og->render());
+        $this->assertContains($expected, (string) $this->og);
     }
 
     /** @test */
@@ -136,9 +136,9 @@ class GraphTest extends TestCase
 
         $this->og->setImage($image);
 
-        $this->assertContains(
-            '<meta property="og:image" content="' . $image . '">',
-            $this->og->render()
-        );
+        $expected = '<meta property="og:image" content="' . $image . '">';
+
+        $this->assertContains($expected, $this->og->render());
+        $this->assertContains($expected, (string) $this->og);
     }
 }

@@ -188,20 +188,6 @@ class Card implements TwitterCardInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Render the twitter card.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        if ( ! empty($this->images)) {
-            $this->loadImages();
-        }
-
-        return $this->metas->render();
-    }
-
-    /**
      * Render card images.
      */
     private function loadImages()
@@ -228,6 +214,30 @@ class Card implements TwitterCardInterface
         $this->images = [];
 
         return $this->init();
+    }
+
+    /**
+     * Render the twitter card.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        if ( ! empty($this->images)) {
+            $this->loadImages();
+        }
+
+        return $this->metas->render();
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 
     /* ------------------------------------------------------------------------------------------------

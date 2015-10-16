@@ -64,10 +64,10 @@ class CardTest extends TestCase
         foreach ($supported as $type) {
             $this->card->setType($type);
 
-            $this->assertContains(
-                '<meta name="twitter:card" content="' . $type . '">',
-                $this->card->render()
-            );
+            $expected = '<meta name="twitter:card" content="' . $type . '">';
+
+            $this->assertContains($expected, $this->card->render());
+            $this->assertContains($expected, (string) $this->card);
         }
     }
 
@@ -99,10 +99,10 @@ class CardTest extends TestCase
         $prefix     = 'twt:';
         $this->card = new Card(['prefix' => $prefix]);
 
-        $this->assertContains(
-            '<meta name="' . $prefix . 'card" content="summary">',
-            $this->card->render()
-        );
+        $expected   = '<meta name="' . $prefix . 'card" content="summary">';
+
+        $this->assertContains($expected, $this->card->render());
+        $this->assertContains($expected, (string) $this->card);
     }
 
     /** @test */
@@ -111,10 +111,10 @@ class CardTest extends TestCase
         $title = 'Hello world';
         $this->card->setTitle($title);
 
-        $this->assertContains(
-            '<meta name="twitter:title" content="' . $title . '">',
-            $this->card->render()
-        );
+        $expected = '<meta name="twitter:title" content="' . $title . '">';
+
+        $this->assertContains($expected, $this->card->render());
+        $this->assertContains($expected, (string) $this->card);
     }
 
     /** @test */
@@ -123,10 +123,10 @@ class CardTest extends TestCase
         $description = 'Hello world description';
         $this->card->setDescription($description);
 
-        $this->assertContains(
-            '<meta name="twitter:description" content="' . $description . '">',
-            $this->card->render()
-        );
+        $expected = '<meta name="twitter:description" content="' . $description . '">';
+
+        $this->assertContains($expected, $this->card->render());
+        $this->assertContains($expected, (string) $this->card);
     }
 
     /** @test */
@@ -138,23 +138,23 @@ class CardTest extends TestCase
         $this->card->setSite('@' . $site);
 
         $this->assertContains($excepted, $this->card->render());
+        $this->assertContains($excepted, (string) $this->card);
 
         $this->card->setSite($site);
 
         $this->assertContains($excepted, $this->card->render());
+        $this->assertContains($excepted, (string) $this->card);
     }
 
     /** @test */
     public function it_can_add_and_render_one_image()
     {
-        $avatar = 'http://example.com/img/avatar.png';
-
+        $avatar   = 'http://example.com/img/avatar.png';
         $this->card->addImage($avatar);
+        $expected = '<meta name="twitter:image" content="' . $avatar . '">';
 
-        $this->assertContains(
-            '<meta name="twitter:image" content="' . $avatar . '">',
-            $this->card->render()
-        );
+        $this->assertContains($expected, $this->card->render());
+        $this->assertContains($expected, (string) $this->card);
     }
 
     /** @test */
@@ -163,7 +163,7 @@ class CardTest extends TestCase
         $avatar = 'http://example.com/img/avatar.png';
         $number = range(0, 4);
 
-        foreach ($number as $v) {
+        for ($i = 0; $i < count($number); $i++) {
             $this->card->addImage($avatar);
         }
 
@@ -186,9 +186,11 @@ class CardTest extends TestCase
         $this->card->addImage('http://example.com/img/avatar.png');
 
         $this->assertNotEquals($expected, $this->card->render());
+        $this->assertNotEquals($expected, (string) $this->card);
 
         $this->card->reset();
 
         $this->assertEquals($expected, $this->card->render());
+        $this->assertEquals($expected, (string) $this->card);
     }
 }

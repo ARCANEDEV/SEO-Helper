@@ -172,4 +172,14 @@ class Graph implements OpenGraphInterface
     {
         return $this->metas->render();
     }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
 }
