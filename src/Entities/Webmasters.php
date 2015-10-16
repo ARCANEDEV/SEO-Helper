@@ -55,7 +55,8 @@ class Webmasters implements WebmastersInterface
     {
         $this->setConfigs($configs);
 
-        $this->reset()->init();
+        $this->reset();
+        $this->init();
     }
 
     /**
