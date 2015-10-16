@@ -7,6 +7,6 @@ if ( ! function_exists('seo_helper')) {
      * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
      */
     function seo_helper() {
-        return app('arcanedev.seo-helper');
+        return app(\Arcanedev\SeoHelper\Contracts\SeoHelper::class);
     }
 }
