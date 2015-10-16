@@ -55,8 +55,7 @@ class Webmasters implements WebmastersInterface
     {
         $this->setConfigs($configs);
 
-        $this->metas = new MetaCollection;
-        $this->init();
+        $this->reset()->init();
     }
 
     /**
@@ -94,6 +93,18 @@ class Webmasters implements WebmastersInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Make Webmaster instance.
+     *
+     * @param  array  $webmasters
+     *
+     * @return self
+     */
+    public static function make(array $webmasters = [])
+    {
+        return new self($webmasters);
+    }
+
+    /**
      * Add a webmaster to collection.
      *
      * @param  string  $webmaster
@@ -101,11 +112,23 @@ class Webmasters implements WebmastersInterface
      *
      * @return self
      */
-    private function add($webmaster, $content)
+    public function add($webmaster, $content)
     {
         if ( ! is_null($name = $this->getWebmasterName($webmaster))) {
             $this->metas->add($name, $content);
         }
+
+        return $this;
+    }
+
+    /**
+     * Reset the webmaster collection.
+     *
+     * @return self
+     */
+    public function reset()
+    {
+        $this->metas = new MetaCollection;
 
         return $this;
     }

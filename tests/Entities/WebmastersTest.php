@@ -73,12 +73,45 @@ class WebmastersTest extends TestCase
     }
 
     /** @test */
+    public function it_can_make_and_add()
+    {
+        $this->webmasters = Webmasters::make([
+            'google'  => 'site-verification-code'
+        ]);
+
+        $this->webmasters->add('bing', 'site-verification-code');
+
+        $expectations = [
+            '<meta name="google-site-verification" content="site-verification-code">',
+            '<meta name="msvalidate.01" content="site-verification-code">',
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->webmasters->render());
+            $this->assertContains($expected, (string) $this->webmasters);
+        }
+    }
+
+    /** @test */
     public function it_can_skip_unsupported_webmasters()
     {
-        $this->webmasters = new Webmasters([
+        $this->webmasters = Webmasters::make([
             'duckduckgo'  => 'site-verification-code'
         ]);
 
         $this->assertEmpty($this->webmasters->render());
+        $this->assertEmpty((string) $this->webmasters);
+    }
+
+    /** @test */
+    public function it_can_reset()
+    {
+        $this->assertNotEmpty($this->webmasters->render());
+        $this->assertNotEmpty((string) $this->webmasters);
+
+        $this->webmasters->reset();
+
+        $this->assertEmpty($this->webmasters->render());
+        $this->assertEmpty((string) $this->webmasters);
     }
 }
