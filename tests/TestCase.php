@@ -99,7 +99,10 @@ abstract class TestCase extends BaseTestCase
     /**
      * Get SeoHelper config.
      *
-     * @return array
+     * @param  string      $name
+     * @param  mixed|null  $default
+     *
+     * @return mixed
      */
     protected function getSeoHelperConfig($name = null, $default = null)
     {
