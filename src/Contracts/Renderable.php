@@ -18,4 +18,11 @@ interface Renderable
      * @return string
      */
     public function render();
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString();
 }
