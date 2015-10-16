@@ -25,7 +25,7 @@ class SeoHelperTest extends TestCase
     {
         parent::setUp();
 
-        $this->seoHelper = $this->app['arcanedev.seo-helper'];
+        $this->seoHelper = $this->app[\Arcanedev\SeoHelper\Contracts\SeoHelper::class];
     }
 
     public function tearDown()
@@ -42,8 +42,30 @@ class SeoHelperTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(\Arcanedev\SeoHelper\SeoHelper::class,           $this->seoHelper);
-        $this->assertInstanceOf(\Arcanedev\SeoHelper\Contracts\SeoHelper::class, $this->seoHelper);
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\SeoHelper::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->seoHelper);
+        }
+    }
+
+    /** @test */
+    public function it_can_be_instantiated_with_helper()
+    {
+        $this->seoHelper = seo_helper();
+        $expectations    = [
+            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\SeoHelper::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->seoHelper);
+        }
     }
 
     /** @test */
@@ -51,8 +73,91 @@ class SeoHelperTest extends TestCase
     {
         $seoMeta = $this->seoHelper->meta();
 
-        $this->assertInstanceOf(\Arcanedev\SeoHelper\SeoMeta::class,           $seoMeta);
-        $this->assertInstanceOf(\Arcanedev\SeoHelper\Contracts\SeoMeta::class, $seoMeta);
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\SeoMeta::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $seoMeta);
+        }
+    }
+
+    /** @test */
+    public function it_can_get_seo_open_graph()
+    {
+        $ogs = [
+            $this->seoHelper->openGraph(),
+            $this->seoHelper->og(), // Alias
+        ];
+
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\SeoOpenGraph::class,
+        ];
+
+        foreach ($ogs as $seoOpenGraph) {
+            foreach ($expectations as $expected) {
+                $this->assertInstanceOf($expected, $seoOpenGraph);
+            }
+        }
+    }
+
+    /** @test */
+    public function it_can_set_and_render_title()
+    {
+        $title        = 'Hello World';
+        $siteName     = 'ARCANEDEV';
+        $separator    = '|';
+        $expectations = [
+            "<title>$title $separator $siteName</title>",
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
+        ];
+
+        $this->seoHelper->setTitle($title, $siteName, $separator);
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->seoHelper->render());
+            $this->assertContains($expected, (string) $this->seoHelper);
+        }
+    }
+
+    /** @test */
+    public function it_can_set_and_render_description()
+    {
+        $description  = 'ARCANEDEV super description';
+        $expectations = [
+            '<meta name="description" content="' . $description . '">',
+            '<meta property="og:description" content="' . $description . '">',
+            '<meta name="twitter:description" content="' . $description . '">',
+        ];
+
+        $this->seoHelper->setDescription($description);
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->seoHelper->render());
+            $this->assertContains($expected, (string) $this->seoHelper);
+        }
+    }
+
+    /** @test */
+    public function it_can_set_and_render_keywords()
+    {
+        $keywords = $this->getSeoHelperConfig('keywords.default');
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+
+        $this->seoHelper->setKeywords($keywords); // Array
+
+        $this->assertContains($expected, $this->seoHelper->render());
+        $this->assertContains($expected, (string) $this->seoHelper);
+
+        $this->seoHelper->setKeywords(implode(',', $keywords)); // String
+
+        $this->assertContains($expected, $this->seoHelper->render());
+        $this->assertContains($expected, (string) $this->seoHelper);
     }
 
     /** @test */

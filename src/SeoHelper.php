@@ -147,6 +147,54 @@ class SeoHelper implements Contracts\SeoHelper
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Set title.
+     *
+     * @param  string       $title
+     * @param  string|null  $siteName
+     * @param  string|null  $separator
+     *
+     * @return self
+     */
+    public function setTitle($title, $siteName = null, $separator = null)
+    {
+        $this->meta()->setTitle($title, $siteName, $separator);
+        $this->openGraph()->setTitle($title);
+        $this->twitter()->setTitle($title);
+
+        return $this;
+    }
+
+    /**
+     * Set description.
+     *
+     * @param  string $description
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
+     */
+    public function setDescription($description)
+    {
+        $this->meta()->setDescription($description);
+        $this->openGraph()->setDescription($description);
+        $this->twitter()->setDescription($description);
+
+        return $this;
+    }
+
+    /**
+     * Set keywords.
+     *
+     * @param  array|string  $keywords
+     *
+     * @return self
+     */
+    public function setKeywords($keywords)
+    {
+        $this->meta()->setKeywords($keywords);
+
+        return $this;
+    }
+
+    /**
      * Render all seo tags.
      *
      * @return string
@@ -155,8 +203,18 @@ class SeoHelper implements Contracts\SeoHelper
     {
         return implode(PHP_EOL, array_filter([
             $this->meta()->render(),
-            $this->og()->render(),
+            $this->openGraph()->render(),
             $this->twitter()->render(),
         ]));
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 }

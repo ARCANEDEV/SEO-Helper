@@ -68,4 +68,37 @@ interface SeoHelper extends Renderable
      * @return self
      */
     public function setSeoTwitter(SeoTwitter $seoTwitter);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Set title.
+     *
+     * @param  string       $title
+     * @param  string|null  $siteName
+     * @param  string|null  $separator
+     *
+     * @return self
+     */
+    public function setTitle($title, $siteName = null, $separator = null);
+
+    /**
+     * Set description.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description);
+
+    /**
+     * Set keywords.
+     *
+     * @param  array|string  $keywords
+     *
+     * @return self
+     */
+    public function setKeywords($keywords);
 }
