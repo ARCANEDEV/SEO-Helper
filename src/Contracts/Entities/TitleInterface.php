@@ -15,11 +15,11 @@ interface TitleInterface extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get title.
+     * Get title only (without site name or separator).
      *
      * @return string
      */
-    public function getTitle();
+    public function getTitleOnly();
 
     /**
      * Set title.
@@ -28,7 +28,7 @@ interface TitleInterface extends Renderable
      *
      * @return self
      */
-    public function setTitle($title);
+    public function set($title);
 
     /**
      * Get site name.

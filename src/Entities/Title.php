@@ -70,7 +70,9 @@ class Title implements TitleInterface
     {
         $this->setConfigs($configs);
 
-        $this->init();
+        if ( ! empty($configs)) {
+            $this->init();
+        }
     }
 
     /**
@@ -78,7 +80,7 @@ class Title implements TitleInterface
      */
     private function init()
     {
-        $this->setTitle($this->getConfig('default', ''));
+        $this->set($this->getConfig('default', ''));
         $this->setSiteName($this->getConfig('site-name', ''));
         $this->setSeparator($this->getConfig('separator', '-'));
         $this->switchPosition($this->getConfig('first', true));
@@ -90,11 +92,11 @@ class Title implements TitleInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get title.
+     * Get title only (without site name or separator).
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitleOnly()
     {
         return $this->title;
     }
@@ -106,7 +108,7 @@ class Title implements TitleInterface
      *
      * @return self
      */
-    public function setTitle($title)
+    public function set($title)
     {
         $this->checkTitle($title);
         $this->title = $title;
@@ -273,6 +275,16 @@ class Title implements TitleInterface
         return '<title>' . str_limit($output, $this->getMax()) . '</title>';
     }
 
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Check Functions
      | ------------------------------------------------------------------------------------------------
@@ -339,7 +351,7 @@ class Title implements TitleInterface
     private function renderTitleFirst($separator)
     {
         $output   = [];
-        $output[] = $this->getTitle();
+        $output[] = $this->getTitleOnly();
 
         if ($this->hasSiteName()) {
             $output[] = $separator;
@@ -365,7 +377,7 @@ class Title implements TitleInterface
             $output[] = $separator;
         }
 
-        $output[] = $this->getTitle();
+        $output[] = $this->getTitleOnly();
 
         return implode('', $output);
     }

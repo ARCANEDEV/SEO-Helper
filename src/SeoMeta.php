@@ -189,7 +189,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function setTitle($title, $siteName = null, $separator = null)
     {
-        $this->title->setTitle($title);
+        $this->title->set($title);
 
         if ( ! is_null($siteName)) {
             $this->title->setSiteName($siteName);
