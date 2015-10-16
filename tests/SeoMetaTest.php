@@ -65,6 +65,7 @@ class SeoMetaTest extends TestCase
 
         $this->assertInstanceOf(SeoMeta::class, $this->seoMeta);
         $this->assertNotEmpty($this->seoMeta->render());
+        $this->assertNotEmpty((string) $this->seoMeta);
     }
 
     /** @test */
@@ -74,26 +75,26 @@ class SeoMetaTest extends TestCase
 
         $this->seoMeta->setTitle($title);
 
-        $this->assertContains(
-            '<title>' . $title . '</title>',
-            $this->seoMeta->render()
-        );
+        $expected = '<title>' . $title . '</title>';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
 
         $siteName = 'Company name';
         $this->seoMeta->setTitle($title, $siteName);
 
-        $this->assertContains(
-            '<title>' . $title . ' - ' . $siteName . '</title>',
-            $this->seoMeta->render()
-        );
+        $expected = '<title>' . $title . ' - ' . $siteName . '</title>';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
 
         $separator = '|';
         $this->seoMeta->setTitle($title, $siteName, $separator);
 
-        $this->assertContains(
-            "<title>$title $separator $siteName</title>",
-            $this->seoMeta->render()
-        );
+        $expected = "<title>$title $separator $siteName</title>";
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
     }
 
     /** @test */
@@ -102,10 +103,10 @@ class SeoMetaTest extends TestCase
         $description = 'Awesome Description';
         $this->seoMeta->setDescription($description);
 
-        $this->assertContains(
-            '<meta name="description" content="' . $description . '">',
-            $this->seoMeta->render()
-        );
+        $expected = '<meta name="description" content="' . $description . '">';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
     }
 
     /** @test */
@@ -115,20 +116,22 @@ class SeoMetaTest extends TestCase
 
         $this->seoMeta->setKeywords($keywords);
 
-        $this->assertContains(
-            '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
-            $this->seoMeta->render()
-        );
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
 
         $this->seoMeta->setKeywords(implode(',', $keywords));
 
-        $this->assertContains(
-            '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
-            $this->seoMeta->render()
-        );
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
 
         $this->seoMeta->setKeywords(null);
+
         $this->assertNotContains('name="keywords"', $this->seoMeta->render());
+        $this->assertNotContains('name="keywords"', (string) $this->seoMeta);
     }
 
     /** @test */
@@ -137,42 +140,40 @@ class SeoMetaTest extends TestCase
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
         $this->seoMeta->setKeywords($keywords);
 
-        $this->assertContains(
-            '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
-            $this->seoMeta->render()
-        );
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
 
         $keywords[] = $keyword = 'keyword-6';
         $this->seoMeta->addKeyword($keyword);
 
-        $this->assertContains(
-            '<meta name="keywords" content="' . implode(', ', $keywords) . '">',
-            $this->seoMeta->render()
-        );
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
     }
 
     /** @test */
     public function it_can_add_remove_reset_and_render_a_misc_tag()
     {
-        $output = $this->seoMeta->render();
+        $expectations = [
+            '<meta name="robots" content="noindex, nofollow">',
+            '<link rel="canonical" href="' . $this->baseUrl . '">'
+        ];
 
-        $this->assertContains(
-            '<meta name="robots" content="noindex, nofollow">', $output
-        );
-
-        $this->assertContains(
-            '<link rel="canonical" href="' . $this->baseUrl . '">', $output
-        );
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->seoMeta->render());
+            $this->assertContains($expected, (string) $this->seoMeta);
+        }
 
         $this->seoMeta->removeMeta(['robots', 'canonical']);
         $output = $this->seoMeta->render();
 
-        $this->assertNotContains(
-            '<meta name="robots" content="noindex, nofollow">', $output
-        );
-        $this->assertNotContains(
-            '<link rel="canonical" href="' . $this->baseUrl . '">', $output
-        );
+        foreach ($expectations as $expected) {
+            $this->assertNotContains($expected, $output);
+            $this->assertNotContains($expected, (string) $this->seoMeta);
+        }
 
         $this->seoMeta->addMetas([
             'copyright' => 'ARCANEDEV',
@@ -181,8 +182,14 @@ class SeoMetaTest extends TestCase
 
         $output = $this->seoMeta->render();
 
-        $this->assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
-        $this->assertContains('<meta name="expires" content="never">', $output);
+        $expectations = [
+            '<meta name="copyright" content="ARCANEDEV">',
+            '<meta name="expires" content="never">',
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $output);
+        }
 
         $this->seoMeta->removeMeta('copyright');
 
@@ -215,5 +222,36 @@ class SeoMetaTest extends TestCase
         foreach (['viewport', 'copyright', 'expires'] as $blacklisted) {
             $this->assertNotContains($blacklisted, $this->seoMeta->render());
         }
+    }
+
+    /** @test */
+    public function it_can_render_add_reset_webmasters()
+    {
+        $expectations = [
+            '<meta name="google-site-verification" content="site-verification-code">',
+            '<meta name="msvalidate.01" content="site-verification-code">',
+            '<meta name="alexaVerifyID" content="site-verification-code">',
+            '<meta name="p:domain_verify" content="site-verification-code">',
+            '<meta name="yandex-verification" content="site-verification-code">',
+        ];
+
+        foreach ($expectations as $excepted) {
+            $this->assertContains($excepted, $this->seoMeta->render());
+            $this->assertContains($excepted, (string) $this->seoMeta);
+        }
+
+        $this->seoMeta->resetWebmasters();
+
+        foreach ($expectations as $excepted) {
+            $this->assertNotContains($excepted, $this->seoMeta->render());
+            $this->assertNotContains($excepted, (string) $this->seoMeta);
+        }
+
+        $this->seoMeta->addWebmaster('google', 'site-verification-code');
+
+        $excepted = '<meta name="google-site-verification" content="site-verification-code">';
+
+        $this->assertContains($excepted, $this->seoMeta->render());
+        $this->assertContains($excepted, (string) $this->seoMeta);
     }
 }

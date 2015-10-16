@@ -96,6 +96,16 @@ interface SeoMeta extends Renderable
     public function addKeyword($keyword);
 
     /**
+     * Add a webmaster tool site verifier.
+     *
+     * @param  string  $webmaster
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addWebmaster($webmaster, $content);
+
+    /**
      * Set the current URL.
      *
      * @param  string  $url
@@ -142,4 +152,11 @@ interface SeoMeta extends Renderable
      * @return self
      */
     public function resetMetas();
+
+    /**
+     * Reset all webmaster tool site verifier metas.
+     *
+     * @return self
+     */
+    public function resetWebmasters();
 }

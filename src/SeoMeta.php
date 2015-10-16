@@ -245,6 +245,21 @@ class SeoMeta implements Contracts\SeoMeta
     }
 
     /**
+     * Add a webmaster tool site verifier.
+     *
+     * @param  string  $webmaster
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addWebmaster($webmaster, $content)
+    {
+        $this->webmasters->add($webmaster, $content);
+
+        return $this;
+    }
+
+    /**
      * Set the current URL.
      *
      * @param  string  $url
@@ -263,21 +278,6 @@ class SeoMeta implements Contracts\SeoMeta
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * Render all seo tags.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        return implode(PHP_EOL, array_filter([
-            $this->title->render(),
-            $this->description->render(),
-            $this->keywords->render(),
-            $this->misc->render(),
-        ]));
-    }
-
     /**
      * Add a meta tag.
      *
@@ -331,5 +331,43 @@ class SeoMeta implements Contracts\SeoMeta
         $this->misc->reset();
 
         return $this;
+    }
+
+    /**
+     * Reset all webmaster tool site verifier metas.
+     *
+     * @return self
+     */
+    public function resetWebmasters()
+    {
+        $this->webmasters->reset();
+
+        return $this;
+    }
+
+    /**
+     * Render all seo tags.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return implode(PHP_EOL, array_filter([
+            $this->title->render(),
+            $this->description->render(),
+            $this->keywords->render(),
+            $this->misc->render(),
+            $this->webmasters->render(),
+        ]));
+    }
+
+    /**
+     * Render all seo tags.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 }
