@@ -48,7 +48,7 @@ class Keywords implements KeywordsInterface
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-        $this->setContent($this->getConfig('default', []));
+        $this->set($this->getConfig('default', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ class Keywords implements KeywordsInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get content.
+     * Get raw keywords content.
      *
      * @return array
      */
@@ -66,13 +66,23 @@ class Keywords implements KeywordsInterface
     }
 
     /**
-     * Set description content.
+     * Get keywords content.
+     *
+     * @return string
+     */
+    public function get()
+    {
+        return implode(', ', $this->getContent());
+    }
+
+    /**
+     * Set keywords content.
      *
      * @param  array|string  $content
      *
      * @return self
      */
-    public function setContent($content)
+    public function set($content)
     {
         if (is_string($content)) {
             $content = explode(',', $content);
@@ -82,7 +92,9 @@ class Keywords implements KeywordsInterface
             $content = (array) $content;
         }
 
-        $this->content = array_map('trim', $content);
+        $this->content = array_map(function ($keyword) {
+            return $this->clean($keyword);
+        }, $content);
 
         return $this;
     }
@@ -96,7 +108,7 @@ class Keywords implements KeywordsInterface
      */
     public function add($keyword)
     {
-        $this->content[] = $keyword;
+        $this->content[] = $this->clean($keyword);
 
         return $this;
     }
@@ -116,7 +128,17 @@ class Keywords implements KeywordsInterface
             return '';
         }
 
-        return Meta::make($this->name, implode(', ', $this->getContent()))->render();
+        return Meta::make($this->name, $this->get())->render();
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -131,5 +153,21 @@ class Keywords implements KeywordsInterface
     private function hasContent()
     {
         return ! empty($this->getContent());
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Clean the string.
+     *
+     * @param  string  $value
+     *
+     * @return string
+     */
+    public function clean($value)
+    {
+        return trim(strip_tags($value));
     }
 }

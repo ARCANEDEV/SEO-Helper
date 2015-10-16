@@ -63,23 +63,23 @@ class KeywordsTest extends TestCase
     {
         $content = $this->getDefaultContent();
 
-        $this->keywords->setContent($content);
+        $this->keywords->set($content);
 
         $this->assertCount(count($content), $this->keywords->getContent());
         $this->assertEquals($content, $this->keywords->getContent());
 
-        $this->keywords->setContent(implode(',', $content));
+        $this->keywords->set(implode(',', $content));
 
         $this->assertCount(count($content), $this->keywords->getContent());
         $this->assertEquals($content, $this->keywords->getContent());
 
         $keyword = 'one-keyword';
-        $this->keywords->setContent($keyword);
+        $this->keywords->set($keyword);
 
         $this->assertCount(1, $this->keywords->getContent());
         $this->assertEquals([$keyword], $this->keywords->getContent());
 
-        $this->keywords->setContent(null);
+        $this->keywords->set(null);
 
         $this->assertCount(0, $this->keywords->getContent());
         $this->assertEmpty($this->keywords->getContent());
@@ -90,7 +90,7 @@ class KeywordsTest extends TestCase
     {
         $content = $this->getDefaultContent();
 
-        $this->keywords->setContent($content);
+        $this->keywords->set($content);
 
         $this->assertCount(count($content), $this->keywords->getContent());
         $this->assertEquals($content, $this->keywords->getContent());
@@ -109,26 +109,32 @@ class KeywordsTest extends TestCase
         $expected = '<meta name="keywords" content="' . implode(', ', $content) .'">';
 
         $this->assertEquals($expected, $this->keywords->render());
+        $this->assertEquals($expected, (string) $this->keywords);
 
-        $this->keywords->setContent(implode(',', $content));
-
-        $this->assertEquals($expected, $this->keywords->render());
-
-        $this->keywords->setContent(implode(' ,', $content));
+        $this->keywords->set(implode(',', $content));
 
         $this->assertEquals($expected, $this->keywords->render());
+        $this->assertEquals($expected, (string) $this->keywords);
 
-        $this->keywords->setContent(implode(', ', $content));
-
-        $this->assertEquals($expected, $this->keywords->render());
-
-        $this->keywords->setContent(implode(' , ', $content));
+        $this->keywords->set(implode(' ,', $content));
 
         $this->assertEquals($expected, $this->keywords->render());
+        $this->assertEquals($expected, (string) $this->keywords);
 
-        $this->keywords->setContent(null);
+        $this->keywords->set(implode(', ', $content));
+
+        $this->assertEquals($expected, $this->keywords->render());
+        $this->assertEquals($expected, (string) $this->keywords);
+
+        $this->keywords->set(implode(' , ', $content));
+
+        $this->assertEquals($expected, $this->keywords->render());
+        $this->assertEquals($expected, (string) $this->keywords);
+
+        $this->keywords->set(null);
 
         $this->assertEmpty($this->keywords->render());
+        $this->assertEmpty((string) $this->keywords);
     }
 
     /* ------------------------------------------------------------------------------------------------

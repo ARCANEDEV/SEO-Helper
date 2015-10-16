@@ -225,7 +225,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function setKeywords($content)
     {
-        $this->keywords->setContent($content);
+        $this->keywords->set($content);
 
         return $this;
     }
