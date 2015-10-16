@@ -176,4 +176,14 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     {
         return $this->openGraph->render();
     }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
 }

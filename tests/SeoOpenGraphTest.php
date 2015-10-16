@@ -57,7 +57,6 @@ class SeoOpenGraphTest extends TestCase
     /** @test */
     public function it_can_render_defaults()
     {
-        $output       = $this->seoOpenGraph->render();
         $expectations = [
             '<meta property="og:type" content="website">',
             '<meta property="og:title" content="Default Open Graph title">',
@@ -65,7 +64,8 @@ class SeoOpenGraphTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $output);
+            $this->assertContains($expected, $this->seoOpenGraph->render());
+            $this->assertContains($expected, (string) $this->seoOpenGraph);
         }
     }
 
@@ -80,10 +80,9 @@ class SeoOpenGraphTest extends TestCase
             '<meta property="open-graph:description" content="Default Open Graph description">',
         ];
 
-        $output = $this->seoOpenGraph->render();
-
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $output);
+            $this->assertContains($expected, $this->seoOpenGraph->render());
+            $this->assertContains($expected, (string) $this->seoOpenGraph);
         }
     }
 
@@ -100,10 +99,10 @@ class SeoOpenGraphTest extends TestCase
         foreach ($types as $type) {
             $this->seoOpenGraph->setType($type);
 
-            $this->assertContains(
-                '<meta property="og:type" content="' . $type . '">',
-                $this->seoOpenGraph->render()
-            );
+            $expected = '<meta property="og:type" content="' . $type . '">';
+
+            $this->assertContains($expected, $this->seoOpenGraph->render());
+            $this->assertContains($expected, (string) $this->seoOpenGraph);
         }
     }
 
@@ -114,10 +113,10 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setTitle($title);
 
-        $this->assertContains(
-            '<meta property="og:title" content="' . $title . '">',
-            $this->seoOpenGraph->render()
-        );
+        $expected = '<meta property="og:title" content="' . $title . '">';
+
+        $this->assertContains($expected, $this->seoOpenGraph->render());
+        $this->assertContains($expected, (string) $this->seoOpenGraph);
     }
 
     /** @test */
@@ -127,10 +126,10 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setDescription($description);
 
-        $this->assertContains(
-            '<meta property="og:description" content="' . $description . '">',
-            $this->seoOpenGraph->render()
-        );
+        $expected = '<meta property="og:description" content="' . $description . '">';
+
+        $this->assertContains($expected, $this->seoOpenGraph->render());
+        $this->assertContains($expected, (string) $this->seoOpenGraph);
     }
 
     /** @test */
@@ -140,10 +139,10 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setUrl($url);
 
-        $this->assertContains(
-            '<meta property="og:url" content="' . $url . '">',
-            $this->seoOpenGraph->render()
-        );
+        $expected = '<meta property="og:url" content="' . $url . '">';
+
+        $this->assertContains($expected, $this->seoOpenGraph->render());
+        $this->assertContains($expected, (string) $this->seoOpenGraph);
     }
 
     /** @test */
@@ -153,10 +152,10 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setImage($image);
 
-        $this->assertContains(
-            '<meta property="og:image" content="' . $image . '">',
-            $this->seoOpenGraph->render()
-        );
+        $expected = '<meta property="og:image" content="' . $image . '">';
+
+        $this->assertContains($expected, $this->seoOpenGraph->render());
+        $this->assertContains($expected, (string) $this->seoOpenGraph);
     }
 
     /** @test */
@@ -169,10 +168,10 @@ class SeoOpenGraphTest extends TestCase
         foreach ($locales as $locale) {
             $this->seoOpenGraph->addProperty('locale', $locale);
 
-            $this->assertContains(
-                '<meta property="og:locale" content="' . $locale . '">',
-                $this->seoOpenGraph->render()
-            );
+            $expected = '<meta property="og:locale" content="' . $locale . '">';
+
+            $this->assertContains($expected, $this->seoOpenGraph->render());
+            $this->assertContains($expected, (string) $this->seoOpenGraph);
         }
     }
 }
