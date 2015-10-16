@@ -85,7 +85,7 @@ class SeoHelperServiceProvider extends ServiceProvider
     {
         return [
             'arcanedev.seo-helper',
-            Contracts\SeoHelper::class,
+            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
 
             // Utilities
             'arcanedev.seo-helper.meta',
@@ -106,19 +106,14 @@ class SeoHelperServiceProvider extends ServiceProvider
      */
     private function registerSeoHelperService()
     {
-        $this->singleton('arcanedev.seo-helper', function ($app) {
-            /**
-             * @var  Contracts\SeoMeta       $seoMeta
-             * @var  Contracts\SeoOpenGraph  $seoOpenGraph
-             * @var  Contracts\SeoTwitter    $seoTwitter
-             */
-            $seoMeta      = $app['arcanedev.seo-helper.meta'];
-            $seoOpenGraph = $app['arcanedev.seo-helper.open-graph'];
-            $seoTwitter   = $app['arcanedev.seo-helper.twitter'];
+        $this->singleton(
+            'arcanedev.seo-helper',
+            \Arcanedev\SeoHelper\SeoHelper::class
+        );
 
-            return new SeoHelper($seoMeta, $seoOpenGraph, $seoTwitter);
-        });
-
-        $this->app->bind(Contracts\SeoHelper::class, 'arcanedev.seo-helper');
+        $this->app->bind(
+            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
+            'arcanedev.seo-helper'
+        );
     }
 }
