@@ -75,10 +75,10 @@ class SeoTwitterTest extends TestCase
     {
         $this->twitter->setType('app');
 
-        $this->assertContains(
-            '<meta name="twitter:card" content="app">',
-            $this->twitter->render()
-        );
+        $expected = '<meta name="twitter:card" content="app">';
+
+        $this->assertContains($expected, $this->twitter->render());
+        $this->assertContains($expected, (string) $this->twitter);
     }
 
     /** @test */
@@ -86,21 +86,32 @@ class SeoTwitterTest extends TestCase
     {
         $this->twitter->setSite('Arcanedev');
 
-        $this->assertContains(
-            '<meta name="twitter:site" content="@Arcanedev">',
-            $this->twitter->render()
-        );
+        $expected = '<meta name="twitter:site" content="@Arcanedev">';
+
+        $this->assertContains($expected, $this->twitter->render());
+        $this->assertContains($expected, (string) $this->twitter);
     }
 
     /** @test */
     public function it_can_set_and_render_title()
     {
-        $this->twitter->setTitle('Arcanedev super title');
+        $this->twitter->setTitle('ARCANEDEV super title');
 
-        $this->assertContains(
-            '<meta name="twitter:title" content="Arcanedev super title">',
-            $this->twitter->render()
-        );
+        $expected = '<meta name="twitter:title" content="ARCANEDEV super title">';
+
+        $this->assertContains($expected, $this->twitter->render());
+        $this->assertContains($expected, (string) $this->twitter);
+    }
+
+    /** @test */
+    public function it_can_set_and_render_description()
+    {
+        $this->twitter->setDescription('ARCANEDEV super description');
+
+        $expected = '<meta name="twitter:description" content="ARCANEDEV super description">';
+
+        $this->assertContains($expected, $this->twitter->render());
+        $this->assertContains($expected, (string) $this->twitter);
     }
 
     /** @test */
@@ -108,10 +119,10 @@ class SeoTwitterTest extends TestCase
     {
         $this->twitter->addImage('http://example.com/img/avatar.png');
 
-        $this->assertContains(
-            '<meta name="twitter:image" content="http://example.com/img/avatar.png">',
-            $this->twitter->render()
-        );
+        $expected = '<meta name="twitter:image" content="http://example.com/img/avatar.png">';
+
+        $this->assertContains($expected, $this->twitter->render());
+        $this->assertContains($expected, (string) $this->twitter);
     }
 
     /** @test */
@@ -136,9 +147,9 @@ class SeoTwitterTest extends TestCase
     {
         $this->twitter->addMeta('creator', '@Arcanedev');
 
-        $this->assertContains(
-            '<meta name="twitter:creator" content="@Arcanedev">',
-            $this->twitter->render()
-        );
+        $expected = '<meta name="twitter:creator" content="@Arcanedev">';
+
+        $this->assertContains($expected, $this->twitter->render());
+        $this->assertContains($expected, (string) $this->twitter);
     }
 }

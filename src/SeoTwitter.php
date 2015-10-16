@@ -109,6 +109,20 @@ class SeoTwitter implements Contracts\SeoTwitter
     }
 
     /**
+     * Set the card description.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->card->setDescription($description);
+
+        return $this;
+    }
+
+    /**
      * Add image to the card.
      *
      * @param  string  $url
@@ -142,6 +156,18 @@ class SeoTwitter implements Contracts\SeoTwitter
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Reset the twitter card.
+     *
+     * @return self
+     */
+    public function reset()
+    {
+        $this->card->reset();
+
+        return $this;
+    }
+
+    /**
      * Render the tag.
      *
      * @return string
@@ -152,14 +178,12 @@ class SeoTwitter implements Contracts\SeoTwitter
     }
 
     /**
-     * Reset the twitter card.
+     * Render the tag.
      *
-     * @return self
+     * @return string
      */
-    public function reset()
+    public function __toString()
     {
-        $this->card->reset();
-
-        return $this;
+        return $this->render();
     }
 }

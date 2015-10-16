@@ -51,6 +51,15 @@ interface SeoTwitter extends Renderable
     public function setTitle($title);
 
     /**
+     * Set the card description.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description);
+
+    /**
      * Add image to the card.
      *
      * @param  string  $url
