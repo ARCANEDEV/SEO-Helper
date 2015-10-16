@@ -58,51 +58,50 @@ class MiscTagsTest extends TestCase
 
         $this->misc->setUrl($url);
 
-        $this->assertContains(
-            '<link rel="canonical" href="' . $url . '">',
-            $this->misc->render()
-        );
+        $expected = '<link rel="canonical" href="' . $url . '">';
+
+        $this->assertContains($expected, $this->misc->render());
+        $this->assertContains($expected, (string) $this->misc);
 
         $this->misc = new MiscTags(['canonical' => false]);
 
         $this->assertEmpty($this->misc->render());
+        $this->assertEmpty((string) $this->misc);
     }
 
     /** @test */
     public function it_can_render_robots()
     {
-        $this->assertContains(
-            '<meta name="robots" content="noindex, nofollow">',
-            $this->misc->render()
-        );
+        $expected = '<meta name="robots" content="noindex, nofollow">';
+
+        $this->assertContains($expected, $this->misc->render());
+        $this->assertContains($expected, (string) $this->misc);
 
         $this->misc = new MiscTags(['robots' => false]);
 
         $this->assertEmpty($this->misc->render());
+        $this->assertEmpty((string) $this->misc);
     }
 
     /** @test */
-    public function it_can_render_author()
+    public function it_can_render_links()
     {
         $author     = 'https://plus.google.com/+AuthorProfile';
-        $this->misc = new MiscTags(['default' => compact('author')]);
-
-        $this->assertEquals(
-            '<link rel="author" href="' . $author . '">',
-            $this->misc->render()
-        );
-    }
-
-    /** @test */
-    public function it_can_render_publisher()
-    {
         $publisher  = 'https://plus.google.com/+PublisherProfile';
-        $this->misc = new MiscTags(['default' => compact('publisher')]);
 
-        $this->assertEquals(
+        $this->misc = new MiscTags([
+            'default' => compact('author', 'publisher')
+        ]);
+
+        $expectations = [
+            '<link rel="author" href="' . $author . '">',
             '<link rel="publisher" href="' . $publisher . '">',
-            $this->misc->render()
-        );
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->misc->render());
+            $this->assertContains($expected, (string) $this->misc);
+        }
     }
 
     /** @test */
@@ -143,7 +142,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_remove_tags()
+    public function it_can_add_remove_and_reset_tags()
     {
         $this->assertNotEmpty($this->misc->render());
 
@@ -157,30 +156,30 @@ class MiscTagsTest extends TestCase
             $this->assertContains($expected, $output);
         }
 
-        $this->misc->removeMeta('robots');
+        $this->misc->remove('robots');
 
         $this->assertNotContains($robots, $this->misc->render());
 
-        $this->misc->removeMeta('canonical');
+        $this->misc->remove('canonical');
 
         $this->assertNotContains($canonical, $this->misc->render());
 
-        $this->misc->removeMeta('viewport');
+        $this->misc->remove('viewport');
 
         $this->assertEmpty($this->misc->render());
 
-        $this->misc->addMeta('document-rating', 'Safe For Work');
+        $this->misc->add('document-rating', 'Safe For Work');
 
         $this->assertEquals(
             '<meta name="document-rating" content="Safe For Work">',
             $this->misc->render()
         );
 
-        $this->misc->removeMeta('document-rating');
+        $this->misc->remove('document-rating');
 
         $this->assertEmpty($this->misc->render());
 
-        $this->misc->addMetas([
+        $this->misc->addMany([
             'copyright' => 'ARCANEDEV',
             'expires'   => 'never',
         ]);
@@ -190,9 +189,48 @@ class MiscTagsTest extends TestCase
         $this->assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
         $this->assertContains('<meta name="expires" content="never">', $output);
 
-        $this->misc->removeMeta(['copyright', 'expires']);
+        $this->misc->remove(['copyright', 'expires']);
 
         $this->assertEmpty($this->misc->render());
+
+        $this->misc->addMany([
+            'document-rating' => 'Safe For Work',
+            'copyright'       => 'ARCANEDEV',
+            'expires'         => 'never',
+        ]);
+
+        $this->assertNotEmpty($this->misc->render());
+
+        $this->misc->reset();
+
+        $this->assertEmpty($this->misc->render());
+    }
+
+    /** @test */
+    public function it_can_make()
+    {
+        $this->misc = MiscTags::make([
+            'copyright'       => 'ARCANEDEV',
+            'document-rating' => 'Safe For Work',
+            'expires'         => 'expires',
+        ]);
+
+        $copyright    = '<meta name="copyright" content="ARCANEDEV">';
+        $expectations = [
+            $copyright,
+            '<meta name="document-rating" content="Safe For Work">',
+            '<meta name="expires" content="expires">',
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->misc->render());
+            $this->assertContains($expected, (string) $this->misc);
+        }
+
+        $this->misc->remove(['expires', 'document-rating']);
+
+        $this->assertEquals($copyright, $this->misc->render());
+        $this->assertEquals($copyright, (string) $this->misc);
     }
 
     /* ------------------------------------------------------------------------------------------------

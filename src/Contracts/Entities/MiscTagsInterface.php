@@ -15,6 +15,13 @@ interface MiscTagsInterface extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Get the current URL.
+     *
+     * @return string
+     */
+    public function getUrl();
+
+    /**
      * Set the current URL.
      *
      * @param  string  $url
@@ -28,6 +35,15 @@ interface MiscTagsInterface extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Make MiscTags instance.
+     *
+     * @param  array  $defaults
+     *
+     * @return self
+     */
+    public static function make(array $defaults = []);
+
+    /**
      * Add a meta tag.
      *
      * @param  string  $name
@@ -35,7 +51,7 @@ interface MiscTagsInterface extends Renderable
      *
      * @return self
      */
-    public function addMeta($name, $content);
+    public function add($name, $content);
 
     /**
      * Add many meta tags.
@@ -44,7 +60,7 @@ interface MiscTagsInterface extends Renderable
      *
      * @return self
      */
-    public function addMetas(array $metas);
+    public function addMany(array $metas);
 
     /**
      * Remove a meta from the meta collection by key.
@@ -53,7 +69,7 @@ interface MiscTagsInterface extends Renderable
      *
      * @return self
      */
-    public function removeMeta($names);
+    public function remove($names);
 
     /**
      * Reset the meta collection.

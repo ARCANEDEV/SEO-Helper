@@ -288,7 +288,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function addMeta($name, $content)
     {
-        $this->misc->addMeta($name, $content);
+        $this->misc->add($name, $content);
 
         return $this;
     }
@@ -302,7 +302,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function addMetas(array $metas)
     {
-        $this->misc->addMetas($metas);
+        $this->misc->addMany($metas);
 
         return $this;
     }
@@ -316,7 +316,7 @@ class SeoMeta implements Contracts\SeoMeta
      */
     public function removeMeta($names)
     {
-        $this->misc->removeMeta($names);
+        $this->misc->remove($names);
 
         return $this;
     }

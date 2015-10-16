@@ -60,7 +60,7 @@ class MiscTags implements MiscTagsInterface
     {
         $this->addCanonical();
         $this->addRobotsMeta();
-        $this->addMetas($this->getDefault());
+        $this->addMany($this->getConfig('default', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -92,20 +92,22 @@ class MiscTags implements MiscTagsInterface
         return $this;
     }
 
-    /**
-     * Get default tags.
-     *
-     * @return array
-     */
-    private function getDefault()
-    {
-        return $this->getConfig('default', []);
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Make MiscTags instance.
+     *
+     * @param  array  $defaults
+     *
+     * @return self
+     */
+    public static function make(array $defaults = [])
+    {
+        return new self(['default' => $defaults]);
+    }
+
     /**
      * Add a meta tag.
      *
@@ -114,7 +116,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @return self
      */
-    public function addMeta($name, $content)
+    public function add($name, $content)
     {
         $this->metas->add($name, $content);
 
@@ -128,7 +130,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @return self
      */
-    public function addMetas(array $metas)
+    public function addMany(array $metas)
     {
         $this->metas->addMany($metas);
 
@@ -142,7 +144,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @return self
      */
-    public function removeMeta($names)
+    public function remove($names)
     {
         $this->metas->remove($names);
 
@@ -172,29 +174,13 @@ class MiscTags implements MiscTagsInterface
     }
 
     /**
-     * Add the robots meta.
+     * Render the tag.
      *
-     * @return self
+     * @return string
      */
-    private function addRobotsMeta()
+    public function __toString()
     {
-        if ($this->isRobotsEnabled()) {
-            $this->addMeta('robots', 'noindex, nofollow');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add the canonical link.
-     *
-     * @return self
-     */
-    private function addCanonical()
-    {
-        if ($this->isCanonicalEnabled() && $this->hasUrl()) {
-            $this->addMeta('canonical', $this->currentUrl);
-        }
+        return $this->render();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -229,5 +215,35 @@ class MiscTags implements MiscTagsInterface
     private function isRobotsEnabled()
     {
         return (bool) $this->getConfig('robots', false);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Add the robots meta.
+     *
+     * @return self
+     */
+    private function addRobotsMeta()
+    {
+        if ($this->isRobotsEnabled()) {
+            $this->add('robots', 'noindex, nofollow');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add the canonical link.
+     *
+     * @return self
+     */
+    private function addCanonical()
+    {
+        if ($this->isCanonicalEnabled() && $this->hasUrl()) {
+            $this->add('canonical', $this->currentUrl);
+        }
     }
 }
