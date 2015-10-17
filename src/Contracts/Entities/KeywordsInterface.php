@@ -51,4 +51,13 @@ interface KeywordsInterface extends Renderable
      * @return self
      */
     public function add($keyword);
+
+    /**
+     * Add many keywords to the content.
+     *
+     * @param  array  $keywords
+     *
+     * @return self
+     */
+    public function addMany(array $keywords);
 }

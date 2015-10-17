@@ -155,6 +155,26 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
+    public function it_can_add_many_keywords()
+    {
+        $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+        $this->seoMeta->setKeywords($keywords);
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
+
+        $new       = ['keyword-6', 'keyword-7', 'keyword-8'];
+        $keywords  = array_merge($keywords, $new);
+        $expected  = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+
+        $this->seoMeta->addKeywords($new);
+
+        $this->assertContains($expected, $this->seoMeta->render());
+        $this->assertContains($expected, (string) $this->seoMeta);
+    }
+
+    /** @test */
     public function it_can_add_remove_reset_and_render_a_misc_tag()
     {
         $expectations = [

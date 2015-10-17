@@ -96,6 +96,15 @@ interface SeoMeta extends Renderable
     public function addKeyword($keyword);
 
     /**
+     * Add many keywords.
+     *
+     * @param  array  $keywords
+     *
+     * @return self
+     */
+    public function addKeywords(array $keywords);
+
+    /**
      * Add a webmaster tool site verifier.
      *
      * @param  string  $webmaster

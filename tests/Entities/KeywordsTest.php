@@ -103,6 +103,25 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
+    public function it_can_add_many_keywords()
+    {
+        $content = $this->getDefaultContent();
+
+        $this->keywords->set($content);
+
+        $this->assertCount(count($content), $this->keywords->getContent());
+        $this->assertEquals($content, $this->keywords->getContent());
+
+        $keywords = ['keyword-6', 'keyword-7', 'keyword-8'];
+        $content  = array_merge($content, $keywords);
+
+        $this->keywords->addMany($keywords);
+
+        $this->assertCount(count($content), $this->keywords->getContent());
+        $this->assertEquals($content, $this->keywords->getContent());
+    }
+
+    /** @test */
     public function it_can_render()
     {
         $content  = $this->getDefaultContent();

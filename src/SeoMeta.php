@@ -245,6 +245,20 @@ class SeoMeta implements Contracts\SeoMeta
     }
 
     /**
+     * Add many keywords.
+     *
+     * @param  array  $keywords
+     *
+     * @return self
+     */
+    public function addKeywords(array $keywords)
+    {
+        $this->keywords->addMany($keywords);
+
+        return $this;
+    }
+
+    /**
      * Add a webmaster tool site verifier.
      *
      * @param  string  $webmaster

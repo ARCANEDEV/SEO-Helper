@@ -130,6 +130,22 @@ class Keywords implements KeywordsInterface
     }
 
     /**
+     * Add many keywords to the content.
+     *
+     * @param  array  $keywords
+     *
+     * @return self
+     */
+    public function addMany(array $keywords)
+    {
+        foreach ($keywords as $keyword) {
+            $this->add($keyword);
+        }
+
+        return $this;
+    }
+
+    /**
      * Render the tag.
      *
      * @return string
