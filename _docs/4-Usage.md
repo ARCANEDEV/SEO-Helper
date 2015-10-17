@@ -39,7 +39,7 @@ interface Renderable
 
 ### Title
 
-To start you new to instantiate the `Title` class.
+To start, you need to make a new instance of the `Title` class.
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -93,7 +93,7 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-You can chain all these method :
+You can chain all these methods :
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -112,7 +112,7 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-You can also `make` title object:
+You can also `make` the title object:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -147,7 +147,7 @@ echo $title->render();
 
 To reset the title position, use `setFirst()` method.
 
-You know that the title must be optimized for SEO, Right ?? So the optimal title length is **55** characters long.
+> **Note :** You know that the title must be optimized for SEO, Right ?? So the optimal title length is **55** characters long.
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -183,14 +183,109 @@ echo $title->render();
 <title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed...</title>
 ```
 
+And last but not least, the `Title` class constructor accepts an array as an argument:
+
+```php
+use Arcanedev\SeoHelper\Entities\Title;
+
+$title = new Title([
+    'default'   => 'Your awesome title',
+    'separator' => '|',
+    'site-name' => 'Company name',
+    'max'       => 60
+]);
+
+echo $title->render();
+```
+
+> Output:
+
+```html
+<title>Your awesome title | Company name</title>
+```
+
+> Note: You can also echo out the `$title` object like this `echo $title;`.
+
 For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#title).
 
 ### Description
 
+Let's start by making a new instance of the `Description` class.
+
 ```php
+use Arcanedev\SeoHelper\Entities\Description;
+
+$description = new Description;
+$description->set('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum, tellus mi congue magna.');
+
+echo $description->render();
 ```
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#description).
+> Output:
+
+```html
+<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum, tellus mi congue magna.">
+```
+
+You can also specify the max length, the default max is **155**:
+
+```php
+use Arcanedev\SeoHelper\Entities\Description;
+
+$description = new Description;
+$description->set('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum, tellus mi congue magna.');
+$description->setMax(100);
+
+echo $description->render();
+```
+
+> Output:
+
+```html
+<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum,...">
+```
+
+> Note: Don't forget you can chain the methods.
+
+If you want to `make` a Description object:
+
+```php
+use Arcanedev\SeoHelper\Entities\Description;
+
+$raw         = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum, tellus mi congue magna.';
+$description = Description::make($raw, 100);
+
+echo $description->render();
+```
+
+> Output:
+
+```html
+<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum,...">
+```
+
+And last but not least, the `Description` class constructor accepts an array as an argument:
+
+```php
+use Arcanedev\SeoHelper\Entities\Description;
+
+$description = new Description([
+    'default'   => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum, tellus mi congue magna.',
+    'max'       => 100,
+]);
+
+echo $description->render();
+```
+
+> Output:
+
+```html
+<meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum,...">
+```
+
+> Note: You can also echo out the `$description` object like this `echo $description;`.
+
+For more details, check the [Description API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#description).
 
 ### Keywords
 
