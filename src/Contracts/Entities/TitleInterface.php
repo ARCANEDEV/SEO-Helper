@@ -113,11 +113,4 @@ interface TitleInterface extends Renderable
      * @return self
      */
     public static function make($title, $siteName = '', $separator = '-');
-
-    /**
-     * Get the evaluated contents of the object.
-     *
-     * @return string
-     */
-    public function render();
 }
