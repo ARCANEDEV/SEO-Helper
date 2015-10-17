@@ -52,4 +52,18 @@ interface DescriptionInterface extends Renderable
      * @return self
      */
     public function setMax($max);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make a description instance.
+     *
+     * @param  string  $content
+     * @param  int     $max
+     *
+     * @return self
+     */
+    public static function make($content, $max = 155);
 }

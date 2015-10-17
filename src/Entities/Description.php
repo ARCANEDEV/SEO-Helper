@@ -57,7 +57,7 @@ class Description implements DescriptionInterface
     {
         $this->setConfigs($configs);
         $this->set($this->getConfig('default', ''));
-        $this->setMax($this->getConfig('max', 55));
+        $this->setMax($this->getConfig('max', 155));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -128,6 +128,22 @@ class Description implements DescriptionInterface
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Make a description instance.
+     *
+     * @param  string  $content
+     * @param  int     $max
+     *
+     * @return self
+     */
+    public static function make($content, $max = 155)
+    {
+        return new self([
+            'default'   => $content,
+            'max'       => $max
+        ]);
+    }
+
     /**
      * Render the tag.
      *

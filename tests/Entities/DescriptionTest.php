@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -45,8 +44,31 @@ class DescriptionTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(Description::class,   $this->description);
-        $this->assertInstanceOf(Renderable::class, $this->description);
+        $expectations = [
+            \Arcanedev\SeoHelper\Entities\Description::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->description);
+        }
+    }
+
+    /** @test */
+    public function it_can_make()
+    {
+        $this->description = Description::make('Cool description about this package');
+
+        $expectations = [
+            \Arcanedev\SeoHelper\Entities\Description::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->description);
+        }
     }
 
     /** @test */
