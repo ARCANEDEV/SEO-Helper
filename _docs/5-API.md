@@ -1,3 +1,291 @@
-# 5. API
+# 5. API 
 
-Coming soon&hellip;
+## Table of contents
+
+1. [Contracts](#1-contracts)
+  * [Renderable](#renderable)
+2. [Entities](#2-entities)
+  * [Title](#title)
+  * [Description](#description)
+  * [Keywords](#keywords)
+  * [Miscellaneous Tags](#miscellaneous-tags)
+  * [Webmasters](#webmasters)
+  * [Open Graph](#open-graph)
+  * [Twitter Card](#twitter-card)
+3. [Helpers]
+
+## 1. Contracts
+
+### Renderable
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts;
+
+interface Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function render();
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString();
+}
+```
+
+## 2. Entities
+
+### Title
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface TitleInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get title only (without site name or separator).
+     *
+     * @return string
+     */
+    public function getTitleOnly();
+
+    /**
+     * Set title.
+     *
+     * @param  string  $title
+     *
+     * @return self
+     */
+    public function set($title);
+
+    /**
+     * Get site name.
+     *
+     * @return string
+     */
+    public function getSiteName();
+
+    /**
+     * Set site name.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
+    /**
+     * Get title separator.
+     *
+     * @return string
+     */
+    public function getSeparator();
+
+    /**
+     * Set title separator.
+     *
+     * @param  string  $separator
+     *
+     * @return self
+     */
+    public function setSeparator($separator);
+
+    /**
+     * Set title first.
+     *
+     * @return self
+     */
+    public function setFirst();
+
+    /**
+     * Set title last.
+     *
+     * @return self
+     */
+    public function setLast();
+
+    /**
+     * Check if title is first.
+     *
+     * @return bool
+     */
+    public function isTitleFirst();
+
+    /**
+     * Get title max lenght.
+     *
+     * @return int
+     */
+    public function getMax();
+
+    /**
+     * Set title max lenght.
+     *
+     * @param  int  $max
+     *
+     * @return self
+     */
+    public function setMax($max);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make a Title instance.
+     *
+     * @param  string  $title
+     * @param  string  $siteName
+     * @param  string  $separator
+     *
+     * @return self
+     */
+    public static function make($title, $siteName = '', $separator = '-');
+}
+```
+
+### Description
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface DescriptionInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get raw description content.
+     *
+     * @return string
+     */
+    public function getContent();
+
+    /**
+     * Get description content.
+     *
+     * @return string
+     */
+    public function get();
+
+    /**
+     * Set description content.
+     *
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function set($content);
+
+    /**
+     * Get description max length.
+     *
+     * @return int
+     */
+    public function getMax();
+
+    /**
+     * Set description max length.
+     *
+     * @param  int  $max
+     *
+     * @return self
+     */
+    public function setMax($max);
+    
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make a description instance.
+     *
+     * @param  string  $content
+     * @param  int     $max
+     *
+     * @return self
+     */
+    public static function make($content, $max = 155);
+}
+
+```
+
+### Keywords
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface KeywordsInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get content.
+     *
+     * @return array
+     */
+    public function getContent();
+
+    /**
+     * Set description content.
+     *
+     * @param  array|string  $content
+     *
+     * @return self
+     */
+    public function set($content);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make Keywords instance.
+     *
+     * @param  array|string  $keywords
+     *
+     * @return self
+     */
+    public static function make($keywords);
+
+    /**
+     * Add a keyword to the content.
+     *
+     * @param  string  $keyword
+     *
+     * @return self
+     */
+    public function add($keyword);
+}
+```
+
+### Miscellaneous Tags
+
+### Webmasters
+
+### Open Graph
+
+### Twitter Card
