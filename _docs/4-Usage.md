@@ -289,10 +289,84 @@ For more details, check the [Description API](https://github.com/ARCANEDEV/SEO-H
 
 ### Keywords
 
+So far so good, let's make the `Keywords` object now.
+
 ```php
+use Arcanedev\SeoHelper\Entities\Keywords;
+
+$keywords = new Keywords;
+$keywords->set([
+    'seo-helper', 'is', 'awesome', 'cool', 'easy', 'php', 'package'
+]);
+
+echo $keywords->render();
 ```
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#keywords).
+> Output:
+
+```html
+<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
+```
+
+You can also pass a string as an argument (to separate the keywords use `,` - Comma separated).
+
+```php
+use Arcanedev\SeoHelper\Entities\Keywords;
+
+$keywords = new Keywords;
+$keywords->set('seo-helper, is, awesome, cool, easy, php, package');
+
+echo $keywords->render();
+```
+
+> Output:
+
+```html
+<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
+```
+
+If you want to `add` more keywords:
+
+```php
+use Arcanedev\SeoHelper\Entities\Keywords;
+
+$keywords = new Keywords;
+$keywords->set([
+    'seo-helper', 'is', 'awesome', 'cool', 'easy', 'php', 'package'
+]);
+$keywords->add('laravel')->add('supported');
+
+echo $keywords->render();
+```
+
+> Output:
+
+```html
+<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package, laravel, supported">
+```
+
+And if you want to `make` a Description object:
+
+```php
+use Arcanedev\SeoHelper\Entities\Keywords;
+
+$keywords = Keywords::make([
+    'seo-helper', 'is', 'awesome', 'cool', 'easy', 'php', 'package'
+]);
+
+// OR
+$keywords = Keywords::make('seo-helper, is, awesome, cool, easy, php, package');
+
+echo $keywords->render();
+```
+
+> Output:
+
+```html
+<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
+```
+
+For more details, check the [Keywords API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#keywords).
 
 ### Miscellaneous Tags
 
