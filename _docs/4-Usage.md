@@ -345,7 +345,7 @@ echo $keywords->render();
 <meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package, laravel, supported">
 ```
 
-And if you want to `make` a Description object:
+And if you want to `make` a Keywords object:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Keywords;
