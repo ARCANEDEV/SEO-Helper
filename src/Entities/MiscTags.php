@@ -142,7 +142,7 @@ class MiscTags implements MiscTagsInterface
     /**
      * Remove a meta from the meta collection by key.
      *
-     * @param  string|array  $names
+     * @param  array|string  $names
      *
      * @return self
      */

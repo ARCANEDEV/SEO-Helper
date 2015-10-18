@@ -414,7 +414,7 @@ echo $tags->render();
 
 For the `canonical` link tag, there are many ways to achieve it :
 
-```
+```php
 use Arcanedev\SeoHelper\Entities\MiscTags;
 
 // 1st example:
@@ -484,7 +484,7 @@ echo $tags->render();
 
 Ok, now we're going to `remove` some tags:
 
-```
+```php
 use Arcanedev\SeoHelper\Entities\MiscTags;
 
 $tags = new MiscTags;

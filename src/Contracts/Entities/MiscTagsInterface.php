@@ -65,7 +65,7 @@ interface MiscTagsInterface extends Renderable
     /**
      * Remove a meta from the meta collection by key.
      *
-     * @param  string|array  $names
+     * @param  array|string  $names
      *
      * @return self
      */
