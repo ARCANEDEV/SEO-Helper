@@ -1,4 +1,4 @@
-# SEO Helper [![Packagist License][badge_license]](https://github.com/ARCANEDEV/SEO-Helper/blob/master/LICENSE.md)
+# SEO Helper [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]](https://github.com/ARCANEDEV/SEO-Helper)
 
 [![Travis Status][badge_build]](https://travis-ci.org/ARCANEDEV/SEO-Helper)
 [![HHVM Status][badge_hhvm]](http://hhvm.h4cc.de/package/arcanedev/seo-helper)
@@ -11,7 +11,9 @@
 [![Packagist Release][badge_release]](https://packagist.org/packages/arcanedev/seo-helper)
 [![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanedev/seo-helper)
 
+[badge_php]:       https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
 [badge_license]:   https://img.shields.io/packagist/l/arcanedev/seo-helper.svg?style=flat-square
+
 [badge_build]:     https://img.shields.io/travis/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_hhvm]:      https://img.shields.io/hhvm/arcanedev/seo-helper.svg?style=flat-square
 [badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/SEO-Helper.svg?style=flat-square
@@ -29,9 +31,13 @@ SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
 
 ### Features
 
+  * Framework agnostic package.
+  * Open Graph &amp; Twitter Cards are supported.
+  * Webmaster tools site verifier tags are supported.
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
+  * Laravel 5.1 supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
@@ -46,10 +52,10 @@ SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
 ## TODOS
 
   - [ ] Complete the documentation.
-  - [ ] Framework agnostic package.
 
 ## DONE
 
+  - [x] Framework agnostic package.
   - [x] Open Graph supported.
   - [x] Twitter Cards supported.
   - [x] Webmaster tools supported.
