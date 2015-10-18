@@ -12,8 +12,13 @@
   * [Webmasters](#webmasters)
   * [Open Graph](#open-graph)
   * [Twitter Card](#twitter-card)
-3. [Helpers]
-
+3. [Helpers](#3-helpers)
+  * [Meta](#meta)
+3. [Managers](#3-manager)
+  * [SEO Meta](#seo-meta)
+  * [SEO Open Graph](#seo-open-graph)
+  * [SEO Twitter Card](#seo-twitter-card)
+  
 ## 1. Contracts
 
 ### Renderable
@@ -363,6 +368,601 @@ interface MiscTagsInterface extends Renderable
 
 ### Webmasters
 
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface WebmastersInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make Webmaster instance.
+     *
+     * @param  array  $webmasters
+     *
+     * @return self
+     */
+    public static function make(array $webmasters = []);
+
+    /**
+     * Add a webmaster to collection.
+     *
+     * @param  string  $webmaster
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function add($webmaster, $content);
+
+    /**
+     * Reset the webmaster collection.
+     *
+     * @return self
+     */
+    public function reset();
+}
+```
+
 ### Open Graph
 
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface OpenGraphInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Set the open graph prefix.
+     *
+     * @param  string  $prefix
+     *
+     * @return self
+     */
+    public function setPrefix($prefix);
+
+    /**
+     * Set type property.
+     *
+     * @param  string  $type
+     *
+     * @return self
+     */
+    public function setType($type);
+
+    /**
+     * Set title property.
+     *
+     * @param  string  $title
+     *
+     * @return self
+     */
+    public function setTitle($title);
+
+    /**
+     * Set description property.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description);
+
+    /**
+     * Set url property.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function setUrl($url);
+
+    /**
+     * Set image property.
+     *
+     * @param  string  $image
+     *
+     * @return self
+     */
+    public function setImage($image);
+
+    /**
+     * Add an open graph property.
+     *
+     * @param  string  $property
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addProperty($property, $content);
+}
+```
+
 ### Twitter Card
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface TwitterCardInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     *
+     * @param  string  $type
+     *
+     * @return self
+     */
+    public function setType($type);
+
+    /**
+     * Set card site.
+     *
+     * @param  string  $site
+     *
+     * @return self
+     */
+    public function setSite($site);
+
+    /**
+     * Set card title.
+     *
+     * @param  string  $title
+     *
+     * @return self
+     */
+    public function setTitle($title);
+
+    /**
+     * Set card description.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description);
+
+    /**
+     * Add image to the card.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function addImage($url);
+
+    /**
+     * Add a meta to the card.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Reset the card.
+     *
+     * @return self
+     */
+    public function reset();
+}
+```
+
+## 3. Helpers
+
+### Meta
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Helpers;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface MetaInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters and Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the meta name.
+     *
+     * @return string
+     */
+    public function key();
+
+    /**
+     * Set the meta prefix name.
+     *
+     * @param  string  $prefix
+     *
+     * @return self
+     */
+    public function setPrefix($prefix);
+
+    /**
+     * Set the meta property name.
+     *
+     * @param  string  $nameProperty
+     *
+     * @return self
+     */
+    public function setNameProperty($nameProperty);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make Meta instance.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public static function make($name, $content);
+
+    /**
+     * Check if meta is valid.
+     *
+     * @return bool
+     */
+    public function isValid();
+}
+```
+
+## 4. Managers
+
+### SEO Meta
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts;
+
+interface SeoMeta extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Set the Title instance.
+     *
+     * @param  TitleInterface  $title
+     *
+     * @return self
+     */
+    public function title(TitleInterface $title);
+
+    /**
+     * Set the Description instance.
+     *
+     * @param  DescriptionInterface  $description
+     *
+     * @return self
+     */
+    public function description(DescriptionInterface $description);
+
+    /**
+     * Set the Keywords instance.
+     *
+     * @param  KeywordsInterface  $keywords
+     *
+     * @return self
+     */
+    public function keywords(KeywordsInterface $keywords);
+
+    /**
+     * Set the MiscTags instance.
+     *
+     * @param  MiscTagsInterface  $misc
+     *
+     * @return self
+     */
+    public function misc(MiscTagsInterface $misc);
+
+    /**
+     * Set the Webmasters instance.
+     *
+     * @param  WebmastersInterface  $webmasters
+     *
+     * @return self
+     */
+    public function webmasters(WebmastersInterface $webmasters);
+
+    /**
+     * Set the title.
+     *
+     * @param  string  $title
+     * @param  string  $siteName
+     * @param  string  $separator
+     *
+     * @return self
+     */
+    public function setTitle($title, $siteName = null, $separator = null);
+
+    /**
+     * Set the description content.
+     *
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function setDescription($content);
+
+    /**
+     * Set the keywords content.
+     *
+     * @param  array|string  $content
+     *
+     * @return self
+     */
+    public function setKeywords($content);
+
+    /**
+     * Add a keyword.
+     *
+     * @param  string  $keyword
+     *
+     * @return self
+     */
+    public function addKeyword($keyword);
+
+    /**
+     * Add many keywords.
+     *
+     * @param  array  $keywords
+     *
+     * @return self
+     */
+    public function addKeywords(array $keywords);
+
+    /**
+     * Add a webmaster tool site verifier.
+     *
+     * @param  string  $webmaster
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addWebmaster($webmaster, $content);
+
+    /**
+     * Set the current URL.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function setUrl($url);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Add a meta tag.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content);
+
+    /**
+     * Add many meta tags.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas);
+
+    /**
+     * Remove a meta from the meta collection by key.
+     *
+     * @param  string|array  $names
+     *
+     * @return self
+     */
+    public function removeMeta($names);
+
+    /**
+     * Reset the meta collection except the description and keywords metas.
+     *
+     * @return self
+     */
+    public function resetMetas();
+
+    /**
+     * Reset all webmaster tool site verifier metas.
+     *
+     * @return self
+     */
+    public function resetWebmasters();
+}
+```
+
+### SEO Open Graph
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts;
+
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
+
+interface SeoOpenGraph extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Set the Open Graph instance.
+     *
+     * @param  OpenGraphInterface  $openGraph
+     *
+     * @return self
+     */
+    public function setOpenGraph(OpenGraphInterface $openGraph);
+
+    /**
+     * Set the open graph prefix.
+     *
+     * @param  string  $prefix
+     *
+     * @return self
+     */
+    public function setPrefix($prefix);
+
+    /**
+     * Set type property.
+     *
+     * @param  string  $type
+     *
+     * @return self
+     */
+    public function setType($type);
+
+    /**
+     * Set title property.
+     *
+     * @param  string  $title
+     *
+     * @return self
+     */
+    public function setTitle($title);
+
+    /**
+     * Set description property.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description);
+
+    /**
+     * Set url property.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function setUrl($url);
+
+    /**
+     * Set image property.
+     *
+     * @param  string  $image
+     *
+     * @return self
+     */
+    public function setImage($image);
+
+    /**
+     * Add an open graph property.
+     *
+     * @param  string  $property
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addProperty($property, $content);
+}
+```
+
+### SEO Twitter Card
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts;
+
+interface SeoTwitter extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Set the twitter card instance.
+     *
+     * @param  TwitterCardInterface  $card
+     *
+     * @return self
+     */
+    public function setCard(TwitterCardInterface $card);
+
+    /**
+     * Set the card type.
+     *
+     * @param  string  $type
+     *
+     * @return self
+     */
+    public function setType($type);
+
+    /**
+     * Set the card site.
+     *
+     * @param  string  $site
+     *
+     * @return self
+     */
+    public function setSite($site);
+
+    /**
+     * Set the card title.
+     *
+     * @param  string  $title
+     *
+     * @return self
+     */
+    public function setTitle($title);
+
+    /**
+     * Set the card description.
+     *
+     * @param  string  $description
+     *
+     * @return self
+     */
+    public function setDescription($description);
+
+    /**
+     * Add image to the card.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function addImage($url);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Reset the twitter card.
+     *
+     * @return self
+     */
+    public function reset();
+}
+```
