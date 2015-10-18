@@ -27,7 +27,7 @@
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
-SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.
+SEO Helper is a package that provides tools and helpers for SEO (Search Engine Optimization).
 
 ### Features
 
