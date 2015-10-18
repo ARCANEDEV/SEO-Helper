@@ -9,7 +9,7 @@ Or by adding the package to your `composer.json`.
 ```json
 {
     "require": {
-        "arcanedev/seo-helper": "~0.8"
+        "arcanedev/seo-helper": "~0.12"
     }
 }
 ```    
