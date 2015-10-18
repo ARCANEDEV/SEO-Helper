@@ -12,7 +12,13 @@
   * [Webmasters](#webmasters)
   * [Open Graph](#open-graph)
   * [Twitter Card](#twitter-card)
-2. [Helpers]
+2. [Helpers](#2-helpers)
+  * [Meta](#meta)
+3. [Managers](#3-managers)
+  * [SEO Meta](#seo-meta)
+  * [SEO Open Graph](#seo-open-graph)
+  * [SEO Twitter Card](#seo-twitter-card)
+4. [Laravel Usage](#4-laravel-usage)
 
 ## 1. Entities
 
@@ -544,18 +550,52 @@ For more details, check the [Miscellaneous Tags API](https://github.com/ARCANEDE
 ```php
 ```
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#webmasters).
+For more details, check the [Webmasters API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#webmasters).
 
 ### Open Graph
 
 ```php
 ```
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#open-graph).
+For more details, check the [Open Graph API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#open-graph).
 
 ### Twitter Card
 
 ```php
 ```
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#twitter-card).
+For more details, check the [Twitter Card API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#twitter-card).
+
+## 2. Helpers
+
+### Meta
+
+```php
+```
+
+For more details, check the [Meta API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#meta).
+
+## 3. Managers
+
+### SEO Meta
+
+```php
+```
+
+For more details, check the [SEO Meta API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#seo-meta).
+
+### SEO Open Graph
+
+```php
+```
+
+For more details, check the [SEO Open Graph API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#seo-open-graph).
+
+### SEO Twitter Card
+
+```php
+```
+
+For more details, check the [SEO Twitter Card API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#seo-twitter-card).
+
+## 4. Laravel Usage
