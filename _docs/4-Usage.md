@@ -1,5 +1,7 @@
 # 4. Usage
 
+> **:warning: DISCLAIMER :** French speaker here ! Brace yourselves, omelette du fromage is coming.
+
 ## Table of contents
 
 1. [Entities](#1-entities)
@@ -10,7 +12,7 @@
   * [Webmasters](#webmasters)
   * [Open Graph](#open-graph)
   * [Twitter Card](#twitter-card)
-2. [Helpers] 
+2. [Helpers]
 
 ## 1. Entities
 
@@ -370,10 +372,172 @@ For more details, check the [Keywords API](https://github.com/ARCANEDEV/SEO-Help
 
 ### Miscellaneous Tags
 
+Same thing as usual, we start by creating a `MiscTags` object:
+
 ```php
+use Arcanedev\SeoHelper\Entities\MiscTags;
+
+$tags = new MiscTags;
+
+$tags->add('copyright', 'ARCANEDEV');
+
+echo $tags->render();
 ```
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#miscellaneous-tags).
+> Output:
+
+```html
+<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
+```
+
+Ok, lets add many tags:
+
+```php
+use Arcanedev\SeoHelper\Entities\MiscTags;
+
+$tags = new MiscTags;
+
+$tags->addMany([
+    'copyright' => 'ARCANEDEV',
+    'viewport'  => 'width=device-width, initial-scale=1',
+]);
+
+echo $tags->render();
+```
+
+> Output:
+
+```html
+<meta name="copyright" content="ARCANEDEV">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+For the `canonical` link tag, there are many ways to achieve it :
+
+```
+use Arcanedev\SeoHelper\Entities\MiscTags;
+
+// 1st example:
+$tags   = new MiscTags;
+
+$tags->add('canonical', 'http://www.example.com/');
+
+// 2nd example:
+$tags   = new MiscTags([
+   'default' => [
+       'canonical' => 'http://www.example.com/',
+   ],
+]);
+
+// 3rd example:
+$tags   = new MiscTags([
+   'canonical' => true,
+]);
+
+$tags->setUrl('http://www.example.com/');
+
+// And Finally:
+echo $tags->render();
+```
+
+> Output:
+
+```html
+<link rel="canonical" href="http://www.example.com/">
+```
+
+> **Note :** the `setUrl()` method is used to set the `canonical` URL.
+
+Same here for `robots` meta tag:
+
+```php
+use Arcanedev\SeoHelper\Entities\MiscTags;
+
+// 1st example: 
+$tags = new MiscTags;
+
+$tags->add('robots', 'noindex, nofollow');
+
+// 2nd example:
+$tags   = new MiscTags([
+  'default'   => [
+      'robots'    => 'noindex, nofollow',
+  ],
+]);
+
+// 3rd example:
+$tags = new MiscTags([
+    'robots' => true,
+]);
+
+// And finally:
+echo $tags->render();
+```
+
+> Output:
+
+```html
+<meta name="robots" content="noindex, nofollow">
+```
+
+> As you can see, the `canonical` and `robots` tags got a spacial treatment.
+
+Ok, now we're going to `remove` some tags:
+
+```
+use Arcanedev\SeoHelper\Entities\MiscTags;
+
+$tags = new MiscTags;
+
+$tags->addMany([
+    'copyright' => 'ARCANEDEV',
+    'viewport'  => 'width=device-width, initial-scale=1',
+]);
+
+$tags->remove('viewport');
+
+echo $tags->render();
+```
+
+> Output:
+
+```html
+<meta name="copyright" content="ARCANEDEV">
+```
+
+> **Note :** you can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`. 
+
+If you want to `reset` all tags:
+
+```php
+use Arcanedev\SeoHelper\Entities\MiscTags;
+
+$tags = new MiscTags([
+    'canonical' => true,
+    'robots'    => true,
+]);
+
+$tags->setUrl('http://www.example.com/');
+
+$tags->addMany([
+    'copyright' => 'ARCANEDEV',
+    'viewport'  => 'width=device-width, initial-scale=1',
+]);
+
+$tags->reset();
+
+$tags->add('copyright', 'ARCANEDEV');
+
+echo $tags->render();
+```
+
+> Output:
+
+```html
+<meta name="copyright" content="ARCANEDEV">
+```
+
+For more details, check the [Miscellaneous Tags API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#miscellaneous-tags).
 
 ### Webmasters
 
