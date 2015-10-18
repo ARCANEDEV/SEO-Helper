@@ -105,7 +105,9 @@ class MiscTags implements MiscTagsInterface
      */
     public static function make(array $defaults = [])
     {
-        return new self(['default' => $defaults]);
+        return new self([
+            'default' => $defaults,
+        ]);
     }
 
     /**
