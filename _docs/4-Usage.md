@@ -136,7 +136,7 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-> **Note :** The site name and separator are optionals, you can simply do this `Title::make('Your awesome title');`.
+> :information_source: The **site name** and **separator** are **optionals**, you can simply do this `Title::make('Your awesome title');`.
 
 To switch the title and site name positions:
 
@@ -157,7 +157,7 @@ echo $title->render();
 
 To reset the title position, use `setFirst()` method.
 
-> **Note :** You know that the title must be optimized for the SEO, Right ?? So the optimal title length is **55** characters long.
+> :information_source: You know that the title must be optimized for the SEO, Right ?? So the optimal title length is **55** characters long.
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -195,12 +195,12 @@ echo $title->render();
 
 And last but not least, the `Title` class constructor accepts an array as an argument:
 
-| Key         | Type    | Required | Description                |
-| ----------- | ------- | -------- | -------------------------- |
-| `default`   | string  | Yes      | The default title content. |
-| `site-name` | string  | No       | The site name.             |
-| `separator` | string  | No       | The title separator.       |
-| `max`       | integer | No       | The maximum title length.  |
+| Key         | Type      | Required | Description                |
+| ----------- | --------- | -------- | -------------------------- |
+| `default`   | `string`  | Yes      | The default title content. |
+| `site-name` | `string`  | No       | The site name.             |
+| `separator` | `string`  | No       | The title separator.       |
+| `max`       | `integer` | No       | The maximum title length.  |
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -221,7 +221,7 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-> Note: You can also echo out the `$title` object like this `echo $title;`.
+> :information_source: You can also echo out the `$title` object like this `echo $title;`.
 
 For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#title).
 
@@ -262,7 +262,7 @@ echo $description->render();
 <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum,...">
 ```
 
-> Note: Don't forget you can chain the methods.
+> :information_source: Don't forget you can chain the methods.
 
 If you want to `make` a Description object:
 
@@ -283,10 +283,10 @@ echo $description->render();
 
 And last but not least, the `Description` class constructor accepts an array as an argument:
 
-| Key         | Type    | Required | Description                      |
-| ----------- | ------- | -------- | -------------------------------- |
-| `default`   | string  | Yes      | The default description content. |
-| `max`       | integer | No       | The maximum title length.        |
+| Key         | Type      | Required | Description                      |
+| ----------- | --------- | -------- | -------------------------------- |
+| `default`   | `string`  | Yes      | The default description content. |
+| `max`       | `integer` | No       | The maximum title length.        |
 
 ```php
 use Arcanedev\SeoHelper\Entities\Description;
@@ -305,7 +305,7 @@ echo $description->render();
 <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum,...">
 ```
 
-> Note: You can also echo out the `$description` object like this `echo $description;`.
+> :information_source: You can also echo out the `$description` object like this `echo $description;`.
 
 For more details, check the [Description API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#description).
 
@@ -466,7 +466,7 @@ echo $tags->render();
 <link rel="canonical" href="http://www.example.com/">
 ```
 
-> **Note :** the `setUrl()` method is used to set the `canonical` URL.
+> :information_source: the `setUrl()` method is used to set the `canonical` URL.
 
 Same here for `robots` meta tag:
 
@@ -500,7 +500,29 @@ echo $tags->render();
 <meta name="robots" content="noindex, nofollow">
 ```
 
-> As you can see, the `canonical` and `robots` tags got a spacial treatment.
+> :information_source: As you can see, the `canonical` and `robots` tags got a spacial treatment.
+
+As you can see, the `MiscTags` constructor accept an array as argument:
+
+| Key         | Type      | Required | Description                                                                           |
+| ----------- | --------- | -------- | ------------------------------------------------------------------------------------- |
+| `canonical` | `boolean` | No       | Enable automatic generation for `canonical` link tag.                                 |
+| `robots`    | `boolean` | No       | Enable the `robots` meta tag to prevent from the indexation by the search engines.    |
+| `default`   | `array`   | No       | A `key => value` array that represent the `name` and `content` of miscellaneous tags. |
+
+For example:
+
+```php
+$data = [
+    'canonical' => true,
+    'robots'    => true,  // true (for local environment) and false (for production environment) 
+    'default'   => [
+        'viewport'  => 'width=device-width, initial-scale=1', // Responsive design thing
+        'author'    => 'https://plus.google.com/+ArcanedevNetMaroc',
+        // ...
+    ],
+];
+```
 
 Ok, now we're going to `remove` some tags:
 
@@ -525,7 +547,7 @@ echo $tags->render();
 <meta name="copyright" content="ARCANEDEV">
 ```
 
-> **Note :** you can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`. 
+> :information_source: you can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`. 
 
 If you want to `reset` all tags:
 
