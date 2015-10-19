@@ -39,7 +39,9 @@ After you've published the config file `config/seo-helper.php`, you can customiz
 
 ```php
 'keywords'  => [
-    'default'   => [],
+    'default'   => [
+        //
+    ],
 ],
 ```
 
@@ -77,6 +79,10 @@ After you've published the config file `config/seo-helper.php`, you can customiz
     'type'        => 'website',
     'title'       => 'Default Open Graph title',
     'description' => 'Default Open Graph description',
+    'site-name'   => '',
+    'properties'  => [
+        //
+    ],
 ],
 ```
 
