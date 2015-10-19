@@ -31,7 +31,7 @@ Once the package is installed, you can register the service provider in `config/
 ],
 ```
 
-And for the Facade:
+And for the Facades:
 
 ```php
 // config/app.php
@@ -40,7 +40,7 @@ And for the Facade:
     ...
     'SeoHelper'    => Arcanedev\SeoHelper\Facades\SeoHelper::class,
     
-    // OR, by choosing a specific SEO Helper.
+    // OR, by choosing a specific SEO Manager.
     'SeoMeta'      => Arcanedev\SeoHelper\Facades\SeoMeta::class,
     'SeoOpenGraph' => Arcanedev\SeoHelper\Facades\SeoOpenGraph::class,
     'SeoTwitter'   => Arcanedev\SeoHelper\Facades\SeoTwitter::class,
