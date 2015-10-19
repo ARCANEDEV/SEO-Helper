@@ -87,6 +87,15 @@ interface SeoOpenGraph extends Renderable
     public function setSiteName($siteName);
 
     /**
+     * Add many open graph properties.
+     *
+     * @param  array  $properties
+     *
+     * @return self
+     */
+    public function addProperties(array $properties);
+
+    /**
      * Add an open graph property.
      *
      * @param  string  $property

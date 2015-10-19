@@ -154,4 +154,39 @@ class GraphTest extends TestCase
         $this->assertContains($expected, $this->og->render());
         $this->assertContains($expected, (string) $this->og);
     }
+
+    /** @test */
+    public function it_can_add_render_property()
+    {
+        $locale = 'en_GB';
+
+        $this->og->addProperty('locale', $locale);
+
+        $expected = '<meta property="og:locale" content="' . $locale . '">';
+
+        $this->assertContains($expected, $this->og->render());
+        $this->assertContains($expected, (string) $this->og);
+    }
+
+    /** @test */
+    public function it_can_add_render_properties()
+    {
+        $properties = [
+            'locale'            => 'en_GB',
+            'profile:username'  => 'ARCANEDEV'
+        ];
+
+        $expectations = [];
+
+        foreach ($properties as $property => $content) {
+            $expectations[] = '<meta property="og:' . $property . '" content="' . $content . '">';
+        }
+
+        $this->og->addProperties($properties);
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->og->render());
+            $this->assertContains($expected, (string) $this->og);
+        }
+    }
 }

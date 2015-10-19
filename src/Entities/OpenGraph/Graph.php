@@ -54,6 +54,8 @@ class Graph implements OpenGraphInterface
         $this->setType($this->getConfig('type', ''));
         $this->setTitle($this->getConfig('title', ''));
         $this->setDescription($this->getConfig('description', ''));
+        $this->setSiteName($this->getConfig('site-name', ''));
+        $this->addProperties($this->getConfig('properties', []));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -154,6 +156,22 @@ class Graph implements OpenGraphInterface
     public function setSiteName($siteName)
     {
         $this->addProperty('site_name', $siteName);
+
+        return $this;
+    }
+
+    /**
+     * Add many open graph properties.
+     *
+     * @param  array  $properties
+     *
+     * @return self
+     */
+    public function addProperties(array $properties)
+    {
+        foreach ($properties as $property => $content) {
+            $this->metas->add($property, $content);
+        }
 
         return $this;
     }

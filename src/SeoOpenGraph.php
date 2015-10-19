@@ -163,10 +163,24 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     }
 
     /**
+     * Add many open graph properties.
+     *
+     * @param  array  $properties
+     *
+     * @return self
+     */
+    public function addProperties(array $properties)
+    {
+        $this->openGraph->addProperties($properties);
+
+        return $this;
+    }
+
+    /**
      * Add an open graph property.
      *
-     * @param  string $property
-     * @param  string $content
+     * @param  string  $property
+     * @param  string  $content
      *
      * @return self
      */
