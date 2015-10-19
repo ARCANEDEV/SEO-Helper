@@ -745,8 +745,14 @@ $openGraph->setType('website');
 $openGraph->setTitle('Your awesome title');
 $openGraph->setDescription('Your awesome description');
 $openGraph->setSiteName('Your site name');
+
 $openGraph->addProperty('locale', 'en_GB');
 $openGraph->addProperty('locale:alternate', 'fr_FR');
+// OR
+$openGraph->addProperties([
+    'locale'           => 'en_GB',
+    'locale:alternate' => 'fr_FR',
+]);
 
 echo $openGraph->render();
 ```
