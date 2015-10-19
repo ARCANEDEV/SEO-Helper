@@ -705,7 +705,61 @@ For more details, check the [Webmasters API](https://github.com/ARCANEDEV/SEO-He
 
 ### Open Graph
 
+It's pretty darn easy, right ? for the open graph protocol, same old stuff :
+
 ```php
+use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
+
+$openGraph = new Graph;
+
+$openGraph->setType('website');
+$openGraph->setTitle('Your awesome title');
+$openGraph->setDescription('Your awesome description');
+$openGraph->setSiteName('Your site name');
+$openGraph->setUrl('http://my.awesome-website.com');
+$openGraph->setImage('http://my.awesome-website.com/img/cool-image.jpg');
+// Of course you can chain all these methods
+
+echo $openGraph->render();
+```
+
+> Output:
+
+```html
+<meta property="og:type" content="website">
+<meta property="og:title" content="Your awesome title">
+<meta property="og:description" content="Your awesome description">
+<meta property="og:site_name" content="Your site name">
+<meta property="og:url" content="http://my.awesome-website.com">
+<meta property="og:image" content="http://my.awesome-website.com/img/cool-image.jpg">
+```
+
+You can add more custom properties by using `addProperty()` method:
+
+```php
+use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
+
+$openGraph = new Graph;
+
+$openGraph->setType('website');
+$openGraph->setTitle('Your awesome title');
+$openGraph->setDescription('Your awesome description');
+$openGraph->setSiteName('Your site name');
+$openGraph->addProperty('locale', 'en_GB');
+$openGraph->addProperty('locale:alternate', 'fr_FR');
+
+echo $openGraph->render();
+```
+
+> Output:
+
+```html
+<meta property="og:type" content="website">
+<meta property="og:title" content="Your awesome title">
+<meta property="og:description" content="Your awesome description">
+<meta property="og:site_name" content="Your site name">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
 ```
 
 For more details, check the [Open Graph API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#open-graph).
