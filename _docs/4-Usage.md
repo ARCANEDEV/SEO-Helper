@@ -470,14 +470,14 @@ $tags->add('canonical', 'http://www.example.com/');
 
 // 2nd example:
 $tags   = new MiscTags([
-   'default' => [
-       'canonical' => 'http://www.example.com/',
-   ],
+    'default' => [
+        'canonical' => 'http://www.example.com/',
+    ],
 ]);
 
 // 3rd example:
 $tags   = new MiscTags([
-   'canonical' => true,
+    'canonical' => true,
 ]);
 
 $tags->setUrl('http://www.example.com/');
@@ -506,9 +506,9 @@ $tags->add('robots', 'noindex, nofollow');
 
 // 2nd example:
 $tags   = new MiscTags([
-  'default'   => [
-      'robots'    => 'noindex, nofollow',
-  ],
+    'default'   => [
+        'robots'    => 'noindex, nofollow',
+    ],
 ]);
 
 // 3rd example:
@@ -609,7 +609,96 @@ For more details, check the [Miscellaneous Tags API](https://github.com/ARCANEDE
 
 ### Webmasters
 
+Let's repeat the same process by creating a `Webmasters` object:
+
 ```php
+use Arcanedev\SeoHelper\Entities\Webmasters;
+
+$webmasters = new Webmasters;
+
+$webmasters->add('google', 'google-site-verification-code');
+
+echo $webmasters->render();
+```
+
+> Output:
+
+```html
+<meta name="google-site-verification" content="google-site-verification-code">
+```
+
+The supported webmasters are:
+
+| Name      | Key         |
+| --------- | ----------- |
+| Google    | 'google'    |
+| Bing      | 'bing'      |
+| Alexa     | 'alexa'     |
+| Pinterest | 'pinterest' |
+| Yandex    | 'yandex'    |
+
+You can also check some [useful links about Webmaster Tools](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/6-Extras.md#webmaster-tools)
+
+If you want to add many `webmasters` at once:
+
+```php
+use Arcanedev\SeoHelper\Entities\Webmasters;
+
+$webmasters = new Webmasters([
+    'google'    => 'google-site-verification-code',
+    'bing'      => 'bing-site-verification-code',
+    'alexa'     => 'alexa-site-verification-code',
+    'pinterest' => 'pinterest-site-verification-code',
+    'yandex'    => 'yandex-site-verification-code'
+]);
+
+// OR by using the make() method
+
+$webmasters = Webmasters::make([
+    'google'    => 'google-site-verification-code',
+    'bing'      => 'bing-site-verification-code',
+    'alexa'     => 'alexa-site-verification-code',
+    'pinterest' => 'pinterest-site-verification-code',
+    'yandex'    => 'yandex-site-verification-code'
+]);
+
+echo $webmasters->render();
+```
+
+> Output:
+
+```html
+<meta name="google-site-verification" content="google-site-verification-code">
+<meta name="msvalidate.01" content="bing-site-verification-code">
+<meta name="alexaVerifyID" content="alexa-site-verification-code">
+<meta name="p:domain_verify" content="pinterest-site-verification-code">
+<meta name="yandex-verification" content="yandex-site-verification-code">
+```
+
+To `reset` and clean all your `webmasters`, you just do this:
+
+```php
+use Arcanedev\SeoHelper\Entities\Webmasters;
+
+$webmasters = Webmasters::make([
+    'google'    => 'google-site-verification-code',
+    'bing'      => 'bing-site-verification-code',
+    'alexa'     => 'alexa-site-verification-code',
+    'pinterest' => 'pinterest-site-verification-code',
+    'yandex'    => 'yandex-site-verification-code'
+]);
+
+$webmasters->reset();
+
+$webmasters->add('google', 'new-google-site-verification-code');
+
+echo $webmasters->render();
+```
+
+> Output:
+
+```html
+<meta name="google-site-verification" content="new-google-site-verification-code">
 ```
 
 For more details, check the [Webmasters API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#webmasters).
