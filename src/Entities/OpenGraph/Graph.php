@@ -91,7 +91,7 @@ class Graph implements OpenGraphInterface
     /**
      * Set title property.
      *
-     * @param  string $title
+     * @param  string  $title
      *
      * @return self
      */
@@ -119,7 +119,7 @@ class Graph implements OpenGraphInterface
     /**
      * Set url property.
      *
-     * @param  string $url
+     * @param  string  $url
      *
      * @return self
      */
@@ -147,8 +147,8 @@ class Graph implements OpenGraphInterface
     /**
      * Add an open graph property.
      *
-     * @param  string $property
-     * @param  string $content
+     * @param  string  $property
+     * @param  string  $content
      *
      * @return self
      */
