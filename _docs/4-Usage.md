@@ -492,7 +492,7 @@ echo $tags->render();
 <link rel="canonical" href="http://www.example.com/">
 ```
 
-> :information_source: the `setUrl()` method is used to set the `canonical` URL.
+> :information_source: The `setUrl()` method is used to set the `canonical` URL.
 
 Same here for `robots` meta tag:
 
@@ -573,7 +573,7 @@ echo $tags->render();
 <meta name="copyright" content="ARCANEDEV">
 ```
 
-> :information_source: you can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`.
+> :information_source: You can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`.
 
 If you want to `reset` all tags:
 
@@ -627,17 +627,17 @@ echo $webmasters->render();
 <meta name="google-site-verification" content="google-site-verification-code">
 ```
 
-The supported webmasters are:
+The supported `webmasters` are:
 
 | Name      | Key         |
 | --------- | ----------- |
-| Google    | 'google'    |
-| Bing      | 'bing'      |
-| Alexa     | 'alexa'     |
-| Pinterest | 'pinterest' |
-| Yandex    | 'yandex'    |
+| Google    | `google`    |
+| Bing      | `bing`      |
+| Alexa     | `alexa`     |
+| Pinterest | `pinterest` |
+| Yandex    | `yandex`    |
 
-You can also check some [useful links about Webmaster Tools](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/6-Extras.md#webmaster-tools)
+> :information_source: You can also check some [useful links about Webmaster Tools](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/6-Extras.md#webmaster-tools)
 
 If you want to add many `webmasters` at once:
 
