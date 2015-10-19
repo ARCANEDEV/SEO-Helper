@@ -4,15 +4,15 @@
 
 You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require arcanedev/seo-helper`.
 
-Or by adding the package to your `composer.json`. 
+Or by adding the package to your `composer.json`.
 
 ```json
 {
     "require": {
-        "arcanedev/seo-helper": "~0.12"
+        "arcanedev/seo-helper": "~0.14"
     }
 }
-```    
+```
 
 Then install it via `composer install` or `composer update`.
 
@@ -39,7 +39,7 @@ And for the Facades:
 'aliases' => [
     ...
     'SeoHelper'    => Arcanedev\SeoHelper\Facades\SeoHelper::class,
-    
+
     // OR, by choosing a specific SEO Manager.
     'SeoMeta'      => Arcanedev\SeoHelper\Facades\SeoMeta::class,
     'SeoOpenGraph' => Arcanedev\SeoHelper\Facades\SeoOpenGraph::class,
@@ -50,7 +50,7 @@ And for the Facades:
 ### Artisan commands
 
 To publish the config file, run this command:
- 
+
 ```bash
 php artisan vendor:publish --provider="Arcanedev\SeoHelper\SeoHelperServiceProvider"
 ```
