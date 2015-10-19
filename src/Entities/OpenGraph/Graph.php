@@ -145,6 +145,20 @@ class Graph implements OpenGraphInterface
     }
 
     /**
+     * Set site name property.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName)
+    {
+        $this->addProperty('site_name', $siteName);
+
+        return $this;
+    }
+
+    /**
      * Add an open graph property.
      *
      * @param  string  $property

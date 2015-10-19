@@ -159,6 +159,19 @@ class SeoOpenGraphTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_and_render_site_name()
+    {
+        $siteName = 'My site name';
+
+        $this->seoOpenGraph->setSiteName($siteName);
+
+        $expected = '<meta property="og:site_name" content="' . $siteName . '">';
+
+        $this->assertContains($expected, $this->seoOpenGraph->render());
+        $this->assertContains($expected, (string) $this->seoOpenGraph);
+    }
+
+    /** @test */
     public function it_can_add_and_render_property()
     {
         $locales = [

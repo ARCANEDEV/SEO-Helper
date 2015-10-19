@@ -149,6 +149,20 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     }
 
     /**
+     * Set site name property.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName)
+    {
+        $this->openGraph->setSiteName($siteName);
+
+        return $this;
+    }
+
+    /**
      * Add an open graph property.
      *
      * @param  string $property

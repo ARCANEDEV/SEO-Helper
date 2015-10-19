@@ -69,6 +69,15 @@ interface OpenGraphInterface extends Renderable
     public function setImage($image);
 
     /**
+     * Set site name property.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
+    /**
      * Add an open graph property.
      *
      * @param  string  $property

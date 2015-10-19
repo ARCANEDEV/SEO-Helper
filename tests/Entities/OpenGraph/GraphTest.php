@@ -141,4 +141,17 @@ class GraphTest extends TestCase
         $this->assertContains($expected, $this->og->render());
         $this->assertContains($expected, (string) $this->og);
     }
+
+    /** @test */
+    public function it_can_set_and_render_site_name()
+    {
+        $siteName = 'My site name';
+
+        $this->og->setSiteName($siteName);
+
+        $expected = '<meta property="og:site_name" content="' . $siteName . '">';
+
+        $this->assertContains($expected, $this->og->render());
+        $this->assertContains($expected, (string) $this->og);
+    }
 }

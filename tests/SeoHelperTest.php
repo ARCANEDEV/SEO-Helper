@@ -114,6 +114,7 @@ class SeoHelperTest extends TestCase
         $expectations = [
             "<title>$title $separator $siteName</title>",
             '<meta property="og:title" content="' . $title . '">',
+            '<meta property="og:site_name" content="' . $siteName . '">',
             '<meta name="twitter:title" content="' . $title . '">',
         ];
 
