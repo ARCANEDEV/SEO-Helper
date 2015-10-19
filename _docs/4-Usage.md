@@ -762,6 +762,36 @@ echo $openGraph->render();
 <meta property="og:locale:alternate" content="fr_FR">
 ```
 
+You can also pass an array as argument to the `Graph` constructor:
+
+```php
+use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
+
+$openGraph = new Graph([
+    'prefix'      => 'og:',
+    'type'        => 'website',
+    'title'       => 'Default Open Graph title',
+    'description' => 'Default Open Graph description',
+    'site-name'   => 'Your site name',
+    'properties'  => [
+        'locale'            => 'en_GB',
+        'profile:username'  => 'ARCANEDEV'
+        // ...
+    ],
+]);
+```
+
+| Key           | Type     | Description                                                                                           |
+| ------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `prefix`      | `string` | The property prefix name (Default is `og:`).                                                          |
+| `type`        | `string` | The title of your object as it should appear within the graph.                                        |
+| `title`       | `string` | The type of your object (For more details : [The graph types](http://ogp.me/#types)).                 |
+| `description` | `string` | A one to two sentence description of your object.                                                     |
+| `site-name`   | `string` | If your object is part of a larger web site, the name which should be displayed for the overall site. |
+| `properties`  | `array`  | The other graph properties (**no need to prefix the names**).                                         |
+
+> **Source :** [The Open Graph protocol documentation](http://ogp.me).
+
 For more details, check the [Open Graph API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#open-graph).
 
 ### Twitter Card
