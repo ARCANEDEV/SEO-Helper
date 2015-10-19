@@ -367,6 +367,32 @@ echo $keywords->render();
 <meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package, laravel, supported">
 ```
 
+You can also pass an array as argument to the constructor:
+
+| Key         | Type            | Required | Description                   |
+| ----------- | --------------- | -------- | ----------------------------- |
+| `default`   | `array|string`  | Yes      | The default keywords content. |
+
+```php
+use Arcanedev\SeoHelper\Entities\Keywords;
+
+$content  = ['seo-helper', 'is', 'awesome', 'cool', 'easy', 'php', 'package'];
+// or
+$content  = 'seo-helper, is, awesome, cool, easy, php, package';
+
+$keywords = new Keywords([
+    'default' => $content,
+]);
+
+echo $keywords->render();
+```
+
+> Output:
+
+```html
+<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
+```
+
 And if you want to `make` a Keywords object:
 
 ```php
@@ -473,7 +499,7 @@ Same here for `robots` meta tag:
 ```php
 use Arcanedev\SeoHelper\Entities\MiscTags;
 
-// 1st example: 
+// 1st example:
 $tags = new MiscTags;
 
 $tags->add('robots', 'noindex, nofollow');
@@ -515,7 +541,7 @@ For example:
 ```php
 $data = [
     'canonical' => true,
-    'robots'    => true,  // true (for local environment) and false (for production environment) 
+    'robots'    => true,  // true (for local environment) and false (for production environment)
     'default'   => [
         'viewport'  => 'width=device-width, initial-scale=1', // Responsive design thing
         'author'    => 'https://plus.google.com/+ArcanedevNetMaroc',
@@ -547,7 +573,7 @@ echo $tags->render();
 <meta name="copyright" content="ARCANEDEV">
 ```
 
-> :information_source: you can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`. 
+> :information_source: you can remove many tags by passing an array of names like this: `$tags->remove(['copyright', 'viewport']);`.
 
 If you want to `reset` all tags:
 
