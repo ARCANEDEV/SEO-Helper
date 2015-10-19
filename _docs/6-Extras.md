@@ -2,14 +2,18 @@
 
 ## Q&A :
 
-  * Q: Where to ask questions ?
-  * A: Check our [Repo Issues](https://github.com/ARCANEDEV/SEO-Helper/issues?q=is%3Aissue+label%3Aquestion).
+  * **Q:** Where to ask questions ?
+  * **A:** Check our [Repo Issues](https://github.com/ARCANEDEV/SEO-Helper/issues?q=is%3Aissue+label%3Aquestion).
 
-  * Q: I've a question, what to do ?
-  * A: First check if your question is not already posted, if it's not, create an issue (and don't forget to give us detailed information).
+---
 
-  * Q: What is your favorite things you do on in your free time ?
-  * A: Drinking coffee (Duh !) and reading [CommitStrip](http://www.commitstrip.com/en/).
+  * **Q:** I've a question, what to do ?
+  * **A:** First check if your question is not already posted, if it's not, create an issue (and don't forget to give us detailed information).
+
+---
+
+  * **Q:** What is your favorite things you do on in your free time ?
+  * **A:** Drinking coffee (Duh !) and reading [CommitStrip](http://www.commitstrip.com/en/).
 
 ## Useful links :
 
