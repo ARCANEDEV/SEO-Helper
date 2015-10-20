@@ -286,7 +286,7 @@ And last but not least, the `Description` class constructor accepts an array as 
 | Key         | Type      | Required | Description                      |
 | ----------- | --------- | -------- | -------------------------------- |
 | `default`   | `string`  | Yes      | The default description content. |
-| `max`       | `integer` | No       | The maximum title length.        |
+| `max`       | `integer` | No       | The maximum description length.  |
 
 ```php
 use Arcanedev\SeoHelper\Entities\Description;
@@ -734,7 +734,7 @@ echo $openGraph->render();
 <meta property="og:image" content="http://my.awesome-website.com/img/cool-image.jpg">
 ```
 
-You can add more custom properties by using `addProperty()` method:
+You can add more custom properties by using `addProperty()` or `addProperties()` methods:
 
 ```php
 use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
@@ -802,10 +802,93 @@ For more details, check the [Open Graph API](https://github.com/ARCANEDEV/SEO-He
 
 ### Twitter Card
 
+We are going to start by creating a Twitter `Card` object:
+
 ```php
+use Arcanedev\SeoHelper\Entities\Twitter\Card;
+
+$card = new Card;
+
+$card->setType('summary');
+$card->setSite('@Arcanedev');         // Or just 'Arcanedev'
+$card->setTitle('Your awesome title');
+$card->setDescription('Your awesome description');
+$card->addImage('http://my.awesome-website.com/img/cool-image.jpg');
+
+echo $card->render();
 ```
 
-For more details, check the [Twitter Card API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#twitter-card).
+> Output:
+
+```html
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@Arcanedev">
+<meta name="twitter:title" content="Your awesome title">
+<meta name="twitter:description" content="Your awesome description">
+<meta name="twitter:image" content="http://my.awesome-website.com/img/cool-image.jpg">
+```
+
+> :information_source: **The supported Twitter Card types are :** `'app'`, `'gallery'`, `'photo'`, `'player'`, `'product'`, `'summary'`, `'summary_large_image'`.
+
+You can also add more `Card` meta tags by using the `addMeta()` method :
+
+```php
+use Arcanedev\SeoHelper\Entities\Twitter\Card;
+
+$card = new Card;
+
+$card->setType('gallery');
+$card->setSite('@Arcanedev');
+$card->addMeta('creator', '@Arcanedev');
+$card->setTitle('Your awesome title');
+$card->setDescription('Your awesome description');
+$card->addMeta('url', 'http://my.awesome-website.com');
+$card->addImage('http://my.awesome-website.com/img/cool-image.jpg');
+
+echo $card;
+```
+
+> Output:
+
+```html
+<meta name="twitter:card" content="gallery">
+<meta name="twitter:site" content="@Arcanedev">
+<meta name="twitter:creator" content="@Arcanedev">
+<meta name="twitter:title" content="Your awesome title">
+<meta name="twitter:description" content="Your awesome description">
+<meta name="twitter:url" content="http://my.awesome-website.com">
+<meta name="twitter:image" content="http://my.awesome-website.com/img/cool-image.jpg">
+```
+
+You can reset all `Card` meta tags by using the `reset()` method:
+
+```php
+use Arcanedev\SeoHelper\Entities\Twitter\Card;
+
+$card = new Card;
+
+$card->setType('gallery');
+$card->setSite('Arcanedev');
+$card->addMeta('creator', '@Arcanedev');
+$card->setTitle('Your awesome title');
+$card->setDescription('Your awesome description');
+$card->addMeta('url', 'http://my.awesome-website.com');
+$card->addImage('http://my.awesome-website.com/img/cool-image.jpg');
+
+$card->reset();
+
+$card->setType('summary');
+
+echo $card;
+```
+
+> Output:
+
+```html
+<meta name="twitter:card" content="summary">
+```
+
+For more details, check the [Twitter Card API](5-API.md#twitter-card).
 
 ## 2. Helpers
 
