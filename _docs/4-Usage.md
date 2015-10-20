@@ -223,7 +223,7 @@ echo $title->render();
 
 > :information_source: You can also echo out the `$title` object like this `echo $title;`.
 
-For more details, check the [Title API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#title).
+For more details, check the [Title API](5-API.md#title).
 
 ### Description
 
@@ -307,7 +307,7 @@ echo $description->render();
 
 > :information_source: You can also echo out the `$description` object like this `echo $description;`.
 
-For more details, check the [Description API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#description).
+For more details, check the [Description API](5-API.md#description).
 
 ### Keywords
 
@@ -414,7 +414,7 @@ echo $keywords->render();
 <meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
 ```
 
-For more details, check the [Keywords API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#keywords).
+For more details, check the [Keywords API](5-API.md#keywords).
 
 ### Miscellaneous Tags
 
@@ -605,7 +605,7 @@ echo $tags->render();
 <meta name="copyright" content="ARCANEDEV">
 ```
 
-For more details, check the [Miscellaneous Tags API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#miscellaneous-tags).
+For more details, check the [Miscellaneous Tags API](5-API.md#miscellaneous-tags).
 
 ### Webmasters
 
@@ -637,7 +637,7 @@ The supported `webmasters` are:
 | Pinterest | `pinterest` |
 | Yandex    | `yandex`    |
 
-> :information_source: You can also check some [useful links about Webmaster Tools](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/6-Extras.md#webmaster-tools)
+> :information_source: You can also check some [useful links about Webmaster Tools](6-Extras.md#webmaster-tools)
 
 If you want to add many `webmasters` at once:
 
@@ -701,7 +701,7 @@ echo $webmasters->render();
 <meta name="google-site-verification" content="new-google-site-verification-code">
 ```
 
-For more details, check the [Webmasters API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#webmasters).
+For more details, check the [Webmasters API](5-API.md#webmasters).
 
 ### Open Graph
 
@@ -789,7 +789,7 @@ $openGraph = new Graph([
 
 | Key           | Type     | Description                                                                                           |
 | ------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `prefix`      | `string` | The property prefix name (Default is `og:`).                                                          |
+| `prefix`      | `string` | The property prefix name (Default is `'og:'`).                                                          |
 | `type`        | `string` | The title of your object as it should appear within the graph.                                        |
 | `title`       | `string` | The type of your object (For more details : [The graph types](http://ogp.me/#types)).                 |
 | `description` | `string` | A one to two sentence description of your object.                                                     |
@@ -798,7 +798,7 @@ $openGraph = new Graph([
 
 > **Source :** [The Open Graph protocol documentation](http://ogp.me).
 
-For more details, check the [Open Graph API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#open-graph).
+For more details, check the [Open Graph API](5-API.md#open-graph).
 
 ### Twitter Card
 
@@ -860,7 +860,9 @@ echo $card;
 <meta name="twitter:image" content="http://my.awesome-website.com/img/cool-image.jpg">
 ```
 
-You can reset all `Card` meta tags by using the `reset()` method:
+> :information_source: To add multiple meta tags at once, use the `addMetas()` method.
+
+If you want to reset all `Card` meta tags, use the `reset()` method:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Twitter\Card;
@@ -868,7 +870,7 @@ use Arcanedev\SeoHelper\Entities\Twitter\Card;
 $card = new Card;
 
 $card->setType('gallery');
-$card->setSite('Arcanedev');
+$card->setSite('@Arcanedev');
 $card->addMeta('creator', '@Arcanedev');
 $card->setTitle('Your awesome title');
 $card->setDescription('Your awesome description');
@@ -888,6 +890,48 @@ echo $card;
 <meta name="twitter:card" content="summary">
 ```
 
+You can pass an array as argument to `Card` constructor:
+
+```php
+use Arcanedev\SeoHelper\Entities\Twitter\Card;
+
+$card = new Card([
+    'prefix' => 'twitter:',
+    'card'   => 'summary',
+    'site'   => '@Arcanedev',
+    'title'  => 'Your awesome title',
+    'metas'  => [
+        'description' => 'Your awesome description',
+        'creator'     => '@Arcanedev',
+        'url'         => 'http://my.awesome-website.com',
+        'image'       => 'http://my.awesome-website.com/img/cool-image.jpg',
+        // ...
+    ],
+]);
+
+echo $card;
+```
+
+> Output:
+
+```html
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@Arcanedev">
+<meta name="twitter:title" content="Your awesome title">
+<meta name="twitter:description" content="Your awesome description">
+<meta name="twitter:creator" content="@Arcanedev">
+<meta name="twitter:url" content="http://my.awesome-website.com">
+<meta name="twitter:image" content="http://my.awesome-website.com/img/cool-image.jpg">
+```
+
+| Key      | Type     | Description                                                                                           |
+| -------- | -------- | ------------------------------------------------------- |
+| `prefix` | `string` | The meta prefix name (Default is `'twitter:'`).         |
+| `card`   | `string` | The twitter card type.                                  |
+| `site`   | `string` | The twitter username.                                   |
+| `title`  | `string` | The title as it should appear within the card.          |
+| `metas`  | `array`  | The other card metas (**no need to prefix the names**). |
+
 For more details, check the [Twitter Card API](5-API.md#twitter-card).
 
 ## 2. Helpers
@@ -897,7 +941,7 @@ For more details, check the [Twitter Card API](5-API.md#twitter-card).
 ```php
 ```
 
-For more details, check the [Meta API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#meta).
+For more details, check the [Meta API](5-API.md#meta).
 
 ## 3. Managers
 
@@ -906,20 +950,20 @@ For more details, check the [Meta API](https://github.com/ARCANEDEV/SEO-Helper/b
 ```php
 ```
 
-For more details, check the [SEO Meta API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#seo-meta).
+For more details, check the [SEO Meta API](5-API.md#seo-meta).
 
 ### SEO Open Graph
 
 ```php
 ```
 
-For more details, check the [SEO Open Graph API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#seo-open-graph).
+For more details, check the [SEO Open Graph API](5-API.md#seo-open-graph).
 
 ### SEO Twitter Card
 
 ```php
 ```
 
-For more details, check the [SEO Twitter Card API](https://github.com/ARCANEDEV/SEO-Helper/blob/master/_docs/5-API.md#seo-twitter-card).
+For more details, check the [SEO Twitter Card API](5-API.md#seo-twitter-card).
 
 ## 4. Laravel Usage
