@@ -76,7 +76,7 @@ return [
     /* ------------------------------------------------------------------------------------------------
      |  Twitter
      | ------------------------------------------------------------------------------------------------
-     |  Supported card types : 'summary', 'summary_large_image', 'photo', 'gallery', 'app', 'product'.
+     |  Supported card types : 'app', 'gallery', 'photo', 'player', 'product', 'summary', 'summary_large_image'.
      */
     'twitter' => [
         'prefix' => 'twitter:',

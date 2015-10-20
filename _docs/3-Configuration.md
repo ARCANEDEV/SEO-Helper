@@ -94,5 +94,8 @@ After you've published the config file `config/seo-helper.php`, you can customiz
     'card'   => 'summary',
     'site'   => 'Username',
     'title'  => 'Default Twitter Card title',
+    'metas'  => [
+        //
+    ],
 ],
 ```
