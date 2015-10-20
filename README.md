@@ -52,6 +52,7 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
 ## TODOS
 
   - [ ] Complete the documentation.
+  - [ ] Adding Google Analytics support.
 
 ## DONE
 
