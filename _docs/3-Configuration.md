@@ -9,6 +9,7 @@
 * [Keywords](#keywords)
 * [Miscellaneous](#miscellaneous)
 * [Webmaster Tools](#webmaster-tools)
+* [Analytics](#analytics)
 * [Open Graph](#open-graph)
 * [Twitter](#twitter)
 
@@ -68,6 +69,14 @@ After you've published the config file `config/seo-helper.php`, you can customiz
     'alexa'     => '',
     'pinterest' => '',
     'yandex'    => '',
+],
+```
+
+### Analytics
+
+```php
+'analytics' => [
+    'google' => '', // UA-XXXXXXXX-X
 ],
 ```
 
