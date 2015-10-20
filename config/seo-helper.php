@@ -83,5 +83,8 @@ return [
         'card'   => 'summary',
         'site'   => 'Username',
         'title'  => 'Default Twitter Card title',
+        'metas'  => [
+            //
+        ],
     ],
 ];
