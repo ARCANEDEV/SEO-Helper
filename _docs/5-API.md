@@ -1,4 +1,4 @@
-# 5. API 
+# 5. API
 
 ## Table of contents
 
@@ -10,6 +10,7 @@
   * [Keywords](#keywords)
   * [Miscellaneous Tags](#miscellaneous-tags)
   * [Webmasters](#webmasters)
+  * [Analytics](#analytics)
   * [Open Graph](#open-graph)
   * [Twitter Card](#twitter-card)
 3. [Helpers](#3-helpers)
@@ -18,7 +19,7 @@
   * [SEO Meta](#seo-meta)
   * [SEO Open Graph](#seo-open-graph)
   * [SEO Twitter Card](#seo-twitter-card)
-  
+
 ## 1. Contracts
 
 ### Renderable
@@ -216,7 +217,7 @@ interface DescriptionInterface extends Renderable
      * @return self
      */
     public function setMax($max);
-    
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -404,6 +405,30 @@ interface WebmastersInterface extends Renderable
      * @return self
      */
     public function reset();
+}
+```
+
+### Analytics
+
+```php
+<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+
+use Arcanedev\SeoHelper\Contracts\Renderable;
+
+interface AnalyticsInterface extends Renderable
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Set google analytics code.
+     *
+     * @param  string  $code
+     *
+     * @return self
+     */
+    public function setGoogle($code);
 }
 ```
 

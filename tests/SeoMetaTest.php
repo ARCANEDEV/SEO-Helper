@@ -274,4 +274,20 @@ class SeoMetaTest extends TestCase
         $this->assertContains($excepted, $this->seoMeta->render());
         $this->assertContains($excepted, (string) $this->seoMeta);
     }
+
+    /** @test */
+    public function it_can_set_and_render_google_analytics()
+    {
+        $this->assertContains(
+            "ga('create', 'UA-12345678-9', 'auto');",
+            $this->seoMeta->render()
+        );
+
+        $this->seoMeta->setGoogleAnalytics('UA-98765432-1');
+
+        $this->assertContains(
+            "ga('create', 'UA-98765432-1', 'auto');",
+            $this->seoMeta->render()
+        );
+    }
 }

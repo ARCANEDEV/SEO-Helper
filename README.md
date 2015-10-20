@@ -34,6 +34,7 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
   * Framework agnostic package.
   * Open Graph &amp; Twitter Cards are supported.
   * Webmaster tools site verifier tags are supported.
+  * Google Analytics tracking is supported.
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
@@ -52,7 +53,6 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
 ## TODOS
 
   - [ ] Complete the documentation.
-  - [ ] Adding Google Analytics support.
 
 ## DONE
 
@@ -60,6 +60,7 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
   - [x] Open Graph supported.
   - [x] Twitter Cards supported.
   - [x] Webmaster tools supported.
+  - [x] Google Analytics supported.
   - [x] Laravel 5.1 supported.
 
 ## Contribution

@@ -80,6 +80,11 @@ abstract class TestCase extends BaseTestCase
             'pinterest' => 'site-verification-code',
             'yandex'    => 'site-verification-code',
         ]);
+
+        // Analytics
+        $app['config']->set('seo-helper.analytics', [
+            'google'    => 'UA-12345678-9',
+        ]);
     }
 
     /**

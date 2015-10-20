@@ -10,6 +10,7 @@
   * [Keywords](#keywords)
   * [Miscellaneous Tags](#miscellaneous-tags)
   * [Webmasters](#webmasters)
+  * [Analytics](#analytics)
   * [Open Graph](#open-graph)
   * [Twitter Card](#twitter-card)
 2. [Helpers](#2-helpers)
@@ -702,6 +703,13 @@ echo $webmasters->render();
 ```
 
 For more details, check the [Webmasters API](5-API.md#webmasters).
+
+### Analytics
+
+```php
+```
+
+For more details, check the [Webmasters API](5-API.md#analytics).
 
 ### Open Graph
 

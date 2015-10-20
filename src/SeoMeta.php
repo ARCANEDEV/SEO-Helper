@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\Entities\AnalyticsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
@@ -67,6 +68,13 @@ class SeoMeta implements Contracts\SeoMeta
      */
     protected $webmasters;
 
+    /**
+     * The Analytics instance.
+     *
+     * @var AnalyticsInterface
+     */
+    protected $analytics;
+
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -101,6 +109,9 @@ class SeoMeta implements Contracts\SeoMeta
         );
         $this->webmasters(
             new Entities\Webmasters($this->getConfig('webmasters', []))
+        );
+        $this->analytics(
+            new Entities\Analytics($this->getConfig('analytics', []))
         );
     }
 
@@ -174,6 +185,20 @@ class SeoMeta implements Contracts\SeoMeta
     public function webmasters(WebmastersInterface $webmasters)
     {
         $this->webmasters = $webmasters;
+
+        return $this;
+    }
+
+    /**
+     * Set the Analytics instance.
+     *
+     * @param  Contracts\Entities\AnalyticsInterface  $analytics
+     *
+     * @return self
+     */
+    private function analytics(AnalyticsInterface $analytics)
+    {
+        $this->analytics = $analytics;
 
         return $this;
     }
@@ -288,6 +313,20 @@ class SeoMeta implements Contracts\SeoMeta
         return $this;
     }
 
+    /**
+     * Set the Google Analytics code.
+     *
+     * @param  string  $code
+     *
+     * @return self
+     */
+    public function setGoogleAnalytics($code)
+    {
+        $this->analytics->setGoogle($code);
+
+        return $this;
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -372,6 +411,7 @@ class SeoMeta implements Contracts\SeoMeta
             $this->keywords->render(),
             $this->misc->render(),
             $this->webmasters->render(),
+            $this->analytics->render(),
         ]));
     }
 
