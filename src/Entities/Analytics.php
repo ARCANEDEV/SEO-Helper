@@ -22,7 +22,7 @@ class Analytics implements AnalyticsInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Google analytics code.
+     * Google Analytics code.
      *
      * @var string
      */
@@ -49,7 +49,7 @@ class Analytics implements AnalyticsInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Set google analytics code.
+     * Set Google Analytics code.
      *
      * @param  string  $code
      *
@@ -93,7 +93,7 @@ class Analytics implements AnalyticsInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Render the google tracking code.
+     * Render the Google Analytics tracking script.
      *
      * @return string
      */

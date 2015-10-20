@@ -422,7 +422,7 @@ interface AnalyticsInterface extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Set google analytics code.
+     * Set Google Analytics code.
      *
      * @param  string  $code
      *

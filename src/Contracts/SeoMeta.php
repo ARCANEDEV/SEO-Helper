@@ -124,7 +124,7 @@ interface SeoMeta extends Renderable
     public function setUrl($url);
 
     /**
-     * Set the google analytics code.
+     * Set the Google Analytics code.
      *
      * @param  string  $code
      *
