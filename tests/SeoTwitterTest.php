@@ -152,4 +152,26 @@ class SeoTwitterTest extends TestCase
         $this->assertContains($expected, $this->twitter->render());
         $this->assertContains($expected, (string) $this->twitter);
     }
+
+    /** @test */
+    public function it_can_add_and_render_many_metas()
+    {
+        $metas = [
+            'creator' => '@Arcanedev',
+            'url'     => 'http://www.arcanedev.net',
+        ];
+
+        $expectations = [];
+
+        foreach ($metas as $name => $content) {
+            $expectations[] = '<meta name="twitter:' . $name . '" content="' . $content . '">';
+        }
+
+        $this->twitter->addMetas($metas);
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->twitter->render());
+            $this->assertContains($expected, (string) $this->twitter);
+        }
+    }
 }

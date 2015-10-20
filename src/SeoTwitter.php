@@ -137,6 +137,20 @@ class SeoTwitter implements Contracts\SeoTwitter
     }
 
     /**
+     * Add many metas to the card.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas)
+    {
+        $this->card->addMetas($metas);
+
+        return $this;
+    }
+
+    /**
      * Add a meta to the twitter card.
      *
      * @param  string  $name

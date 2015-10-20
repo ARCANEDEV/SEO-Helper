@@ -68,6 +68,25 @@ interface SeoTwitter extends Renderable
      */
     public function addImage($url);
 
+    /**
+     * Add many metas to the card.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas);
+
+    /**
+     * Add a meta to the twitter card.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content);
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------

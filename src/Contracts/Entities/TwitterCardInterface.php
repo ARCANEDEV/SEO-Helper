@@ -59,6 +59,15 @@ interface TwitterCardInterface extends Renderable
     public function addImage($url);
 
     /**
+     * Add many metas to the card.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas);
+
+    /**
      * Add a meta to the card.
      *
      * @param  string  $name

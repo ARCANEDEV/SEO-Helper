@@ -71,6 +71,7 @@ class Card implements TwitterCardInterface
         $this->setType($this->getConfig('card', ''));
         $this->setSite($this->getConfig('site', ''));
         $this->setTitle($this->getConfig('title', ''));
+        $this->addMetas($this->getConfig('metas', []));
 
         return $this;
     }
@@ -167,6 +168,22 @@ class Card implements TwitterCardInterface
     {
         if (count($this->images) < 4) {
             $this->images[] = $url;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add many metas to the card.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas)
+    {
+        foreach ($metas as $name => $content) {
+            $this->addMeta($name, $content);
         }
 
         return $this;
