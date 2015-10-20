@@ -68,7 +68,7 @@ class Card implements TwitterCardInterface
     private function init()
     {
         $this->setPrefix($this->getConfig('prefix', 'twitter:'));
-        $this->setType($this->getConfig('card', 'summary'));
+        $this->setType($this->getConfig('card', ''));
         $this->setSite($this->getConfig('site', ''));
         $this->setTitle($this->getConfig('title', ''));
 
@@ -101,10 +101,12 @@ class Card implements TwitterCardInterface
      */
     public function setType($type)
     {
-        $this->checkType($type);
+        if ( ! empty($type)) {
+            $this->checkType($type);
 
-        $this->type = $type;
-        $this->addMeta('card', $type);
+            $this->type = $type;
+            $this->addMeta('card', $type);
+        }
 
         return $this;
     }

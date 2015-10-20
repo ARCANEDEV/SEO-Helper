@@ -75,11 +75,11 @@ class CardTest extends TestCase
      * @test
      *
      * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException
-     * @expectedExceptionMessage  The Twitter card type must be a string value, [NULL] was given.
+     * @expectedExceptionMessage  The Twitter card type must be a string value, [boolean] was given.
      */
     public function it_must_throw_invalid_twitter_card_exception_on_invalid_type()
     {
-        $this->card->setType(null);
+        $this->card->setType(true);
     }
 
     /**
@@ -97,7 +97,10 @@ class CardTest extends TestCase
     public function it_can_set_prefix()
     {
         $prefix     = 'twt:';
-        $this->card = new Card(['prefix' => $prefix]);
+        $this->card = new Card([
+            'prefix' => $prefix,
+            'card'   => 'summary',
+        ]);
 
         $expected   = '<meta name="' . $prefix . 'card" content="summary">';
 
