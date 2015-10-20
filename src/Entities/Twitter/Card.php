@@ -118,8 +118,10 @@ class Card implements TwitterCardInterface
      */
     public function setSite($site)
     {
-        $this->checkSite($site);
-        $this->addMeta('site', $site);
+        if ( ! empty($site)) {
+            $this->checkSite($site);
+            $this->addMeta('site', $site);
+        }
 
         return $this;
     }
