@@ -55,6 +55,14 @@ class AnalyticsTest extends TestCase
     }
 
     /** @test */
+    public function it_must_render_empty_on_init()
+    {
+        $this->analytics = new Analytics;
+
+        $this->assertEmpty($this->analytics->render());
+    }
+
+    /** @test */
     public function it_can_render()
     {
         $expectations = [

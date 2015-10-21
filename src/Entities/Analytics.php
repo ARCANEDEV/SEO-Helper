@@ -35,11 +35,11 @@ class Analytics implements AnalyticsInterface
     /**
      * Make an Analytics instance.
      *
-     * @param  array  $config
+     * @param  array  $configs
      */
-    public function __construct(array $config)
+    public function __construct(array $configs = [])
     {
-        $this->setConfigs($config);
+        $this->setConfigs($configs);
 
         $this->setGoogle($this->getConfig('google', ''));
     }
@@ -99,6 +99,10 @@ class Analytics implements AnalyticsInterface
      */
     private function renderGoogleScript()
     {
+        if (empty($this->google)) {
+            return '';
+        }
+
         return <<<EOT
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
