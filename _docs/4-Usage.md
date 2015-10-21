@@ -706,10 +706,59 @@ For more details, check the [Webmasters API](5-API.md#webmasters).
 
 ### Analytics
 
+For the analytics, it's very simple, with start by creating an `Analytics` object:
+
 ```php
+use Arcanedev\SeoHelper\Entities\Analytics;
+
+$analytics = new Analytics;
+
+$analytics->setGoogle('UA-12345678-9');
+
+echo $analytics->render();
 ```
 
-For more details, check the [Webmasters API](5-API.md#analytics).
+> Output:
+
+```html
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-12345678-9', 'auto');
+    ga('send', 'pageview');
+</script>
+```
+
+For the time being, **only Google Analytics is supported**, so you can set the tracking code by using `setGoogle()` method.
+
+Also, the `Analytics` constructor accepts an array as argument:
+
+```php
+use Arcanedev\SeoHelper\Entities\Analytics;
+
+$analytics = new Analytics([
+    'google' => 'UA-12345678-9',
+]);
+
+echo $analytics->render();
+```
+
+> Output:
+
+```html
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-12345678-9', 'auto');
+    ga('send', 'pageview');
+</script>
+```
+
+For more details, check the [Analytics API](5-API.md#analytics).
 
 ### Open Graph
 

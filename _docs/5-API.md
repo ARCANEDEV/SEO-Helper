@@ -232,7 +232,6 @@ interface DescriptionInterface extends Renderable
      */
     public static function make($content, $max = 155);
 }
-
 ```
 
 ### Keywords
@@ -285,6 +284,15 @@ interface KeywordsInterface extends Renderable
      * @return self
      */
     public function add($keyword);
+
+    /**
+     * Add many keywords to the content.
+     *
+     * @param  array  $keywords
+     *
+     * @return self
+     */
+    public function addMany(array $keywords);
 }
 ```
 
@@ -500,6 +508,24 @@ interface OpenGraphInterface extends Renderable
     public function setImage($image);
 
     /**
+     * Set site name property.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
+    /**
+     * Add many open graph properties.
+     *
+     * @param  array  $properties
+     *
+     * @return self
+     */
+    public function addProperties(array $properties);
+
+    /**
      * Add an open graph property.
      *
      * @param  string  $property
@@ -567,6 +593,15 @@ interface TwitterCardInterface extends Renderable
      * @return self
      */
     public function addImage($url);
+
+    /**
+     * Add many metas to the card.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas);
 
     /**
      * Add a meta to the card.
@@ -778,6 +813,15 @@ interface SeoMeta extends Renderable
      */
     public function setUrl($url);
 
+    /**
+     * Set the Google Analytics code.
+     *
+     * @param  string  $code
+     *
+     * @return self
+     */
+    public function setGoogleAnalytics($code);
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -903,6 +947,24 @@ interface SeoOpenGraph extends Renderable
     public function setImage($image);
 
     /**
+     * Set site name property.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
+    /**
+     * Add many open graph properties.
+     *
+     * @param  array  $properties
+     *
+     * @return self
+     */
+    public function addProperties(array $properties);
+
+    /**
      * Add an open graph property.
      *
      * @param  string  $property
@@ -978,6 +1040,25 @@ interface SeoTwitter extends Renderable
      * @return self
      */
     public function addImage($url);
+
+    /**
+     * Add many metas to the card.
+     *
+     * @param  array  $metas
+     *
+     * @return self
+     */
+    public function addMetas(array $metas);
+
+    /**
+     * Add a meta to the twitter card.
+     *
+     * @param  string  $name
+     * @param  string  $content
+     *
+     * @return self
+     */
+    public function addMeta($name, $content);
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
