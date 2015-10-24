@@ -92,9 +92,11 @@ class MetaTest extends TestCase
     /** @test */
     public function it_can_make_meta_with_prefix()
     {
+        $meta = Meta::make('hello', 'Hello World', 'name', 'say:');
+
         $this->assertEquals(
             '<meta name="say:hello" content="Hello World">',
-            Meta::make('hello', 'Hello World', 'say:')->render()
+            $meta->render()
         );
 
         $meta = Meta::make('hello', 'Hello World');
@@ -120,20 +122,25 @@ class MetaTest extends TestCase
     /** @test */
     public function it_can_make_meta_with_custom_name_property()
     {
+        $meta = Meta::make('title', 'Hello World', 'property', 'og:');
+
         $this->assertEquals(
             '<meta property="og:title" content="Hello World">',
-            Meta::make('title', 'Hello World', 'og:', 'property')->render()
+            $meta->render()
         );
     }
 
     /** @test */
     public function it_can_set_name_property()
     {
-        $meta = Meta::make('title', 'Hello World', 'og:');
+        $meta = Meta::make('title', 'Hello World');
+
+        $meta->setPrefix('og:');
+        $meta->setNameProperty('property');
 
         $this->assertEquals(
             '<meta property="og:title" content="Hello World">',
-            $meta->setNameProperty('property')->render()
+            $meta->render()
         );
     }
 

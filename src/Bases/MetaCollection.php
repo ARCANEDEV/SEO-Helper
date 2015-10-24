@@ -112,7 +112,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      */
     protected function addMeta($name, $content)
     {
-        $meta = Meta::make($name, $content, $this->prefix, $this->nameProperty);
+        $meta = Meta::make($name, $content, $this->nameProperty, $this->prefix);
 
         $this->put($meta->key(), $meta);
 

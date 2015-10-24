@@ -55,7 +55,7 @@ class Meta implements MetaInterface
      * @param  string  $prefix
      * @param  string  $propertyName
      */
-    public function __construct($name, $content, $prefix = '', $propertyName = 'name')
+    public function __construct($name, $content, $propertyName = 'name', $prefix = '')
     {
         $this->setPrefix($prefix);
         $this->setName($name);
@@ -174,14 +174,14 @@ class Meta implements MetaInterface
      *
      * @param  string  $name
      * @param  string  $content
-     * @param  string  $prefix
      * @param  string  $propertyName
+     * @param  string  $prefix
      *
      * @return self
      */
-    public static function make($name, $content, $prefix = '', $propertyName = 'name')
+    public static function make($name, $content, $propertyName = 'name', $prefix = '')
     {
-        return new self($name, $content, $prefix, $propertyName);
+        return new self($name, $content, $propertyName, $prefix);
     }
 
     /**
