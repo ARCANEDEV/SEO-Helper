@@ -675,10 +675,12 @@ interface MetaInterface extends Renderable
      *
      * @param  string  $name
      * @param  string  $content
+     * @param  string  $propertyName
+     * @param  string  $prefix
      *
      * @return self
      */
-    public static function make($name, $content);
+    public static function make($name, $content, $propertyName = 'name', $prefix = '');
 
     /**
      * Check if meta is valid.

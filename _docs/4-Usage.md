@@ -995,7 +995,68 @@ For more details, check the [Twitter Card API](5-API.md#twitter-card).
 
 ### Meta
 
+You can start making custom meta tags by instantiating the `Meta` class:
+
 ```php
+use Arcanedev\SeoHelper\Helpers\Meta;
+
+$meta = new Meta('copyright', 'ARCANEDEV');
+
+echo $meta->render();
+```
+
+> Output:
+
+```html
+<meta name="copyright" content="ARCANEDEV">
+```
+
+(Add description here...)
+
+```php
+use Arcanedev\SeoHelper\Helpers\Meta;
+
+$meta = new Meta('Content-Type', 'text/html; charset=UTF-8', 'http-equiv');
+
+echo $meta;
+```
+
+> Output:
+
+```html
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+```
+
+(Add description here...)
+
+```php
+use Arcanedev\SeoHelper\Helpers\Meta;
+
+$meta = new Meta('custom-name', 'meta content', 'itemprop', 'arc:');
+
+echo $meta;
+```
+
+> Output:
+
+```html
+<meta itemprop="arc:custom-name" content="meta content">
+```
+
+You can use the `make` method to create a meta object:
+
+```php
+use Arcanedev\SeoHelper\Helpers\Meta;
+
+$meta = Meta::make('custom-name', 'meta content', 'itemprop', 'arc:');
+
+echo $meta;
+```
+
+> Output:
+
+```html
+<meta itemprop="arc:custom-name" content="meta content">
 ```
 
 For more details, check the [Meta API](5-API.md#meta).
