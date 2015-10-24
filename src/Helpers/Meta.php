@@ -275,7 +275,7 @@ class Meta implements MetaInterface
         }
 
         $name    = str_slug($nameProperty);
-        $allowed = ['name', 'property'];
+        $allowed = ['charset', 'http-equiv', 'itemprop', 'name', 'property'];
 
         if ( ! in_array($name, $allowed)) {
             throw new InvalidArgumentException(

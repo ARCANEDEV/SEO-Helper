@@ -152,7 +152,7 @@ class MetaTest extends TestCase
      * @test
      *
      * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The meta name property [foo] is not supported, the allowed name properties are ['name', 'property'].
+     * @expectedExceptionMessage  The meta name property [foo] is not supported, the allowed name properties are ['charset', 'http-equiv', 'itemprop', 'name', 'property'].
      */
     public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name()
     {
