@@ -24,6 +24,7 @@
   * [Structured Data - Google](https://developers.google.com/structured-data/).
   * [Schema.org](http://schema.org/).
   * [Learn SEO and Search Marketing](https://moz.com/learn/seo).
+  * [List of Usable HTML Meta and Link Tags](https://gist.github.com/kevinSuttle/1997924)
 
 ### Webmaster Tools:
 
