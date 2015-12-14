@@ -104,4 +104,40 @@ interface SeoOpenGraph extends Renderable
      * @return self
      */
     public function addProperty($property, $content);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Enable the OpenGraph.
+     *
+     * @return self
+     */
+    public function enable();
+
+    /**
+     * Disable the OpenGraph.
+     *
+     * @return self
+     */
+    public function disable();
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Function
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if the OpenGraph is enabled.
+     *
+     * @return bool
+     */
+    public function isEnabled();
+
+    /**
+     * Check if the OpenGraph is disabled.
+     *
+     * @return bool
+     */
+    public function isDisabled();
 }

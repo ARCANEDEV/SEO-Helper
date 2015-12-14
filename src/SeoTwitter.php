@@ -24,6 +24,13 @@ class SeoTwitter implements Contracts\SeoTwitter
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Enable or Disable the Twitter Card.
+     *
+     * @var bool
+     */
+    protected $enabled;
+
+    /**
      * The Twitter Card instance.
      *
      * @var TwitterCardInterface
@@ -43,6 +50,7 @@ class SeoTwitter implements Contracts\SeoTwitter
     {
         $this->setConfigs($configs);
 
+        $this->setEnabled($this->getConfig('twitter.enabled', false));
         $this->setCard(
             new Entities\Twitter\Card($this->getConfig('twitter', []))
         );
@@ -53,7 +61,21 @@ class SeoTwitter implements Contracts\SeoTwitter
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Set the twitter card instance.
+     * Set the enabled status for the Twitter Card.
+     *
+     * @param  bool  $enabled
+     *
+     * @return self
+     */
+    private function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Set the Twitter Card instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface  $card
      *
@@ -151,7 +173,7 @@ class SeoTwitter implements Contracts\SeoTwitter
     }
 
     /**
-     * Add a meta to the twitter card.
+     * Add a meta to the Twitter Card.
      *
      * @param  string  $name
      * @param  string  $content
@@ -170,7 +192,7 @@ class SeoTwitter implements Contracts\SeoTwitter
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Reset the twitter card.
+     * Reset the Twitter Card.
      *
      * @return self
      */
@@ -188,7 +210,11 @@ class SeoTwitter implements Contracts\SeoTwitter
      */
     public function render()
     {
-        return $this->card->render();
+        if ($this->isEnabled()) {
+            return $this->card->render();
+        }
+
+        return '';
     }
 
     /**
@@ -199,5 +225,49 @@ class SeoTwitter implements Contracts\SeoTwitter
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * Enable the Twitter Card.
+     *
+     * @return self
+     */
+    public function enable()
+    {
+        return $this->setEnabled(true);
+    }
+
+    /**
+     * Disable the Twitter Card.
+     *
+     * @return self
+     */
+    public function disable()
+    {
+        return $this->setEnabled(false);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Function
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if the Twitter Card is enabled.
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Check if the Twitter Card is disabled.
+     *
+     * @return bool
+     */
+    public function isDisabled()
+    {
+        return ! $this->isEnabled();
     }
 }

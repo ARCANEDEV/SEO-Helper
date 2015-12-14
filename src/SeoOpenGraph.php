@@ -22,6 +22,13 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Enable or Disable the OpenGraph.
+     *
+     * @var bool
+     */
+    protected $enabled;
+
+    /**
      * The Open Graph instance.
      *
      * @var OpenGraphInterface
@@ -41,6 +48,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     {
         $this->setConfigs($configs);
 
+        $this->setEnabled($this->getConfig('open-graph.enabled', false));
         $this->setOpenGraph(
             new Entities\OpenGraph\Graph($this->getConfig('open-graph', []))
         );
@@ -50,6 +58,20 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Set the enabled status for the OpenGraph.
+     *
+     * @param  bool  $enabled
+     *
+     * @return self
+     */
+    private function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
     /**
      * Set the Open Graph instance.
      *
@@ -202,7 +224,11 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function render()
     {
-        return $this->openGraph->render();
+        if ($this->isEnabled()) {
+            return $this->openGraph->render();
+        }
+
+        return '';
     }
 
     /**
@@ -213,5 +239,49 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * Enable the OpenGraph.
+     *
+     * @return self
+     */
+    public function enable()
+    {
+        return $this->setEnabled(true);
+    }
+
+    /**
+     * Disable the OpenGraph.
+     *
+     * @return self
+     */
+    public function disable()
+    {
+        return $this->setEnabled(false);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Function
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if the OpenGraph is enabled.
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Check if the OpenGraph is disabled.
+     *
+     * @return bool
+     */
+    public function isDisabled()
+    {
+        return ! $this->isEnabled();
     }
 }

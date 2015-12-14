@@ -168,4 +168,72 @@ class SeoHelperTest extends TestCase
 
         $this->assertNotEmpty($output);
     }
+
+    /** @test */
+    public function it_can_enable_and_disable_open_graph()
+    {
+        $needle = '<meta property="og:';
+
+        $this->assertTrue($this->seoHelper->openGraph()->isEnabled());
+        $this->assertFalse($this->seoHelper->openGraph()->isDisabled());
+        $this->assertContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->disableOpenGraph();
+
+        $this->assertFalse($this->seoHelper->openGraph()->isEnabled());
+        $this->assertTrue($this->seoHelper->openGraph()->isDisabled());
+        $this->assertNotContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->enableOpenGraph();
+
+        $this->assertTrue($this->seoHelper->openGraph()->isEnabled());
+        $this->assertFalse($this->seoHelper->openGraph()->isDisabled());
+        $this->assertContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->openGraph()->disable();
+
+        $this->assertFalse($this->seoHelper->openGraph()->isEnabled());
+        $this->assertTrue($this->seoHelper->openGraph()->isDisabled());
+        $this->assertNotContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->openGraph()->enable();
+
+        $this->assertTrue($this->seoHelper->openGraph()->isEnabled());
+        $this->assertFalse($this->seoHelper->openGraph()->isDisabled());
+        $this->assertContains($needle, $this->seoHelper->render());
+    }
+
+    /** @test */
+    public function it_can_enable_and_disable_twitter_card()
+    {
+        $needle = '<meta name="twitter:';
+
+        $this->assertTrue($this->seoHelper->twitter()->isEnabled());
+        $this->assertFalse($this->seoHelper->twitter()->isDisabled());
+        $this->assertContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->disableTwitter();
+
+        $this->assertFalse($this->seoHelper->twitter()->isEnabled());
+        $this->assertTrue($this->seoHelper->twitter()->isDisabled());
+        $this->assertNotContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->enableTwitter();
+
+        $this->assertTrue($this->seoHelper->twitter()->isEnabled());
+        $this->assertFalse($this->seoHelper->twitter()->isDisabled());
+        $this->assertContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->twitter()->disable();
+
+        $this->assertFalse($this->seoHelper->twitter()->isEnabled());
+        $this->assertTrue($this->seoHelper->twitter()->isDisabled());
+        $this->assertNotContains($needle, $this->seoHelper->render());
+
+        $this->seoHelper->twitter()->enable();
+
+        $this->assertTrue($this->seoHelper->twitter()->isEnabled());
+        $this->assertFalse($this->seoHelper->twitter()->isDisabled());
+        $this->assertContains($needle, $this->seoHelper->render());
+    }
 }

@@ -69,10 +69,6 @@ interface SeoHelper extends Renderable
      */
     public function setSeoTwitter(SeoTwitter $seoTwitter);
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Set title.
      *
@@ -83,7 +79,6 @@ interface SeoHelper extends Renderable
      * @return self
      */
     public function setTitle($title, $siteName = null, $separator = null);
-
     /**
      * Set description.
      *
@@ -101,4 +96,36 @@ interface SeoHelper extends Renderable
      * @return self
      */
     public function setKeywords($keywords);
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Enable the OpenGraph.
+     *
+     * @return self
+     */
+    public function enableOpenGraph();
+
+    /**
+     * Disable the OpenGraph.
+     *
+     * @return self
+     */
+    public function disableOpenGraph();
+
+    /**
+     * Enable the Twitter Card.
+     *
+     * @return self
+     */
+    public function enableTwitter();
+
+    /**
+     * Disable the Twitter Card.
+     *
+     * @return self
+     */
+    public function disableTwitter();
 }
