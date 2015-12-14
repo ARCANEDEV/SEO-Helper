@@ -209,4 +209,24 @@ class SeoOpenGraphTest extends TestCase
             $this->assertContains($expected, (string) $this->seoOpenGraph);
         }
     }
+
+    /** @test */
+    public function it_can_enable_and_disable()
+    {
+        $this->assertTrue($this->seoOpenGraph->isEnabled());
+        $this->assertFalse($this->seoOpenGraph->isDisabled());
+        $this->assertNotEmpty($this->seoOpenGraph->render());
+
+        $this->seoOpenGraph->disable();
+
+        $this->assertFalse($this->seoOpenGraph->isEnabled());
+        $this->assertTrue($this->seoOpenGraph->isDisabled());
+        $this->assertEmpty($this->seoOpenGraph->render());
+
+        $this->seoOpenGraph->enable();
+
+        $this->assertTrue($this->seoOpenGraph->isEnabled());
+        $this->assertFalse($this->seoOpenGraph->isDisabled());
+        $this->assertNotEmpty($this->seoOpenGraph->render());
+    }
 }

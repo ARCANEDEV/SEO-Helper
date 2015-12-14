@@ -142,10 +142,6 @@ class SeoHelper implements Contracts\SeoHelper
         return $this;
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Set title.
      *
@@ -195,6 +191,10 @@ class SeoHelper implements Contracts\SeoHelper
         return $this;
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Render all seo tags.
      *
@@ -217,5 +217,53 @@ class SeoHelper implements Contracts\SeoHelper
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * Enable the OpenGraph.
+     *
+     * @return self
+     */
+    public function enableOpenGraph()
+    {
+        $this->openGraph()->enable();
+
+        return $this;
+    }
+
+    /**
+     * Disable the OpenGraph.
+     *
+     * @return self
+     */
+    public function disableOpenGraph()
+    {
+        $this->openGraph()->disable();
+
+        return $this;
+    }
+
+    /**
+     * Enable the Twitter Card.
+     *
+     * @return self
+     */
+    public function enableTwitter()
+    {
+        $this->twitter()->enable();
+
+        return $this;
+    }
+
+    /**
+     * Disable the Twitter Card.
+     *
+     * @return self
+     */
+    public function disableTwitter()
+    {
+        $this->twitter()->disable();
+
+        return $this;
     }
 }

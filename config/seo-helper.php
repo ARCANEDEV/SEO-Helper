@@ -63,6 +63,7 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'open-graph' => [
+        'enabled'     => true,
         'prefix'      => 'og:',
         'type'        => 'website',
         'title'       => 'Default Open Graph title',
@@ -79,11 +80,12 @@ return [
      |  Supported card types : 'app', 'gallery', 'photo', 'player', 'product', 'summary', 'summary_large_image'.
      */
     'twitter' => [
-        'prefix' => 'twitter:',
-        'card'   => 'summary',
-        'site'   => 'Username',
-        'title'  => 'Default Twitter Card title',
-        'metas'  => [
+        'enabled' => true,
+        'prefix'  => 'twitter:',
+        'card'    => 'summary',
+        'site'    => 'Username',
+        'title'   => 'Default Twitter Card title',
+        'metas'   => [
             //
         ],
     ],

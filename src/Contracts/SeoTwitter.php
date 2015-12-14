@@ -97,4 +97,36 @@ interface SeoTwitter extends Renderable
      * @return self
      */
     public function reset();
+
+    /**
+     * Enable the Twitter Card.
+     *
+     * @return self
+     */
+    public function enable();
+
+    /**
+     * Disable the Twitter Card.
+     *
+     * @return self
+     */
+    public function disable();
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Check Function
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Check if the Twitter Card is enabled.
+     *
+     * @return bool
+     */
+    public function isEnabled();
+
+    /**
+     * Check if the Twitter Card is disabled.
+     *
+     * @return bool
+     */
+    public function isDisabled();
 }
