@@ -32,9 +32,9 @@ class GraphTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->og);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

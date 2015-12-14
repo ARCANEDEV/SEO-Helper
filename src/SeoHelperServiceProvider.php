@@ -89,10 +89,10 @@ class SeoHelperServiceProvider extends ServiceProvider
 
             // Utilities
             'arcanedev.seo-helper.meta',
-            'arcanedev.seo-helper.open-graph',
-            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            'arcanedev.seo-helper.open-graph',
             \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
     }
@@ -111,7 +111,7 @@ class SeoHelperServiceProvider extends ServiceProvider
             \Arcanedev\SeoHelper\SeoHelper::class
         );
 
-        $this->app->bind(
+        $this->bind(
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
             'arcanedev.seo-helper'
         );

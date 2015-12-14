@@ -31,9 +31,9 @@ class MetaCollectionTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->metas);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

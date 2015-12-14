@@ -31,9 +31,9 @@ class UtilityServiceProviderTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->provider);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -59,10 +59,10 @@ class UtilityServiceProviderTest extends TestCase
     {
         $expected = [
             'arcanedev.seo-helper.meta',
-            'arcanedev.seo-helper.open-graph',
-            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            'arcanedev.seo-helper.open-graph',
             \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
 

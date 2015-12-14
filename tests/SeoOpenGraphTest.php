@@ -31,9 +31,9 @@ class SeoOpenGraphTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->seoOpenGraph);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

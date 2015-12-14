@@ -30,9 +30,9 @@ class SeoHelperTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->seoHelper);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

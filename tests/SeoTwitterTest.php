@@ -31,9 +31,9 @@ class SeoTwitterTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->twitter);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

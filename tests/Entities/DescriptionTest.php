@@ -32,9 +32,9 @@ class DescriptionTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->description);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

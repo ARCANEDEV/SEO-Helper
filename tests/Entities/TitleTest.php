@@ -33,6 +33,8 @@ class TitleTest extends TestCase
 
     public function tearDown()
     {
+        unset($this->title);
+
         parent::tearDown();
     }
 

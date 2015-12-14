@@ -31,9 +31,9 @@ class CardTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->card);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

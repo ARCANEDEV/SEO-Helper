@@ -35,9 +35,9 @@ class MiscTagsTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->misc);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

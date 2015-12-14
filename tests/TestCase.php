@@ -21,11 +21,6 @@ abstract class TestCase extends BaseTestCase
         $this->app->loadDeferredProviders();
     }
 
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Laravel Functions
      | ------------------------------------------------------------------------------------------------

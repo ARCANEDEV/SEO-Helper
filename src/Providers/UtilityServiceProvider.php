@@ -49,10 +49,10 @@ class UtilityServiceProvider extends ServiceProvider
     {
         return [
             'arcanedev.seo-helper.meta',
-            'arcanedev.seo-helper.open-graph',
-            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            'arcanedev.seo-helper.open-graph',
             \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            'arcanedev.seo-helper.twitter',
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
     }
@@ -67,13 +67,13 @@ class UtilityServiceProvider extends ServiceProvider
     private function registerSeoMetaService()
     {
         $this->singleton('arcanedev.seo-helper.meta', function ($app) {
-            /** @var  \Illuminate\Config\Repository  $config */
+            /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new SeoMeta($config->get('seo-helper'));
         });
 
-        $this->app->bind(
+        $this->bind(
             \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
             'arcanedev.seo-helper.meta'
         );
@@ -85,13 +85,13 @@ class UtilityServiceProvider extends ServiceProvider
     private function registerSeoOpenGraphService()
     {
         $this->singleton('arcanedev.seo-helper.open-graph', function ($app) {
-            /** @var  \Illuminate\Config\Repository  $config */
+            /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new SeoOpenGraph($config->get('seo-helper'));
         });
 
-        $this->app->bind(
+        $this->bind(
             \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             'arcanedev.seo-helper.open-graph'
         );
@@ -103,13 +103,13 @@ class UtilityServiceProvider extends ServiceProvider
     private function registerSeoTwitterService()
     {
         $this->singleton('arcanedev.seo-helper.twitter', function ($app) {
-            /** @var  \Illuminate\Config\Repository  $config */
+            /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new SeoTwitter($config->get('seo-helper'));
         });
 
-        $this->app->bind(
+        $this->bind(
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
             'arcanedev.seo-helper.twitter'
         );
