@@ -434,7 +434,7 @@ echo $tags->render();
 > Output:
 
 ```html
-<meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package">
+<meta name="copyright" content="ARCANEDEV">
 ```
 
 Ok, lets add many tags:
