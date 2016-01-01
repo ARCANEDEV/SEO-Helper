@@ -120,7 +120,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
     }
 
     /**
-     * Remove a meta from the meta collection by key.
+     * Remove a meta from the collection by key.
      *
      * @param  array|string  $names
      *
@@ -130,9 +130,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
     {
         $names = $this->prepareName($names);
 
-        $this->forget($names);
-
-        return $this;
+        return $this->forget($names);
     }
 
     /**
@@ -179,6 +177,22 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Remove an item from the collection by key.
+     *
+     * @param  string|array  $keys
+     *
+     * @return self
+     */
+    public function forget($keys)
+    {
+        foreach ((array) $keys as $key) {
+            $this->offsetUnset($key);
+        }
+
+        return $this;
+    }
+
     /**
      * Refresh meta collection items.
      */

@@ -61,7 +61,9 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
   - [x] Twitter Cards supported.
   - [x] Webmaster tools supported.
   - [x] Google Analytics supported.
+  - [x] Laravel 5.2 supported.
   - [x] Laravel 5.1 supported.
+  - [x] Laravel 5.0 supported.
 
 ## Contribution
 
