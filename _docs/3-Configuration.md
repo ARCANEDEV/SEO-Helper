@@ -51,7 +51,7 @@ After you've published the config file `config/seo-helper.php`, you can customiz
 ```php
 'misc'      => [
     'canonical' => true,
-    'robots'    => ! app()->environment('production'),
+    'robots'    => ! env('APP_DEBUG', false),
     'default'   => [
         'viewport'  => 'width=device-width, initial-scale=1',
         'author'    => '', // https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]
