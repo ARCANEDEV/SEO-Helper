@@ -55,14 +55,14 @@ class UtilityServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_provide()
+    public function it_can_provides()
     {
         $expected = [
             'arcanedev.seo-helper.meta',
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
             'arcanedev.seo-helper.open-graph',
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             'arcanedev.seo-helper.twitter',
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
 

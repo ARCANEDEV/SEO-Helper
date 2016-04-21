@@ -49,10 +49,10 @@ class UtilityServiceProvider extends ServiceProvider
     {
         return [
             'arcanedev.seo-helper.meta',
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
             'arcanedev.seo-helper.open-graph',
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             'arcanedev.seo-helper.twitter',
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
     }

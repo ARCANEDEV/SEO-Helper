@@ -70,10 +70,7 @@ class SeoHelperServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        // Publish the config file.
-        $this->publishes([
-            $this->getConfigFile() => config_path("{$this->package}.php"),
-        ], 'config');
+        $this->publishConfig();
     }
 
     /**
@@ -89,10 +86,10 @@ class SeoHelperServiceProvider extends ServiceProvider
 
             // Utilities
             'arcanedev.seo-helper.meta',
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
             'arcanedev.seo-helper.open-graph',
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             'arcanedev.seo-helper.twitter',
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
     }
