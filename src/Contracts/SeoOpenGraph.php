@@ -17,7 +17,7 @@ interface SeoOpenGraph extends Renderable
     /**
      * Set the Open Graph instance.
      *
-     * @param  OpenGraphInterface  $openGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface  $openGraph
      *
      * @return self
      */

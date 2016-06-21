@@ -15,21 +15,21 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * The SeoMeta instance.
      *
-     * @var Contracts\SeoMeta
+     * @var \Arcanedev\SeoHelper\Contracts\SeoMeta
      */
     private $seoMeta;
 
     /**
      * The SeoOpenGraph instance.
      *
-     * @var Contracts\SeoOpenGraph
+     * @var \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
     private $seoOpenGraph;
 
     /**
      * The SeoTwitter instance.
      *
-     * @var Contracts\SeoTwitter
+     * @var \Arcanedev\SeoHelper\Contracts\SeoTwitter
      */
     private $seoTwitter;
 
@@ -40,9 +40,9 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Make SeoHelper instance.
      *
-     * @param  Contracts\SeoMeta       $seoMeta
-     * @param  Contracts\SeoOpenGraph  $seoOpenGraph
-     * @param  Contracts\SeoTwitter    $seoTwitter
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta       $seoMeta
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter    $seoTwitter
      */
     public function __construct(
         Contracts\SeoMeta      $seoMeta,
@@ -61,7 +61,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Get SeoMeta instance.
      *
-     * @return Contracts\SeoMeta
+     * @return \Arcanedev\SeoHelper\Contracts\SeoMeta
      */
     public function meta()
     {
@@ -71,7 +71,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Set SeoMeta instance.
      *
-     * @param  Contracts\SeoMeta  $seoMeta
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
      *
      * @return self
      */
@@ -85,7 +85,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Get SeoOpenGraph instance.
      *
-     * @return Contracts\SeoOpenGraph
+     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
     public function openGraph()
     {
@@ -97,7 +97,7 @@ class SeoHelper implements Contracts\SeoHelper
      *
      * @see    \Arcanedev\SeoHelper\SeoHelper::openGraph()
      *
-     * @return Contracts\SeoOpenGraph
+     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
     public function og()
     {
@@ -107,7 +107,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Get SeoOpenGraph instance.
      *
-     * @param  Contracts\SeoOpenGraph  $seoOpenGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
      *
      * @return self
      */
@@ -121,7 +121,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Get SeoTwitter instance.
      *
-     * @return Contracts\SeoTwitter
+     * @return \Arcanedev\SeoHelper\Contracts\SeoTwitter
      */
     public function twitter()
     {
@@ -131,7 +131,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Set SeoTwitter instance.
      *
-     * @param  Contracts\SeoTwitter  $seoTwitter
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
      *
      * @return self
      */
@@ -164,7 +164,7 @@ class SeoHelper implements Contracts\SeoHelper
     /**
      * Set description.
      *
-     * @param  string $description
+     * @param  string  $description
      *
      * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
      */

@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -38,7 +37,7 @@ class Webmasters implements WebmastersInterface
     /**
      * The meta collection.
      *
-     * @var MetaCollectionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
      */
     protected $metas;
 

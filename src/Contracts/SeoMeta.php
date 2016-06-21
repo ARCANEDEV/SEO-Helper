@@ -15,7 +15,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Title instance.
      *
-     * @param  Entities\TitleInterface  $title
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TitleInterface  $title
      *
      * @return self
      */
@@ -24,7 +24,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Description instance.
      *
-     * @param  Entities\DescriptionInterface  $description
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface  $description
      *
      * @return self
      */
@@ -33,7 +33,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Keywords instance.
      *
-     * @param  Entities\KeywordsInterface  $keywords
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface  $keywords
      *
      * @return self
      */
@@ -42,7 +42,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the MiscTags instance.
      *
-     * @param  Entities\MiscTagsInterface  $misc
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface  $misc
      *
      * @return self
      */
@@ -51,7 +51,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Webmasters instance.
      *
-     * @param  Entities\WebmastersInterface  $webmasters
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface  $webmasters
      *
      * @return self
      */

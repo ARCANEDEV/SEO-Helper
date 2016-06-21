@@ -24,7 +24,7 @@ class Graph implements OpenGraphInterface
     /**
      * The Open Graph meta collection.
      *
-     * @var MetaCollection
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
      */
     protected $metas;
 

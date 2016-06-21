@@ -32,7 +32,7 @@ class Card implements TwitterCardInterface
     /**
      * Card meta collection.
      *
-     * @var MetaCollection
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
      */
     protected $metas;
 

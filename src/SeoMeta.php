@@ -1,11 +1,5 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\Entities\AnalyticsInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -36,42 +30,42 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * The Title instance.
      *
-     * @var TitleInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\TitleInterface
      */
     protected $title;
 
     /**
      * The Description instance.
      *
-     * @var DescriptionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface
      */
     protected $description;
 
     /**
      * The Keywords instance.
      *
-     * @var KeywordsInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface
      */
     protected $keywords;
 
     /**
      * The MiscTags instance.
      *
-     * @var MiscTagsInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface
      */
     protected $misc;
 
     /**
      * The Webmasters instance.
      *
-     * @var WebmastersInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface
      */
     protected $webmasters;
 
     /**
      * The Analytics instance.
      *
-     * @var AnalyticsInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\AnalyticsInterface
      */
     protected $analytics;
 
@@ -122,11 +116,11 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * Set the Title instance.
      *
-     * @param  Contracts\Entities\TitleInterface  $title
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TitleInterface  $title
      *
      * @return self
      */
-    public function title(TitleInterface $title)
+    public function title(Contracts\Entities\TitleInterface $title)
     {
         $this->title = $title;
 
@@ -136,12 +130,11 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * Set the Description instance.
      *
-     * @param  Contracts\Entities\DescriptionInterface  $description
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface  $description
      *
      * @return self
      */
-    public function description(DescriptionInterface $description)
-    {
+    public function description(Contracts\Entities\DescriptionInterface $description) {
         $this->description = $description;
 
         return $this;
@@ -150,11 +143,11 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * Set the Keywords instance.
      *
-     * @param  Contracts\Entities\KeywordsInterface  $keywords
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface  $keywords
      *
      * @return self
      */
-    public function keywords(KeywordsInterface $keywords)
+    public function keywords(Contracts\Entities\KeywordsInterface $keywords)
     {
         $this->keywords = $keywords;
 
@@ -164,11 +157,11 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * Set the MiscTags instance.
      *
-     * @param  Contracts\Entities\MiscTagsInterface  $misc
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface  $misc
      *
      * @return self
      */
-    public function misc(MiscTagsInterface $misc)
+    public function misc(Contracts\Entities\MiscTagsInterface $misc)
     {
         $this->misc = $misc;
 
@@ -178,11 +171,11 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * Set the Webmasters instance.
      *
-     * @param  Contracts\Entities\WebmastersInterface  $webmasters
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface  $webmasters
      *
      * @return self
      */
-    public function webmasters(WebmastersInterface $webmasters)
+    public function webmasters(Contracts\Entities\WebmastersInterface $webmasters)
     {
         $this->webmasters = $webmasters;
 
@@ -196,7 +189,7 @@ class SeoMeta implements Contracts\SeoMeta
      *
      * @return self
      */
-    private function analytics(AnalyticsInterface $analytics)
+    private function analytics(Contracts\Entities\AnalyticsInterface $analytics)
     {
         $this->analytics = $analytics;
 
