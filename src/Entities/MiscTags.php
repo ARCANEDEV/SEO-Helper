@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -32,7 +31,7 @@ class MiscTags implements MiscTagsInterface
     /**
      * Meta collection.
      *
-     * @var MetaCollectionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
      */
     protected $metas;
 

@@ -15,14 +15,14 @@ interface SeoHelper extends Renderable
     /**
      * Get SeoMeta instance.
      *
-     * @return SeoMeta
+     * @return \Arcanedev\SeoHelper\Contracts\SeoMeta
      */
     public function meta();
 
     /**
      * Set SeoMeta instance.
      *
-     * @param  SeoMeta  $seoMeta
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
      *
      * @return self
      */
@@ -31,23 +31,23 @@ interface SeoHelper extends Renderable
     /**
      * Get SeoOpenGraph instance.
      *
-     * @return SeoOpenGraph
+     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
     public function openGraph();
 
     /**
      * Get SeoOpenGraph instance (alias).
      *
-     * @see    \Arcanedev\SeoHelper\SeoHelper::openGraph()
+     * @see    \Arcanedev\SeoHelper\Contracts\SeoHelper::openGraph()
      *
-     * @return SeoOpenGraph
+     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
     public function og();
 
     /**
      * Get SeoOpenGraph instance.
      *
-     * @param  SeoOpenGraph  $seoOpenGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
      *
      * @return self
      */
@@ -56,14 +56,14 @@ interface SeoHelper extends Renderable
     /**
      * Get SeoTwitter instance.
      *
-     * @return SeoTwitter
+     * @return \Arcanedev\SeoHelper\Contracts\SeoTwitter
      */
     public function twitter();
 
     /**
      * Set SeoTwitter instance.
      *
-     * @param  SeoTwitter  $seoTwitter
+     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
      *
      * @return self
      */

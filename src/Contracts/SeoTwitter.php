@@ -17,7 +17,7 @@ interface SeoTwitter extends Renderable
     /**
      * Set the twitter card instance.
      *
-     * @param  Entities\TwitterCardInterface  $card
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface  $card
      *
      * @return self
      */
