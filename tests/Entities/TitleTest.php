@@ -270,6 +270,17 @@ class TitleTest extends TestCase
         $this->assertEquals($expected, (string) $this->title);
     }
 
+    /** @test */
+    public function it_can_render_title_with_accents()
+    {
+        $title    = 'Ce package est intuitif, exceptionnel et bien sûr opérationnel';
+        $expected = '<title>Ce package est intuitif, exceptionnel et bien s&ucirc;r op&eacute;ra...</title>';
+
+        $this->title->set($title);
+
+        $this->assertEquals($expected, $this->title->render());
+    }
+
     /**
      * @test
      *

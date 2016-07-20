@@ -3,6 +3,7 @@
 use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\Support\Traits\Configurable;
+use Illuminate\Support\Str;
 
 /**
  * Class     Title
@@ -264,15 +265,24 @@ class Title implements TitleInterface
      */
     public function render()
     {
-        $separator = empty($this->getSeparator()) ? ' ' : ' ' . $this->getSeparator() . ' ';
-
+        $separator = $this->renderSeparator();
         $output    = $this->isTitleFirst()
             ? $this->renderTitleFirst($separator)
             : $this->renderTitleLast($separator);
 
-        $output    = e(strip_tags($output));
+        $output    = Str::limit(strip_tags($output), $this->getMax());
 
-        return '<title>' . str_limit($output, $this->getMax()) . '</title>';
+        return '<title>' . e($output) . '</title>';
+    }
+
+    /**
+     * Render the separator.
+     *
+     * @return string
+     */
+    protected function renderSeparator()
+    {
+        return empty($separator = $this->getSeparator()) ? ' ' : " $separator ";
     }
 
     /**
