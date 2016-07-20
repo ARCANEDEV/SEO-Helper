@@ -4,14 +4,21 @@
 
 ## Table of contents
 
-* [Title](#title)
-* [Description](#description)
-* [Keywords](#keywords)
-* [Miscellaneous](#miscellaneous)
-* [Webmaster Tools](#webmaster-tools)
-* [Analytics](#analytics)
-* [Open Graph](#open-graph)
-* [Twitter](#twitter)
+0. [Home](0-Home.md)
+1. [Requirements](1-Requirements.md)
+2. [Installation and Setup](2-Installation-and-Setup.md)
+3. [Configuration](3-Configuration.md)
+  * [Title](#title)
+  * [Description](#description)
+  * [Keywords](#keywords)
+  * [Miscellaneous](#miscellaneous)
+  * [Webmaster Tools](#webmaster-tools)
+  * [Open Graph](#open-graph)
+  * [Twitter](#twitter)
+  * [Analytics](#analytics)
+4. [Usage](4-Usage.md)
+5. [API](5-API.md)
+6. [Extras](6-Extras.md)
 
 After you've published the config file `config/seo-helper.php`, you can customize the settings :
 
@@ -72,18 +79,11 @@ After you've published the config file `config/seo-helper.php`, you can customiz
 ],
 ```
 
-### Analytics
-
-```php
-'analytics' => [
-    'google' => '', // UA-XXXXXXXX-X
-],
-```
-
 ### Open Graph
 
 ```php
 'open-graph' => [
+    'enabled'     => true,
     'prefix'      => 'og:',
     'type'        => 'website',
     'title'       => 'Default Open Graph title',
@@ -99,12 +99,21 @@ After you've published the config file `config/seo-helper.php`, you can customiz
 
 ```php
 'twitter' => [
-    'prefix' => 'twitter:',
-    'card'   => 'summary',
-    'site'   => 'Username',
-    'title'  => 'Default Twitter Card title',
-    'metas'  => [
+    'enabled' => true,
+    'prefix'  => 'twitter:',
+    'card'    => 'summary',
+    'site'    => 'Username',
+    'title'   => 'Default Twitter Card title',
+    'metas'   => [
         //
     ],
+],
+```
+
+### Analytics
+
+```php
+'analytics' => [
+    'google' => '', // UA-XXXXXXXX-X
 ],
 ```

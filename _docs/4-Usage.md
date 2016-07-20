@@ -1,29 +1,36 @@
 # 4. Usage
 
-> **:warning: DISCLAIMER :** French speaker here ! Brace yourselves, omelette du fromage is coming.
-
 ## Table of contents
 
-1. [Entities](#1-entities)
-  * [Title](#title)
-  * [Description](#description)
-  * [Keywords](#keywords)
-  * [Miscellaneous Tags](#miscellaneous-tags)
-  * [Webmasters](#webmasters)
-  * [Analytics](#analytics)
-  * [Open Graph](#open-graph)
-  * [Twitter Card](#twitter-card)
-2. [Helpers](#2-helpers)
-  * [Meta](#meta)
-3. [Managers](#3-managers)
-  * [SEO Meta](#seo-meta)
-  * [SEO Open Graph](#seo-open-graph)
-  * [SEO Twitter Card](#seo-twitter-card)
-4. [Laravel Usage](#4-laravel-usage)
+0. [Home](0-Home.md)
+1. [Requirements](1-Requirements.md)
+2. [Installation and Setup](2-Installation-and-Setup.md)
+3. [Configuration](3-Configuration.md)
+4. [Usage](4-Usage.md)
+  1. [Entities](#1-entities)
+    * [Title](#title)
+    * [Description](#description)
+    * [Keywords](#keywords)
+    * [Miscellaneous Tags](#miscellaneous-tags)
+    * [Webmasters](#webmasters)
+    * [Analytics](#analytics)
+    * [Open Graph](#open-graph)
+    * [Twitter Card](#twitter-card)
+  2. [Helpers](#2-helpers)
+    * [Meta](#meta)
+  3. [Managers](#3-managers)
+    * [SEO Meta](#seo-meta)
+    * [SEO Open Graph](#seo-open-graph)
+    * [SEO Twitter Card](#seo-twitter-card)
+  4. [Laravel Usage](#4-laravel-usage)
+5. [API](5-API.md)
+6. [Extras](6-Extras.md)
+
+> **:warning: DISCLAIMER :** French speaker here ! Brace yourselves, omelette du fromage is coming.
 
 ## 1. Entities
 
-All the `Entities` classes are located in `Arcanedev\SeoHelper\Entities` namespace and they implements the `Arcanedev\SeoHelper\Contracts\Renderable` interface.
+All the `Entities` are located in `Arcanedev\SeoHelper\Entities` namespace and they implements the `Arcanedev\SeoHelper\Contracts\Renderable` interface.
 
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts;
@@ -48,7 +55,7 @@ interface Renderable
 
 ### Title
 
-To start, you need to make a new instance of the `Title` class.
+To start, you need to make a new instance of the `Title` class and use the `set()` method to set the title's content.
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -65,7 +72,7 @@ echo $title->render();
 <title>Your awesome title</title>
 ```
 
-If you need to add a site name to the title:
+If you need to add a site name to the title, use the `setSiteName()` method:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -83,7 +90,7 @@ echo $title->render();
 <title>Your awesome title - Company name</title>
 ```
 
-The default title separator is `-`, you can modifying it by doing this:
+The default title separator is `-`, you can modifying it by calling the `setSeparator()` method like this (the order doesn't matter):
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -102,7 +109,7 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-By the way, you can chain all these methods :
+**OH WAIT !!!** You can chain all these methods:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -121,7 +128,7 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-You can also `make` the title object:
+You can also use the `make` method to create a title object:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -137,9 +144,9 @@ echo $title->render();
 <title>Your awesome title | Company name</title>
 ```
 
-> :information_source: The **site name** and **separator** are **optionals**, you can simply do this `Title::make('Your awesome title');`.
+> :information_source: The **site name** and **separator** are **optional arguments**, you can simply do this `Title::make('Your awesome title');`.
 
-To switch the title and site name positions:
+To switch the title and site name positions, use the `setFirst()` and `setLast()` methods:
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -158,7 +165,7 @@ echo $title->render();
 
 To reset the title position, use `setFirst()` method.
 
-> :information_source: You know that the title must be optimized for the SEO, Right ?? So the optimal title length is **55** characters long.
+> :information_source: Keep in mind that the title must be optimized for the SEO, the optimal length is **55** characters long, so i make it as a default max lenght to render.
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -175,7 +182,7 @@ echo $title->render();
 <title>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</title>
 ```
 
-You can specify the maximum length by using the `setMax()` method :
+You can specify your own maximum length by using the `setMax()` method :
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
@@ -245,7 +252,7 @@ echo $description->render();
 <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum, tellus mi congue magna.">
 ```
 
-You can also specify the maximum length by using the `setMax()` method (default max is **155**):
+To specify the maximum length, use the `setMax()` method (the default max value is **155**, recommended for SEO):
 
 ```php
 use Arcanedev\SeoHelper\Entities\Description;
@@ -281,6 +288,8 @@ echo $description->render();
 ```html
 <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, sapien id interdum fermentum,...">
 ```
+
+> :information_source: The second argument `max` is optional. 
 
 And last but not least, the `Description` class constructor accepts an array as an argument:
 
@@ -357,7 +366,8 @@ $keywords = new Keywords;
 $keywords->set([
     'seo-helper', 'is', 'awesome', 'cool', 'easy', 'php', 'package'
 ]);
-$keywords->add('laravel')->add('supported');
+$keywords->add('laravel');
+$keywords->add('supported');
 
 echo $keywords->render();
 ```
@@ -367,6 +377,8 @@ echo $keywords->render();
 ```html
 <meta name="keywords" content="seo-helper, is, awesome, cool, easy, php, package, laravel, supported">
 ```
+
+> :information_source: You can chain these methods like this `$keywords->set([...])->add('...')->add('...');`.
 
 You can also pass an array as argument to the constructor:
 
@@ -1011,7 +1023,7 @@ echo $meta->render();
 <meta name="copyright" content="ARCANEDEV">
 ```
 
-(Add description here...)
+An other example with a different meta tag:
 
 ```php
 use Arcanedev\SeoHelper\Helpers\Meta;
@@ -1027,7 +1039,7 @@ echo $meta;
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 ```
 
-(Add description here...)
+You can also create your custom meta tags:
 
 ```php
 use Arcanedev\SeoHelper\Helpers\Meta;
@@ -1043,7 +1055,7 @@ echo $meta;
 <meta itemprop="arc:custom-name" content="meta content">
 ```
 
-You can use the `make` method to create a meta object:
+You can use the static method `make` to create a meta object:
 
 ```php
 use Arcanedev\SeoHelper\Helpers\Meta;
@@ -1065,23 +1077,89 @@ For more details, check the [Meta API](5-API.md#meta).
 
 ### SEO Meta
 
-```php
-```
+The SeoMeta class (`Arcanedev\SeoHelper\SeoMeta`) is a manager that gives you a total control to create all the generic or custom meta tags.
 
-For more details, check the [SEO Meta API](5-API.md#seo-meta).
+For more details about the available methods, check the [SEO Meta API](5-API.md#seo-meta).
+
+Check also the `SeoMeta` [tests for more usage examples](https://github.com/ARCANEDEV/SEO-Helper/blob/master/tests/SeoMetaTest.php).
 
 ### SEO Open Graph
 
-```php
-```
+The SeoOpenGraph class (`Arcanedev\SeoHelper\SeoOpenGraph`) is a manager that control the rendering of all the open-graph tags.
 
-For more details, check the [SEO Open Graph API](5-API.md#seo-open-graph).
+For more details about the available methods, check the [SEO Open Graph API](5-API.md#seo-open-graph).
 
-### SEO Twitter Card
+Check also the `SeoOpenGraph` [tests for more usage examples](https://github.com/ARCANEDEV/SEO-Helper/blob/master/tests/SeoOpenGraphTest.php).
 
-```php
-```
+### SEO Twitter
 
-For more details, check the [SEO Twitter Card API](5-API.md#seo-twitter-card).
+The SeoTwitter class (`Arcanedev\SeoHelper\SeoTwitter`) is a manager that control the rendering of all the twitter card tags.
+
+For more details about the available methods, check the [SEO Twitter API](5-API.md#seo-twitter-card).
+
+Check also the `SeoTwitter` [tests for more usage examples](https://github.com/ARCANEDEV/SEO-Helper/blob/master/tests/SeoTwitterTest.php).
+
+### SEO Helper
+
+The SeoHelper class (`Arcanedev\SeoHelper\SeoHelper`) is a manager that groups and control all the other managers (`SeoMeta`, `SeoOpenGraph`, `SeoTwitter`).
+
+For more details about the available methods, check the [SEO Helper API](5-API.md#seo-helper).
+
+Check also the `SeoHelper` [tests for more usage examples](https://github.com/ARCANEDEV/SEO-Helper/blob/master/tests/SeoHelperTest.php).
 
 ## 4. Laravel Usage
+
+For the laravel users (AKA `artisans`), you can use the `seo_helper()` helper inside your blade views.
+
+For example, if you want to render all the tags inside your blade view:
+
+```blade
+<head>
+    {{ seo_helper()->render() }}
+</head>
+```
+You can also do stuff like this (rendering the tags without the opengraph and twitter card):
+```blade
+<head>
+    {{ seo_helper()->meta()->render() }}
+</head>
+```
+
+There is also a `trait` (`Arcanedev\SeoHelper\Traits\Seoable`) that you can add it inside your base controller and start managing your seo tags and stuff for each page. 
+
+```php
+<?php namespace App\Http\Controllers;
+
+use Arcanedev\SeoHelper\Traits\Seoable;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+
+class Controller extends BaseController
+{
+    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests, Seoable;
+}
+```
+
+And in your homepage (for example) Controller, you can use the seo helper by calling this method `$this->seo()`:
+
+```php
+<?php namespace App\Http\Controllers;
+
+class PagesController extends Controller
+{
+    public function index()
+    {
+        $this->seo()
+             ->setTitle('My awesome title')
+             ->setDescription('My awesome description')
+             ->setKeywords(['this', 'package', 'is', 'awesome']);
+        
+        return view('home');
+    }
+}
+```
+
+The `$this->seo()` method gives you the ability to change your meta tags dynamically and on the fly, you can use the `trait` in other class like Models for example, so **BE CREATIVE**. 

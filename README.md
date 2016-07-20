@@ -26,7 +26,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel 5.1 supported.
+  * Laravel `5.0 | 5.1 | 5.2` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
@@ -38,16 +38,9 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
   5. [API](_docs/5-API.md)
   6. [Extras](_docs/6-Extras.md)
 
-## DONE
+## TODO
 
-  - [x] Framework agnostic package.
-  - [x] Open Graph supported.
-  - [x] Twitter Cards supported.
-  - [x] Webmaster tools supported.
-  - [x] Google Analytics supported.
-  - [x] Laravel 5.2 supported.
-  - [x] Laravel 5.1 supported.
-  - [x] Laravel 5.0 supported.
+  - [ ] Laravel 5.3 support.
 
 ## Contribution
 
