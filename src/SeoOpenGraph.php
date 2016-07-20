@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -8,7 +9,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoOpenGraph implements Contracts\SeoOpenGraph
+class SeoOpenGraph implements SeoOpenGraphContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -102,7 +103,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set type property.
      *
-     * @param  string $type
+     * @param  string  $type
      *
      * @return self
      */
@@ -116,7 +117,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set title property.
      *
-     * @param  string $title
+     * @param  string  $title
      *
      * @return self
      */
@@ -130,7 +131,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set description property.
      *
-     * @param  string $description
+     * @param  string  $description
      *
      * @return self
      */
@@ -144,7 +145,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set url property.
      *
-     * @param  string $url
+     * @param  string  $url
      *
      * @return self
      */
@@ -158,7 +159,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
     /**
      * Set image property.
      *
-     * @param  string $image
+     * @param  string  $image
      *
      * @return self
      */
@@ -223,11 +224,7 @@ class SeoOpenGraph implements Contracts\SeoOpenGraph
      */
     public function render()
     {
-        if ($this->isEnabled()) {
-            return $this->openGraph->render();
-        }
-
-        return '';
+        return $this->isEnabled() ? $this->openGraph->render() : '';
     }
 
     /**

@@ -214,10 +214,8 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      */
     protected function prepareName($names)
     {
-        $prepared = array_map(function ($name) {
+        return array_map(function ($name) {
             return strtolower(trim($name));
         }, (array) $names);
-
-        return $prepared;
     }
 }

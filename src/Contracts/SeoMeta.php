@@ -1,5 +1,11 @@
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
+use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface;
+
 /**
  * Interface  SeoMeta
  *
@@ -19,7 +25,7 @@ interface SeoMeta extends Renderable
      *
      * @return self
      */
-    public function title(Entities\TitleInterface $title);
+    public function title(TitleInterface $title);
 
     /**
      * Set the Description instance.
@@ -28,7 +34,7 @@ interface SeoMeta extends Renderable
      *
      * @return self
      */
-    public function description(Entities\DescriptionInterface $description);
+    public function description(DescriptionInterface $description);
 
     /**
      * Set the Keywords instance.
@@ -37,7 +43,7 @@ interface SeoMeta extends Renderable
      *
      * @return self
      */
-    public function keywords(Entities\KeywordsInterface $keywords);
+    public function keywords(KeywordsInterface $keywords);
 
     /**
      * Set the MiscTags instance.
@@ -46,7 +52,7 @@ interface SeoMeta extends Renderable
      *
      * @return self
      */
-    public function misc(Entities\MiscTagsInterface $misc);
+    public function misc(MiscTagsInterface $misc);
 
     /**
      * Set the Webmasters instance.
@@ -55,7 +61,7 @@ interface SeoMeta extends Renderable
      *
      * @return self
      */
-    public function webmasters(Entities\WebmastersInterface $webmasters);
+    public function webmasters(WebmastersInterface $webmasters);
 
     /**
      * Set the title.
