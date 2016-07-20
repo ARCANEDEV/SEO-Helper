@@ -11,10 +11,23 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface TwitterCardInterface extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
+     |  Constants
+     | ------------------------------------------------------------------------------------------------
+     */
+    const TYPE_APP                 = 'app';
+    const TYPE_GALLERY             = 'gallery';
+    const TYPE_PHOTO               = 'photo';
+    const TYPE_PLAYER              = 'player';
+    const TYPE_PRODUCT             = 'product';
+    const TYPE_SUMMARY             = 'summary';
+    const TYPE_SUMMARY_LARGE_IMAGE = 'summary_large_image';
+
+    /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Set the card type.
      *
      * @param  string  $type
      *
@@ -76,6 +89,13 @@ interface TwitterCardInterface extends Renderable
      * @return self
      */
     public function addMeta($name, $content);
+
+    /**
+     * Get all supported card types.
+     *
+     * @return array
+     */
+    public function types();
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

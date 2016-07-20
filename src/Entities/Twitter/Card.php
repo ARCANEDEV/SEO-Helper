@@ -27,7 +27,7 @@ class Card implements TwitterCardInterface
      *
      * @var string
      */
-    protected $type   = 'summary';
+    protected $type;
 
     /**
      * Card meta collection.
@@ -55,7 +55,7 @@ class Card implements TwitterCardInterface
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-        $this->metas   = new MetaCollection;
+        $this->metas = new MetaCollection;
 
         $this->init();
     }
@@ -68,7 +68,7 @@ class Card implements TwitterCardInterface
     private function init()
     {
         $this->setPrefix($this->getConfig('prefix', 'twitter:'));
-        $this->setType($this->getConfig('card', ''));
+        $this->setType($this->getConfig('card', static::TYPE_SUMMARY));
         $this->setSite($this->getConfig('site', ''));
         $this->setTitle($this->getConfig('title', ''));
         $this->addMetas($this->getConfig('metas', []));
@@ -95,6 +95,7 @@ class Card implements TwitterCardInterface
     }
 
     /**
+     * Set the card type.
      *
      * @param  string  $type
      *
@@ -204,6 +205,24 @@ class Card implements TwitterCardInterface
         return $this;
     }
 
+    /**
+     * Get all supported card types.
+     *
+     * @return array
+     */
+    public function types()
+    {
+        return [
+            static::TYPE_APP,
+            static::TYPE_GALLERY,
+            static::TYPE_PHOTO,
+            static::TYPE_PLAYER,
+            static::TYPE_PRODUCT,
+            static::TYPE_SUMMARY,
+            static::TYPE_SUMMARY_LARGE_IMAGE,
+        ];
+    }
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
@@ -266,20 +285,6 @@ class Card implements TwitterCardInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Check if type is supported.
-     *
-     * @param  string  $type
-     *
-     * @return bool
-     */
-    private function isSupportedType($type)
-    {
-        return in_array($type, [
-            'app', 'gallery', 'photo', 'player', 'product', 'summary', 'summary_large_image'
-        ]);
-    }
-
-    /**
      * Check the card type.
      *
      * @param  string  $type
@@ -296,7 +301,7 @@ class Card implements TwitterCardInterface
 
         $type = strtolower(trim($type));
 
-        if ( ! $this->isSupportedType($type)) {
+        if ( ! in_array($type, $this->types())) {
             throw new InvalidTwitterCardException(
                 "The Twitter card type [$type] is not supported."
             );
