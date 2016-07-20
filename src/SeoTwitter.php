@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -10,7 +11,7 @@ use Arcanedev\Support\Traits\Configurable;
  *
  * @link     https://dev.twitter.com/cards/overview
  */
-class SeoTwitter implements Contracts\SeoTwitter
+class SeoTwitter implements SeoTwitterContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -68,7 +69,7 @@ class SeoTwitter implements Contracts\SeoTwitter
      */
     private function setEnabled($enabled)
     {
-        $this->enabled = $enabled;
+        $this->enabled = (bool) $enabled;
 
         return $this;
     }
@@ -209,11 +210,7 @@ class SeoTwitter implements Contracts\SeoTwitter
      */
     public function render()
     {
-        if ($this->isEnabled()) {
-            return $this->card->render();
-        }
-
-        return '';
+        return $this->isEnabled() ? $this->card->render() : '';
     }
 
     /**

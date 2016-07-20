@@ -1,12 +1,17 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
+
 /**
  * Class     SeoHelper
  *
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoHelper implements Contracts\SeoHelper
+class SeoHelper implements SeoHelperContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -45,9 +50,9 @@ class SeoHelper implements Contracts\SeoHelper
      * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter    $seoTwitter
      */
     public function __construct(
-        Contracts\SeoMeta      $seoMeta,
-        Contracts\SeoOpenGraph $seoOpenGraph,
-        Contracts\SeoTwitter   $seoTwitter
+        SeoMetaContract      $seoMeta,
+        SeoOpenGraphContract $seoOpenGraph,
+        SeoTwitterContract   $seoTwitter
     ) {
         $this->setSeoMeta($seoMeta);
         $this->setSeoOpenGraph($seoOpenGraph);
@@ -75,7 +80,7 @@ class SeoHelper implements Contracts\SeoHelper
      *
      * @return self
      */
-    public function setSeoMeta(Contracts\SeoMeta $seoMeta)
+    public function setSeoMeta(SeoMetaContract $seoMeta)
     {
         $this->seoMeta = $seoMeta;
 
@@ -111,7 +116,7 @@ class SeoHelper implements Contracts\SeoHelper
      *
      * @return self
      */
-    public function setSeoOpenGraph(Contracts\SeoOpenGraph $seoOpenGraph)
+    public function setSeoOpenGraph(SeoOpenGraphContract $seoOpenGraph)
     {
         $this->seoOpenGraph = $seoOpenGraph;
 
@@ -135,7 +140,7 @@ class SeoHelper implements Contracts\SeoHelper
      *
      * @return self
      */
-    public function setSeoTwitter(Contracts\SeoTwitter $seoTwitter)
+    public function setSeoTwitter(SeoTwitterContract $seoTwitter)
     {
         $this->seoTwitter = $seoTwitter;
 

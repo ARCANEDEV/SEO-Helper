@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -8,7 +9,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoMeta implements Contracts\SeoMeta
+class SeoMeta implements SeoMetaContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -185,7 +186,7 @@ class SeoMeta implements Contracts\SeoMeta
     /**
      * Set the Analytics instance.
      *
-     * @param  Contracts\Entities\AnalyticsInterface  $analytics
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\AnalyticsInterface  $analytics
      *
      * @return self
      */
