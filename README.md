@@ -22,7 +22,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
   * Framework agnostic package.
   * Open Graph &amp; Twitter Cards are supported.
   * Webmaster tools site verifier tags are supported.
-  * Google Analytics tracking is supported.
+  * Google Analytics tracking code is supported.
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
@@ -40,7 +40,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
 
 ## TODO
 
-  - [ ] Laravel 5.3 support.
+  - [ ] Laravel `5.3` support.
 
 ## Contribution
 

@@ -7,7 +7,7 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
   * Framework agnostic package.
   * Open Graph &amp; Twitter Cards are supported.
   * Webmaster tools site verifier tags are supported.
-  * Google Analytics tracking is supported.
+  * Google Analytics tracking code is supported.
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
