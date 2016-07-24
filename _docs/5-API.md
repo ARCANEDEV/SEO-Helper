@@ -1,24 +1,33 @@
 # 5. API
 
+> **:warning: DISCLAIMER :** French speaker here ! Brace yourselves, omelette du fromage is coming.
+
 ## Table of contents
 
-1. [Contracts](#1-contracts)
-  * [Renderable](#renderable)
-2. [Entities](#2-entities)
-  * [Title](#title)
-  * [Description](#description)
-  * [Keywords](#keywords)
-  * [Miscellaneous Tags](#miscellaneous-tags)
-  * [Webmasters](#webmasters)
-  * [Analytics](#analytics)
-  * [Open Graph](#open-graph)
-  * [Twitter Card](#twitter-card)
-3. [Helpers](#3-helpers)
-  * [Meta](#meta)
-3. [Managers](#3-manager)
-  * [SEO Meta](#seo-meta)
-  * [SEO Open Graph](#seo-open-graph)
-  * [SEO Twitter Card](#seo-twitter-card)
+0. [Home](0-Home.md)
+1. [Requirements](1-Requirements.md)
+2. [Installation and Setup](2-Installation-and-Setup.md)
+3. [Configuration](3-Configuration.md)
+4. [Usage](4-Usage.md)
+  1. [Contracts](#1-contracts)
+    * [Renderable](#renderable)
+  2. [Entities](#2-entities)
+    * [Title](#title)
+    * [Description](#description)
+    * [Keywords](#keywords)
+    * [Miscellaneous Tags](#miscellaneous-tags)
+    * [Webmasters](#webmasters)
+    * [Analytics](#analytics)
+    * [Open Graph](#open-graph)
+    * [Twitter Card](#twitter-card)
+  3. [Helpers](#3-helpers)
+    * [Meta](#meta)
+  4. [Managers](#3-manager)
+    * [SEO Meta](#seo-meta)
+    * [SEO Open Graph](#seo-open-graph)
+    * [SEO Twitter Card](#seo-twitter-card)
+  5. [API](5-API.md)
+  6. [Extras](6-Extras.md)
 
 ## 1. Contracts
 
@@ -51,7 +60,7 @@ interface Renderable
 
 ## 2. Entities
 
-### Title
+### Title 
 
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts\Entities;
@@ -544,13 +553,32 @@ interface OpenGraphInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
+/**
+ * Interface  TwitterCardInterface
+ *
+ * @package   Arcanedev\SeoHelper\Contracts\Entities\Twitter
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 interface TwitterCardInterface extends Renderable
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Constants
+     | ------------------------------------------------------------------------------------------------
+     */
+    const TYPE_APP                 = 'app';
+    const TYPE_GALLERY             = 'gallery';
+    const TYPE_PHOTO               = 'photo';
+    const TYPE_PLAYER              = 'player';
+    const TYPE_PRODUCT             = 'product';
+    const TYPE_SUMMARY             = 'summary';
+    const TYPE_SUMMARY_LARGE_IMAGE = 'summary_large_image';
+
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Set the card type.
      *
      * @param  string  $type
      *
@@ -612,6 +640,13 @@ interface TwitterCardInterface extends Renderable
      * @return self
      */
     public function addMeta($name, $content);
+
+    /**
+     * Get all supported card types.
+     *
+     * @return array
+     */
+    public function types();
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -698,6 +733,12 @@ interface MetaInterface extends Renderable
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
+/**
+ * Interface  SeoMeta
+ *
+ * @package   Arcanedev\SeoHelper\Contracts
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 interface SeoMeta extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
@@ -707,7 +748,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Title instance.
      *
-     * @param  TitleInterface  $title
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TitleInterface  $title
      *
      * @return self
      */
@@ -716,7 +757,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Description instance.
      *
-     * @param  DescriptionInterface  $description
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface  $description
      *
      * @return self
      */
@@ -725,7 +766,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Keywords instance.
      *
-     * @param  KeywordsInterface  $keywords
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface  $keywords
      *
      * @return self
      */
@@ -734,7 +775,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the MiscTags instance.
      *
-     * @param  MiscTagsInterface  $misc
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface  $misc
      *
      * @return self
      */
@@ -743,7 +784,7 @@ interface SeoMeta extends Renderable
     /**
      * Set the Webmasters instance.
      *
-     * @param  WebmastersInterface  $webmasters
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface  $webmasters
      *
      * @return self
      */

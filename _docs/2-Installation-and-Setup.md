@@ -1,5 +1,15 @@
 # 2. Installation
 
+## Table of contents
+
+0. [Home](0-Home.md)
+1. [Requirements](1-Requirements.md)
+2. [Installation and Setup](2-Installation-and-Setup.md)
+3. [Configuration](3-Configuration.md)
+4. [Usage](4-Usage.md)
+5. [API](5-API.md)
+6. [Extras](6-Extras.md)
+
 ## Composer
 
 You can install this package via [Composer](http://getcomposer.org/) by running this command: `composer require arcanedev/seo-helper`.
@@ -31,7 +41,7 @@ Once the package is installed, you can register the service provider in `config/
 ],
 ```
 
-And for the Facades:
+(**Optional**) And for the Facades:
 
 ```php
 // config/app.php
