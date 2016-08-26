@@ -3,12 +3,12 @@
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  WebmastersInterface
+ * Interface  Webmasters
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface WebmastersInterface extends Renderable
+interface Webmasters extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

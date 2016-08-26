@@ -45,7 +45,7 @@ class MetaCollectionTest extends TestCase
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\MetaCollection::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection::class,
             \Arcanedev\Support\Collection::class,
             \Illuminate\Support\Collection::class,
         ];

@@ -46,7 +46,7 @@ class GraphTest extends TestCase
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\OpenGraph\Graph::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 

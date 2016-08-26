@@ -3,12 +3,12 @@
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  OpenGraphInterface
+ * Interface  OpenGraph
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface OpenGraphInterface extends Renderable
+interface OpenGraph extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters

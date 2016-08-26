@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Helpers;
 
-use Arcanedev\SeoHelper\Contracts\Helpers\MetaInterface;
+use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Meta implements MetaInterface
+class Meta implements MetaContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -82,7 +82,7 @@ class Meta implements MetaInterface
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
     public function setPrefix($prefix)
     {
@@ -96,7 +96,7 @@ class Meta implements MetaInterface
      *
      * @param  string  $nameProperty
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
     public function setNameProperty($nameProperty)
     {
@@ -129,7 +129,7 @@ class Meta implements MetaInterface
      *
      * @param  string  $name
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
     private function setName($name)
     {
@@ -154,7 +154,7 @@ class Meta implements MetaInterface
      *
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
     private function setContent($content)
     {
@@ -177,7 +177,7 @@ class Meta implements MetaInterface
      * @param  string  $propertyName
      * @param  string  $prefix
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
     public static function make($name, $content, $propertyName = 'name', $prefix = '')
     {

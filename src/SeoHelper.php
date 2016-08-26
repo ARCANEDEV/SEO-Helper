@@ -2,8 +2,8 @@
 
 use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
-use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 
 /**
  * Class     SeoHelper
@@ -78,7 +78,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function setSeoMeta(SeoMetaContract $seoMeta)
     {
@@ -100,7 +100,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Get SeoOpenGraph instance (alias).
      *
-     * @see    \Arcanedev\SeoHelper\SeoHelper::openGraph()
+     * @see openGraph()
      *
      * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
@@ -114,7 +114,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function setSeoOpenGraph(SeoOpenGraphContract $seoOpenGraph)
     {
@@ -138,7 +138,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function setSeoTwitter(SeoTwitterContract $seoTwitter)
     {
@@ -154,7 +154,7 @@ class SeoHelper implements SeoHelperContract
      * @param  string|null  $siteName
      * @param  string|null  $separator
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function setTitle($title, $siteName = null, $separator = null)
     {
@@ -187,7 +187,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @param  array|string  $keywords
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function setKeywords($keywords)
     {
@@ -227,7 +227,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Enable the OpenGraph.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function enableOpenGraph()
     {
@@ -239,7 +239,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Disable the OpenGraph.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function disableOpenGraph()
     {
@@ -251,7 +251,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Enable the Twitter Card.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function enableTwitter()
     {
@@ -263,7 +263,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Disable the Twitter Card.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
     public function disableTwitter()
     {

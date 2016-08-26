@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\AnalyticsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Analytics implements AnalyticsInterface
+class Analytics implements AnalyticsContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -53,7 +53,7 @@ class Analytics implements AnalyticsInterface
      *
      * @param  string  $code
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Analytics
      */
     public function setGoogle($code)
     {

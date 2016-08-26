@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities\OpenGraph;
 
-use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Graph implements OpenGraphInterface
+class Graph implements OpenGraphContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -24,7 +24,7 @@ class Graph implements OpenGraphInterface
     /**
      * The Open Graph meta collection.
      *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
     protected $metas;
 
@@ -67,7 +67,7 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setPrefix($prefix)
     {
@@ -81,13 +81,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $type
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setType($type)
     {
-        $this->addProperty('type', $type);
-
-        return $this;
+        return $this->addProperty('type', $type);
     }
 
     /**
@@ -95,13 +93,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $title
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setTitle($title)
     {
-        $this->addProperty('title', $title);
-
-        return $this;
+        return $this->addProperty('title', $title);
     }
 
     /**
@@ -109,13 +105,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $description
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setDescription($description)
     {
-        $this->addProperty('description', $description);
-
-        return $this;
+        return $this->addProperty('description', $description);
     }
 
     /**
@@ -123,13 +117,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $url
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setUrl($url)
     {
-        $this->addProperty('url', $url);
-
-        return $this;
+        return $this->addProperty('url', $url);
     }
 
     /**
@@ -137,13 +129,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $image
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setImage($image)
     {
-        $this->addProperty('image', $image);
-
-        return $this;
+        return $this->addProperty('image', $image);
     }
 
     /**
@@ -151,13 +141,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function setSiteName($siteName)
     {
-        $this->addProperty('site_name', $siteName);
-
-        return $this;
+        return $this->addProperty('site_name', $siteName);
     }
 
     /**
@@ -165,13 +153,11 @@ class Graph implements OpenGraphInterface
      *
      * @param  array  $properties
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function addProperties(array $properties)
     {
-        foreach ($properties as $property => $content) {
-            $this->metas->add($property, $content);
-        }
+        $this->metas->addMany($properties);
 
         return $this;
     }
@@ -182,7 +168,7 @@ class Graph implements OpenGraphInterface
      * @param  string  $property
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */
     public function addProperty($property, $content)
     {

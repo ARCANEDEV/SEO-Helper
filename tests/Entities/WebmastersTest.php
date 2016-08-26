@@ -46,7 +46,7 @@ class WebmastersTest extends TestCase
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Webmasters::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Webmasters::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
         ];
 

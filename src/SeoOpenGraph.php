@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -31,7 +32,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
     /**
      * The Open Graph instance.
      *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph
      */
     protected $openGraph;
 
@@ -63,7 +64,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  bool  $enabled
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     private function setEnabled($enabled)
     {
@@ -75,11 +76,11 @@ class SeoOpenGraph implements SeoOpenGraphContract
     /**
      * Set the Open Graph instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface  $openGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph  $openGraph
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
-    public function setOpenGraph(Contracts\Entities\OpenGraphInterface $openGraph)
+    public function setOpenGraph(OpenGraphContract $openGraph)
     {
         $this->openGraph = $openGraph;
 
@@ -91,7 +92,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setPrefix($prefix)
     {
@@ -105,7 +106,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $type
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setType($type)
     {
@@ -119,7 +120,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $title
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setTitle($title)
     {
@@ -133,7 +134,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $description
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setDescription($description)
     {
@@ -147,7 +148,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $url
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setUrl($url)
     {
@@ -161,7 +162,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $image
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setImage($image)
     {
@@ -175,7 +176,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function setSiteName($siteName)
     {
@@ -189,7 +190,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      *
      * @param  array  $properties
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function addProperties(array $properties)
     {
@@ -204,7 +205,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      * @param  string  $property
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function addProperty($property, $content)
     {
@@ -240,7 +241,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
     /**
      * Enable the OpenGraph.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function enable()
     {
@@ -250,7 +251,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
     /**
      * Disable the OpenGraph.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
      */
     public function disable()
     {

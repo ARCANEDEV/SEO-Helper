@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
-use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 
 /**
  * Interface  SeoOpenGraph
@@ -17,11 +17,11 @@ interface SeoOpenGraph extends Renderable
     /**
      * Set the Open Graph instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface  $openGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph  $openGraph
      *
      * @return self
      */
-    public function setOpenGraph(OpenGraphInterface $openGraph);
+    public function setOpenGraph(OpenGraphContract $openGraph);
 
     /**
      * Set the open graph prefix.

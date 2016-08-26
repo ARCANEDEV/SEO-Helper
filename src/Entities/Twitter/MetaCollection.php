@@ -20,21 +20,4 @@ class MetaCollection extends BaseMetaCollection
      * @var string
      */
     protected $prefix = 'twitter:';
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Add a meta to collection.
-     *
-     * @param  string  $name
-     * @param  string  $content
-     *
-     * @return self
-     */
-    public function add($name, $content)
-    {
-        parent::add($name, $content);
-    }
 }

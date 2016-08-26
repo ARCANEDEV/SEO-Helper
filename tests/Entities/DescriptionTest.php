@@ -47,7 +47,7 @@ class DescriptionTest extends TestCase
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Description::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Description::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -63,7 +63,7 @@ class DescriptionTest extends TestCase
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Description::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Description::class,
         ];
 
         foreach ($expectations as $expected) {

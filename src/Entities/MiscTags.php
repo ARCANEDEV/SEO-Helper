@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class MiscTags implements MiscTagsInterface
+class MiscTags implements MiscTagsContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -31,7 +31,7 @@ class MiscTags implements MiscTagsInterface
     /**
      * Meta collection.
      *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
     protected $metas;
 
@@ -81,7 +81,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @param  string  $url
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     public function setUrl($url)
     {
@@ -100,7 +100,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @param  array  $defaults
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     public static function make(array $defaults = [])
     {
@@ -115,7 +115,7 @@ class MiscTags implements MiscTagsInterface
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     public function add($name, $content)
     {
@@ -129,7 +129,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     public function addMany(array $metas)
     {
@@ -143,7 +143,7 @@ class MiscTags implements MiscTagsInterface
      *
      * @param  array|string  $names
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     public function remove($names)
     {
@@ -155,7 +155,7 @@ class MiscTags implements MiscTagsInterface
     /**
      * Reset the meta collection.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     public function reset()
     {
@@ -225,7 +225,7 @@ class MiscTags implements MiscTagsInterface
     /**
      * Add the robots meta.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     private function addRobotsMeta()
     {
@@ -239,12 +239,14 @@ class MiscTags implements MiscTagsInterface
     /**
      * Add the canonical link.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
     private function addCanonical()
     {
         if ($this->isCanonicalEnabled() && $this->hasUrl()) {
             $this->add('canonical', $this->currentUrl);
         }
+
+        return $this;
     }
 }

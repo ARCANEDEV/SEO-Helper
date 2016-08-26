@@ -1,9 +1,9 @@
 {
     "name":        "arcanedev/seo-helper",
-    "description": "SEO Helper is a package for Laravel 5 that provides tools and helpers for SEO.",
+    "description": "SEO Helper is a framework agnostic package that provides tools & helpers for SEO (Laravel supported).",
     "keywords": [
-        "laravel", "seo", "google", "bing", "alexa", "yandex", "webmaster",
-        "twitter", "opengraph", "og", "opengraph protocol", "helper"
+        "laravel", "seo", "google", "bing", "alexa", "yandex", "webmaster", "helper",
+        "title", "description", "keywords", "metas", "tags", "twitter", "opengraph", "og"
     ],
     "homepage": "https://github.com/ARCANEDEV/SEO-Helper",
     "authors": [
@@ -17,7 +17,7 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php":               ">=5.5.9",
+        "php":               ">=5.6",
         "arcanedev/support": "~3.0"
     },
     "require-dev": {

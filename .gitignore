@@ -1,6 +1,4 @@
-/.idea/
-/_arcanedev/
 /build/
 /vendor/
-composer.lock
-composer.phar
+/composer.lock
+/composer.phar

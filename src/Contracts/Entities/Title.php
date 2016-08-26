@@ -3,12 +3,12 @@
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  TitleInterface
+ * Interface  Title
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface TitleInterface extends Renderable
+interface Title extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
