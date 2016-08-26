@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -10,7 +10,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Keywords implements KeywordsInterface
+class Keywords implements KeywordsContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits

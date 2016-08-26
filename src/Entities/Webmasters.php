@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -9,7 +9,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Webmasters implements WebmastersInterface
+class Webmasters implements WebmastersContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -37,7 +37,7 @@ class Webmasters implements WebmastersInterface
     /**
      * The meta collection.
      *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
     protected $metas;
 
@@ -97,7 +97,7 @@ class Webmasters implements WebmastersInterface
      *
      * @param  array  $webmasters
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Webmasters
      */
     public static function make(array $webmasters = [])
     {
@@ -110,7 +110,7 @@ class Webmasters implements WebmastersInterface
      * @param  string  $webmaster
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Webmasters
      */
     public function add($webmaster, $content)
     {
@@ -124,7 +124,7 @@ class Webmasters implements WebmastersInterface
     /**
      * Reset the webmaster collection.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Webmasters
      */
     public function reset()
     {

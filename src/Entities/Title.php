@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\Support\Traits\Configurable;
 use Illuminate\Support\Str;
@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Title implements TitleInterface
+class Title implements TitleContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -28,35 +28,35 @@ class Title implements TitleInterface
      *
      * @var string
      */
-    protected $title        = '';
+    protected $title      = '';
 
     /**
      * The site name.
      *
      * @var string
      */
-    protected $siteName     = '';
+    protected $siteName   = '';
 
     /**
      * The title separator.
      *
      * @var string
      */
-    protected $separator    = '-';
+    protected $separator  = '-';
 
     /**
      * Display the title first.
      *
      * @var bool
      */
-    protected $titleFirst   = true;
+    protected $titleFirst = true;
 
     /**
      * The maximum title length.
      *
      * @var int
      */
-    protected $max          = 55;
+    protected $max        = 55;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -71,9 +71,7 @@ class Title implements TitleInterface
     {
         $this->setConfigs($configs);
 
-        if ( ! empty($configs)) {
-            $this->init();
-        }
+        if ( ! empty($configs)) $this->init();
     }
 
     /**
@@ -107,7 +105,7 @@ class Title implements TitleInterface
      *
      * @param  string  $title
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public function set($title)
     {
@@ -132,7 +130,7 @@ class Title implements TitleInterface
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public function setSiteName($siteName)
     {
@@ -156,7 +154,7 @@ class Title implements TitleInterface
      *
      * @param  string  $separator
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public function setSeparator($separator)
     {
@@ -168,7 +166,7 @@ class Title implements TitleInterface
     /**
      * Set title first.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public function setFirst()
     {
@@ -178,7 +176,7 @@ class Title implements TitleInterface
     /**
      * Set title last.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public function setLast()
     {
@@ -190,7 +188,7 @@ class Title implements TitleInterface
      *
      * @param  bool  $first
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     private function switchPosition($first)
     {
@@ -224,7 +222,7 @@ class Title implements TitleInterface
      *
      * @param  int  $max
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public function setMax($max)
     {
@@ -246,7 +244,7 @@ class Title implements TitleInterface
      * @param  string  $siteName
      * @param  string  $separator
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Title
      */
     public static function make($title, $siteName = '', $separator = '-')
     {
@@ -311,17 +309,13 @@ class Title implements TitleInterface
         if ( ! is_string($title)) {
             $type = gettype($title);
 
-            throw new InvalidArgumentException(
-                "The title must be a string value, [$type] is given."
-            );
+            throw new InvalidArgumentException("The title must be a string value, [$type] is given.");
         }
 
         $title = trim($title);
 
         if (empty($title)) {
-            throw new InvalidArgumentException(
-                'The title is required and must not be empty.'
-            );
+            throw new InvalidArgumentException('The title is required and must not be empty.');
         }
     }
 
@@ -335,15 +329,11 @@ class Title implements TitleInterface
     private function checkMax($max)
     {
         if ( ! is_int($max)) {
-            throw new InvalidArgumentException(
-                'The title maximum lenght must be integer.'
-            );
+            throw new InvalidArgumentException('The title maximum lenght must be integer.');
         }
 
         if ($max <= 0) {
-            throw new InvalidArgumentException(
-                'The title maximum lenght must be greater 0.'
-            );
+            throw new InvalidArgumentException('The title maximum lenght must be greater 0.');
         }
     }
 

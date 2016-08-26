@@ -34,7 +34,7 @@ class MetaCollection extends BaseMetaCollection
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\MetaCollection
      */
     public function add($name, $content)
     {

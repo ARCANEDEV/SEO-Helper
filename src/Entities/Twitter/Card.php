@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities\Twitter;
 
-use Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -10,7 +10,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities\Twitter
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Card implements TwitterCardInterface
+class Card implements CardContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
@@ -32,7 +32,7 @@ class Card implements TwitterCardInterface
     /**
      * Card meta collection.
      *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
     protected $metas;
 
@@ -63,7 +63,7 @@ class Card implements TwitterCardInterface
     /**
      * Start the engine.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     private function init()
     {
@@ -85,7 +85,7 @@ class Card implements TwitterCardInterface
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     private function setPrefix($prefix)
     {
@@ -99,18 +99,16 @@ class Card implements TwitterCardInterface
      *
      * @param  string  $type
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function setType($type)
     {
-        if ( ! empty($type)) {
-            $this->checkType($type);
+        if (empty($type)) return $this;
 
-            $this->type = $type;
-            $this->addMeta('card', $type);
-        }
+        $this->checkType($type);
+        $this->type = $type;
 
-        return $this;
+        return $this->addMeta('card', $type);
     }
 
     /**
@@ -118,16 +116,15 @@ class Card implements TwitterCardInterface
      *
      * @param  string  $site
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function setSite($site)
     {
-        if ( ! empty($site)) {
-            $this->checkSite($site);
-            $this->addMeta('site', $site);
-        }
+        if (empty($site)) return $this;
 
-        return $this;
+        $this->checkSite($site);
+
+        return $this->addMeta('site', $site);
     }
 
     /**
@@ -135,13 +132,11 @@ class Card implements TwitterCardInterface
      *
      * @param  string  $title
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function setTitle($title)
     {
-        $this->addMeta('title', $title);
-
-        return $this;
+        return $this->addMeta('title', $title);
     }
 
     /**
@@ -149,13 +144,11 @@ class Card implements TwitterCardInterface
      *
      * @param  string  $description
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function setDescription($description)
     {
-        $this->addMeta('description', $description);
-
-        return $this;
+        return $this->addMeta('description', $description);
     }
 
     /**
@@ -163,7 +156,7 @@ class Card implements TwitterCardInterface
      *
      * @param  string  $url
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function addImage($url)
     {
@@ -179,13 +172,11 @@ class Card implements TwitterCardInterface
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function addMetas(array $metas)
     {
-        foreach ($metas as $name => $content) {
-            $this->addMeta($name, $content);
-        }
+        $this->metas->addMany($metas);
 
         return $this;
     }
@@ -196,7 +187,7 @@ class Card implements TwitterCardInterface
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function addMeta($name, $content)
     {
@@ -246,7 +237,7 @@ class Card implements TwitterCardInterface
     /**
      * Reset the card.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */
     public function reset()
     {
@@ -302,9 +293,7 @@ class Card implements TwitterCardInterface
         $type = strtolower(trim($type));
 
         if ( ! in_array($type, $this->types())) {
-            throw new InvalidTwitterCardException(
-                "The Twitter card type [$type] is not supported."
-            );
+            throw new InvalidTwitterCardException("The Twitter card type [$type] is not supported.");
         }
     }
 

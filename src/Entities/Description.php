@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Traits\Configurable;
@@ -11,7 +11,7 @@ use Arcanedev\Support\Traits\Configurable;
  * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Description implements DescriptionInterface
+class Description implements DescriptionContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits
