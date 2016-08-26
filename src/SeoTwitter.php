@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -33,7 +34,7 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * The Twitter Card instance.
      *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface
+     * @var \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard
      */
     protected $card;
 
@@ -65,7 +66,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  bool  $enabled
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     private function setEnabled($enabled)
     {
@@ -77,11 +78,11 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Set the Twitter Card instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCardInterface  $card
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard  $card
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
-    public function setCard(Contracts\Entities\TwitterCardInterface $card)
+    public function setCard(CardContract $card)
     {
         $this->card = $card;
 
@@ -93,7 +94,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  string  $type
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function setType($type)
     {
@@ -107,7 +108,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  string  $site
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function setSite($site)
     {
@@ -121,7 +122,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  string  $title
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function setTitle($title)
     {
@@ -135,7 +136,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  string  $description
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function setDescription($description)
     {
@@ -149,7 +150,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  string  $url
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function addImage($url)
     {
@@ -163,7 +164,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function addMetas(array $metas)
     {
@@ -178,7 +179,7 @@ class SeoTwitter implements SeoTwitterContract
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function addMeta($name, $content)
     {
@@ -194,7 +195,7 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Reset the Twitter Card.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function reset()
     {
@@ -226,7 +227,7 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Enable the Twitter Card.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function enable()
     {
@@ -236,7 +237,7 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Disable the Twitter Card.
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoTwitter
      */
     public function disable()
     {
