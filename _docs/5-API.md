@@ -67,7 +67,7 @@ interface Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface TitleInterface extends Renderable
+interface Title extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -182,7 +182,7 @@ interface TitleInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface DescriptionInterface extends Renderable
+interface Description extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -250,7 +250,7 @@ interface DescriptionInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface KeywordsInterface extends Renderable
+interface Keywords extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -312,7 +312,7 @@ interface KeywordsInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface MiscTagsInterface extends Renderable
+interface MiscTags extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -391,7 +391,7 @@ interface MiscTagsInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface WebmastersInterface extends Renderable
+interface Webmasters extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -432,7 +432,7 @@ interface WebmastersInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface AnalyticsInterface extends Renderable
+interface Analytics extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -456,7 +456,7 @@ interface AnalyticsInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface OpenGraphInterface extends Renderable
+interface OpenGraph extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -559,7 +559,7 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
  * @package   Arcanedev\SeoHelper\Contracts\Entities\Twitter
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface TwitterCardInterface extends Renderable
+interface TwitterCard extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
@@ -670,7 +670,7 @@ interface TwitterCardInterface extends Renderable
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
-interface MetaInterface extends Renderable
+interface Meta extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters and Setters
@@ -733,6 +733,12 @@ interface MetaInterface extends Renderable
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
+
 /**
  * Interface  SeoMeta
  *
@@ -748,47 +754,47 @@ interface SeoMeta extends Renderable
     /**
      * Set the Title instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TitleInterface  $title
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Title  $title
      *
      * @return self
      */
-    public function title(TitleInterface $title);
+    public function title(TitleContract $title);
 
     /**
      * Set the Description instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface  $description
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Description  $description
      *
      * @return self
      */
-    public function description(DescriptionInterface $description);
+    public function description(DescriptionContract $description);
 
     /**
      * Set the Keywords instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface  $keywords
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Keywords  $keywords
      *
      * @return self
      */
-    public function keywords(KeywordsInterface $keywords);
+    public function keywords(KeywordsContract $keywords);
 
     /**
      * Set the MiscTags instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface  $misc
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags  $misc
      *
      * @return self
      */
-    public function misc(MiscTagsInterface $misc);
+    public function misc(MiscTagsContract $misc);
 
     /**
      * Set the Webmasters instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface  $webmasters
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters  $webmasters
      *
      * @return self
      */
-    public function webmasters(WebmastersInterface $webmasters);
+    public function webmasters(WebmastersContract $webmasters);
 
     /**
      * Set the title.
@@ -918,7 +924,7 @@ interface SeoMeta extends Renderable
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
-use Arcanedev\SeoHelper\Contracts\Entities\OpenGraphInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 
 interface SeoOpenGraph extends Renderable
 {
@@ -929,11 +935,11 @@ interface SeoOpenGraph extends Renderable
     /**
      * Set the Open Graph instance.
      *
-     * @param  OpenGraphInterface  $openGraph
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph  $openGraph
      *
      * @return self
      */
-    public function setOpenGraph(OpenGraphInterface $openGraph);
+    public function setOpenGraph(OpenGraphContract $openGraph);
 
     /**
      * Set the open graph prefix.
@@ -1024,6 +1030,8 @@ interface SeoOpenGraph extends Renderable
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
+use Arcanedev\SeoHelper\Entities\Twitter\Card as CardContract;
+
 interface SeoTwitter extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
@@ -1033,11 +1041,11 @@ interface SeoTwitter extends Renderable
     /**
      * Set the twitter card instance.
      *
-     * @param  TwitterCardInterface  $card
+     * @param  \Arcanedev\SeoHelper\Entities\Twitter\Card  $card
      *
      * @return self
      */
-    public function setCard(TwitterCardInterface $card);
+    public function setCard(CardContract $card);
 
     /**
      * Set the card type.
