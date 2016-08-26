@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Bases;
 
-use Arcanedev\SeoHelper\Contracts\Entities\MetaCollectionInterface;
-use Arcanedev\SeoHelper\Contracts\Helpers\MetaInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
+use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Collection;
@@ -12,7 +12,7 @@ use Arcanedev\Support\Collection;
  * @package  Arcanedev\SeoHelper\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-abstract class MetaCollection extends Collection implements MetaCollectionInterface
+abstract class MetaCollection extends Collection implements MetaCollectionContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -55,14 +55,13 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
-        $this->refresh();
 
-        return $this;
+        return $this->refresh();
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -74,7 +73,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     public function addMany(array $metas)
     {
@@ -91,15 +90,13 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     public function add($name, $content)
     {
-        if ( ! empty($name) && ! empty($content)) {
-            $this->addMeta($name, $content);
-        }
+        if (empty($name) || empty($content)) return $this;
 
-        return $this;
+        return $this->addMeta($name, $content);
     }
 
     /**
@@ -108,7 +105,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     protected function addMeta($name, $content)
     {
@@ -124,7 +121,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      *
      * @param  array|string  $names
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     public function remove($names)
     {
@@ -182,7 +179,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
      *
      * @param  string|array  $keys
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     public function forget($keys)
     {
@@ -195,13 +192,13 @@ abstract class MetaCollection extends Collection implements MetaCollectionInterf
 
     /**
      * Refresh meta collection items.
+     *
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
     private function refresh()
     {
-        $this->map(function (MetaInterface $meta) {
-            $meta->setPrefix($this->prefix);
-
-            return $meta;
+        return $this->map(function (MetaContract $meta) {
+            return $meta->setPrefix($this->prefix);
         });
     }
 
