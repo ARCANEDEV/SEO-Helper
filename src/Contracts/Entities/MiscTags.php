@@ -3,19 +3,48 @@
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  MetaCollectionInterface
+ * Interface  MiscTags
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface MetaCollectionInterface extends Renderable
+interface MiscTags extends Renderable
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the current URL.
+     *
+     * @return string
+     */
+    public function getUrl();
+
+    /**
+     * Set the current URL.
+     *
+     * @param  string  $url
+     *
+     * @return self
+     */
+    public function setUrl($url);
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Add a meta to collection.
+     * Make MiscTags instance.
+     *
+     * @param  array  $defaults
+     *
+     * @return self
+     */
+    public static function make(array $defaults = []);
+
+    /**
+     * Add a meta tag.
      *
      * @param  string  $name
      * @param  string  $content
@@ -41,4 +70,11 @@ interface MetaCollectionInterface extends Renderable
      * @return self
      */
     public function remove($names);
+
+    /**
+     * Reset the meta collection.
+     *
+     * @return self
+     */
+    public function reset();
 }

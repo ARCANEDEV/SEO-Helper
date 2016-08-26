@@ -1,10 +1,10 @@
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
-use Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\TitleInterface;
-use Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface;
+use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
 
 /**
  * Interface  SeoMeta
@@ -21,47 +21,47 @@ interface SeoMeta extends Renderable
     /**
      * Set the Title instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TitleInterface  $title
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Title  $title
      *
      * @return self
      */
-    public function title(TitleInterface $title);
+    public function title(TitleContract $title);
 
     /**
      * Set the Description instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\DescriptionInterface  $description
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Description  $description
      *
      * @return self
      */
-    public function description(DescriptionInterface $description);
+    public function description(DescriptionContract $description);
 
     /**
      * Set the Keywords instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\KeywordsInterface  $keywords
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Keywords  $keywords
      *
      * @return self
      */
-    public function keywords(KeywordsInterface $keywords);
+    public function keywords(KeywordsContract $keywords);
 
     /**
      * Set the MiscTags instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTagsInterface  $misc
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags  $misc
      *
      * @return self
      */
-    public function misc(MiscTagsInterface $misc);
+    public function misc(MiscTagsContract $misc);
 
     /**
      * Set the Webmasters instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\WebmastersInterface  $webmasters
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters  $webmasters
      *
      * @return self
      */
-    public function webmasters(WebmastersInterface $webmasters);
+    public function webmasters(WebmastersContract $webmasters);
 
     /**
      * Set the title.

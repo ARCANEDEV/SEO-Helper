@@ -38,7 +38,7 @@ interface SeoHelper extends Renderable
     /**
      * Get SeoOpenGraph instance (alias).
      *
-     * @see    \Arcanedev\SeoHelper\Contracts\SeoHelper::openGraph()
+     * @see  openGraph()
      *
      * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */

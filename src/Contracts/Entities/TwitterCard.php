@@ -3,12 +3,12 @@
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
 /**
- * Interface  TwitterCardInterface
+ * Interface  TwitterCard
  *
  * @package   Arcanedev\SeoHelper\Contracts\Entities\Twitter
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface TwitterCardInterface extends Renderable
+interface TwitterCard extends Renderable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
