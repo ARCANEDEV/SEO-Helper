@@ -125,7 +125,7 @@ class MiscTagsTest extends TestCase
             ['default' => compact('author', 'publisher')]
         ));
 
-        $this->assertEquals(implode(PHP_EOL, [
+        $this->assertSame(implode(PHP_EOL, [
             $robots,
             '<link rel="author" href="' . $author . '">',
             '<link rel="publisher" href="' . $publisher . '">',
@@ -133,7 +133,7 @@ class MiscTagsTest extends TestCase
 
         $this->misc->setUrl($this->baseUrl);
 
-        $this->assertEquals(implode(PHP_EOL, [
+        $this->assertSame(implode(PHP_EOL, [
             $robots,
             '<link rel="author" href="' . $author . '">',
             '<link rel="publisher" href="' . $publisher . '">',
@@ -170,7 +170,7 @@ class MiscTagsTest extends TestCase
 
         $this->misc->add('document-rating', 'Safe For Work');
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="document-rating" content="Safe For Work">',
             $this->misc->render()
         );
@@ -229,8 +229,8 @@ class MiscTagsTest extends TestCase
 
         $this->misc->remove(['expires', 'document-rating']);
 
-        $this->assertEquals($copyright, $this->misc->render());
-        $this->assertEquals($copyright, (string) $this->misc);
+        $this->assertSame($copyright, $this->misc->render());
+        $this->assertSame($copyright, (string) $this->misc);
     }
 
     /* ------------------------------------------------------------------------------------------------
