@@ -74,12 +74,12 @@ class MetaCollectionTest extends TestCase
     {
         $this->metas->add('robots', 'noindex, nofollow');
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="robots" content="noindex, nofollow">',
             $this->metas->render()
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="robots" content="noindex, nofollow">',
             (string) $this->metas
         );
@@ -90,7 +90,7 @@ class MetaCollectionTest extends TestCase
     {
         $this->metas->add('canonical', $this->baseUrl);
 
-        $this->assertEquals(
+        $this->assertSame(
             '<link rel="canonical" href="' . $this->baseUrl . '">',
             $this->metas->render()
         );

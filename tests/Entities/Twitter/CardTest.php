@@ -210,12 +210,12 @@ class CardTest extends TestCase
         $this->card->setDescription('Twitter card description');
         $this->card->addImage('http://example.com/img/avatar.png');
 
-        $this->assertNotEquals($expected, $this->card->render());
-        $this->assertNotEquals($expected, (string) $this->card);
+        $this->assertNotSame($expected, $this->card->render());
+        $this->assertNotSame($expected, (string) $this->card);
 
         $this->card->reset();
 
-        $this->assertEquals($expected, $this->card->render());
-        $this->assertEquals($expected, (string) $this->card);
+        $this->assertSame($expected, $this->card->render());
+        $this->assertSame($expected, (string) $this->card);
     }
 }

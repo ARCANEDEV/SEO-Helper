@@ -135,11 +135,11 @@ class SeoTwitterTest extends TestCase
         $this->seoTwitter->setTitle('Arcanedev super title');
         $this->seoTwitter->addImage('http://example.com/img/avatar.png');
 
-        $this->assertNotEquals($expected, $this->seoTwitter->render());
+        $this->assertNotSame($expected, $this->seoTwitter->render());
 
         $this->seoTwitter->reset();
 
-        $this->assertEquals($expected, $this->seoTwitter->render());
+        $this->assertSame($expected, $this->seoTwitter->render());
     }
 
     /** @test */

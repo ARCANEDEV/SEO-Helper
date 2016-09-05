@@ -76,7 +76,7 @@ class DescriptionTest extends TestCase
     {
         $content = $this->getDefaultContent();
 
-        $this->assertEquals($content, $this->description->getContent());
+        $this->assertSame($content, $this->description->getContent());
     }
 
     /** @test */
@@ -86,7 +86,7 @@ class DescriptionTest extends TestCase
 
         $this->description->set($content);
 
-        $this->assertEquals($content, $this->description->getContent());
+        $this->assertSame($content, $this->description->getContent());
     }
 
     /** @test */
@@ -96,7 +96,7 @@ class DescriptionTest extends TestCase
 
         $this->description->setMax($max);
 
-        $this->assertEquals($max, $this->description->getMax());
+        $this->assertSame($max, $this->description->getMax());
     }
 
     /**
@@ -130,8 +130,8 @@ class DescriptionTest extends TestCase
 
         $expected = '<meta name="description" content="' . $description .'">';
 
-        $this->assertEquals($expected, $this->description->render());
-        $this->assertEquals($expected, (string) $this->description);
+        $this->assertSame($expected, $this->description->render());
+        $this->assertSame($expected, (string) $this->description);
     }
 
     /** @test */
@@ -153,8 +153,8 @@ class DescriptionTest extends TestCase
 
         $expected = '<meta name="description" content="' . str_limit($content, $max) . '">';
 
-        $this->assertEquals($expected, $this->description->render());
-        $this->assertEquals($expected, (string) $this->description);
+        $this->assertSame($expected, $this->description->render());
+        $this->assertSame($expected, (string) $this->description);
     }
 
     /* ------------------------------------------------------------------------------------------------

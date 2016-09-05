@@ -52,7 +52,7 @@ class TitleTest extends TestCase
     /** @test */
     public function it_can_get_default_title()
     {
-        $this->assertEquals(
+        $this->assertSame(
             $this->getDefaultTitle(), $this->title->getTitleOnly()
         );
     }
@@ -64,13 +64,13 @@ class TitleTest extends TestCase
 
         $this->title->set($title);
 
-        $this->assertEquals($title, $this->title->getTitleOnly());
+        $this->assertSame($title, $this->title->getTitleOnly());
     }
 
     /** @test */
     public function it_can_get_default_site_name()
     {
-        $this->assertEquals(
+        $this->assertSame(
             $this->getDefaultSiteName(),
             $this->title->getSiteName()
         );
@@ -83,13 +83,13 @@ class TitleTest extends TestCase
 
         $this->title->setSiteName($siteName);
 
-        $this->assertEquals($siteName, $this->title->getSiteName());
+        $this->assertSame($siteName, $this->title->getSiteName());
     }
 
     /** @test */
     public function it_can_get_default_separator()
     {
-        $this->assertEquals(
+        $this->assertSame(
             $this->getDefaultSeparator(), $this->title->getSeparator()
         );
     }
@@ -100,18 +100,18 @@ class TitleTest extends TestCase
         $separator = '|';
         $this->title->setSeparator($separator);
 
-        $this->assertEquals($separator, $this->title->getSeparator());
+        $this->assertSame($separator, $this->title->getSeparator());
 
         $separator = ' _ ';
         $this->title->setSeparator($separator);
 
-        $this->assertEquals(trim($separator), $this->title->getSeparator());
+        $this->assertSame(trim($separator), $this->title->getSeparator());
     }
 
     /** @test */
     public function it_can_get_default_title_position()
     {
-        $this->assertEquals(
+        $this->assertSame(
             array_get($this->getTitleConfig(), 'first', true),
             $this->title->isTitleFirst()
         );
@@ -137,8 +137,8 @@ class TitleTest extends TestCase
         $title    = $this->getDefaultTitle();
         $expected = "<title>$title</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
     }
 
     /** @test */
@@ -154,39 +154,39 @@ class TitleTest extends TestCase
             ->setSeparator($separator);
         $expected = "<title>$title $separator $siteName</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $this->title->setLast();
         $expected = "<title>$siteName $separator $title</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $separator = '|';
         $this->title->setSeparator($separator);
         $expected  = "<title>$siteName $separator $title</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $this->title->setFirst();
         $expected = "<title>$title $separator $siteName</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $this->title->setSiteName('');
         $expected = "<title>$title</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $this->title->setLast();
         $expected = "<title>$title</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $this->title
             ->setSiteName($siteName)
@@ -194,14 +194,14 @@ class TitleTest extends TestCase
             ->setFirst();
         $expected = "<title>$title $siteName</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
 
         $this->title->setLast();
         $expected = "<title>$siteName $title</title>";
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
     }
 
     /** @test */
@@ -215,14 +215,14 @@ class TitleTest extends TestCase
 
         $this->assertInstanceOf(Title::class, $this->title);
 
-        $this->assertEquals($title,     $this->title->getTitleOnly());
-        $this->assertEquals($siteName,  $this->title->getSiteName());
-        $this->assertEquals($separator, $this->title->getSeparator());
+        $this->assertSame($title,     $this->title->getTitleOnly());
+        $this->assertSame($siteName,  $this->title->getSiteName());
+        $this->assertSame($separator, $this->title->getSeparator());
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
     }
 
     /**
@@ -250,11 +250,9 @@ class TitleTest extends TestCase
     /** @test */
     public function it_can_set_and_get_max_length()
     {
-        $max = 50;
+        $this->title->setMax($max = 50);
 
-        $this->title->setMax($max);
-
-        $this->assertEquals($max, $this->title->getMax());
+        $this->assertSame($max, $this->title->getMax());
     }
 
     /** @test */
@@ -266,19 +264,19 @@ class TitleTest extends TestCase
         $this->title->set($title)->setMax($max);
         $expected = '<title>' . str_limit($title, $max) . '</title>';
 
-        $this->assertEquals($expected, $this->title->render());
-        $this->assertEquals($expected, (string) $this->title);
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
     }
 
     /** @test */
     public function it_can_render_title_with_accents()
     {
         $title    = 'Ce package est intuitif, exceptionnel et bien sûr opérationnel';
-        $expected = '<title>Ce package est intuitif, exceptionnel et bien s&ucirc;r op&eacute;ra...</title>';
+        $expected = '<title>Ce package est intuitif, exceptionnel et bien sûr opéra...</title>';
 
         $this->title->set($title);
 
-        $this->assertEquals($expected, $this->title->render());
+        $this->assertSame($expected, $this->title->render());
     }
 
     /**

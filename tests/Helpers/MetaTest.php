@@ -34,7 +34,7 @@ class MetaTest extends TestCase
                 $this->assertInstanceOf($expected, $actual);
             }
 
-            $this->assertEquals('name', $actual->key());
+            $this->assertSame('name', $actual->key());
             $this->assertTrue($actual->isValid());
         }
     }
@@ -68,22 +68,22 @@ class MetaTest extends TestCase
     /** @test */
     public function it_can_render()
     {
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="name" content="Hello world">',
             Meta::make('name', 'Hello world')->render()
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="name" content="Hello world">',
             (string) Meta::make('name', 'Hello world')
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             Meta::make('viewport', 'width=device-width, initial-scale=1')->render()
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             '<link rel="author" href="https://plus.google.com/+ArcanedevNetMaroc">',
             Meta::make('author', 'https://plus.google.com/+ArcanedevNetMaroc')->render()
         );
@@ -94,14 +94,14 @@ class MetaTest extends TestCase
     {
         $meta = Meta::make('hello', 'Hello World', 'name', 'say:');
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="say:hello" content="Hello World">',
             $meta->render()
         );
 
         $meta = Meta::make('hello', 'Hello World');
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="say:hello" content="Hello World">',
             $meta->setPrefix('say:')->render()
         );
@@ -113,7 +113,7 @@ class MetaTest extends TestCase
         $name    = '<b>Awesome name</b>';
         $content = 'Harmless <script>alert("Danger Zone");</script>';
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta name="Awesome-name" content="Harmless alert(&quot;Danger Zone&quot;);">',
             Meta::make($name, $content)->render()
         );
@@ -124,7 +124,7 @@ class MetaTest extends TestCase
     {
         $meta = Meta::make('title', 'Hello World', 'property', 'og:');
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta property="og:title" content="Hello World">',
             $meta->render()
         );
@@ -138,7 +138,7 @@ class MetaTest extends TestCase
         $meta->setPrefix('og:');
         $meta->setNameProperty('property');
 
-        $this->assertEquals(
+        $this->assertSame(
             '<meta property="og:title" content="Hello World">',
             $meta->render()
         );

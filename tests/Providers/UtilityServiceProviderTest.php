@@ -66,6 +66,6 @@ class UtilityServiceProviderTest extends TestCase
             \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
 
-        $this->assertEquals($expected, $this->provider->provides());
+        $this->assertSame($expected, $this->provider->provides());
     }
 }
