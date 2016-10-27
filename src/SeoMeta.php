@@ -214,15 +214,22 @@ class SeoMeta implements SeoMetaContract
      */
     public function setTitle($title, $siteName = null, $separator = null)
     {
-        $this->title->set($title);
+        $this->title->set($title)
+                    ->setSeparator($separator);
 
-        if ( ! is_null($siteName)) {
-            $this->title->setSiteName($siteName);
-        }
+        return $this->setSiteName($siteName);
+    }
 
-        if ( ! is_null($separator)) {
-            $this->title->setSeparator($separator);
-        }
+    /**
+     * Set the site name.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName)
+    {
+        $this->title->setSiteName($siteName);
 
         return $this;
     }

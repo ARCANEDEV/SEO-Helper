@@ -1135,11 +1135,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests, Seoable;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, Seoable;
 }
 ```
 
@@ -1154,6 +1153,7 @@ class PagesController extends Controller
     {
         $this->seo()
              ->setTitle('My awesome title')
+             ->setSiteName('My Company Name')
              ->setDescription('My awesome description')
              ->setKeywords(['this', 'package', 'is', 'awesome']);
         

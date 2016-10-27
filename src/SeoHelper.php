@@ -158,10 +158,24 @@ class SeoHelper implements SeoHelperContract
      */
     public function setTitle($title, $siteName = null, $separator = null)
     {
-        $this->meta()->setTitle($title, $siteName, $separator);
+        $this->meta()->setTitle($title, null, $separator);
         $this->openGraph()->setTitle($title);
-        $this->openGraph()->setSiteName($siteName);
         $this->twitter()->setTitle($title);
+
+        return $this->setSiteName($siteName);
+    }
+
+    /**
+     * Set the site name.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName)
+    {
+        $this->meta()->setSiteName($siteName);
+        $this->openGraph()->setSiteName($siteName);
 
         return $this;
     }

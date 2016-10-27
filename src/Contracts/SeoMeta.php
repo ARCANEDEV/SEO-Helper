@@ -75,6 +75,15 @@ interface SeoMeta extends Renderable
     public function setTitle($title, $siteName = null, $separator = null);
 
     /**
+     * Set the site name.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
+    /**
      * Set the description content.
      *
      * @param  string  $content

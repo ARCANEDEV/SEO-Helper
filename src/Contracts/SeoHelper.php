@@ -97,6 +97,15 @@ interface SeoHelper extends Renderable
      */
     public function setKeywords($keywords);
 
+    /**
+     * Set the site name.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
