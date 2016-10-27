@@ -135,7 +135,8 @@ class TitleTest extends TestCase
     public function it_can_render_default_title()
     {
         $title    = $this->getDefaultTitle();
-        $expected = "<title>$title</title>";
+        $siteName = $this->getDefaultSiteName();
+        $expected = "<title>{$title} - {$siteName}</title>";
 
         $this->assertSame($expected, $this->title->render());
         $this->assertSame($expected, (string) $this->title);

@@ -71,11 +71,12 @@ class SeoMetaTest extends TestCase
     /** @test */
     public function it_can_set_and_get_and_render_title()
     {
-        $title = 'Awesome Title';
+        $title    = 'Awesome Title';
+        $siteName = $this->getSeoHelperConfig('title.site-name');
 
         $this->seoMeta->setTitle($title);
 
-        $expected = '<title>' . $title . '</title>';
+        $expected = "<title>{$title} - {$siteName}</title>";
 
         $this->assertContains($expected, $this->seoMeta->render());
         $this->assertContains($expected, (string) $this->seoMeta);
@@ -83,7 +84,7 @@ class SeoMetaTest extends TestCase
         $siteName = 'Company name';
         $this->seoMeta->setTitle($title, $siteName);
 
-        $expected = '<title>' . $title . ' - ' . $siteName . '</title>';
+        $expected = "<title>{$title} - {$siteName}</title>";
 
         $this->assertContains($expected, $this->seoMeta->render());
         $this->assertContains($expected, (string) $this->seoMeta);
