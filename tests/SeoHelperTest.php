@@ -127,6 +127,27 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_and_render_site_name()
+    {
+        $title        = 'My Application';
+        $siteName     = 'ARCANEDEV';
+        $expectations = [
+            "<title>{$title} - {$siteName}</title>",
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta property="og:site_name" content="' . $siteName . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
+        ];
+
+        $this->seoHelper->setSiteName($siteName)
+                        ->setTitle($title);
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $this->seoHelper->render());
+            $this->assertContains($expected, (string) $this->seoHelper);
+        }
+    }
+
+    /** @test */
     public function it_can_set_and_render_description()
     {
         $description  = 'ARCANEDEV super description';

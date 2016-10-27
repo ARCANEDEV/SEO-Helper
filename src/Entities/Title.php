@@ -134,7 +134,8 @@ class Title implements TitleContract
      */
     public function setSiteName($siteName)
     {
-        $this->siteName = $siteName;
+        if ( ! is_null($siteName))
+            $this->siteName = $siteName;
 
         return $this;
     }
@@ -158,7 +159,8 @@ class Title implements TitleContract
      */
     public function setSeparator($separator)
     {
-        $this->separator = trim($separator);
+        if ( ! is_null($separator))
+            $this->separator = trim($separator);
 
         return $this;
     }
