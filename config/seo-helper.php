@@ -6,7 +6,7 @@ return [
      | ------------------------------------------------------------------------------------------------
      */
     'title' => [
-        'default'   => 'Default title',
+        'default'   => config('app.name', 'Laravel'),
         'site-name' => '',
         'separator' => '-',
         'first'     => true,
