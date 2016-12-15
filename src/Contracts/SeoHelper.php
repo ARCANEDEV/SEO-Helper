@@ -111,6 +111,13 @@ interface SeoHelper extends Renderable
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Render all seo tags with HtmlString object.
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function renderHtml();
+
+    /**
      * Enable the OpenGraph.
      *
      * @return self

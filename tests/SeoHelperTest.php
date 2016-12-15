@@ -191,6 +191,15 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
+    public function it_can_render_all_with_html_string_object()
+    {
+        $output = $this->seoHelper->renderHtml();
+
+        $this->assertInstanceOf(\Illuminate\Support\HtmlString::class, $output);
+        $this->assertNotEmpty($output->toHtml());
+    }
+
+    /** @test */
     public function it_can_enable_and_disable_open_graph()
     {
         $needle = '<meta property="og:';

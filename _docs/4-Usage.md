@@ -1115,13 +1115,23 @@ For example, if you want to render all the tags inside your blade view:
 
 ```blade
 <head>
-    {{ seo_helper()->render() }}
+    {!! seo_helper()->render() !!}
 </head>
 ```
-You can also do stuff like this (rendering the tags without the opengraph and twitter card):
+
+##### OR
+
 ```blade
 <head>
-    {{ seo_helper()->meta()->render() }}
+    {{ seo_helper()->renderHtml() }}
+</head>
+```
+
+You can also do stuff like this (rendering the tags without the opengraph and twitter card):
+
+```blade
+<head>
+    {!! seo_helper()->meta()->render() !!}
 </head>
 ```
 
