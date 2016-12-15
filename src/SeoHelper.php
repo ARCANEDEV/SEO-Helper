@@ -229,6 +229,18 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
+     * Render all seo tags with HtmlString object.
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    public function renderHtml()
+    {
+        return new \Illuminate\Support\HtmlString(
+            $this->render()
+        );
+    }
+
+    /**
      * Render the tag.
      *
      * @return string
