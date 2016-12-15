@@ -25,7 +25,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `5.0 | 5.1 | 5.2 | 5.3` are supported.
+  * Laravel `5.1 | 5.2 | 5.3` are supported (For Laravel `5.0` use `seo-helper: 1.1.*`).
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
