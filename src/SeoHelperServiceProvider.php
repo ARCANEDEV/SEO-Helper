@@ -15,25 +15,18 @@ class SeoHelperServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Vendor name.
-     *
-     * @var string
-     */
-    protected $vendor   = 'arcanedev';
-
-    /**
      * Package name.
      *
      * @var string
      */
-    protected $package  = 'seo-helper';
+    protected $package = 'seo-helper';
 
     /**
      * Indicates if loading of the provider is deferred.
      *
      * @var bool
      */
-    protected $defer    = true;
+    protected $defer   = true;
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -103,7 +96,7 @@ class SeoHelperServiceProvider extends ServiceProvider
      */
     private function registerSeoHelperService()
     {
-        $this->singleton('arcanedev.seo-helper', SeoHelper::class);
-        $this->bind(Contracts\SeoHelper::class, 'arcanedev.seo-helper');
+        $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
+        $this->singleton('arcanedev.seo-helper', Contracts\SeoHelper::class);
     }
 }
