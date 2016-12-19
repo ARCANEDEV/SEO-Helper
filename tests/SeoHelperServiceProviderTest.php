@@ -60,14 +60,6 @@ class SeoHelperServiceProviderTest extends TestCase
         $expected = [
             'arcanedev.seo-helper',
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-
-            // Utilities
-            'arcanedev.seo-helper.meta',
-            'arcanedev.seo-helper.open-graph',
-            'arcanedev.seo-helper.twitter',
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
 
         $this->assertSame($expected, $this->provider->provides());
