@@ -52,7 +52,7 @@ class SeoHelperServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
-        $this->app->register(Providers\UtilityServiceProvider::class);
+        $this->registerProvider(Providers\UtilityServiceProvider::class);
         $this->registerSeoHelperService();
     }
 
@@ -76,14 +76,6 @@ class SeoHelperServiceProvider extends ServiceProvider
         return [
             'arcanedev.seo-helper',
             Contracts\SeoHelper::class,
-
-            // Utilities
-            'arcanedev.seo-helper.meta',
-            'arcanedev.seo-helper.open-graph',
-            'arcanedev.seo-helper.twitter',
-            Contracts\SeoMeta::class,
-            Contracts\SeoOpenGraph::class,
-            Contracts\SeoTwitter::class,
         ];
     }
 

@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Providers;
 
+use Arcanedev\SeoHelper\Contracts;
 use Arcanedev\SeoHelper\SeoMeta;
 use Arcanedev\SeoHelper\SeoOpenGraph;
 use Arcanedev\SeoHelper\SeoTwitter;
@@ -51,9 +52,9 @@ class UtilityServiceProvider extends ServiceProvider
             'arcanedev.seo-helper.meta',
             'arcanedev.seo-helper.open-graph',
             'arcanedev.seo-helper.twitter',
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
+            Contracts\SeoMeta::class,
+            Contracts\SeoOpenGraph::class,
+            Contracts\SeoTwitter::class,
         ];
     }
 
@@ -66,17 +67,14 @@ class UtilityServiceProvider extends ServiceProvider
      */
     private function registerSeoMetaService()
     {
-        $this->singleton('arcanedev.seo-helper.meta', function ($app) {
+        $this->singleton(Contracts\SeoMeta::class, function ($app) {
             /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new SeoMeta($config->get('seo-helper'));
         });
 
-        $this->bind(
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            'arcanedev.seo-helper.meta'
-        );
+        $this->singleton('arcanedev.seo-helper.meta', Contracts\SeoMeta::class);
     }
 
     /**
@@ -84,17 +82,14 @@ class UtilityServiceProvider extends ServiceProvider
      */
     private function registerSeoOpenGraphService()
     {
-        $this->singleton('arcanedev.seo-helper.open-graph', function ($app) {
+        $this->singleton(Contracts\SeoOpenGraph::class, function ($app) {
             /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new SeoOpenGraph($config->get('seo-helper'));
         });
 
-        $this->bind(
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            'arcanedev.seo-helper.open-graph'
-        );
+        $this->singleton('arcanedev.seo-helper.open-graph', Contracts\SeoOpenGraph::class);
     }
 
     /**
@@ -102,16 +97,13 @@ class UtilityServiceProvider extends ServiceProvider
      */
     private function registerSeoTwitterService()
     {
-        $this->singleton('arcanedev.seo-helper.twitter', function ($app) {
+        $this->singleton(Contracts\SeoTwitter::class, function ($app) {
             /** @var  \Illuminate\Contracts\Config\Repository  $config */
             $config = $app['config'];
 
             return new SeoTwitter($config->get('seo-helper'));
         });
 
-        $this->bind(
-            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
-            'arcanedev.seo-helper.twitter'
-        );
+        $this->singleton('arcanedev.seo-helper.twitter', Contracts\SeoTwitter::class);
     }
 }
