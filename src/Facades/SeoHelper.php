@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Facades;
 
+use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -15,5 +16,5 @@ class SeoHelper extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.seo-helper'; }
+    protected static function getFacadeAccessor() { return SeoHelperContract::class; }
 }

@@ -61,7 +61,7 @@ class SeoMetaTest extends TestCase
     /** @test */
     public function it_can_be_instantiated_by_container()
     {
-        $this->seoMeta = $this->app['arcanedev.seo-helper.meta'];
+        $this->seoMeta = $this->app[\Arcanedev\SeoHelper\Contracts\SeoMeta::class];
 
         $this->assertInstanceOf(SeoMeta::class, $this->seoMeta);
         $this->assertNotEmpty($this->seoMeta->render());

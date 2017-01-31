@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Facades;
 
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -15,5 +16,5 @@ class SeoTwitter extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.seo-helper.twitter'; }
+    protected static function getFacadeAccessor() { return SeoTwitterContract::class; }
 }

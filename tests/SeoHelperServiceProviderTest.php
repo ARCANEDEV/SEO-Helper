@@ -58,7 +58,6 @@ class SeoHelperServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanedev.seo-helper',
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
         ];
 
