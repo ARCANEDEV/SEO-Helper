@@ -49,9 +49,6 @@ class UtilityServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.seo-helper.meta',
-            'arcanedev.seo-helper.open-graph',
-            'arcanedev.seo-helper.twitter',
             Contracts\SeoMeta::class,
             Contracts\SeoOpenGraph::class,
             Contracts\SeoTwitter::class,
@@ -73,8 +70,6 @@ class UtilityServiceProvider extends ServiceProvider
 
             return new SeoMeta($config->get('seo-helper'));
         });
-
-        $this->singleton('arcanedev.seo-helper.meta', Contracts\SeoMeta::class);
     }
 
     /**
@@ -88,8 +83,6 @@ class UtilityServiceProvider extends ServiceProvider
 
             return new SeoOpenGraph($config->get('seo-helper'));
         });
-
-        $this->singleton('arcanedev.seo-helper.open-graph', Contracts\SeoOpenGraph::class);
     }
 
     /**
@@ -103,7 +96,5 @@ class UtilityServiceProvider extends ServiceProvider
 
             return new SeoTwitter($config->get('seo-helper'));
         });
-
-        $this->singleton('arcanedev.seo-helper.twitter', Contracts\SeoTwitter::class);
     }
 }

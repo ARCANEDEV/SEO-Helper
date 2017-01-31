@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Facades;
 
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -15,5 +16,5 @@ class SeoOpenGraph extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.seo-helper.open-graph'; }
+    protected static function getFacadeAccessor() { return SeoOpenGraphContract::class; }
 }

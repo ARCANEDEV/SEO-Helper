@@ -52,7 +52,9 @@ class SeoHelperServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+
         $this->registerProvider(Providers\UtilityServiceProvider::class);
+
         $this->registerSeoHelperService();
     }
 
@@ -74,7 +76,6 @@ class SeoHelperServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.seo-helper',
             Contracts\SeoHelper::class,
         ];
     }
@@ -89,6 +90,5 @@ class SeoHelperServiceProvider extends ServiceProvider
     private function registerSeoHelperService()
     {
         $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
-        $this->singleton('arcanedev.seo-helper', Contracts\SeoHelper::class);
     }
 }
