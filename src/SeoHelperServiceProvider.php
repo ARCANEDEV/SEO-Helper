@@ -10,9 +10,9 @@ use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
  */
 class SeoHelperServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * Package name.
@@ -28,34 +28,22 @@ class SeoHelperServiceProvider extends ServiceProvider
      */
     protected $defer   = true;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the base path of the package.
-     *
-     * @return string
-     */
-    public function getBasePath()
-    {
-        return dirname(__DIR__);
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register the service provider.
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
 
         $this->registerProvider(Providers\UtilityServiceProvider::class);
 
-        $this->registerSeoHelperService();
+        $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
     }
 
     /**
@@ -78,17 +66,5 @@ class SeoHelperServiceProvider extends ServiceProvider
         return [
             Contracts\SeoHelper::class,
         ];
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Services Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Register SeoMeta service.
-     */
-    private function registerSeoHelperService()
-    {
-        $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
     }
 }

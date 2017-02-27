@@ -8,9 +8,9 @@
  */
 interface SeoHelper extends Renderable
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * Get SeoMeta instance.
@@ -79,6 +79,16 @@ interface SeoHelper extends Renderable
      * @return self
      */
     public function setTitle($title, $siteName = null, $separator = null);
+
+    /**
+     * Set the site name.
+     *
+     * @param  string  $siteName
+     *
+     * @return self
+     */
+    public function setSiteName($siteName);
+
     /**
      * Set description.
      *
@@ -98,17 +108,17 @@ interface SeoHelper extends Renderable
     public function setKeywords($keywords);
 
     /**
-     * Set the site name.
+     * Set Image.
      *
-     * @param  string  $siteName
+     * @param  string  $imageUrl
      *
-     * @return self
+     * @return \Arcanedev\SeoHelper\SeoHelper
      */
-    public function setSiteName($siteName);
+    public function setImage($imageUrl);
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Render all seo tags with HtmlString object.
