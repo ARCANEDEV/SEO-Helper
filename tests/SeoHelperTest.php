@@ -183,6 +183,23 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
+    public function it_can_set_and_render_image()
+    {
+        $this->seoHelper->setImage($imageUrl = 'http://localhost/assets/img/logo.png');
+
+        $expectations = [
+            '<meta property="og:image" content="'.$imageUrl.'">',
+            '<meta name="twitter:image" content="'.$imageUrl.'">'
+        ];
+
+        $rendered = $this->seoHelper->render();
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $rendered);
+        }
+    }
+
+    /** @test */
     public function it_can_render_all()
     {
         $output = $this->seoHelper->render();
