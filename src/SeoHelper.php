@@ -1,4 +1,6 @@
-<?php namespace Arcanedev\SeoHelper;
+<?php
+
+namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
@@ -6,9 +8,8 @@ use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 
 /**
- * Class     SeoHelper
+ * Class     SeoHelper.
  *
- * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoHelper implements SeoHelperContract
@@ -45,9 +46,9 @@ class SeoHelper implements SeoHelperContract
     /**
      * Make SeoHelper instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta       $seoMeta
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter    $seoTwitter
+     * @param \Arcanedev\SeoHelper\Contracts\SeoMeta      $seoMeta
+     * @param \Arcanedev\SeoHelper\Contracts\SeoOpenGraph $seoOpenGraph
+     * @param \Arcanedev\SeoHelper\Contracts\SeoTwitter   $seoTwitter
      */
     public function __construct(
         SeoMetaContract      $seoMeta,
@@ -76,7 +77,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set SeoMeta instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
+     * @param \Arcanedev\SeoHelper\Contracts\SeoMeta $seoMeta
      *
      * @return \Arcanedev\SeoHelper\SeoHelper
      */
@@ -112,7 +113,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Get SeoOpenGraph instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
+     * @param \Arcanedev\SeoHelper\Contracts\SeoOpenGraph $seoOpenGraph
      *
      * @return \Arcanedev\SeoHelper\SeoHelper
      */
@@ -136,7 +137,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set SeoTwitter instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
+     * @param \Arcanedev\SeoHelper\Contracts\SeoTwitter $seoTwitter
      *
      * @return \Arcanedev\SeoHelper\SeoHelper
      */
@@ -150,9 +151,9 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set title.
      *
-     * @param  string       $title
-     * @param  string|null  $siteName
-     * @param  string|null  $separator
+     * @param string      $title
+     * @param string|null $siteName
+     * @param string|null $separator
      *
      * @return \Arcanedev\SeoHelper\SeoHelper
      */
@@ -168,7 +169,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set the site name.
      *
-     * @param  string  $siteName
+     * @param string $siteName
      *
      * @return self
      */
@@ -183,7 +184,7 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set description.
      *
-     * @param  string  $description
+     * @param string $description
      *
      * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
      */
@@ -196,10 +197,25 @@ class SeoHelper implements SeoHelperContract
         return $this;
     }
 
+     /**
+      * Set Image.
+      *
+      * @param  string  $img_url
+      *
+      * @return \Arcanedev\SeoHelper\SeoHelper
+      */
+     public function setImage($img_url)
+     {
+         $this->openGraph()->setImage($img_url);
+         $this->twitter()->addImage($img_url);
+
+         return $this;
+     }
+
     /**
      * Set keywords.
      *
-     * @param  array|string  $keywords
+     * @param array|string $keywords
      *
      * @return \Arcanedev\SeoHelper\SeoHelper
      */

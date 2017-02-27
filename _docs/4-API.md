@@ -59,7 +59,7 @@ interface Renderable
 
 ## 2. Entities
 
-### Title 
+### Title
 
 ```php
 <?php namespace Arcanedev\SeoHelper\Contracts\Entities;
@@ -966,7 +966,7 @@ interface SeoMeta extends Renderable
      * @return self
      */
     public function setSiteName($siteName);
-    
+
     /**
      * Set the description content.
      *
@@ -1281,5 +1281,14 @@ interface SeoTwitter extends Renderable
      * @return self
      */
     public function reset();
+
+    /**
+     * Set Image. (For convenience without having to create a Card or OpenGraph)
+     *
+     * @param  string  $img_url
+     *
+     * @return self
+     */
+    public function setImage($img_url);
 }
 ```
