@@ -90,6 +90,20 @@ interface SeoHelper extends Renderable
     public function setSiteName($siteName);
 
     /**
+     * Hide the site name.
+     *
+     * @return self
+     */
+    public function hideSiteName();
+
+    /**
+     * Show the site name.
+     *
+     * @return self
+     */
+    public function showSiteName();
+
+    /**
      * Set description.
      *
      * @param  string  $description

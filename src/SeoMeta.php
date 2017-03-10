@@ -235,6 +235,30 @@ class SeoMeta implements SeoMetaContract
     }
 
     /**
+     * Hide site name.
+     *
+     * @return \Arcanedev\SeoHelper\SeoMeta
+     */
+    public function hideSiteName()
+    {
+        $this->title->hideSiteName();
+
+        return $this;
+    }
+
+    /**
+     * Show site name.
+     *
+     * @return self
+     */
+    public function showSiteName()
+    {
+        $this->title->showSiteName();
+
+        return $this;
+    }
+
+    /**
      * Set the description content.
      *
      * @param  string  $content

@@ -181,6 +181,30 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
+     * Hide the site name.
+     *
+     * @return self
+     */
+    public function hideSiteName()
+    {
+        $this->meta()->hideSiteName();
+
+        return $this;
+    }
+
+    /**
+     * Show the site name.
+     *
+     * @return self
+     */
+    public function showSiteName()
+    {
+        $this->meta()->showSiteName();
+
+        return $this;
+    }
+
+    /**
      * Set description.
      *
      * @param  string  $description

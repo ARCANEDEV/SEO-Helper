@@ -38,6 +38,13 @@ class Title implements TitleContract
     protected $siteName   = '';
 
     /**
+     * The site name visibility.
+     *
+     * @var bool
+     */
+    protected $siteNameVisibility = true;
+
+    /**
      * The title separator.
      *
      * @var string
@@ -136,6 +143,40 @@ class Title implements TitleContract
     {
         if ( ! is_null($siteName))
             $this->siteName = $siteName;
+
+        return $this;
+    }
+
+    /**
+     * Hide the site name.
+     *
+     * @return \Arcanedev\SeoHelper\Entities\Title
+     */
+    public function hideSiteName()
+    {
+        return $this->setSiteNameVisibility(false);
+    }
+
+    /**
+     * Show the site name.
+     *
+     * @return \Arcanedev\SeoHelper\Entities\Title
+     */
+    public function showSiteName()
+    {
+        return $this->setSiteNameVisibility(true);
+    }
+
+    /**
+     * Set the site name visibility.
+     *
+     * @param  bool  $visible
+     *
+     * @return \Arcanedev\SeoHelper\Entities\Title
+     */
+    public function setSiteNameVisibility($visible)
+    {
+        $this->siteNameVisibility = (bool) $visible;
 
         return $this;
     }
@@ -304,7 +345,7 @@ class Title implements TitleContract
      */
     private function hasSiteName()
     {
-        return ! empty($this->getSiteName());
+        return ! empty($this->getSiteName()) && $this->siteNameVisibility;
     }
 
     /**

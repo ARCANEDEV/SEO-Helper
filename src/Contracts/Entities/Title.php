@@ -47,6 +47,29 @@ interface Title extends Renderable
     public function setSiteName($siteName);
 
     /**
+     * Hide the site name.
+     *
+     * @return self
+     */
+    public function hideSiteName();
+
+    /**
+     * Show the site name.
+     *
+     * @return self
+     */
+    public function showSiteName();
+
+    /**
+     * Set the site name visibility.
+     *
+     * @param  bool  $visible
+     *
+     * @return self
+     */
+    public function setSiteNameVisibility($visible);
+
+    /**
      * Get title separator.
      *
      * @return string
