@@ -84,6 +84,20 @@ interface SeoMeta extends Renderable
     public function setSiteName($siteName);
 
     /**
+     * Hide site name.
+     *
+     * @return self
+     */
+    public function hideSiteName();
+
+    /**
+     * Show site name.
+     *
+     * @return self
+     */
+    public function showSiteName();
+
+    /**
      * Set the description content.
      *
      * @param  string  $content

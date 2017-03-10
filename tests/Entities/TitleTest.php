@@ -226,6 +226,35 @@ class TitleTest extends TestCase
         $this->assertSame($expected, (string) $this->title);
     }
 
+    /** @test */
+    public function it_can_toggle_site_name_visibility()
+    {
+        $title     = 'Awesome title';
+        $siteName  = 'Company Name';
+        $separator = '|';
+
+        $this->title = Title::make($title, $siteName, $separator);
+
+        $expected = '<title>Awesome title | Company Name</title>';
+
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
+
+        $this->title->hideSiteName();
+
+        $expected = '<title>Awesome title</title>';
+
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
+
+        $this->title->showSiteName();
+
+        $expected = '<title>Awesome title | Company Name</title>';
+
+        $this->assertSame($expected, $this->title->render());
+        $this->assertSame($expected, (string) $this->title);
+    }
+
     /**
      * @test
      *

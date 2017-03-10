@@ -148,6 +148,34 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
+    public function it_can_toggle_site_name_visibility()
+    {
+        $title    = 'My Application';
+        $siteName = 'ARCANEDEV';
+
+        $this->seoHelper->setTitle($title, $siteName);
+
+        $this->assertContains(
+            "<title>{$title} - {$siteName}</title>",
+            $this->seoHelper->render()
+        );
+
+        $this->seoHelper->hideSiteName();
+
+        $this->assertContains(
+            "<title>{$title}</title>",
+            $this->seoHelper->render()
+        );
+
+        $this->seoHelper->showSiteName();
+
+        $this->assertContains(
+            "<title>{$title} - {$siteName}</title>",
+            $this->seoHelper->render()
+        );
+    }
+
+    /** @test */
     public function it_can_set_and_render_description()
     {
         $description  = 'ARCANEDEV super description';
