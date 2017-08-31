@@ -18,12 +18,14 @@ class SeoTwitter implements SeoTwitterContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Enable or Disable the Twitter Card.
      *
@@ -42,6 +44,7 @@ class SeoTwitter implements SeoTwitterContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make SeoTwitter instance.
      *
@@ -61,6 +64,7 @@ class SeoTwitter implements SeoTwitterContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the enabled status for the Twitter Card.
      *
@@ -192,6 +196,7 @@ class SeoTwitter implements SeoTwitterContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Reset the Twitter Card.
      *
@@ -248,6 +253,7 @@ class SeoTwitter implements SeoTwitterContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if the Twitter Card is enabled.
      *

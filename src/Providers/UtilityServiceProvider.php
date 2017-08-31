@@ -18,6 +18,7 @@ class UtilityServiceProvider extends ServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -29,6 +30,7 @@ class UtilityServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      *
@@ -36,6 +38,8 @@ class UtilityServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         $this->registerSeoMetaService();
         $this->registerSeoOpenGraphService();
         $this->registerSeoTwitterService();
@@ -59,6 +63,7 @@ class UtilityServiceProvider extends ServiceProvider
      |  Utilities
      | -----------------------------------------------------------------
      */
+
     /**
      * Register SeoMeta service.
      */

@@ -4,6 +4,7 @@ use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
 use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
+use Illuminate\Support\HtmlString;
 
 /**
  * Class     SeoHelper
@@ -17,6 +18,7 @@ class SeoHelper implements SeoHelperContract
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The SeoMeta instance.
      *
@@ -42,6 +44,7 @@ class SeoHelper implements SeoHelperContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make SeoHelper instance.
      *
@@ -63,6 +66,7 @@ class SeoHelper implements SeoHelperContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get SeoMeta instance.
      *
@@ -253,6 +257,7 @@ class SeoHelper implements SeoHelperContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render all seo tags.
      *
@@ -274,7 +279,7 @@ class SeoHelper implements SeoHelperContract
      */
     public function renderHtml()
     {
-        return new \Illuminate\Support\HtmlString(
+        return new HtmlString(
             $this->render()
         );
     }

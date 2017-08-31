@@ -21,12 +21,14 @@ class SeoMeta implements SeoMetaContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Current URL.
      *
@@ -80,6 +82,7 @@ class SeoMeta implements SeoMetaContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make SeoMeta instance.
      *
@@ -120,6 +123,7 @@ class SeoMeta implements SeoMetaContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the Title instance.
      *
@@ -141,7 +145,8 @@ class SeoMeta implements SeoMetaContract
      *
      * @return \Arcanedev\SeoHelper\SeoMeta
      */
-    public function description(DescriptionContract $description) {
+    public function description(DescriptionContract $description)
+    {
         $this->description = $description;
 
         return $this;
@@ -214,8 +219,7 @@ class SeoMeta implements SeoMetaContract
      */
     public function setTitle($title, $siteName = null, $separator = null)
     {
-        $this->title->set($title)
-                    ->setSeparator($separator);
+        $this->title->set($title)->setSeparator($separator);
 
         return $this->setSiteName($siteName);
     }
@@ -362,6 +366,7 @@ class SeoMeta implements SeoMetaContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add a meta tag.
      *

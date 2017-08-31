@@ -18,6 +18,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Meta tag prefix.
      *
@@ -50,6 +51,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set meta prefix name.
      *
@@ -68,6 +70,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      |  Main Functions
      | -----------------------------------------------------------------
      */
+
     /**
      * Add many meta tags.
      *
@@ -158,6 +161,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      |  Check Functions
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if meta is ignored.
      *
@@ -174,6 +178,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      |  Other Functions
      | -----------------------------------------------------------------
      */
+
     /**
      * Remove an item from the collection by key.
      *

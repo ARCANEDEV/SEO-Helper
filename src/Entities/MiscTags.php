@@ -15,12 +15,14 @@ class MiscTags implements MiscTagsContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Current URL.
      *
@@ -39,6 +41,7 @@ class MiscTags implements MiscTagsContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make MiscTags instance.
      *
@@ -66,6 +69,7 @@ class MiscTags implements MiscTagsContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the current URL.
      *
@@ -95,6 +99,7 @@ class MiscTags implements MiscTagsContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make MiscTags instance.
      *
@@ -104,9 +109,7 @@ class MiscTags implements MiscTagsContract
      */
     public static function make(array $defaults = [])
     {
-        return new self([
-            'default' => $defaults,
-        ]);
+        return new self(['default' => $defaults]);
     }
 
     /**
@@ -188,6 +191,7 @@ class MiscTags implements MiscTagsContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if has the current URL.
      *
@@ -222,6 +226,7 @@ class MiscTags implements MiscTagsContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the robots meta.
      *
@@ -229,9 +234,8 @@ class MiscTags implements MiscTagsContract
      */
     private function addRobotsMeta()
     {
-        if ($this->isRobotsEnabled()) {
+        if ($this->isRobotsEnabled())
             $this->add('robots', 'noindex, nofollow');
-        }
 
         return $this;
     }
@@ -243,9 +247,8 @@ class MiscTags implements MiscTagsContract
      */
     private function addCanonical()
     {
-        if ($this->isCanonicalEnabled() && $this->hasUrl()) {
+        if ($this->isCanonicalEnabled() && $this->hasUrl())
             $this->add('canonical', $this->currentUrl);
-        }
 
         return $this;
     }

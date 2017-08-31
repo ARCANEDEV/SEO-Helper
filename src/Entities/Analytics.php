@@ -15,12 +15,14 @@ class Analytics implements AnalyticsContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Google Analytics code.
      *
@@ -32,6 +34,7 @@ class Analytics implements AnalyticsContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make an Analytics instance.
      *
@@ -48,6 +51,7 @@ class Analytics implements AnalyticsContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set Google Analytics code.
      *
@@ -66,6 +70,7 @@ class Analytics implements AnalyticsContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render the tag.
      *
@@ -92,6 +97,7 @@ class Analytics implements AnalyticsContract
      |  Other Functions
      | -----------------------------------------------------------------
      */
+
     /**
      * Render the Google Analytics tracking script.
      *

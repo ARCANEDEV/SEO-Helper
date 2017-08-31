@@ -14,6 +14,7 @@ class SeoHelperServiceProvider extends ServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Package name.
      *
@@ -32,6 +33,7 @@ class SeoHelperServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      */

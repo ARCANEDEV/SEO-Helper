@@ -15,12 +15,14 @@ class Graph implements OpenGraphContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The Open Graph meta collection.
      *
@@ -32,6 +34,7 @@ class Graph implements OpenGraphContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Graph instance.
      *
@@ -62,6 +65,7 @@ class Graph implements OpenGraphContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the open graph prefix.
      *
@@ -181,6 +185,7 @@ class Graph implements OpenGraphContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render the tag.
      *

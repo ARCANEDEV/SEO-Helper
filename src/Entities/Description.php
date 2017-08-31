@@ -17,12 +17,14 @@ class Description implements DescriptionContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The meta name.
      *
@@ -48,6 +50,7 @@ class Description implements DescriptionContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Description instance.
      *
@@ -64,6 +67,7 @@ class Description implements DescriptionContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get raw description content.
      *
@@ -128,6 +132,7 @@ class Description implements DescriptionContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a description instance.
      *
@@ -138,10 +143,7 @@ class Description implements DescriptionContract
      */
     public static function make($content, $max = 155)
     {
-        return new self([
-            'default'   => $content,
-            'max'       => $max
-        ]);
+        return new self(['default' => $content, 'max' => $max]);
     }
 
     /**
@@ -151,11 +153,9 @@ class Description implements DescriptionContract
      */
     public function render()
     {
-        if ( ! $this->hasContent()) {
-            return '';
-        }
-
-        return Meta::make($this->name, $this->get())->render();
+        return $this->hasContent()
+            ? Meta::make($this->name, $this->get())->render()
+            : '';
     }
 
     /**
@@ -172,6 +172,7 @@ class Description implements DescriptionContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if description has content.
      *

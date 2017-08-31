@@ -15,12 +15,14 @@ class Webmasters implements WebmastersContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The supported webmasters.
      *
@@ -45,6 +47,7 @@ class Webmasters implements WebmastersContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Create Webmasters instance.
      *
@@ -72,6 +75,7 @@ class Webmasters implements WebmastersContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the webmaster meta name.
      *
@@ -81,11 +85,9 @@ class Webmasters implements WebmastersContract
      */
     private function getWebmasterName($webmaster)
     {
-        if ($this->isSupported($webmaster)) {
-            return $this->supported[$webmaster];
-        }
-
-        return null;
+        return $this->isSupported($webmaster)
+            ? $this->supported[$webmaster]
+            : null;
     }
 
     /* -----------------------------------------------------------------
@@ -157,6 +159,7 @@ class Webmasters implements WebmastersContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if the webmaster is supported.
      *

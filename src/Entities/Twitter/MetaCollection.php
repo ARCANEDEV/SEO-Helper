@@ -14,6 +14,7 @@ class MetaCollection extends BaseMetaCollection
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Meta tag prefix.
      *

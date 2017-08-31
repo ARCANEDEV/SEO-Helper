@@ -17,12 +17,14 @@ class Title implements TitleContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The title content.
      *
@@ -69,6 +71,7 @@ class Title implements TitleContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make the Title instance.
      *
@@ -78,7 +81,8 @@ class Title implements TitleContract
     {
         $this->setConfigs($configs);
 
-        if ( ! empty($configs)) $this->init();
+        if ( ! empty($configs))
+            $this->init();
     }
 
     /**
@@ -97,6 +101,7 @@ class Title implements TitleContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get title only (without site name or separator).
      *
@@ -280,6 +285,7 @@ class Title implements TitleContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a Title instance.
      *
@@ -338,6 +344,7 @@ class Title implements TitleContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if site name exists.
      *
@@ -392,6 +399,7 @@ class Title implements TitleContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render title first.
      *
