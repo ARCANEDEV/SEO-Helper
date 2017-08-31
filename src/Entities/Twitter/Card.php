@@ -16,12 +16,14 @@ class Card implements CardContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Card type.
      *
@@ -47,6 +49,7 @@ class Card implements CardContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make the twitter card instance.
      *
@@ -80,6 +83,7 @@ class Card implements CardContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set meta prefix name.
      *
@@ -218,6 +222,7 @@ class Card implements CardContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render card images.
      */
@@ -275,6 +280,7 @@ class Card implements CardContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check the card type.
      *
@@ -311,6 +317,7 @@ class Card implements CardContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Prepare username.
      *
@@ -320,10 +327,6 @@ class Card implements CardContract
      */
     private function prepareUsername($username)
     {
-        if ( ! starts_with($username, '@')) {
-            $username = '@' . $username;
-        }
-
-        return $username;
+        return starts_with($username, '@') ? $username : "@{$username}";
     }
 }

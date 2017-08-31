@@ -12,6 +12,7 @@ trait Seoable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the SeoHelper instance.
      *
@@ -56,6 +57,7 @@ trait Seoable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set title.
      *

@@ -10,10 +10,11 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
  */
 abstract class TestCase extends BaseTestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * The base URL to use while testing the application.
      *
@@ -21,10 +22,11 @@ abstract class TestCase extends BaseTestCase
      */
     protected $baseUrl = 'http://localhost';
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -32,10 +34,6 @@ abstract class TestCase extends BaseTestCase
         $this->app->loadDeferredProviders();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Laravel Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Get package providers.
      *
@@ -93,6 +91,11 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+
     /**
      * Get Config instance.
      *
@@ -100,13 +103,9 @@ abstract class TestCase extends BaseTestCase
      */
     protected function config()
     {
-        return  $this->app['config'];
+        return $this->app['config'];
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * Get SeoHelper config.
      *
@@ -117,10 +116,8 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getSeoHelperConfig($name = null, $default = null)
     {
-        if (is_null($name)) {
-            return $this->config()->get('seo-helper', []);
-        }
-
-        return $this->config()->get("seo-helper.$name", $default);
+        return is_null($name)
+            ? $this->config()->get('seo-helper', [])
+            : $this->config()->get("seo-helper.$name", $default);
     }
 }

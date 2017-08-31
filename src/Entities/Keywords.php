@@ -16,12 +16,14 @@ class Keywords implements KeywordsContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The meta name.
      *
@@ -40,6 +42,7 @@ class Keywords implements KeywordsContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Keywords instance.
      *
@@ -55,6 +58,7 @@ class Keywords implements KeywordsContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get raw keywords content.
      *
@@ -84,13 +88,11 @@ class Keywords implements KeywordsContract
      */
     public function set($content)
     {
-        if (is_string($content)) {
+        if (is_string($content))
             $content = explode(',', $content);
-        }
 
-        if ( ! is_array($content)) {
+        if ( ! is_array($content))
             $content = (array) $content;
-        }
 
         $this->content = array_map(function ($keyword) {
             return $this->clean($keyword);
@@ -103,6 +105,7 @@ class Keywords implements KeywordsContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Keywords instance.
      *
@@ -152,11 +155,9 @@ class Keywords implements KeywordsContract
      */
     public function render()
     {
-        if ( ! $this->hasContent()) {
-            return '';
-        }
-
-        return Meta::make($this->name, $this->get())->render();
+        return $this->hasContent()
+            ? Meta::make($this->name, $this->get())->render()
+            : '';
     }
 
     /**
@@ -173,6 +174,7 @@ class Keywords implements KeywordsContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if keywords has content.
      *
@@ -187,6 +189,7 @@ class Keywords implements KeywordsContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Clean the string.
      *

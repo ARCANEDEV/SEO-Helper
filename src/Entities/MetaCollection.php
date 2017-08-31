@@ -15,6 +15,7 @@ class MetaCollection extends BaseMetaCollection
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Ignored tags, they have dedicated class.
      *
@@ -28,6 +29,7 @@ class MetaCollection extends BaseMetaCollection
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add a meta to collection.
      *

@@ -16,12 +16,14 @@ class SeoOpenGraph implements SeoOpenGraphContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Configurable;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Enable or Disable the OpenGraph.
      *
@@ -36,10 +38,11 @@ class SeoOpenGraph implements SeoOpenGraphContract
      */
     protected $openGraph;
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Constructor
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Make SeoOpenGraph instance.
      *
@@ -59,6 +62,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the enabled status for the OpenGraph.
      *
@@ -218,6 +222,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render the tag.
      *
@@ -262,6 +267,7 @@ class SeoOpenGraph implements SeoOpenGraphContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if the OpenGraph is enabled.
      *

@@ -15,6 +15,7 @@ class Meta implements MetaContract
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Meta prefix name.
      *
@@ -47,6 +48,7 @@ class Meta implements MetaContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Meta instance.
      *
@@ -67,6 +69,7 @@ class Meta implements MetaContract
      |  Getters and Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the meta name.
      *
@@ -115,13 +118,9 @@ class Meta implements MetaContract
      */
     private function getName($prefixed = true)
     {
-        $name = $this->name;
-
-        if ($prefixed) {
-            $name = $this->prefix . $name;
-        }
-
-        return $this->clean($name);
+        return $this->clean(
+            $prefixed ? $this->prefix.$this->name : $this->name
+        );
     }
 
     /**
@@ -234,6 +233,7 @@ class Meta implements MetaContract
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if meta is a link tag.
      *
@@ -289,6 +289,7 @@ class Meta implements MetaContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Clean all the inputs.
      *
