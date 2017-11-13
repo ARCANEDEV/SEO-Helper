@@ -229,4 +229,35 @@ class SeoOpenGraphTest extends TestCase
         $this->assertFalse($this->seoOpenGraph->isDisabled());
         $this->assertNotEmpty($this->seoOpenGraph->render());
     }
+
+    /** @test */
+    public function it_can_set_and_render_locale_property()
+    {
+        $locales = ['fr_FR', 'en_GB', 'es_ES'];
+
+        foreach ($locales as $locale) {
+            $this->assertContains(
+                '<meta property="og:locale" content="'.$locale.'">',
+                $this->seoOpenGraph->setLocale($locale)->render()
+            );
+        }
+    }
+
+    /** @test */
+    public function it_can_set_and_render_alternative_properties()
+    {
+        $this->seoOpenGraph->setAlternativeLocales(['fr_FR', 'en_GB', 'es_ES']);
+
+        $expectations = [
+            '<meta property="og:locale:alternate" content="fr_FR">',
+            '<meta property="og:locale:alternate" content="en_GB">',
+            '<meta property="og:locale:alternate" content="es_ES">',
+        ];
+
+        $actual = $this->seoOpenGraph->render();
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $actual);
+        }
+    }
 }
