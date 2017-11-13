@@ -190,6 +190,34 @@ class SeoOpenGraph implements SeoOpenGraphContract
     }
 
     /**
+     * Set the locale.
+     *
+     * @param  string  $locale
+     *
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
+     */
+    public function setLocale($locale)
+    {
+        $this->openGraph->setLocale($locale);
+
+        return $this;
+    }
+
+    /**
+     * Set the alternative locales.
+     *
+     * @param  array  $locales
+     *
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
+     */
+    public function setAlternativeLocales(array $locales)
+    {
+        $this->openGraph->setAlternativeLocales($locales);
+
+        return $this;
+    }
+
+    /**
      * Add many open graph properties.
      *
      * @param  array  $properties

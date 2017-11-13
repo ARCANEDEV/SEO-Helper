@@ -87,6 +87,24 @@ interface SeoOpenGraph extends Renderable
     public function setSiteName($siteName);
 
     /**
+     * Set the locale.
+     *
+     * @param  string  $locale
+     *
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
+     */
+    public function setLocale($locale);
+
+    /**
+     * Set the alternative locales.
+     *
+     * @param  array  $locales
+     *
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
+     */
+    public function setAlternativeLocales(array $locales);
+
+    /**
      * Add many open graph properties.
      *
      * @param  array  $properties
