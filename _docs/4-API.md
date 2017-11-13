@@ -633,8 +633,8 @@ interface TwitterCard extends Renderable
     /**
      * Add a meta to the card.
      *
-     * @param  string  $name
-     * @param  string  $content
+     * @param  string        $name
+     * @param  string|array  $content
      *
      * @return self
      */
@@ -707,10 +707,10 @@ interface Meta extends Renderable
     /**
      * Make Meta instance.
      *
-     * @param  string  $name
-     * @param  string  $content
-     * @param  string  $propertyName
-     * @param  string  $prefix
+     * @param  string        $name
+     * @param  string|array  $content
+     * @param  string        $propertyName
+     * @param  string        $prefix
      *
      * @return self
      */
@@ -1174,6 +1174,24 @@ interface SeoOpenGraph extends Renderable
      */
     public function setSiteName($siteName);
 
+    /** 
+     * Set the locale. 
+     * 
+     * @param  string  $locale 
+     * 
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph 
+     */ 
+    public function setLocale($locale); 
+ 
+    /** 
+     * Set the alternative locales. 
+     * 
+     * @param  array  $locales 
+     * 
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph 
+     */ 
+    public function setAlternativeLocales(array $locales); 
+    
     /**
      * Add many open graph properties.
      *
@@ -1186,8 +1204,8 @@ interface SeoOpenGraph extends Renderable
     /**
      * Add an open graph property.
      *
-     * @param  string  $property
-     * @param  string  $content
+     * @param  string        $property
+     * @param  string|array  $content 
      *
      * @return self
      */

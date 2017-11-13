@@ -153,6 +153,30 @@ class Graph implements OpenGraphContract
     }
 
     /**
+     * Set the locale.
+     *
+     * @param  string  $locale
+     *
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     */
+    public function setLocale($locale)
+    {
+        return $this->addProperty('locale', $locale);
+    }
+
+    /**
+     * Set the alternative locales.
+     *
+     * @param  array  $locales
+     *
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     */
+    public function setAlternativeLocales(array $locales)
+    {
+        return $this->addProperty('locale:alternate', $locales);
+    }
+
+    /**
      * Add many open graph properties.
      *
      * @param  array  $properties
@@ -169,8 +193,8 @@ class Graph implements OpenGraphContract
     /**
      * Add an open graph property.
      *
-     * @param  string  $property
-     * @param  string  $content
+     * @param  string        $property
+     * @param  string|array  $content
      *
      * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
      */

@@ -11,17 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class GraphTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /** @var Graph */
     private $og;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -37,10 +39,11 @@ class GraphTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -123,7 +126,7 @@ class GraphTest extends TestCase
 
         $this->og->setUrl($url);
 
-        $expected = '<meta property="og:url" content="' . $url . '">';
+        $expected = '<meta property="og:url" content="'.$url.'">';
 
         $this->assertContains($expected, $this->og->render());
         $this->assertContains($expected, (string) $this->og);
@@ -136,7 +139,7 @@ class GraphTest extends TestCase
 
         $this->og->setImage($image);
 
-        $expected = '<meta property="og:image" content="' . $image . '">';
+        $expected = '<meta property="og:image" content="'.$image.'">';
 
         $this->assertContains($expected, $this->og->render());
         $this->assertContains($expected, (string) $this->og);
@@ -149,7 +152,7 @@ class GraphTest extends TestCase
 
         $this->og->setSiteName($siteName);
 
-        $expected = '<meta property="og:site_name" content="' . $siteName . '">';
+        $expected = '<meta property="og:site_name" content="'.$siteName.'">';
 
         $this->assertContains($expected, $this->og->render());
         $this->assertContains($expected, (string) $this->og);
@@ -162,7 +165,7 @@ class GraphTest extends TestCase
 
         $this->og->addProperty('locale', $locale);
 
-        $expected = '<meta property="og:locale" content="' . $locale . '">';
+        $expected = '<meta property="og:locale" content="'.$locale.'">';
 
         $this->assertContains($expected, $this->og->render());
         $this->assertContains($expected, (string) $this->og);
@@ -179,7 +182,7 @@ class GraphTest extends TestCase
         $expectations = [];
 
         foreach ($properties as $property => $content) {
-            $expectations[] = '<meta property="og:' . $property . '" content="' . $content . '">';
+            $expectations[] = '<meta property="og:'.$property.'" content="'.$content.'">';
         }
 
         $this->og->addProperties($properties);
@@ -187,6 +190,37 @@ class GraphTest extends TestCase
         foreach ($expectations as $expected) {
             $this->assertContains($expected, $this->og->render());
             $this->assertContains($expected, (string) $this->og);
+        }
+    }
+
+    /** @test */
+    public function it_can_set_and_render_locale_property()
+    {
+        $locales = ['fr_FR', 'en_GB', 'es_ES'];
+
+        foreach ($locales as $locale) {
+            $this->assertContains(
+                '<meta property="og:locale" content="'.$locale.'">',
+                $this->og->setLocale($locale)->render()
+            );
+        }
+    }
+
+    /** @test */
+    public function it_can_set_and_render_alternative_properties()
+    {
+        $this->og->setAlternativeLocales(['fr_FR', 'en_GB', 'es_ES']);
+
+        $expectations = [
+            '<meta property="og:locale:alternate" content="fr_FR">',
+            '<meta property="og:locale:alternate" content="en_GB">',
+            '<meta property="og:locale:alternate" content="es_ES">',
+        ];
+
+        $actual = $this->og->render();
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $actual);
         }
     }
 }

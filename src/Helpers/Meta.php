@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
+use Illuminate\Support\Arr;
 
 /**
  * Class     Meta
@@ -40,9 +41,9 @@ class Meta implements MetaContract
     /**
      * Meta content.
      *
-     * @var string
+     * @var string|array
      */
-    protected $content = '';
+    protected $content;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -52,10 +53,10 @@ class Meta implements MetaContract
     /**
      * Make Meta instance.
      *
-     * @param  string  $name
-     * @param  string  $content
-     * @param  string  $prefix
-     * @param  string  $propertyName
+     * @param  string        $name
+     * @param  string|array  $content
+     * @param  string        $prefix
+     * @param  string        $propertyName
      */
     public function __construct($name, $content, $propertyName = 'name', $prefix = '')
     {
@@ -141,25 +142,28 @@ class Meta implements MetaContract
     /**
      * Get the meta content.
      *
-     * @return string
+     * @return string|array
      */
     private function getContent()
     {
-        return $this->clean($this->content);
+        return is_array($this->content)
+            ? array_map(function ($content) { return $this->clean($content); }, $this->content)
+            : $this->clean($this->content);
     }
 
     /**
      * Set the meta content.
      *
-     * @param  string  $content
+     * @param  string|array  $content
      *
      * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
     private function setContent($content)
     {
-        if (is_string($content)) {
+        if (is_array($content))
+            $this->content = $content;
+        elseif (is_string($content))
             $this->content = trim($content);
-        }
 
         return $this;
     }
@@ -171,10 +175,10 @@ class Meta implements MetaContract
     /**
      * Make Meta instance.
      *
-     * @param  string  $name
-     * @param  string  $content
-     * @param  string  $propertyName
-     * @param  string  $prefix
+     * @param  string        $name
+     * @param  string|array  $content
+     * @param  string        $propertyName
+     * @param  string        $prefix
      *
      * @return \Arcanedev\SeoHelper\Helpers\Meta
      */
@@ -190,9 +194,7 @@ class Meta implements MetaContract
      */
     public function render()
     {
-        return $this->isLink()
-            ? $this->renderLink()
-            : $this->renderMeta();
+        return $this->isLink() ? $this->renderLink() : $this->renderMeta();
     }
 
     /**
@@ -212,11 +214,11 @@ class Meta implements MetaContract
      */
     private function renderMeta()
     {
-        $output   = [];
-        $output[] = $this->nameProperty.'="'.$this->getName().'"';
-        $output[] = 'content="'.$this->getContent().'"';
+        $content = Arr::wrap($this->getContent());
 
-        return '<meta '.implode(' ', $output).'>';
+        return implode(PHP_EOL, array_map(function ($content) {
+            return "<meta {$this->nameProperty}=\"{$this->getName()}\" content=\"{$content}\">";
+        }, $content));
     }
 
     /**
@@ -268,7 +270,7 @@ class Meta implements MetaContract
     {
         if ( ! is_string($nameProperty)) {
             throw new InvalidArgumentException(
-                'The meta name property is must be a string value, ' . gettype($nameProperty) . ' is given.'
+                'The meta name property is must be a string value, '.gettype($nameProperty).' is given.'
             );
         }
 
@@ -278,7 +280,7 @@ class Meta implements MetaContract
         if ( ! in_array($name, $allowed)) {
             throw new InvalidArgumentException(
                 "The meta name property [$name] is not supported, ".
-                "the allowed name properties are ['". implode("', '", $allowed) . "']."
+                "the allowed name properties are ['".implode("', '", $allowed)."']."
             );
         }
 

@@ -188,8 +188,8 @@ class Card implements CardContract
     /**
      * Add a meta to the card.
      *
-     * @param  string  $name
-     * @param  string  $content
+     * @param  string        $name
+     * @param  string|array  $content
      *
      * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
      */

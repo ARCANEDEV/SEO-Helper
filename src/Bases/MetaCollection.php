@@ -90,8 +90,8 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     /**
      * Add a meta to collection.
      *
-     * @param  string  $name
-     * @param  string  $content
+     * @param  string        $name
+     * @param  string|array  $content
      *
      * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
@@ -105,8 +105,8 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     /**
      * Make a meta and add it to collection.
      *
-     * @param  string  $name
-     * @param  string  $content
+     * @param  string        $name
+     * @param  string|array  $content
      *
      * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
