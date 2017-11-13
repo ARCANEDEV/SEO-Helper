@@ -11,10 +11,11 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class MetaTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -164,5 +165,26 @@ class MetaTest extends TestCase
     public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name()
     {
         Meta::make('title', 'Hello World')->setNameProperty('foo');
+    }
+
+    /** @test */
+    public function it_can_render_array_content()
+    {
+        $meta = Meta::make('locale:alternate', ['fr_FR', 'es_ES', 'en_GB']);
+
+        $meta->setPrefix('og:');
+        $meta->setNameProperty('property');
+
+        $expectations = [
+            '<meta property="og:locale:alternate" content="fr_FR">',
+            '<meta property="og:locale:alternate" content="en_GB">',
+            '<meta property="og:locale:alternate" content="es_ES">',
+        ];
+
+        $actual = $meta->render();
+
+        foreach ($expectations as $expected) {
+            $this->assertContains($expected, $actual);
+        }
     }
 }

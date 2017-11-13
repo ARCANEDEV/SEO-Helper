@@ -83,8 +83,8 @@ interface TwitterCard extends Renderable
     /**
      * Add a meta to the card.
      *
-     * @param  string  $name
-     * @param  string  $content
+     * @param  string        $name
+     * @param  string|array  $content
      *
      * @return self
      */

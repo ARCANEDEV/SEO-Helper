@@ -78,6 +78,24 @@ interface OpenGraph extends Renderable
     public function setSiteName($siteName);
 
     /**
+     * Set the locale.
+     *
+     * @param  string  $locale
+     *
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     */
+    public function setLocale($locale);
+
+    /**
+     * Set the alternative locales.
+     *
+     * @param  array  $locales
+     *
+     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     */
+    public function setAlternativeLocales(array $locales);
+
+    /**
      * Add many open graph properties.
      *
      * @param  array  $properties
@@ -89,8 +107,8 @@ interface OpenGraph extends Renderable
     /**
      * Add an open graph property.
      *
-     * @param  string  $property
-     * @param  string  $content
+     * @param  string        $property
+     * @param  string|array  $content
      *
      * @return self
      */

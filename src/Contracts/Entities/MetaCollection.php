@@ -17,8 +17,8 @@ interface MetaCollection extends Renderable
     /**
      * Add a meta to collection.
      *
-     * @param  string  $name
-     * @param  string  $content
+     * @param  string        $name
+     * @param  string|array  $content
      *
      * @return self
      */

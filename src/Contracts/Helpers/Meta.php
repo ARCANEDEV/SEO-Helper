@@ -46,10 +46,10 @@ interface Meta extends Renderable
     /**
      * Make Meta instance.
      *
-     * @param  string  $name
-     * @param  string  $content
-     * @param  string  $propertyName
-     * @param  string  $prefix
+     * @param  string        $name
+     * @param  string|array  $content
+     * @param  string        $propertyName
+     * @param  string        $prefix
      *
      * @return self
      */
