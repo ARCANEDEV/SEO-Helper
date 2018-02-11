@@ -12,17 +12,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class MiscTagsTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var MiscTags */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags */
     private $misc;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -40,33 +42,39 @@ class MiscTagsTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(MiscTags::class,   $this->misc);
-        $this->assertInstanceOf(Renderable::class, $this->misc);
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\Entities\MiscTags::class,
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Entities\MiscTags::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $this->misc);
+        }
     }
 
     /** @test */
     public function it_can_render_canonical()
     {
-        $url = 'http://laravel.com';
+        $this->misc->setUrl($url = 'http://laravel.com');
 
-        $this->misc->setUrl($url);
+        $expected = '<link rel="canonical" href="'.$url.'">';
 
-        $expected = '<link rel="canonical" href="' . $url . '">';
-
-        $this->assertContains($expected, $this->misc->render());
-        $this->assertContains($expected, (string) $this->misc);
+        static::assertContains($expected, $this->misc->render());
+        static::assertContains($expected, (string) $this->misc);
 
         $this->misc = new MiscTags(['canonical' => false]);
 
-        $this->assertEmpty($this->misc->render());
-        $this->assertEmpty((string) $this->misc);
+        static::assertEmpty($this->misc->render());
+        static::assertEmpty((string) $this->misc);
     }
 
     /** @test */
@@ -74,110 +82,110 @@ class MiscTagsTest extends TestCase
     {
         $expected = '<meta name="robots" content="noindex, nofollow">';
 
-        $this->assertContains($expected, $this->misc->render());
-        $this->assertContains($expected, (string) $this->misc);
+        static::assertContains($expected, $this->misc->render());
+        static::assertContains($expected, (string) $this->misc);
 
         $this->misc = new MiscTags(['robots' => false]);
 
-        $this->assertEmpty($this->misc->render());
-        $this->assertEmpty((string) $this->misc);
+        static::assertEmpty($this->misc->render());
+        static::assertEmpty((string) $this->misc);
     }
 
     /** @test */
     public function it_can_render_links()
     {
-        $author     = 'https://plus.google.com/+AuthorProfile';
-        $publisher  = 'https://plus.google.com/+PublisherProfile';
+        $author    = 'https://plus.google.com/+AuthorProfile';
+        $publisher = 'https://plus.google.com/+PublisherProfile';
 
         $this->misc = new MiscTags([
             'default' => compact('author', 'publisher')
         ]);
 
         $expectations = [
-            '<link rel="author" href="' . $author . '">',
-            '<link rel="publisher" href="' . $publisher . '">',
+            '<link rel="author" href="'.$author.'">',
+            '<link rel="publisher" href="'.$publisher.'">',
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->misc->render());
-            $this->assertContains($expected, (string) $this->misc);
+            static::assertContains($expected, $this->misc->render());
+            static::assertContains($expected, (string) $this->misc);
         }
     }
 
     /** @test */
     public function it_can_render()
     {
-        $robots     = '<meta name="robots" content="noindex, nofollow">';
-        $canonical  = '<link rel="canonical" href="' . $this->baseUrl . '">';
-        $viewport   = '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        $robots    = '<meta name="robots" content="noindex, nofollow">';
+        $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
+        $viewport  = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
         $output = $this->misc->render();
 
         foreach (compact('robots', 'canonical', 'viewport') as $expected) {
-            $this->assertContains($expected, $output);
+            static::assertContains($expected, $output);
         }
 
-        $author     = 'https://plus.google.com/+AuthorProfile';
-        $publisher  = 'https://plus.google.com/+PublisherProfile';
+        $author    = 'https://plus.google.com/+AuthorProfile';
+        $publisher = 'https://plus.google.com/+PublisherProfile';
 
         $this->misc = new MiscTags(array_merge(
             $this->getMiscConfig(),
             ['default' => compact('author', 'publisher')]
         ));
 
-        $this->assertSame(implode(PHP_EOL, [
+        static::assertSame(implode(PHP_EOL, [
             $robots,
-            '<link rel="author" href="' . $author . '">',
-            '<link rel="publisher" href="' . $publisher . '">',
+            '<link rel="author" href="'.$author.'">',
+            '<link rel="publisher" href="'.$publisher.'">',
         ]), $this->misc->render());
 
         $this->misc->setUrl($this->baseUrl);
 
-        $this->assertSame(implode(PHP_EOL, [
+        static::assertSame(implode(PHP_EOL, [
             $robots,
-            '<link rel="author" href="' . $author . '">',
-            '<link rel="publisher" href="' . $publisher . '">',
-            '<link rel="canonical" href="' . $this->baseUrl . '">',
+            '<link rel="author" href="'.$author.'">',
+            '<link rel="publisher" href="'.$publisher.'">',
+            '<link rel="canonical" href="'.$this->baseUrl.'">',
         ]), $this->misc->render());
     }
 
     /** @test */
     public function it_can_add_remove_and_reset_tags()
     {
-        $this->assertNotEmpty($this->misc->render());
+        static::assertNotEmpty($this->misc->render());
 
-        $robots     = '<meta name="robots" content="noindex, nofollow">';
-        $canonical  = '<link rel="canonical" href="' . $this->baseUrl . '">';
-        $viewport   = '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        $robots    = '<meta name="robots" content="noindex, nofollow">';
+        $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
+        $viewport  = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
         $output = $this->misc->render();
 
         foreach (compact('robots', 'canonical', 'viewport') as $expected) {
-            $this->assertContains($expected, $output);
+            static::assertContains($expected, $output);
         }
 
         $this->misc->remove('robots');
 
-        $this->assertNotContains($robots, $this->misc->render());
+        static::assertNotContains($robots, $this->misc->render());
 
         $this->misc->remove('canonical');
 
-        $this->assertNotContains($canonical, $this->misc->render());
+        static::assertNotContains($canonical, $this->misc->render());
 
         $this->misc->remove('viewport');
 
-        $this->assertEmpty($this->misc->render());
+        static::assertEmpty($this->misc->render());
 
         $this->misc->add('document-rating', 'Safe For Work');
 
-        $this->assertSame(
+        static::assertSame(
             '<meta name="document-rating" content="Safe For Work">',
             $this->misc->render()
         );
 
         $this->misc->remove('document-rating');
 
-        $this->assertEmpty($this->misc->render());
+        static::assertEmpty($this->misc->render());
 
         $this->misc->addMany([
             'copyright' => 'ARCANEDEV',
@@ -186,12 +194,12 @@ class MiscTagsTest extends TestCase
 
         $output = $this->misc->render();
 
-        $this->assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
-        $this->assertContains('<meta name="expires" content="never">', $output);
+        static::assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
+        static::assertContains('<meta name="expires" content="never">', $output);
 
         $this->misc->remove(['copyright', 'expires']);
 
-        $this->assertEmpty($this->misc->render());
+        static::assertEmpty($this->misc->render());
 
         $this->misc->addMany([
             'document-rating' => 'Safe For Work',
@@ -199,11 +207,11 @@ class MiscTagsTest extends TestCase
             'expires'         => 'never',
         ]);
 
-        $this->assertNotEmpty($this->misc->render());
+        static::assertNotEmpty($this->misc->render());
 
         $this->misc->reset();
 
-        $this->assertEmpty($this->misc->render());
+        static::assertEmpty($this->misc->render());
     }
 
     /** @test */
@@ -223,20 +231,21 @@ class MiscTagsTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->misc->render());
-            $this->assertContains($expected, (string) $this->misc);
+            static::assertContains($expected, $this->misc->render());
+            static::assertContains($expected, (string) $this->misc);
         }
 
         $this->misc->remove(['expires', 'document-rating']);
 
-        $this->assertSame($copyright, $this->misc->render());
-        $this->assertSame($copyright, (string) $this->misc);
+        static::assertSame($copyright, $this->misc->render());
+        static::assertSame($copyright, (string) $this->misc);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get misc config.
      *

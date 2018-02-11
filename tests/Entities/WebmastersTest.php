@@ -11,17 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class WebmastersTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var Webmasters */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters */
     private $webmasters;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -37,10 +39,11 @@ class WebmastersTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -51,7 +54,7 @@ class WebmastersTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->webmasters);
+            static::assertInstanceOf($expected, $this->webmasters);
         }
     }
 
@@ -67,8 +70,8 @@ class WebmastersTest extends TestCase
         ];
 
         foreach ($expectations as $excepted) {
-            $this->assertContains($excepted, $this->webmasters->render());
-            $this->assertContains($excepted, (string) $this->webmasters);
+            static::assertContains($excepted, $this->webmasters->render());
+            static::assertContains($excepted, (string) $this->webmasters);
         }
     }
 
@@ -87,8 +90,8 @@ class WebmastersTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->webmasters->render());
-            $this->assertContains($expected, (string) $this->webmasters);
+            static::assertContains($expected, $this->webmasters->render());
+            static::assertContains($expected, (string) $this->webmasters);
         }
     }
 
@@ -99,19 +102,19 @@ class WebmastersTest extends TestCase
             'duckduckgo'  => 'site-verification-code'
         ]);
 
-        $this->assertEmpty($this->webmasters->render());
-        $this->assertEmpty((string) $this->webmasters);
+        static::assertEmpty($this->webmasters->render());
+        static::assertEmpty((string) $this->webmasters);
     }
 
     /** @test */
     public function it_can_reset()
     {
-        $this->assertNotEmpty($this->webmasters->render());
-        $this->assertNotEmpty((string) $this->webmasters);
+        static::assertNotEmpty($this->webmasters->render());
+        static::assertNotEmpty((string) $this->webmasters);
 
         $this->webmasters->reset();
 
-        $this->assertEmpty($this->webmasters->render());
-        $this->assertEmpty((string) $this->webmasters);
+        static::assertEmpty($this->webmasters->render());
+        static::assertEmpty((string) $this->webmasters);
     }
 }

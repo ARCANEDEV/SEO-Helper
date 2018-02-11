@@ -12,17 +12,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class TitleTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var Title */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Title */
     protected $title;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -38,21 +40,29 @@ class TitleTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(Title::class,      $this->title);
-        $this->assertInstanceOf(Renderable::class, $this->title);
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Title::class,
+            \Arcanedev\SeoHelper\Entities\Title::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $this->title);
+        }
     }
 
     /** @test */
     public function it_can_get_default_title()
     {
-        $this->assertSame(
+        static::assertSame(
             $this->getDefaultTitle(), $this->title->getTitleOnly()
         );
     }
@@ -64,13 +74,13 @@ class TitleTest extends TestCase
 
         $this->title->set($title);
 
-        $this->assertSame($title, $this->title->getTitleOnly());
+        static::assertSame($title, $this->title->getTitleOnly());
     }
 
     /** @test */
     public function it_can_get_default_site_name()
     {
-        $this->assertSame(
+        static::assertSame(
             $this->getDefaultSiteName(),
             $this->title->getSiteName()
         );
@@ -83,13 +93,13 @@ class TitleTest extends TestCase
 
         $this->title->setSiteName($siteName);
 
-        $this->assertSame($siteName, $this->title->getSiteName());
+        static::assertSame($siteName, $this->title->getSiteName());
     }
 
     /** @test */
     public function it_can_get_default_separator()
     {
-        $this->assertSame(
+        static::assertSame(
             $this->getDefaultSeparator(), $this->title->getSeparator()
         );
     }
@@ -100,18 +110,18 @@ class TitleTest extends TestCase
         $separator = '|';
         $this->title->setSeparator($separator);
 
-        $this->assertSame($separator, $this->title->getSeparator());
+        static::assertSame($separator, $this->title->getSeparator());
 
         $separator = ' _ ';
         $this->title->setSeparator($separator);
 
-        $this->assertSame(trim($separator), $this->title->getSeparator());
+        static::assertSame(trim($separator), $this->title->getSeparator());
     }
 
     /** @test */
     public function it_can_get_default_title_position()
     {
-        $this->assertSame(
+        static::assertSame(
             array_get($this->getTitleConfig(), 'first', true),
             $this->title->isTitleFirst()
         );
@@ -120,15 +130,15 @@ class TitleTest extends TestCase
     /** @test */
     public function it_can_switch_title_position()
     {
-        $this->assertTrue($this->title->isTitleFirst());
+        static::assertTrue($this->title->isTitleFirst());
 
         $this->title->setLast();
 
-        $this->assertFalse($this->title->isTitleFirst());
+        static::assertFalse($this->title->isTitleFirst());
 
         $this->title->setFirst();
 
-        $this->assertTrue($this->title->isTitleFirst());
+        static::assertTrue($this->title->isTitleFirst());
     }
 
     /** @test */
@@ -138,8 +148,8 @@ class TitleTest extends TestCase
         $siteName = $this->getDefaultSiteName();
         $expected = "<title>{$title} - {$siteName}</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
     }
 
     /** @test */
@@ -155,39 +165,39 @@ class TitleTest extends TestCase
             ->setSeparator($separator);
         $expected = "<title>$title $separator $siteName</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->setLast();
         $expected = "<title>$siteName $separator $title</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $separator = '|';
         $this->title->setSeparator($separator);
         $expected  = "<title>$siteName $separator $title</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->setFirst();
         $expected = "<title>$title $separator $siteName</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->setSiteName('');
         $expected = "<title>$title</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->setLast();
         $expected = "<title>$title</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title
             ->setSiteName($siteName)
@@ -195,14 +205,14 @@ class TitleTest extends TestCase
             ->setFirst();
         $expected = "<title>$title $siteName</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->setLast();
         $expected = "<title>$siteName $title</title>";
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
     }
 
     /** @test */
@@ -214,16 +224,16 @@ class TitleTest extends TestCase
 
         $this->title = Title::make($title, $siteName, $separator);
 
-        $this->assertInstanceOf(Title::class, $this->title);
+        static::assertInstanceOf(Title::class, $this->title);
 
-        $this->assertSame($title,     $this->title->getTitleOnly());
-        $this->assertSame($siteName,  $this->title->getSiteName());
-        $this->assertSame($separator, $this->title->getSeparator());
+        static::assertSame($title,     $this->title->getTitleOnly());
+        static::assertSame($siteName,  $this->title->getSiteName());
+        static::assertSame($separator, $this->title->getSeparator());
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
     }
 
     /** @test */
@@ -237,22 +247,22 @@ class TitleTest extends TestCase
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->hideSiteName();
 
         $expected = '<title>Awesome title</title>';
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
 
         $this->title->showSiteName();
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
     }
 
     /**
@@ -282,7 +292,7 @@ class TitleTest extends TestCase
     {
         $this->title->setMax($max = 50);
 
-        $this->assertSame($max, $this->title->getMax());
+        static::assertSame($max, $this->title->getMax());
     }
 
     /** @test */
@@ -292,10 +302,10 @@ class TitleTest extends TestCase
         $max   = $this->getDefaultMax();
 
         $this->title->set($title)->setMax($max);
-        $expected = '<title>' . str_limit($title, $max) . '</title>';
+        $expected = '<title>'.str_limit($title, $max).'</title>';
 
-        $this->assertSame($expected, $this->title->render());
-        $this->assertSame($expected, (string) $this->title);
+        static::assertSame($expected, $this->title->render());
+        static::assertSame($expected, (string) $this->title);
     }
 
     /** @test */
@@ -306,7 +316,7 @@ class TitleTest extends TestCase
 
         $this->title->set($title);
 
-        $this->assertSame($expected, $this->title->render());
+        static::assertSame($expected, $this->title->render());
     }
 
     /**
@@ -331,10 +341,11 @@ class TitleTest extends TestCase
         $this->title->setMax(0);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get Title config.
      *

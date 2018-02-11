@@ -10,17 +10,19 @@ use Arcanedev\SeoHelper\SeoHelperServiceProvider;
  */
 class SeoHelperServiceProviderTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var SeoHelperServiceProvider */
+
+    /** @var  \Arcanedev\SeoHelper\SeoHelperServiceProvider */
     private $provider;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -35,10 +37,11 @@ class SeoHelperServiceProviderTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_get_service_provider()
     {
@@ -50,7 +53,7 @@ class SeoHelperServiceProviderTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->provider);
+            static::assertInstanceOf($expected, $this->provider);
         }
     }
 
@@ -61,6 +64,6 @@ class SeoHelperServiceProviderTest extends TestCase
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
         ];
 
-        $this->assertSame($expected, $this->provider->provides());
+        static::assertSame($expected, $this->provider->provides());
     }
 }

@@ -11,19 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class SeoableTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /**
-     * @var  Dummy
-     */
+
+    /** @var  \Arcanedev\SeoHelper\Tests\Stubs\Dummy */
     private $dummy;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -38,10 +38,11 @@ class SeoableTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_get_main_helper()
     {
@@ -54,7 +55,7 @@ class SeoableTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $seoHelper);
+            static::assertInstanceOf($expected, $seoHelper);
         }
     }
 
@@ -70,7 +71,7 @@ class SeoableTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $seoMeta);
+            static::assertInstanceOf($expected, $seoMeta);
         }
     }
 
@@ -86,7 +87,7 @@ class SeoableTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $seoOpenGraph);
+            static::assertInstanceOf($expected, $seoOpenGraph);
         }
     }
 
@@ -101,7 +102,7 @@ class SeoableTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $seoTwitter);
+            static::assertInstanceOf($expected, $seoTwitter);
         }
     }
 
@@ -113,18 +114,18 @@ class SeoableTest extends TestCase
         $separator    = '|';
         $expectations = [
             "<title>$title $separator $siteName</title>",
-            '<meta property="og:title" content="' . $title . '">',
-            '<meta name="twitter:title" content="' . $title . '">',
+            '<meta property="og:title" content="'.$title.'">',
+            '<meta name="twitter:title" content="'.$title.'">',
         ];
 
         $this->dummy->setTitle($title, $siteName, $separator);
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->dummy->seo()->render());
-            $this->assertContains($expected, (string) $this->dummy->seo());
+            static::assertContains($expected, $this->dummy->seo()->render());
+            static::assertContains($expected, (string) $this->dummy->seo());
 
-            $this->assertContains($expected, seo_helper()->render());
-            $this->assertContains($expected, (string) seo_helper());
+            static::assertContains($expected, seo_helper()->render());
+            static::assertContains($expected, (string) seo_helper());
         }
     }
 
@@ -133,19 +134,19 @@ class SeoableTest extends TestCase
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
-            '<meta name="description" content="' . $description . '">',
-            '<meta property="og:description" content="' . $description . '">',
-            '<meta name="twitter:description" content="' . $description . '">',
+            '<meta name="description" content="'.$description.'">',
+            '<meta property="og:description" content="'.$description.'">',
+            '<meta name="twitter:description" content="'.$description.'">',
         ];
 
         $this->dummy->setDescription($description);
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->dummy->seo()->render());
-            $this->assertContains($expected, (string) $this->dummy->seo());
+            static::assertContains($expected, $this->dummy->seo()->render());
+            static::assertContains($expected, (string) $this->dummy->seo());
 
-            $this->assertContains($expected, seo_helper()->render());
-            $this->assertContains($expected, (string) seo_helper());
+            static::assertContains($expected, seo_helper()->render());
+            static::assertContains($expected, (string) seo_helper());
         }
     }
 
@@ -153,22 +154,22 @@ class SeoableTest extends TestCase
     public function it_can_set_and_render_keywords()
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
-        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
 
         $this->dummy->setKeywords($keywords); // Array
 
-        $this->assertContains($expected, $this->dummy->seo()->render());
-        $this->assertContains($expected, (string) $this->dummy->seo());
+        static::assertContains($expected, $this->dummy->seo()->render());
+        static::assertContains($expected, (string) $this->dummy->seo());
 
-        $this->assertContains($expected, seo_helper()->render());
-        $this->assertContains($expected, (string) seo_helper());
+        static::assertContains($expected, seo_helper()->render());
+        static::assertContains($expected, (string) seo_helper());
 
         $this->dummy->setKeywords(implode(',', $keywords)); // String
 
-        $this->assertContains($expected, $this->dummy->seo()->render());
-        $this->assertContains($expected, (string) $this->dummy->seo());
+        static::assertContains($expected, $this->dummy->seo()->render());
+        static::assertContains($expected, (string) $this->dummy->seo());
 
-        $this->assertContains($expected, seo_helper()->render());
-        $this->assertContains($expected, (string) seo_helper());
+        static::assertContains($expected, seo_helper()->render());
+        static::assertContains($expected, (string) seo_helper());
     }
 }

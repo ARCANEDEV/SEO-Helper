@@ -11,17 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class AnalyticsTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var Analytics */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Analytics */
     private $analytics;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -37,20 +39,22 @@ class AnalyticsTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\Analytics::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Analytics::class,
+            \Arcanedev\SeoHelper\Entities\Analytics::class,
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->analytics);
+            static::assertInstanceOf($expected, $this->analytics);
         }
     }
 
@@ -59,7 +63,7 @@ class AnalyticsTest extends TestCase
     {
         $this->analytics = new Analytics;
 
-        $this->assertEmpty($this->analytics->render());
+        static::assertEmpty($this->analytics->render());
     }
 
     /** @test */
@@ -72,8 +76,8 @@ class AnalyticsTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->analytics->render());
-            $this->assertContains($expected, (string) $this->analytics);
+            static::assertContains($expected, $this->analytics->render());
+            static::assertContains($expected, (string) $this->analytics);
         }
     }
 }
