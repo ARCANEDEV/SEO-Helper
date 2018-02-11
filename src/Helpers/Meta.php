@@ -301,6 +301,6 @@ class Meta implements MetaContract
      */
     public function clean($value)
     {
-        return htmlentities(strip_tags($value),ENT_QUOTES, 'UTF-8');
+        return e(strip_tags($value));
     }
 }

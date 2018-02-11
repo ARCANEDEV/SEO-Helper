@@ -4,7 +4,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContr
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Helpers\Meta;
-use Arcanedev\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Class     MetaCollection
@@ -145,6 +145,18 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
         })->toArray();
 
         return implode(PHP_EOL, array_filter($output));
+    }
+
+    /**
+     * Reset the collection.
+     *
+     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     */
+    public function reset()
+    {
+        $this->items = [];
+
+        return $this;
     }
 
     /**

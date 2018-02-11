@@ -18,7 +18,7 @@
     "license": "MIT",
     "require": {
         "php":               ">=7.0",
-        "arcanedev/support": "~4.0"
+        "arcanedev/support": "~4.2"
     },
     "require-dev": {
         "orchestra/testbench": "~3.5.0",
@@ -40,10 +40,7 @@
         "laravel": {
             "providers": [
                 "Arcanedev\\SeoHelper\\SeoHelperServiceProvider"
-            ],
-            "aliases": {
-                "SeoHelper": "Arcanedev\\SeoHelper\\Facades\\SeoHelper"
-            }
+            ]
         }
     }
 }
