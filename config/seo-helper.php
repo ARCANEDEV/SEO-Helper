@@ -1,10 +1,12 @@
 <?php
 
 return [
+
     /* -----------------------------------------------------------------
      |  Title
      | -----------------------------------------------------------------
      */
+
     'title' => [
         'default'   => 'Default Title',
         'site-name' => config('app.name', 'My Application'),
@@ -17,6 +19,7 @@ return [
      |  Description
      | -----------------------------------------------------------------
      */
+
     'description' => [
         'default'   => 'Default description',
         'max'       => 155,
@@ -26,6 +29,7 @@ return [
      |  Keywords
      | -----------------------------------------------------------------
      */
+
     'keywords'  => [
         'default'   => [
             //
@@ -36,6 +40,7 @@ return [
      |  Miscellaneous
      | -----------------------------------------------------------------
      */
+
     'misc'      => [
         'canonical' => true,
         'robots'    => config('app.env') !== 'production', // Tell robots not to index the content if it's not on production
@@ -50,6 +55,7 @@ return [
      |  Webmaster Tools
      | -----------------------------------------------------------------
      */
+
     'webmasters' => [
         'google'    => '',
         'bing'      => '',
@@ -62,6 +68,7 @@ return [
      |  Open Graph
      | -----------------------------------------------------------------
      */
+
     'open-graph' => [
         'enabled'     => true,
         'prefix'      => 'og:',
@@ -79,6 +86,7 @@ return [
      | -----------------------------------------------------------------
      |  Supported card types : 'app', 'gallery', 'photo', 'player', 'product', 'summary', 'summary_large_image'.
      */
+
     'twitter' => [
         'enabled' => true,
         'prefix'  => 'twitter:',
@@ -94,7 +102,9 @@ return [
      |  Analytics
      | -----------------------------------------------------------------
      */
+
     'analytics' => [
         'google' => '', // UA-XXXXXXXX-X
     ],
+
 ];

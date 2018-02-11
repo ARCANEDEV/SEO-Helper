@@ -40,10 +40,7 @@
         "laravel": {
             "providers": [
                 "Arcanedev\\SeoHelper\\SeoHelperServiceProvider"
-            ],
-            "aliases": {
-                "SeoHelper": "Arcanedev\\SeoHelper\\Facades\\SeoHelper"
-            }
+            ]
         }
     }
 }
