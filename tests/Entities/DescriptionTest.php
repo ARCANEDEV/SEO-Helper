@@ -11,17 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class DescriptionTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var Description */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Description */
     private $description;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -37,10 +39,11 @@ class DescriptionTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -51,7 +54,7 @@ class DescriptionTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->description);
+            static::assertInstanceOf($expected, $this->description);
         }
     }
 
@@ -67,7 +70,7 @@ class DescriptionTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->description);
+            static::assertInstanceOf($expected, $this->description);
         }
     }
 
@@ -76,7 +79,7 @@ class DescriptionTest extends TestCase
     {
         $content = $this->getDefaultContent();
 
-        $this->assertSame($content, $this->description->getContent());
+        static::assertSame($content, $this->description->getContent());
     }
 
     /** @test */
@@ -86,7 +89,7 @@ class DescriptionTest extends TestCase
 
         $this->description->set($content);
 
-        $this->assertSame($content, $this->description->getContent());
+        static::assertSame($content, $this->description->getContent());
     }
 
     /** @test */
@@ -96,7 +99,7 @@ class DescriptionTest extends TestCase
 
         $this->description->setMax($max);
 
-        $this->assertSame($max, $this->description->getMax());
+        static::assertSame($max, $this->description->getMax());
     }
 
     /**
@@ -128,10 +131,10 @@ class DescriptionTest extends TestCase
 
         $this->description->set($description);
 
-        $expected = '<meta name="description" content="' . $description .'">';
+        $expected = '<meta name="description" content="'.$description.'">';
 
-        $this->assertSame($expected, $this->description->render());
-        $this->assertSame($expected, (string) $this->description);
+        static::assertSame($expected, $this->description->render());
+        static::assertSame($expected, (string) $this->description);
     }
 
     /** @test */
@@ -139,8 +142,8 @@ class DescriptionTest extends TestCase
     {
         $this->description->set('');
 
-        $this->assertEmpty($this->description->render());
-        $this->assertEmpty((string) $this->description);
+        static::assertEmpty($this->description->render());
+        static::assertEmpty((string) $this->description);
     }
 
     /** @test */
@@ -151,16 +154,17 @@ class DescriptionTest extends TestCase
 
         $this->description->set($content)->setMax($max);
 
-        $expected = '<meta name="description" content="' . str_limit($content, $max) . '">';
+        $expected = '<meta name="description" content="'.str_limit($content, $max).'">';
 
-        $this->assertSame($expected, $this->description->render());
-        $this->assertSame($expected, (string) $this->description);
+        static::assertSame($expected, $this->description->render());
+        static::assertSame($expected, (string) $this->description);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get description config.
      *

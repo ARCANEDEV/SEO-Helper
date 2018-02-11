@@ -11,17 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class MetaCollectionTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var MetaCollection */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection */
     private $metas;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -36,10 +38,11 @@ class MetaCollectionTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -50,10 +53,10 @@ class MetaCollectionTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->metas);
+            static::assertInstanceOf($expected, $this->metas);
         }
 
-        $this->assertCount(0, $this->metas);
+        static::assertCount(0, $this->metas);
     }
 
     /** @test */
@@ -61,11 +64,11 @@ class MetaCollectionTest extends TestCase
     {
         $this->metas->add('robots', 'noindex, nofollow');
 
-        $this->assertCount(1, $this->metas);
+        static::assertCount(1, $this->metas);
 
         $this->metas->add('canonical', $this->baseUrl);
 
-        $this->assertCount(2, $this->metas);
+        static::assertCount(2, $this->metas);
     }
 
     /** @test */
@@ -73,15 +76,10 @@ class MetaCollectionTest extends TestCase
     {
         $this->metas->add('robots', 'noindex, nofollow');
 
-        $this->assertSame(
-            '<meta name="robots" content="noindex, nofollow">',
-            $this->metas->render()
-        );
+        $expected = '<meta name="robots" content="noindex, nofollow">';
 
-        $this->assertSame(
-            '<meta name="robots" content="noindex, nofollow">',
-            (string) $this->metas
-        );
+        static::assertSame($expected, $this->metas->render());
+        static::assertSame($expected, (string) $this->metas);
     }
 
     /** @test */
@@ -89,8 +87,8 @@ class MetaCollectionTest extends TestCase
     {
         $this->metas->add('canonical', $this->baseUrl);
 
-        $this->assertSame(
-            '<link rel="canonical" href="' . $this->baseUrl . '">',
+        static::assertSame(
+            '<link rel="canonical" href="'.$this->baseUrl.'">',
             $this->metas->render()
         );
     }

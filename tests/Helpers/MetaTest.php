@@ -32,11 +32,11 @@ class MetaTest extends TestCase
         foreach ($results as $actual) {
             /** @var Meta $actual */
             foreach ($expectations as $expected) {
-                $this->assertInstanceOf($expected, $actual);
+                static::assertInstanceOf($expected, $actual);
             }
 
-            $this->assertSame('name', $actual->key());
-            $this->assertTrue($actual->isValid());
+            static::assertSame('name', $actual->key());
+            static::assertTrue($actual->isValid());
         }
     }
 
@@ -49,7 +49,7 @@ class MetaTest extends TestCase
 
         foreach ($valids as $meta) {
             /** @var Meta $meta */
-            $this->assertTrue($meta->isValid());
+            static::assertTrue($meta->isValid());
         }
 
         $invalids = [
@@ -62,29 +62,29 @@ class MetaTest extends TestCase
 
         foreach ($invalids as $meta) {
             /** @var Meta $meta */
-            $this->assertFalse($meta->isValid());
+            static::assertFalse($meta->isValid());
         }
     }
 
     /** @test */
     public function it_can_render()
     {
-        $this->assertSame(
+        static::assertSame(
             '<meta name="name" content="Hello world">',
             Meta::make('name', 'Hello world')->render()
         );
 
-        $this->assertSame(
+        static::assertSame(
             '<meta name="name" content="Hello world">',
             (string) Meta::make('name', 'Hello world')
         );
 
-        $this->assertSame(
+        static::assertSame(
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             Meta::make('viewport', 'width=device-width, initial-scale=1')->render()
         );
 
-        $this->assertSame(
+        static::assertSame(
             '<link rel="author" href="https://plus.google.com/+ArcanedevNetMaroc">',
             Meta::make('author', 'https://plus.google.com/+ArcanedevNetMaroc')->render()
         );
@@ -95,14 +95,14 @@ class MetaTest extends TestCase
     {
         $meta = Meta::make('hello', 'Hello World', 'name', 'say:');
 
-        $this->assertSame(
+        static::assertSame(
             '<meta name="say:hello" content="Hello World">',
             $meta->render()
         );
 
         $meta = Meta::make('hello', 'Hello World');
 
-        $this->assertSame(
+        static::assertSame(
             '<meta name="say:hello" content="Hello World">',
             $meta->setPrefix('say:')->render()
         );
@@ -114,7 +114,7 @@ class MetaTest extends TestCase
         $name    = '<b>Awesome name</b>';
         $content = 'Harmless <script>alert("Danger Zone");</script>';
 
-        $this->assertSame(
+        static::assertSame(
             '<meta name="Awesome-name" content="Harmless alert(&quot;Danger Zone&quot;);">',
             Meta::make($name, $content)->render()
         );
@@ -125,7 +125,7 @@ class MetaTest extends TestCase
     {
         $meta = Meta::make('title', 'Hello World', 'property', 'og:');
 
-        $this->assertSame(
+        static::assertSame(
             '<meta property="og:title" content="Hello World">',
             $meta->render()
         );
@@ -139,7 +139,7 @@ class MetaTest extends TestCase
         $meta->setPrefix('og:');
         $meta->setNameProperty('property');
 
-        $this->assertSame(
+        static::assertSame(
             '<meta property="og:title" content="Hello World">',
             $meta->render()
         );
@@ -184,7 +184,7 @@ class MetaTest extends TestCase
         $actual = $meta->render();
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $actual);
+            static::assertContains($expected, $actual);
         }
     }
 }

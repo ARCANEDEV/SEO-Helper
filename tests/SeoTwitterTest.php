@@ -10,17 +10,19 @@ use Arcanedev\SeoHelper\SeoTwitter;
  */
 class SeoTwitterTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var SeoTwitter */
+
+    /** @var \Arcanedev\SeoHelper\Contracts\SeoTwitter */
     private $seoTwitter;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -36,10 +38,11 @@ class SeoTwitterTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -50,7 +53,7 @@ class SeoTwitterTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->seoTwitter);
+            static::assertInstanceOf($expected, $this->seoTwitter);
         }
     }
 
@@ -66,7 +69,7 @@ class SeoTwitterTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $output);
+            static::assertContains($expected, $output);
         }
     }
 
@@ -77,8 +80,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:card" content="app">';
 
-        $this->assertContains($expected, $this->seoTwitter->render());
-        $this->assertContains($expected, (string) $this->seoTwitter);
+        static::assertContains($expected, $this->seoTwitter->render());
+        static::assertContains($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -88,8 +91,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:site" content="@Arcanedev">';
 
-        $this->assertContains($expected, $this->seoTwitter->render());
-        $this->assertContains($expected, (string) $this->seoTwitter);
+        static::assertContains($expected, $this->seoTwitter->render());
+        static::assertContains($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -99,8 +102,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:title" content="ARCANEDEV super title">';
 
-        $this->assertContains($expected, $this->seoTwitter->render());
-        $this->assertContains($expected, (string) $this->seoTwitter);
+        static::assertContains($expected, $this->seoTwitter->render());
+        static::assertContains($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -110,8 +113,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:description" content="ARCANEDEV super description">';
 
-        $this->assertContains($expected, $this->seoTwitter->render());
-        $this->assertContains($expected, (string) $this->seoTwitter);
+        static::assertContains($expected, $this->seoTwitter->render());
+        static::assertContains($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -121,8 +124,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:image" content="http://example.com/img/avatar.png">';
 
-        $this->assertContains($expected, $this->seoTwitter->render());
-        $this->assertContains($expected, (string) $this->seoTwitter);
+        static::assertContains($expected, $this->seoTwitter->render());
+        static::assertContains($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -135,11 +138,11 @@ class SeoTwitterTest extends TestCase
         $this->seoTwitter->setTitle('Arcanedev super title');
         $this->seoTwitter->addImage('http://example.com/img/avatar.png');
 
-        $this->assertNotSame($expected, $this->seoTwitter->render());
+        static::assertNotSame($expected, $this->seoTwitter->render());
 
         $this->seoTwitter->reset();
 
-        $this->assertSame($expected, $this->seoTwitter->render());
+        static::assertSame($expected, $this->seoTwitter->render());
     }
 
     /** @test */
@@ -149,8 +152,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:creator" content="@Arcanedev">';
 
-        $this->assertContains($expected, $this->seoTwitter->render());
-        $this->assertContains($expected, (string) $this->seoTwitter);
+        static::assertContains($expected, $this->seoTwitter->render());
+        static::assertContains($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -164,34 +167,34 @@ class SeoTwitterTest extends TestCase
         $expectations = [];
 
         foreach ($metas as $name => $content) {
-            $expectations[] = '<meta name="twitter:' . $name . '" content="' . $content . '">';
+            $expectations[] = '<meta name="twitter:'.$name.'" content="'.$content.'">';
         }
 
         $this->seoTwitter->addMetas($metas);
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->seoTwitter->render());
-            $this->assertContains($expected, (string) $this->seoTwitter);
+            static::assertContains($expected, $this->seoTwitter->render());
+            static::assertContains($expected, (string) $this->seoTwitter);
         }
     }
 
     /** @test */
     public function it_can_enable_and_disable()
     {
-        $this->assertTrue($this->seoTwitter->isEnabled());
-        $this->assertFalse($this->seoTwitter->isDisabled());
-        $this->assertNotEmpty($this->seoTwitter->render());
+        static::assertTrue($this->seoTwitter->isEnabled());
+        static::assertFalse($this->seoTwitter->isDisabled());
+        static::assertNotEmpty($this->seoTwitter->render());
 
         $this->seoTwitter->disable();
 
-        $this->assertFalse($this->seoTwitter->isEnabled());
-        $this->assertTrue($this->seoTwitter->isDisabled());
-        $this->assertEmpty($this->seoTwitter->render());
+        static::assertFalse($this->seoTwitter->isEnabled());
+        static::assertTrue($this->seoTwitter->isDisabled());
+        static::assertEmpty($this->seoTwitter->render());
 
         $this->seoTwitter->enable();
 
-        $this->assertTrue($this->seoTwitter->isEnabled());
-        $this->assertFalse($this->seoTwitter->isDisabled());
-        $this->assertNotEmpty($this->seoTwitter->render());
+        static::assertTrue($this->seoTwitter->isEnabled());
+        static::assertFalse($this->seoTwitter->isDisabled());
+        static::assertNotEmpty($this->seoTwitter->render());
     }
 }

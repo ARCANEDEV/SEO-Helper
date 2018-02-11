@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -12,17 +11,19 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class KeywordsTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var Keywords */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Keywords */
     private $keywords;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -38,15 +39,23 @@ class KeywordsTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
-        $this->assertInstanceOf(Keywords::class,   $this->keywords);
-        $this->assertInstanceOf(Renderable::class, $this->keywords);
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Contracts\Entities\Keywords::class,
+            Keywords::class
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected,   $this->keywords);
+        }
     }
 
     /** @test */
@@ -54,8 +63,8 @@ class KeywordsTest extends TestCase
     {
         $content = $this->getDefaultContent();
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
     }
 
     /** @test */
@@ -65,24 +74,24 @@ class KeywordsTest extends TestCase
 
         $this->keywords->set($content);
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
 
         $this->keywords->set(implode(',', $content));
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
 
         $keyword = 'one-keyword';
         $this->keywords->set($keyword);
 
-        $this->assertCount(1, $this->keywords->getContent());
-        $this->assertSame([$keyword], $this->keywords->getContent());
+        static::assertCount(1, $this->keywords->getContent());
+        static::assertSame([$keyword], $this->keywords->getContent());
 
         $this->keywords->set(null);
 
-        $this->assertCount(0, $this->keywords->getContent());
-        $this->assertEmpty($this->keywords->getContent());
+        static::assertCount(0, $this->keywords->getContent());
+        static::assertEmpty($this->keywords->getContent());
     }
 
     /** @test */
@@ -92,14 +101,14 @@ class KeywordsTest extends TestCase
 
         $this->keywords->set($content);
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
 
         $content[] = $keyword = 'keyword-6';
         $this->keywords->add($keyword);
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
     }
 
     /** @test */
@@ -109,51 +118,51 @@ class KeywordsTest extends TestCase
 
         $this->keywords->set($content);
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
 
         $keywords = ['keyword-6', 'keyword-7', 'keyword-8'];
         $content  = array_merge($content, $keywords);
 
         $this->keywords->addMany($keywords);
 
-        $this->assertCount(count($content), $this->keywords->getContent());
-        $this->assertSame($content, $this->keywords->getContent());
+        static::assertCount(count($content), $this->keywords->getContent());
+        static::assertSame($content, $this->keywords->getContent());
     }
 
     /** @test */
     public function it_can_render()
     {
         $content  = $this->getDefaultContent();
-        $expected = '<meta name="keywords" content="' . implode(', ', $content) .'">';
+        $expected = '<meta name="keywords" content="'.implode(', ', $content).'">';
 
-        $this->assertSame($expected, $this->keywords->render());
-        $this->assertSame($expected, (string) $this->keywords);
+        static::assertSame($expected, $this->keywords->render());
+        static::assertSame($expected, (string) $this->keywords);
 
         $this->keywords->set(implode(',', $content));
 
-        $this->assertSame($expected, $this->keywords->render());
-        $this->assertSame($expected, (string) $this->keywords);
+        static::assertSame($expected, $this->keywords->render());
+        static::assertSame($expected, (string) $this->keywords);
 
         $this->keywords->set(implode(' ,', $content));
 
-        $this->assertSame($expected, $this->keywords->render());
-        $this->assertSame($expected, (string) $this->keywords);
+        static::assertSame($expected, $this->keywords->render());
+        static::assertSame($expected, (string) $this->keywords);
 
         $this->keywords->set(implode(', ', $content));
 
-        $this->assertSame($expected, $this->keywords->render());
-        $this->assertSame($expected, (string) $this->keywords);
+        static::assertSame($expected, $this->keywords->render());
+        static::assertSame($expected, (string) $this->keywords);
 
         $this->keywords->set(implode(' , ', $content));
 
-        $this->assertSame($expected, $this->keywords->render());
-        $this->assertSame($expected, (string) $this->keywords);
+        static::assertSame($expected, $this->keywords->render());
+        static::assertSame($expected, (string) $this->keywords);
 
         $this->keywords->set(null);
 
-        $this->assertEmpty($this->keywords->render());
-        $this->assertEmpty((string) $this->keywords);
+        static::assertEmpty($this->keywords->render());
+        static::assertEmpty((string) $this->keywords);
     }
 
     /** @test */
@@ -162,17 +171,18 @@ class KeywordsTest extends TestCase
         $keywords       = $this->getDefaultContent();
         $this->keywords = Keywords::make($keywords);
 
-        $expected       = '<meta name="keywords" content="' . implode(', ', $keywords) .'">';
+        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
 
-        $this->assertSame($keywords, $this->keywords->getContent());
-        $this->assertSame($expected, $this->keywords->render());
-        $this->assertSame($expected, (string) $this->keywords);
+        static::assertSame($keywords, $this->keywords->getContent());
+        static::assertSame($expected, $this->keywords->render());
+        static::assertSame($expected, (string) $this->keywords);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Get keywords config.
      *

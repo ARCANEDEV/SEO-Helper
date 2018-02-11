@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Tests;
 
-use Arcanedev\SeoHelper\SeoHelper;
+use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 
 /**
  * Class     SeoHelperTest
@@ -10,11 +10,12 @@ use Arcanedev\SeoHelper\SeoHelper;
  */
 class SeoHelperTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /** @var SeoHelper */
+
+    /** @var  \Arcanedev\SeoHelper\Contracts\SeoHelper */
     private $seoHelper;
 
     /* ------------------------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ class SeoHelperTest extends TestCase
     {
         parent::setUp();
 
-        $this->seoHelper = $this->app[\Arcanedev\SeoHelper\Contracts\SeoHelper::class];
+        $this->seoHelper = $this->app[SeoHelperContract::class];
     }
 
     public function tearDown()
@@ -35,10 +36,11 @@ class SeoHelperTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -49,7 +51,7 @@ class SeoHelperTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->seoHelper);
+            static::assertInstanceOf($expected, $this->seoHelper);
         }
     }
 
@@ -64,7 +66,7 @@ class SeoHelperTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->seoHelper);
+            static::assertInstanceOf($expected, $this->seoHelper);
         }
     }
 
@@ -80,7 +82,7 @@ class SeoHelperTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $seoMeta);
+            static::assertInstanceOf($expected, $seoMeta);
         }
     }
 
@@ -100,7 +102,7 @@ class SeoHelperTest extends TestCase
 
         foreach ($ogs as $seoOpenGraph) {
             foreach ($expectations as $expected) {
-                $this->assertInstanceOf($expected, $seoOpenGraph);
+                static::assertInstanceOf($expected, $seoOpenGraph);
             }
         }
     }
@@ -113,16 +115,16 @@ class SeoHelperTest extends TestCase
         $separator    = '|';
         $expectations = [
             "<title>$title $separator $siteName</title>",
-            '<meta property="og:title" content="' . $title . '">',
-            '<meta property="og:site_name" content="' . $siteName . '">',
-            '<meta name="twitter:title" content="' . $title . '">',
+            '<meta property="og:title" content="'.$title.'">',
+            '<meta property="og:site_name" content="'.$siteName.'">',
+            '<meta name="twitter:title" content="'.$title.'">',
         ];
 
         $this->seoHelper->setTitle($title, $siteName, $separator);
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->seoHelper->render());
-            $this->assertContains($expected, (string) $this->seoHelper);
+            static::assertContains($expected, $this->seoHelper->render());
+            static::assertContains($expected, (string) $this->seoHelper);
         }
     }
 
@@ -133,17 +135,17 @@ class SeoHelperTest extends TestCase
         $siteName     = 'ARCANEDEV';
         $expectations = [
             "<title>{$title} - {$siteName}</title>",
-            '<meta property="og:title" content="' . $title . '">',
-            '<meta property="og:site_name" content="' . $siteName . '">',
-            '<meta name="twitter:title" content="' . $title . '">',
+            '<meta property="og:title" content="'.$title.'">',
+            '<meta property="og:site_name" content="'.$siteName.'">',
+            '<meta name="twitter:title" content="'.$title.'">',
         ];
 
         $this->seoHelper->setSiteName($siteName)
                         ->setTitle($title);
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->seoHelper->render());
-            $this->assertContains($expected, (string) $this->seoHelper);
+            static::assertContains($expected, $this->seoHelper->render());
+            static::assertContains($expected, (string) $this->seoHelper);
         }
     }
 
@@ -155,21 +157,21 @@ class SeoHelperTest extends TestCase
 
         $this->seoHelper->setTitle($title, $siteName);
 
-        $this->assertContains(
+        static::assertContains(
             "<title>{$title} - {$siteName}</title>",
             $this->seoHelper->render()
         );
 
         $this->seoHelper->hideSiteName();
 
-        $this->assertContains(
+        static::assertContains(
             "<title>{$title}</title>",
             $this->seoHelper->render()
         );
 
         $this->seoHelper->showSiteName();
 
-        $this->assertContains(
+        static::assertContains(
             "<title>{$title} - {$siteName}</title>",
             $this->seoHelper->render()
         );
@@ -180,16 +182,16 @@ class SeoHelperTest extends TestCase
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
-            '<meta name="description" content="' . $description . '">',
-            '<meta property="og:description" content="' . $description . '">',
-            '<meta name="twitter:description" content="' . $description . '">',
+            '<meta name="description" content="'.$description.'">',
+            '<meta property="og:description" content="'.$description.'">',
+            '<meta name="twitter:description" content="'.$description.'">',
         ];
 
         $this->seoHelper->setDescription($description);
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $this->seoHelper->render());
-            $this->assertContains($expected, (string) $this->seoHelper);
+            static::assertContains($expected, $this->seoHelper->render());
+            static::assertContains($expected, (string) $this->seoHelper);
         }
     }
 
@@ -197,17 +199,17 @@ class SeoHelperTest extends TestCase
     public function it_can_set_and_render_keywords()
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
-        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
+        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
 
         $this->seoHelper->setKeywords($keywords); // Array
 
-        $this->assertContains($expected, $this->seoHelper->render());
-        $this->assertContains($expected, (string) $this->seoHelper);
+        static::assertContains($expected, $this->seoHelper->render());
+        static::assertContains($expected, (string) $this->seoHelper);
 
         $this->seoHelper->setKeywords(implode(',', $keywords)); // String
 
-        $this->assertContains($expected, $this->seoHelper->render());
-        $this->assertContains($expected, (string) $this->seoHelper);
+        static::assertContains($expected, $this->seoHelper->render());
+        static::assertContains($expected, (string) $this->seoHelper);
     }
 
     /** @test */
@@ -223,7 +225,7 @@ class SeoHelperTest extends TestCase
         $rendered = $this->seoHelper->render();
 
         foreach ($expectations as $expected) {
-            $this->assertContains($expected, $rendered);
+            static::assertContains($expected, $rendered);
         }
     }
 
@@ -232,7 +234,7 @@ class SeoHelperTest extends TestCase
     {
         $output = $this->seoHelper->render();
 
-        $this->assertNotEmpty($output);
+        static::assertNotEmpty($output);
     }
 
     /** @test */
@@ -240,8 +242,8 @@ class SeoHelperTest extends TestCase
     {
         $output = $this->seoHelper->renderHtml();
 
-        $this->assertInstanceOf(\Illuminate\Support\HtmlString::class, $output);
-        $this->assertNotEmpty($output->toHtml());
+        static::assertInstanceOf(\Illuminate\Support\HtmlString::class, $output);
+        static::assertNotEmpty($output->toHtml());
     }
 
     /** @test */
@@ -249,33 +251,33 @@ class SeoHelperTest extends TestCase
     {
         $needle = '<meta property="og:';
 
-        $this->assertTrue($this->seoHelper->openGraph()->isEnabled());
-        $this->assertFalse($this->seoHelper->openGraph()->isDisabled());
-        $this->assertContains($needle, $this->seoHelper->render());
+        static::assertTrue($this->seoHelper->openGraph()->isEnabled());
+        static::assertFalse($this->seoHelper->openGraph()->isDisabled());
+        static::assertContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->disableOpenGraph();
 
-        $this->assertFalse($this->seoHelper->openGraph()->isEnabled());
-        $this->assertTrue($this->seoHelper->openGraph()->isDisabled());
-        $this->assertNotContains($needle, $this->seoHelper->render());
+        static::assertFalse($this->seoHelper->openGraph()->isEnabled());
+        static::assertTrue($this->seoHelper->openGraph()->isDisabled());
+        static::assertNotContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->enableOpenGraph();
 
-        $this->assertTrue($this->seoHelper->openGraph()->isEnabled());
-        $this->assertFalse($this->seoHelper->openGraph()->isDisabled());
-        $this->assertContains($needle, $this->seoHelper->render());
+        static::assertTrue($this->seoHelper->openGraph()->isEnabled());
+        static::assertFalse($this->seoHelper->openGraph()->isDisabled());
+        static::assertContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->openGraph()->disable();
 
-        $this->assertFalse($this->seoHelper->openGraph()->isEnabled());
-        $this->assertTrue($this->seoHelper->openGraph()->isDisabled());
-        $this->assertNotContains($needle, $this->seoHelper->render());
+        static::assertFalse($this->seoHelper->openGraph()->isEnabled());
+        static::assertTrue($this->seoHelper->openGraph()->isDisabled());
+        static::assertNotContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->openGraph()->enable();
 
-        $this->assertTrue($this->seoHelper->openGraph()->isEnabled());
-        $this->assertFalse($this->seoHelper->openGraph()->isDisabled());
-        $this->assertContains($needle, $this->seoHelper->render());
+        static::assertTrue($this->seoHelper->openGraph()->isEnabled());
+        static::assertFalse($this->seoHelper->openGraph()->isDisabled());
+        static::assertContains($needle, $this->seoHelper->render());
     }
 
     /** @test */
@@ -283,32 +285,32 @@ class SeoHelperTest extends TestCase
     {
         $needle = '<meta name="twitter:';
 
-        $this->assertTrue($this->seoHelper->twitter()->isEnabled());
-        $this->assertFalse($this->seoHelper->twitter()->isDisabled());
-        $this->assertContains($needle, $this->seoHelper->render());
+        static::assertTrue($this->seoHelper->twitter()->isEnabled());
+        static::assertFalse($this->seoHelper->twitter()->isDisabled());
+        static::assertContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->disableTwitter();
 
-        $this->assertFalse($this->seoHelper->twitter()->isEnabled());
-        $this->assertTrue($this->seoHelper->twitter()->isDisabled());
-        $this->assertNotContains($needle, $this->seoHelper->render());
+        static::assertFalse($this->seoHelper->twitter()->isEnabled());
+        static::assertTrue($this->seoHelper->twitter()->isDisabled());
+        static::assertNotContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->enableTwitter();
 
-        $this->assertTrue($this->seoHelper->twitter()->isEnabled());
-        $this->assertFalse($this->seoHelper->twitter()->isDisabled());
-        $this->assertContains($needle, $this->seoHelper->render());
+        static::assertTrue($this->seoHelper->twitter()->isEnabled());
+        static::assertFalse($this->seoHelper->twitter()->isDisabled());
+        static::assertContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->twitter()->disable();
 
-        $this->assertFalse($this->seoHelper->twitter()->isEnabled());
-        $this->assertTrue($this->seoHelper->twitter()->isDisabled());
-        $this->assertNotContains($needle, $this->seoHelper->render());
+        static::assertFalse($this->seoHelper->twitter()->isEnabled());
+        static::assertTrue($this->seoHelper->twitter()->isDisabled());
+        static::assertNotContains($needle, $this->seoHelper->render());
 
         $this->seoHelper->twitter()->enable();
 
-        $this->assertTrue($this->seoHelper->twitter()->isEnabled());
-        $this->assertFalse($this->seoHelper->twitter()->isDisabled());
-        $this->assertContains($needle, $this->seoHelper->render());
+        static::assertTrue($this->seoHelper->twitter()->isEnabled());
+        static::assertFalse($this->seoHelper->twitter()->isDisabled());
+        static::assertContains($needle, $this->seoHelper->render());
     }
 }
