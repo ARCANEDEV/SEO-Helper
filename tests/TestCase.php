@@ -11,18 +11,6 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /* -----------------------------------------------------------------
-     |  Properties
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */

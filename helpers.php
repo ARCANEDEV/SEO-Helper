@@ -1,5 +1,7 @@
 <?php
 
+use Arcanedev\SeoHelper\Contracts\SeoHelper;
+
 if ( ! function_exists('seo_helper')) {
     /**
      * Get the SeoHelper instance.
@@ -7,6 +9,6 @@ if ( ! function_exists('seo_helper')) {
      * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
      */
     function seo_helper() {
-        return app(\Arcanedev\SeoHelper\Contracts\SeoHelper::class);
+        return app(SeoHelper::class);
     }
 }
