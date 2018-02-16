@@ -14,6 +14,7 @@ interface MiscTags extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the current URL.
      *
@@ -30,10 +31,18 @@ interface MiscTags extends Renderable
      */
     public function setUrl($url);
 
+    /**
+     * Get all the metas collection.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
+     */
+    public function all();
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make MiscTags instance.
      *

@@ -139,6 +139,16 @@ class SeoMeta implements SeoMetaContract
     }
 
     /**
+     * Get the Title instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Title
+     */
+    public function getTitleEntity()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set the Description instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Description  $description
@@ -150,6 +160,16 @@ class SeoMeta implements SeoMetaContract
         $this->description = $description;
 
         return $this;
+    }
+
+    /**
+     * Get the Description instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Description
+     */
+    public function getDescriptionEntity()
+    {
+        return $this->description;
     }
 
     /**
@@ -167,6 +187,16 @@ class SeoMeta implements SeoMetaContract
     }
 
     /**
+     * Get the Keywords instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Keywords
+     */
+    public function getKeywordsEntity()
+    {
+        return $this->keywords;
+    }
+
+    /**
      * Set the MiscTags instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags  $misc
@@ -178,6 +208,16 @@ class SeoMeta implements SeoMetaContract
         $this->misc = $misc;
 
         return $this;
+    }
+
+    /**
+     * Get the MiscTags instance.
+     *
+     * @return  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags
+     */
+    public function getMiscEntity()
+    {
+        return $this->misc;
     }
 
     /**
@@ -195,17 +235,37 @@ class SeoMeta implements SeoMetaContract
     }
 
     /**
+     * Get the Webmasters instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Webmasters
+     */
+    public function getWebmastersEntity()
+    {
+        return $this->webmasters;
+    }
+
+    /**
      * Set the Analytics instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Analytics  $analytics
      *
      * @return \Arcanedev\SeoHelper\SeoMeta
      */
-    private function analytics(AnalyticsContract $analytics)
+    public function analytics(AnalyticsContract $analytics)
     {
         $this->analytics = $analytics;
 
         return $this;
+    }
+
+    /**
+     * Get the Analytics instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Analytics
+     */
+    public function getAnalyticsEntity()
+    {
+        return $this->analytics;
     }
 
     /**

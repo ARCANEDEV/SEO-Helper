@@ -11,9 +11,22 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface Webmasters extends Renderable
 {
     /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get all the metas collection.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
+     */
+    public function all();
+
+    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Webmaster instance.
      *

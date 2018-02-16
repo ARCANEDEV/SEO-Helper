@@ -95,6 +95,16 @@ class MiscTags implements MiscTagsContract
         return $this;
     }
 
+    /**
+     * Get all the metas collection.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
+     */
+    public function all()
+    {
+        return $this->metas;
+    }
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
