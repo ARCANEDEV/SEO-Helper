@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\SeoHelper\Contracts;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
 use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
 use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
@@ -28,6 +29,13 @@ interface SeoMeta extends Renderable
     public function title(TitleContract $title);
 
     /**
+     * Get the Title instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Title
+     */
+    public function getTitleEntity();
+
+    /**
      * Set the Description instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Description  $description
@@ -35,6 +43,13 @@ interface SeoMeta extends Renderable
      * @return self
      */
     public function description(DescriptionContract $description);
+
+    /**
+     * Get the Description instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Description
+     */
+    public function getDescriptionEntity();
 
     /**
      * Set the Keywords instance.
@@ -46,6 +61,13 @@ interface SeoMeta extends Renderable
     public function keywords(KeywordsContract $keywords);
 
     /**
+     * Get the Keywords instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Keywords
+     */
+    public function getKeywordsEntity();
+
+    /**
      * Set the MiscTags instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags  $misc
@@ -55,6 +77,13 @@ interface SeoMeta extends Renderable
     public function misc(MiscTagsContract $misc);
 
     /**
+     * Get the MiscTags instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\MiscTags
+     */
+    public function getMiscEntity();
+
+    /**
      * Set the Webmasters instance.
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters  $webmasters
@@ -62,6 +91,29 @@ interface SeoMeta extends Renderable
      * @return self
      */
     public function webmasters(WebmastersContract $webmasters);
+
+    /**
+     * Get the Webmasters instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Webmasters
+     */
+    public function getWebmastersEntity();
+
+    /**
+     * Set the Analytics instance.
+     *
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Analytics  $analytics
+     *
+     * @return \Arcanedev\SeoHelper\SeoMeta
+     */
+    public function analytics(AnalyticsContract $analytics);
+
+    /**
+     * Get the Analytics instance.
+     *
+     * @return \Arcanedev\SeoHelper\Contracts\Entities\Analytics
+     */
+    public function getAnalyticsEntity();
 
     /**
      * Set the title.
