@@ -100,6 +100,21 @@ class SeoMetaTest extends TestCase
 
         static::assertContains($expected, $this->seoMeta->render());
         static::assertContains($expected, (string) $this->seoMeta);
+
+        // Entity
+        $titleEntity  = $this->seoMeta->getTitleEntity();
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\Entities\Title::class,
+            \Arcanedev\SeoHelper\Entities\Title::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $titleEntity);
+        }
+
+        static::assertSame($title, $titleEntity->getTitleOnly());
+        static::assertSame($siteName, $titleEntity->getSiteName());
+        static::assertSame($separator, $titleEntity->getSeparator());
     }
 
     /** @test */
@@ -112,6 +127,19 @@ class SeoMetaTest extends TestCase
 
         static::assertContains($expected, $this->seoMeta->render());
         static::assertContains($expected, (string) $this->seoMeta);
+
+        // Entity
+        $descriptionEntity = $this->seoMeta->getDescriptionEntity();
+        $expectations      = [
+            \Arcanedev\SeoHelper\Contracts\Entities\Description::class,
+            \Arcanedev\SeoHelper\Entities\Description::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $descriptionEntity);
+        }
+
+        static::assertSame($description, $descriptionEntity->getContent());
     }
 
     /** @test */
@@ -137,6 +165,21 @@ class SeoMetaTest extends TestCase
 
         static::assertNotContains('name="keywords"', $this->seoMeta->render());
         static::assertNotContains('name="keywords"', (string) $this->seoMeta);
+
+        // Entity
+        $this->seoMeta->setKeywords($keywords);
+
+        $keywordsEntity = $this->seoMeta->getKeywordsEntity();
+        $expecations    = [
+            \Arcanedev\SeoHelper\Contracts\Entities\Keywords::class,
+            \Arcanedev\SeoHelper\Entities\Keywords::class,
+        ];
+
+        foreach ($expecations as $expected) {
+            static::assertInstanceOf($expected, $keywordsEntity);
+        }
+
+        static::assertSame($keywords, $keywordsEntity->getContent());
     }
 
     /** @test */
@@ -247,6 +290,19 @@ class SeoMetaTest extends TestCase
         foreach (['viewport', 'copyright', 'expires'] as $blacklisted) {
             static::assertNotContains($blacklisted, $this->seoMeta->render());
         }
+
+        // Entity
+        $miscEntity   = $this->seoMeta->getMiscEntity();
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\Entities\MiscTags::class,
+            \Arcanedev\SeoHelper\Entities\MiscTags::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $miscEntity);
+        }
+
+        static::assertMetaCollection($miscEntity->all());
     }
 
     /** @test */
@@ -278,6 +334,19 @@ class SeoMetaTest extends TestCase
 
         static::assertContains($excepted, $this->seoMeta->render());
         static::assertContains($excepted, (string) $this->seoMeta);
+
+        // Entity
+        $webmastersEntity = $this->seoMeta->getWebmastersEntity();
+        $expectations     = [
+            \Arcanedev\SeoHelper\Contracts\Entities\Webmasters::class,
+            \Arcanedev\SeoHelper\Entities\Webmasters::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $webmastersEntity);
+        }
+
+        static::assertMetaCollection($webmastersEntity->all());
     }
 
     /** @test */
@@ -294,5 +363,38 @@ class SeoMetaTest extends TestCase
             "ga('create', 'UA-98765432-1', 'auto');",
             $this->seoMeta->render()
         );
+
+        // Entity
+        $analyticsEntity = $this->seoMeta->getAnalyticsEntity();
+        $expectations    = [
+            \Arcanedev\SeoHelper\Contracts\Entities\Analytics::class,
+            \Arcanedev\SeoHelper\Entities\Analytics::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $analyticsEntity);
+        }
+    }
+
+    /* -----------------------------------------------------------------
+     |  Custom Assertions
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Assert the meta collection.
+     *
+     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection  $metas
+     */
+    protected static function assertMetaCollection($metas)
+    {
+        $expectations = [
+            \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection::class,
+            \Arcanedev\SeoHelper\Entities\MetaCollection::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            static::assertInstanceOf($expected, $metas);
+        }
     }
 }
