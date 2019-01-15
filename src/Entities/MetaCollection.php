@@ -22,7 +22,8 @@ class MetaCollection extends BaseMetaCollection
      * @var array
      */
     protected $ignored = [
-        'description', 'keywords'
+        'description',
+        'keywords'
     ];
 
     /* -----------------------------------------------------------------

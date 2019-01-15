@@ -105,7 +105,8 @@ class Analytics implements AnalyticsContract
      */
     protected function renderGoogleScript()
     {
-        if (empty($this->google)) return '';
+        if (empty($this->google))
+            return '';
 
         return <<<EOT
 <script>

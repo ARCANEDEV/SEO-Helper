@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
+use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
-use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -155,9 +155,12 @@ class Keywords implements KeywordsContract
      */
     public function render()
     {
-        return $this->hasContent()
-            ? Meta::make($this->name, $this->get())->render()
-            : '';
+        if ( ! $this->hasContent())
+            return '';
+
+        return Meta::make()
+            ->attributes(['name' => $this->name, 'content' => $this->get()])
+            ->toHtml();
     }
 
     /**

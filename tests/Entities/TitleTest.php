@@ -63,7 +63,8 @@ class TitleTest extends TestCase
     public function it_can_get_default_title()
     {
         static::assertSame(
-            $this->getDefaultTitle(), $this->title->getTitleOnly()
+            $this->getDefaultTitle(),
+            $this->title->getTitleOnly()
         );
     }
 
@@ -100,7 +101,8 @@ class TitleTest extends TestCase
     public function it_can_get_default_separator()
     {
         static::assertSame(
-            $this->getDefaultSeparator(), $this->title->getSeparator()
+            $this->getDefaultSeparator(),
+            $this->title->getSeparator()
         );
     }
 
@@ -148,8 +150,8 @@ class TitleTest extends TestCase
         $siteName = $this->getDefaultSiteName();
         $expected = "<title>{$title} - {$siteName}</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
     /** @test */
@@ -163,56 +165,58 @@ class TitleTest extends TestCase
             ->set($title)
             ->setSiteName($siteName)
             ->setSeparator($separator);
+
         $expected = "<title>$title $separator $siteName</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setLast();
         $expected = "<title>$siteName $separator $title</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $separator = '|';
         $this->title->setSeparator($separator);
         $expected  = "<title>$siteName $separator $title</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setFirst();
         $expected = "<title>$title $separator $siteName</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setSiteName('');
         $expected = "<title>$title</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setLast();
         $expected = "<title>$title</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title
             ->setSiteName($siteName)
             ->setSeparator('')
             ->setFirst();
+
         $expected = "<title>$title $siteName</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setLast();
         $expected = "<title>$siteName $title</title>";
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
     /** @test */
@@ -232,8 +236,8 @@ class TitleTest extends TestCase
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
     /** @test */
@@ -247,22 +251,22 @@ class TitleTest extends TestCase
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->hideSiteName();
 
         $expected = '<title>Awesome title</title>';
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->showSiteName();
 
         $expected = '<title>Awesome title | Company Name</title>';
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
     /**
@@ -302,21 +306,22 @@ class TitleTest extends TestCase
         $max   = $this->getDefaultMax();
 
         $this->title->set($title)->setMax($max);
+
         $expected = '<title>'.str_limit($title, $max).'</title>';
 
-        static::assertSame($expected, $this->title->render());
-        static::assertSame($expected, (string) $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
     /** @test */
     public function it_can_render_title_with_accents()
     {
-        $title    = 'Ce package est intuitif, exceptionnel et bien sûr opérationnel';
+        $this->title->set('Ce package est intuitif, exceptionnel et bien sûr opérationnel');
+
         $expected = '<title>Ce package est intuitif, exceptionnel et bien sûr opéra...</title>';
 
-        $this->title->set($title);
-
-        static::assertSame($expected, $this->title->render());
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
     /**

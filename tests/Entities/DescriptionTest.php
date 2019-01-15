@@ -133,8 +133,8 @@ class DescriptionTest extends TestCase
 
         $expected = '<meta name="description" content="'.$description.'">';
 
-        static::assertSame($expected, $this->description->render());
-        static::assertSame($expected, (string) $this->description);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->description);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());
     }
 
     /** @test */
@@ -156,8 +156,8 @@ class DescriptionTest extends TestCase
 
         $expected = '<meta name="description" content="'.str_limit($content, $max).'">';
 
-        static::assertSame($expected, $this->description->render());
-        static::assertSame($expected, (string) $this->description);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->description);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());
     }
 
     /* -----------------------------------------------------------------
