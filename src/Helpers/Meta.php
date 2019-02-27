@@ -1,5 +1,7 @@
 <?php namespace Arcanedev\SeoHelper\Helpers;
 
+use Arcanedev\Html\Elements\Element;
+use Arcanedev\Html\Elements\Meta as HtmlMeta;
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Arr;
@@ -22,7 +24,7 @@ class Meta implements MetaContract
      *
      * @var string
      */
-    protected $prefix  = '';
+    protected $prefix = '';
 
     /**
      * The meta name property.
@@ -36,7 +38,7 @@ class Meta implements MetaContract
      *
      * @var string
      */
-    protected $name    = '';
+    protected $name = '';
 
     /**
      * Meta content.
@@ -194,7 +196,9 @@ class Meta implements MetaContract
      */
     public function render()
     {
-        return $this->isLink() ? $this->renderLink() : $this->renderMeta();
+        return $this->isLink()
+            ? $this->renderLink()
+            : $this->renderMeta();
     }
 
     /**
@@ -204,7 +208,12 @@ class Meta implements MetaContract
      */
     private function renderLink()
     {
-        return '<link rel="'.$this->getName(false).'" href="'.$this->getContent().'">';
+        return Element::withTag('link')
+            ->attributes([
+                'rel'  => $this->getName(false),
+                'href' => $this->getContent(),
+            ])
+            ->toHtml();
     }
 
     /**
@@ -217,7 +226,10 @@ class Meta implements MetaContract
         $content = Arr::wrap($this->getContent());
 
         return implode(PHP_EOL, array_map(function ($content) {
-            return "<meta {$this->nameProperty}=\"{$this->getName()}\" content=\"{$content}\">";
+            return HtmlMeta::make()->attributes([
+                $this->nameProperty => $this->getName(),
+                'content' => $content,
+            ])->toHtml();
         }, $content));
     }
 

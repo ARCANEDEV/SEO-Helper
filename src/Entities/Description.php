@@ -1,8 +1,8 @@
 <?php namespace Arcanedev\SeoHelper\Entities;
 
+use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
-use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\Support\Traits\Configurable;
 
 /**
@@ -153,9 +153,12 @@ class Description implements DescriptionContract
      */
     public function render()
     {
-        return $this->hasContent()
-            ? Meta::make($this->name, $this->get())->render()
-            : '';
+        if ( ! $this->hasContent())
+            return '';
+
+        return Meta::make()
+            ->attributes(['name' => $this->name, 'content' => $this->get()])
+            ->toHtml();
     }
 
     /**

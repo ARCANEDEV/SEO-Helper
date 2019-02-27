@@ -128,9 +128,9 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      */
     public function remove($names)
     {
-        $names = $this->prepareName($names);
-
-        return $this->forget($names);
+        return $this->forget(
+            $this->prepareName($names)
+        );
     }
 
     /**
@@ -140,11 +140,11 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      */
     public function render()
     {
-        $output = $this->map(function (Renderable $meta) {
-            return $meta->render();
-        })->toArray();
-
-        return implode(PHP_EOL, array_filter($output));
+        return $this->map(function (Renderable $meta) {
+                return $meta->render();
+            })
+            ->filter()
+            ->implode(PHP_EOL);
     }
 
     /**

@@ -136,33 +136,33 @@ class KeywordsTest extends TestCase
         $content  = $this->getDefaultContent();
         $expected = '<meta name="keywords" content="'.implode(', ', $content).'">';
 
-        static::assertSame($expected, $this->keywords->render());
-        static::assertSame($expected, (string) $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
 
         $this->keywords->set(implode(',', $content));
 
-        static::assertSame($expected, $this->keywords->render());
-        static::assertSame($expected, (string) $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
 
         $this->keywords->set(implode(' ,', $content));
 
-        static::assertSame($expected, $this->keywords->render());
-        static::assertSame($expected, (string) $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
 
         $this->keywords->set(implode(', ', $content));
 
-        static::assertSame($expected, $this->keywords->render());
-        static::assertSame($expected, (string) $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
 
         $this->keywords->set(implode(' , ', $content));
 
-        static::assertSame($expected, $this->keywords->render());
-        static::assertSame($expected, (string) $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
 
         $this->keywords->set(null);
 
-        static::assertEmpty($this->keywords->render());
         static::assertEmpty((string) $this->keywords);
+        static::assertEmpty($this->keywords->render());
     }
 
     /** @test */
@@ -171,11 +171,12 @@ class KeywordsTest extends TestCase
         $keywords       = $this->getDefaultContent();
         $this->keywords = Keywords::make($keywords);
 
+        static::assertSame($keywords, $this->keywords->getContent());
+
         $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
 
-        static::assertSame($keywords, $this->keywords->getContent());
-        static::assertSame($expected, $this->keywords->render());
-        static::assertSame($expected, (string) $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
+        static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
     }
 
     /* -----------------------------------------------------------------

@@ -327,6 +327,8 @@ class Card implements CardContract
      */
     private function prepareUsername($username)
     {
-        return starts_with($username, '@') ? $username : "@{$username}";
+        return starts_with($username, '@')
+            ? $username :
+            "@{$username}";
     }
 }
