@@ -24,7 +24,7 @@ class DescriptionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class DescriptionTest extends TestCase
         $this->description = new Description($config);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->description);
 
@@ -102,34 +102,30 @@ class DescriptionTest extends TestCase
         static::assertSame($max, $this->description->getMax());
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The description maximum lenght must be integer.
-     */
-    public function it_must_throw_invalid_max_lenght_type()
+    /** @test */
+    public function it_must_throw_invalid_max_length_type()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The description maximum length must be integer.');
+
         $this->description->setMax(null);
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The description maximum lenght must be greater 0.
-     */
-    public function it_must_throw_invalid_max_lenght_value()
+    /** @test */
+    public function it_must_throw_invalid_max_length_value()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The description maximum length must be greater 0.');
+
         $this->description->setMax(0);
     }
 
     /** @test */
     public function it_can_render()
     {
-        $description = 'Cool description about this package';
-
-        $this->description->set($description);
+        $this->description->set(
+            $description = 'Cool description about this package'
+        );
 
         $expected = '<meta name="description" content="'.$description.'">';
 

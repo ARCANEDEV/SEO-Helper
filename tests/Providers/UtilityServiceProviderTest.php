@@ -24,14 +24,14 @@ class UtilityServiceProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->provider = $this->app->getProvider(UtilityServiceProvider::class);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->provider);
 
@@ -47,9 +47,9 @@ class UtilityServiceProviderTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Providers\UtilityServiceProvider::class,
-            \Arcanedev\Support\ServiceProvider::class,
             \Illuminate\Support\ServiceProvider::class,
+            \Arcanedev\Support\ServiceProvider::class,
+            \Arcanedev\SeoHelper\Providers\UtilityServiceProvider::class,
         ];
 
         foreach ($expectations as $expected) {

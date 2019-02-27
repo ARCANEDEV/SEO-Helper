@@ -390,11 +390,11 @@ class Title implements TitleContract
     private function checkMax($max)
     {
         if ( ! is_int($max)) {
-            throw new InvalidArgumentException('The title maximum lenght must be integer.');
+            throw new InvalidArgumentException('The title maximum length must be integer.');
         }
 
         if ($max <= 0) {
-            throw new InvalidArgumentException('The title maximum lenght must be greater 0.');
+            throw new InvalidArgumentException('The title maximum length must be greater 0.');
         }
     }
 

@@ -24,7 +24,7 @@ class GraphTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class GraphTest extends TestCase
         $this->og = new Graph($config);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->og);
 
@@ -84,8 +84,8 @@ class GraphTest extends TestCase
 
             $expected = '<meta property="og:type" content="'.$type.'">';
 
-            static::assertContains($expected, $this->og->render());
-            static::assertContains($expected, (string) $this->og);
+            static::assertStringContainsString($expected, $this->og->render());
+            static::assertStringContainsString($expected, (string) $this->og);
         }
     }
 
@@ -98,8 +98,8 @@ class GraphTest extends TestCase
 
         $expected = '<meta property="og:title" content="'.$title.'">';
 
-        static::assertContains($expected, $this->og->render());
-        static::assertContains($expected, (string) $this->og);
+        static::assertStringContainsString($expected, $this->og->render());
+        static::assertStringContainsString($expected, (string) $this->og);
     }
 
     /** @test */
@@ -111,8 +111,8 @@ class GraphTest extends TestCase
 
         $expected = '<meta property="og:description" content="'.$description.'">';
 
-        static::assertContains($expected, $this->og->render());
-        static::assertContains($expected, (string) $this->og);
+        static::assertStringContainsString($expected, $this->og->render());
+        static::assertStringContainsString($expected, (string) $this->og);
     }
 
     /** @test */
@@ -124,8 +124,8 @@ class GraphTest extends TestCase
 
         $expected = '<meta property="og:url" content="'.$url.'">';
 
-        static::assertContains($expected, $this->og->render());
-        static::assertContains($expected, (string) $this->og);
+        static::assertStringContainsString($expected, $this->og->render());
+        static::assertStringContainsString($expected, (string) $this->og);
     }
 
     /** @test */
@@ -137,8 +137,8 @@ class GraphTest extends TestCase
 
         $expected = '<meta property="og:image" content="'.$image.'">';
 
-        static::assertContains($expected, $this->og->render());
-        static::assertContains($expected, (string) $this->og);
+        static::assertStringContainsString($expected, $this->og->render());
+        static::assertStringContainsString($expected, (string) $this->og);
     }
 
     /** @test */
@@ -150,8 +150,8 @@ class GraphTest extends TestCase
 
         $expected = '<meta property="og:site_name" content="'.$siteName.'">';
 
-        static::assertContains($expected, $this->og->render());
-        static::assertContains($expected, (string) $this->og);
+        static::assertStringContainsString($expected, $this->og->render());
+        static::assertStringContainsString($expected, (string) $this->og);
     }
 
     /** @test */
@@ -163,8 +163,8 @@ class GraphTest extends TestCase
 
         $expected = '<meta property="og:locale" content="'.$locale.'">';
 
-        static::assertContains($expected, $this->og->render());
-        static::assertContains($expected, (string) $this->og);
+        static::assertStringContainsString($expected, $this->og->render());
+        static::assertStringContainsString($expected, (string) $this->og);
     }
 
     /** @test */
@@ -184,8 +184,8 @@ class GraphTest extends TestCase
         $this->og->addProperties($properties);
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->og->render());
-            static::assertContains($expected, (string) $this->og);
+            static::assertStringContainsString($expected, $this->og->render());
+            static::assertStringContainsString($expected, (string) $this->og);
         }
     }
 
@@ -195,7 +195,7 @@ class GraphTest extends TestCase
         $locales = ['fr_FR', 'en_GB', 'es_ES'];
 
         foreach ($locales as $locale) {
-            static::assertContains(
+            static::assertStringContainsString(
                 '<meta property="og:locale" content="'.$locale.'">',
                 $this->og->setLocale($locale)->render()
             );
@@ -216,7 +216,7 @@ class GraphTest extends TestCase
         $actual = $this->og->render();
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $actual);
+            static::assertStringContainsString($expected, $actual);
         }
     }
 }

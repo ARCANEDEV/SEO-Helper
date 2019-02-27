@@ -25,7 +25,7 @@ class MiscTagsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +35,7 @@ class MiscTagsTest extends TestCase
         $this->misc->setUrl($this->baseUrl);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->misc);
 
@@ -68,8 +68,8 @@ class MiscTagsTest extends TestCase
 
         $expected = '<link rel="canonical" href="'.$url.'">';
 
-        static::assertContains($expected, $this->misc->render());
-        static::assertContains($expected, (string) $this->misc);
+        static::assertStringContainsString($expected, $this->misc->render());
+        static::assertStringContainsString($expected, (string) $this->misc);
 
         $this->misc = new MiscTags(['canonical' => false]);
 
@@ -82,8 +82,8 @@ class MiscTagsTest extends TestCase
     {
         $expected = '<meta name="robots" content="noindex, nofollow">';
 
-        static::assertContains($expected, $this->misc->render());
-        static::assertContains($expected, (string) $this->misc);
+        static::assertStringContainsString($expected, $this->misc->render());
+        static::assertStringContainsString($expected, (string) $this->misc);
 
         $this->misc = new MiscTags(['robots' => false]);
 
@@ -107,8 +107,8 @@ class MiscTagsTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->misc->render());
-            static::assertContains($expected, (string) $this->misc);
+            static::assertStringContainsString($expected, $this->misc->render());
+            static::assertStringContainsString($expected, (string) $this->misc);
         }
     }
 
@@ -122,7 +122,7 @@ class MiscTagsTest extends TestCase
         $output = $this->misc->render();
 
         foreach (compact('robots', 'canonical', 'viewport') as $expected) {
-            static::assertContains($expected, $output);
+            static::assertStringContainsString($expected, $output);
         }
 
         $author    = 'https://plus.google.com/+AuthorProfile';
@@ -161,16 +161,16 @@ class MiscTagsTest extends TestCase
         $output = $this->misc->render();
 
         foreach (compact('robots', 'canonical', 'viewport') as $expected) {
-            static::assertContains($expected, $output);
+            static::assertStringContainsString($expected, $output);
         }
 
         $this->misc->remove('robots');
 
-        static::assertNotContains($robots, $this->misc->render());
+        static::assertStringNotContainsString($robots, $this->misc->render());
 
         $this->misc->remove('canonical');
 
-        static::assertNotContains($canonical, $this->misc->render());
+        static::assertStringNotContainsString($canonical, $this->misc->render());
 
         $this->misc->remove('viewport');
 
@@ -194,8 +194,8 @@ class MiscTagsTest extends TestCase
 
         $output = $this->misc->render();
 
-        static::assertContains('<meta name="copyright" content="ARCANEDEV">', $output);
-        static::assertContains('<meta name="expires" content="never">', $output);
+        static::assertStringContainsString('<meta name="copyright" content="ARCANEDEV">', $output);
+        static::assertStringContainsString('<meta name="expires" content="never">', $output);
 
         $this->misc->remove(['copyright', 'expires']);
 
@@ -231,8 +231,8 @@ class MiscTagsTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->misc->render());
-            static::assertContains($expected, (string) $this->misc);
+            static::assertStringContainsString($expected, $this->misc->render());
+            static::assertStringContainsString($expected, (string) $this->misc);
         }
 
         $this->misc->remove(['expires', 'document-rating']);

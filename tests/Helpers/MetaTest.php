@@ -24,9 +24,9 @@ class MetaTest extends TestCase
             new Meta('name', 'Hello world'),
         ];
         $expectations = [
-            \Arcanedev\SeoHelper\Helpers\Meta::class,
-            \Arcanedev\SeoHelper\Contracts\Helpers\Meta::class,
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            \Arcanedev\SeoHelper\Contracts\Helpers\Meta::class,
+            \Arcanedev\SeoHelper\Helpers\Meta::class,
         ];
 
         foreach ($results as $actual) {
@@ -43,7 +43,7 @@ class MetaTest extends TestCase
     /** @test */
     public function it_can_valid()
     {
-        $valids  = [
+        $valids = [
             Meta::make('name', 'Hello world')
         ];
 
@@ -145,25 +145,21 @@ class MetaTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The meta name property is must be a string value, NULL is given.
-     */
+    /** @test */
     public function it_must_throw_an_invalid_argument_exception_on_invalid_type()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The meta name property is must be a string value, NULL is given.');
+
         Meta::make('title', 'Hello World')->setNameProperty(null);
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The meta name property [foo] is not supported, the allowed name properties are ['charset', 'http-equiv', 'itemprop', 'name', 'property'].
-     */
+    /** @test */
     public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage("The meta name property [foo] is not supported, the allowed name properties are ['charset', 'http-equiv', 'itemprop', 'name', 'property'].");
+
         Meta::make('title', 'Hello World')->setNameProperty('foo');
     }
 
@@ -184,7 +180,7 @@ class MetaTest extends TestCase
         $actual = $meta->render();
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $actual);
+            static::assertStringContainsString($expected, $actual);
         }
     }
 }

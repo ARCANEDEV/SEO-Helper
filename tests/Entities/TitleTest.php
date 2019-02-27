@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\SeoHelper\Tests\Entities;
 
-use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -25,7 +24,7 @@ class TitleTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +32,7 @@ class TitleTest extends TestCase
         $this->title = new Title($config);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->title);
 
@@ -269,25 +268,21 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The title must be a string value, [NULL] is given.
-     */
+    /** @test */
     public function it_must_throw_title_exception_on_invalid_type()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The title must be a string value, [NULL] is given.');
+
         $this->title->set(null);
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The title is required and must not be empty.
-     */
+    /** @test */
     public function it_must_throw_title_exception_on_empty_title()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The title is required and must not be empty.');
+
         $this->title->set('  ');
     }
 
@@ -324,25 +319,21 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The title maximum lenght must be integer.
-     */
-    public function it_must_throw_invalid_max_lenght_type()
+    /** @test */
+    public function it_must_throw_invalid_max_length_type()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The title maximum length must be integer.');
+
         $this->title->setMax(null);
     }
 
-    /**
-     * @test
-     *
-     * @expectedException         \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
-     * @expectedExceptionMessage  The title maximum lenght must be greater 0.
-     */
-    public function it_must_throw_invalid_max_lenght_value()
+    /** @test */
+    public function it_must_throw_invalid_max_length_value()
     {
+        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The title maximum length must be greater 0.');
+
         $this->title->setMax(0);
     }
 

@@ -4,6 +4,7 @@ use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\Support\Traits\Configurable;
+use Illuminate\Support\Str;
 
 /**
  * Class     Description
@@ -85,7 +86,7 @@ class Description implements DescriptionContract
      */
     public function get()
     {
-        return str_limit($this->getContent(), $this->getMax());
+        return Str::limit($this->getContent(), $this->getMax());
     }
 
     /**
@@ -197,13 +198,13 @@ class Description implements DescriptionContract
     {
         if ( ! is_int($max)) {
             throw new InvalidArgumentException(
-                'The description maximum lenght must be integer.'
+                'The description maximum length must be integer.'
             );
         }
 
         if ($max <= 0) {
             throw new InvalidArgumentException(
-                'The description maximum lenght must be greater 0.'
+                'The description maximum length must be greater 0.'
             );
         }
     }

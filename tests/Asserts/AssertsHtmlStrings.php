@@ -24,13 +24,10 @@ trait AssertsHtmlStrings
      */
     public static function assertHtmlStringEqualsHtmlString(string $expected, string $actual, string $message = '')
     {
-        static::assertEquals(
+        static::assertEqualsCanonicalizing(
             static::convertToDomDocument($expected),
             static::convertToDomDocument($actual),
-            $message,
-            0.0,
-            10,
-            true
+            $message
         );
     }
 

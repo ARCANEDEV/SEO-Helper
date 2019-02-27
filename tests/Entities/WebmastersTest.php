@@ -24,7 +24,7 @@ class WebmastersTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class WebmastersTest extends TestCase
         $this->webmasters = new Webmasters($configs);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->webmasters);
 
@@ -70,8 +70,8 @@ class WebmastersTest extends TestCase
         ];
 
         foreach ($expectations as $excepted) {
-            static::assertContains($excepted, $this->webmasters->render());
-            static::assertContains($excepted, (string) $this->webmasters);
+            static::assertStringContainsString($excepted, $this->webmasters->render());
+            static::assertStringContainsString($excepted, (string) $this->webmasters);
         }
     }
 
@@ -90,8 +90,8 @@ class WebmastersTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->webmasters->render());
-            static::assertContains($expected, (string) $this->webmasters);
+            static::assertStringContainsString($expected, $this->webmasters->render());
+            static::assertStringContainsString($expected, (string) $this->webmasters);
         }
     }
 

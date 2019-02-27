@@ -81,7 +81,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     public function addMany(array $metas)
     {
         foreach ($metas as $name => $content) {
-            $this->add($name, $content);
+            $this->addOne($name, $content);
         }
 
         return $this;
@@ -95,9 +95,10 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      *
      * @return \Arcanedev\SeoHelper\Bases\MetaCollection
      */
-    public function add($name, $content)
+    public function addOne($name, $content)
     {
-        if (empty($name) || empty($content)) return $this;
+        if (empty($name) || empty($content))
+            return $this;
 
         return $this->addMeta($name, $content);
     }
@@ -114,9 +115,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     {
         $meta = Meta::make($name, $content, $this->nameProperty, $this->prefix);
 
-        $this->put($meta->key(), $meta);
-
-        return $this;
+        return $this->put($meta->key(), $meta);
     }
 
     /**
