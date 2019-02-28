@@ -23,7 +23,7 @@ class SeoTwitterTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -31,7 +31,7 @@ class SeoTwitterTest extends TestCase
         $this->seoTwitter = new SeoTwitter($configs);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->seoTwitter);
 
@@ -69,7 +69,7 @@ class SeoTwitterTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $output);
+            static::assertStringContainsString($expected, $output);
         }
     }
 
@@ -80,8 +80,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:card" content="app">';
 
-        static::assertContains($expected, $this->seoTwitter->render());
-        static::assertContains($expected, (string) $this->seoTwitter);
+        static::assertStringContainsString($expected, $this->seoTwitter->render());
+        static::assertStringContainsString($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -91,8 +91,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:site" content="@Arcanedev">';
 
-        static::assertContains($expected, $this->seoTwitter->render());
-        static::assertContains($expected, (string) $this->seoTwitter);
+        static::assertStringContainsString($expected, $this->seoTwitter->render());
+        static::assertStringContainsString($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -102,8 +102,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:title" content="ARCANEDEV super title">';
 
-        static::assertContains($expected, $this->seoTwitter->render());
-        static::assertContains($expected, (string) $this->seoTwitter);
+        static::assertStringContainsString($expected, $this->seoTwitter->render());
+        static::assertStringContainsString($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -113,8 +113,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:description" content="ARCANEDEV super description">';
 
-        static::assertContains($expected, $this->seoTwitter->render());
-        static::assertContains($expected, (string) $this->seoTwitter);
+        static::assertStringContainsString($expected, $this->seoTwitter->render());
+        static::assertStringContainsString($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -124,8 +124,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:image" content="http://example.com/img/avatar.png">';
 
-        static::assertContains($expected, $this->seoTwitter->render());
-        static::assertContains($expected, (string) $this->seoTwitter);
+        static::assertStringContainsString($expected, $this->seoTwitter->render());
+        static::assertStringContainsString($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -152,8 +152,8 @@ class SeoTwitterTest extends TestCase
 
         $expected = '<meta name="twitter:creator" content="@Arcanedev">';
 
-        static::assertContains($expected, $this->seoTwitter->render());
-        static::assertContains($expected, (string) $this->seoTwitter);
+        static::assertStringContainsString($expected, $this->seoTwitter->render());
+        static::assertStringContainsString($expected, (string) $this->seoTwitter);
     }
 
     /** @test */
@@ -173,8 +173,8 @@ class SeoTwitterTest extends TestCase
         $this->seoTwitter->addMetas($metas);
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->seoTwitter->render());
-            static::assertContains($expected, (string) $this->seoTwitter);
+            static::assertStringContainsString($expected, $this->seoTwitter->render());
+            static::assertStringContainsString($expected, (string) $this->seoTwitter);
         }
     }
 

@@ -3,6 +3,7 @@
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 use Arcanedev\Support\Traits\Configurable;
+use Illuminate\Support\Str;
 
 /**
  * Class     Card
@@ -195,7 +196,7 @@ class Card implements CardContract
      */
     public function addMeta($name, $content)
     {
-        $this->metas->add($name, $content);
+        $this->metas->addOne($name, $content);
 
         return $this;
     }
@@ -327,7 +328,7 @@ class Card implements CardContract
      */
     private function prepareUsername($username)
     {
-        return starts_with($username, '@')
+        return Str::startsWith($username, '@')
             ? $username :
             "@{$username}";
     }

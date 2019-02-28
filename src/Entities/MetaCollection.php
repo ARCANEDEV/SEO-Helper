@@ -39,7 +39,7 @@ class MetaCollection extends BaseMetaCollection
      *
      * @return \Arcanedev\SeoHelper\Entities\MetaCollection
      */
-    public function add($name, $content)
+    public function addOne($name, $content)
     {
         $meta = Meta::make($name, $content);
 

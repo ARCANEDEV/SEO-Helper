@@ -24,7 +24,7 @@ class KeywordsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class KeywordsTest extends TestCase
         $this->keywords = new Keywords($config);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->keywords);
 

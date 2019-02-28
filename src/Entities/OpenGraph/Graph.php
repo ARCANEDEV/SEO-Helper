@@ -200,7 +200,7 @@ class Graph implements OpenGraphContract
      */
     public function addProperty($property, $content)
     {
-        $this->metas->add($property, $content);
+        $this->metas->addOne($property, $content);
 
         return $this;
     }

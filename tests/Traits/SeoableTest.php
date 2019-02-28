@@ -24,14 +24,14 @@ class SeoableTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->dummy = new Dummy;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->dummy);
 
@@ -121,11 +121,11 @@ class SeoableTest extends TestCase
         $this->dummy->setTitle($title, $siteName, $separator);
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->dummy->seo()->render());
-            static::assertContains($expected, (string) $this->dummy->seo());
+            static::assertStringContainsString($expected, $this->dummy->seo()->render());
+            static::assertStringContainsString($expected, (string) $this->dummy->seo());
 
-            static::assertContains($expected, seo_helper()->render());
-            static::assertContains($expected, (string) seo_helper());
+            static::assertStringContainsString($expected, seo_helper()->render());
+            static::assertStringContainsString($expected, (string) seo_helper());
         }
     }
 
@@ -142,11 +142,11 @@ class SeoableTest extends TestCase
         $this->dummy->setDescription($description);
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->dummy->seo()->render());
-            static::assertContains($expected, (string) $this->dummy->seo());
+            static::assertStringContainsString($expected, $this->dummy->seo()->render());
+            static::assertStringContainsString($expected, (string) $this->dummy->seo());
 
-            static::assertContains($expected, seo_helper()->render());
-            static::assertContains($expected, (string) seo_helper());
+            static::assertStringContainsString($expected, seo_helper()->render());
+            static::assertStringContainsString($expected, (string) seo_helper());
         }
     }
 
@@ -158,18 +158,18 @@ class SeoableTest extends TestCase
 
         $this->dummy->setKeywords($keywords); // Array
 
-        static::assertContains($expected, $this->dummy->seo()->render());
-        static::assertContains($expected, (string) $this->dummy->seo());
+        static::assertStringContainsString($expected, $this->dummy->seo()->render());
+        static::assertStringContainsString($expected, (string) $this->dummy->seo());
 
-        static::assertContains($expected, seo_helper()->render());
-        static::assertContains($expected, (string) seo_helper());
+        static::assertStringContainsString($expected, seo_helper()->render());
+        static::assertStringContainsString($expected, (string) seo_helper());
 
         $this->dummy->setKeywords(implode(',', $keywords)); // String
 
-        static::assertContains($expected, $this->dummy->seo()->render());
-        static::assertContains($expected, (string) $this->dummy->seo());
+        static::assertStringContainsString($expected, $this->dummy->seo()->render());
+        static::assertStringContainsString($expected, (string) $this->dummy->seo());
 
-        static::assertContains($expected, seo_helper()->render());
-        static::assertContains($expected, (string) seo_helper());
+        static::assertStringContainsString($expected, seo_helper()->render());
+        static::assertStringContainsString($expected, (string) seo_helper());
     }
 }

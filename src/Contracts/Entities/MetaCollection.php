@@ -22,7 +22,7 @@ interface MetaCollection extends Renderable
      *
      * @return self
      */
-    public function add($name, $content);
+    public function addOne($name, $content);
 
     /**
      * Add many meta tags.

@@ -24,14 +24,14 @@ class MetaCollectionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->metas = new MetaCollection;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->metas);
 
@@ -62,11 +62,11 @@ class MetaCollectionTest extends TestCase
     /** @test */
     public function it_can_add_meta()
     {
-        $this->metas->add('robots', 'noindex, nofollow');
+        $this->metas->addOne('robots', 'noindex, nofollow');
 
         static::assertCount(1, $this->metas);
 
-        $this->metas->add('canonical', $this->baseUrl);
+        $this->metas->addOne('canonical', $this->baseUrl);
 
         static::assertCount(2, $this->metas);
     }
@@ -74,7 +74,7 @@ class MetaCollectionTest extends TestCase
     /** @test */
     public function it_can_render_meta_tags()
     {
-        $this->metas->add('robots', 'noindex, nofollow');
+        $this->metas->addOne('robots', 'noindex, nofollow');
 
         $expected = '<meta name="robots" content="noindex, nofollow">';
 
@@ -85,7 +85,7 @@ class MetaCollectionTest extends TestCase
     /** @test */
     public function it_can_render_link_tags()
     {
-        $this->metas->add('canonical', $this->baseUrl);
+        $this->metas->addOne('canonical', $this->baseUrl);
 
         static::assertSame(
             '<link rel="canonical" href="'.$this->baseUrl.'">',

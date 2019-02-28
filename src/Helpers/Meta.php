@@ -5,6 +5,7 @@ use Arcanedev\Html\Elements\Meta as HtmlMeta;
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class     Meta
@@ -286,7 +287,7 @@ class Meta implements MetaContract
             );
         }
 
-        $name    = str_slug($nameProperty);
+        $name    = Str::slug($nameProperty);
         $allowed = ['charset', 'http-equiv', 'itemprop', 'name', 'property'];
 
         if ( ! in_array($name, $allowed)) {

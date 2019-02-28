@@ -127,7 +127,7 @@ class Webmasters implements WebmastersContract
     public function add($webmaster, $content)
     {
         if ( ! is_null($name = $this->getWebmasterName($webmaster))) {
-            $this->metas->add($name, $content);
+            $this->metas->addOne($name, $content);
         }
 
         return $this;

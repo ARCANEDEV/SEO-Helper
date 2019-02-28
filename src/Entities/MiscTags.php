@@ -132,7 +132,7 @@ class MiscTags implements MiscTagsContract
      */
     public function add($name, $content)
     {
-        $this->metas->add($name, $content);
+        $this->metas->addOne($name, $content);
 
         return $this;
     }

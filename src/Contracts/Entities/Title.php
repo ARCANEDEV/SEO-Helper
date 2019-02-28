@@ -114,7 +114,7 @@ interface Title extends Renderable
     public function getMax();
 
     /**
-     * Set title max lenght.
+     * Set title max length.
      *
      * @param  int  $max
      *

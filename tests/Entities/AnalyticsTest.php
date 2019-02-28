@@ -24,7 +24,7 @@ class AnalyticsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class AnalyticsTest extends TestCase
         $this->analytics = new Analytics($config);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->analytics);
 
@@ -76,8 +76,8 @@ class AnalyticsTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            static::assertContains($expected, $this->analytics->render());
-            static::assertContains($expected, (string) $this->analytics);
+            static::assertStringContainsString($expected, $this->analytics->render());
+            static::assertStringContainsString($expected, (string) $this->analytics);
         }
     }
 }
