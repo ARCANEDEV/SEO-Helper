@@ -130,6 +130,15 @@ interface SeoHelper extends Renderable
      */
     public function setImage($imageUrl);
 
+    /**
+     * Set the current URL.
+     *
+     * @param  string  $url
+     *
+     * @return \Arcanedev\SeoHelper\SeoHelper
+     */
+    public function setUrl($url);
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
