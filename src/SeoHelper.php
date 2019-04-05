@@ -253,6 +253,21 @@ class SeoHelper implements SeoHelperContract
         return $this;
     }
 
+    /**
+     * Set the current URL.
+     * 
+     * @param  string  $url
+     *
+     * @return \Arcanedev\SeoHelper\SeoHelper
+     */
+    public function setUrl($url)
+    {
+        $this->meta()->setUrl($url);
+        $this->openGraph()->setUrl($url);
+
+        return $this;
+    }
+
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------

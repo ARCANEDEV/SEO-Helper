@@ -229,6 +229,23 @@ class SeoHelperTest extends TestCase
             static::assertStringContainsString($expected, $rendered);
         }
     }
+    
+    /** @test */
+    public function it_can_set_and_render_url()
+    {
+        $this->seoHelper->setUrl($url = 'http://localhost/path');
+
+        $expectations = [
+            '<link rel="canonical" href="'.$url.'">',
+            '<meta property="og:url" content="'.$url.'">'
+        ];
+
+        $rendered = $this->seoHelper->render();
+
+        foreach ($expectations as $expected) {
+            static::assertStringContainsString($expected, $rendered);
+        }
+    }
 
     /** @test */
     public function it_can_render_all()
