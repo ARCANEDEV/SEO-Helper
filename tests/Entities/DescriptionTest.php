@@ -2,6 +2,7 @@
 
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use Illuminate\Support\Str;
 
 /**
  * Class     DescriptionTest
@@ -150,7 +151,7 @@ class DescriptionTest extends TestCase
 
         $this->description->set($content)->setMax($max);
 
-        $expected = '<meta name="description" content="'.str_limit($content, $max).'">';
+        $expected = '<meta name="description" content="'.Str::limit($content, $max).'">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->description);
         static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());

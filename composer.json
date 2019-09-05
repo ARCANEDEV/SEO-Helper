@@ -17,15 +17,15 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php":                ">=7.1.3",
-        "arcanedev/php-html": "~2.0",
-        "arcanedev/support":  "~4.5.0"
+        "php":                ">=7.2.0",
+        "arcanedev/php-html": "~3.0",
+        "arcanedev/support":  "~5.0.0"
     },
     "require-dev": {
         "ext-dom":             "*",
-        "orchestra/testbench": "~3.8.0",
-        "phpunit/phpcov":      "~5.0|~6.0",
-        "phpunit/phpunit":     "~7.0|~8.0"
+        "orchestra/testbench": "~4.0.0",
+        "phpunit/phpcov":      "~6.0",
+        "phpunit/phpunit":     "~8.0"
     },
     "autoload": {
         "psr-4": {
