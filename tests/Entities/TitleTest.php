@@ -2,6 +2,8 @@
 
 use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class     TitleTest
@@ -123,7 +125,7 @@ class TitleTest extends TestCase
     public function it_can_get_default_title_position()
     {
         static::assertSame(
-            array_get($this->getTitleConfig(), 'first', true),
+            Arr::get($this->getTitleConfig(), 'first', true),
             $this->title->isTitleFirst()
         );
     }
@@ -302,7 +304,7 @@ class TitleTest extends TestCase
 
         $this->title->set($title)->setMax($max);
 
-        $expected = '<title>'.str_limit($title, $max).'</title>';
+        $expected = '<title>'.Str::limit($title, $max).'</title>';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
