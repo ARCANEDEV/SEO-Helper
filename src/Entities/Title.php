@@ -353,7 +353,7 @@ class Title implements TitleContract
      *
      * @return bool
      */
-    private function hasSiteName()
+    private function hasSiteName(): bool
     {
         return ! empty($this->getSiteName()) && $this->siteNameVisibility;
     }
@@ -365,7 +365,7 @@ class Title implements TitleContract
      *
      * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      */
-    private function checkTitle(&$title)
+    private function checkTitle(&$title): void
     {
         if ( ! is_string($title)) {
             $type = gettype($title);
@@ -387,7 +387,7 @@ class Title implements TitleContract
      *
      * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      */
-    private function checkMax($max)
+    private function checkMax($max): void
     {
         if ( ! is_int($max)) {
             throw new InvalidArgumentException('The title maximum length must be integer.');
@@ -410,7 +410,7 @@ class Title implements TitleContract
      *
      * @return string
      */
-    private function renderTitleFirst($separator)
+    private function renderTitleFirst(string $separator): string
     {
         $output   = [];
         $output[] = $this->getTitleOnly();
@@ -430,7 +430,7 @@ class Title implements TitleContract
      *
      * @return string
      */
-    private function renderTitleLast($separator)
+    private function renderTitleLast(string $separator): string
     {
         $output = [];
 
@@ -451,7 +451,7 @@ class Title implements TitleContract
      *
      * @return string
      */
-    private function prepareTitleOutput($output)
+    private function prepareTitleOutput(string $output): string
     {
         return htmlspecialchars(
             Str::limit(strip_tags($output), $this->getMax()), ENT_QUOTES, 'UTF-8', false

@@ -207,7 +207,7 @@ class MiscTags implements MiscTagsContract
      *
      * @return bool
      */
-    private function hasUrl()
+    private function hasUrl(): bool
     {
         return ! empty($this->getUrl());
     }
@@ -217,7 +217,7 @@ class MiscTags implements MiscTagsContract
      *
      * @return bool
      */
-    private function isCanonicalEnabled()
+    private function isCanonicalEnabled(): bool
     {
         return (bool) $this->getConfig('canonical', false);
     }
@@ -227,7 +227,7 @@ class MiscTags implements MiscTagsContract
      *
      * @return bool
      */
-    private function isRobotsEnabled()
+    private function isRobotsEnabled(): bool
     {
         return (bool) $this->getConfig('robots', false);
     }
@@ -242,7 +242,7 @@ class MiscTags implements MiscTagsContract
      *
      * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
-    private function addRobotsMeta()
+    private function addRobotsMeta(): self
     {
         if ($this->isRobotsEnabled())
             $this->add('robots', 'noindex, nofollow');
@@ -255,7 +255,7 @@ class MiscTags implements MiscTagsContract
      *
      * @return \Arcanedev\SeoHelper\Entities\MiscTags
      */
-    private function addCanonical()
+    private function addCanonical(): self
     {
         if ($this->isCanonicalEnabled() && $this->hasUrl())
             $this->add('canonical', $this->currentUrl);

@@ -31,7 +31,7 @@ class Description implements DescriptionContract
      *
      * @var string
      */
-    protected $name    = 'description';
+    protected $name = 'description';
 
     /**
      * The meta content.
@@ -45,7 +45,7 @@ class Description implements DescriptionContract
      *
      * @var int
      */
-    protected $max     = 155;
+    protected $max = 155;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -182,7 +182,7 @@ class Description implements DescriptionContract
      *
      * @return bool
      */
-    private function hasContent()
+    private function hasContent(): bool
     {
         return ! empty($this->get());
     }
@@ -194,7 +194,7 @@ class Description implements DescriptionContract
      *
      * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
      */
-    private function checkMax($max)
+    private function checkMax($max): void
     {
         if ( ! is_int($max)) {
             throw new InvalidArgumentException(

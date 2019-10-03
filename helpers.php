@@ -8,7 +8,8 @@ if ( ! function_exists('seo_helper')) {
      *
      * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
      */
-    function seo_helper() {
+    function seo_helper(): SeoHelper
+    {
         return app(SeoHelper::class);
     }
 }

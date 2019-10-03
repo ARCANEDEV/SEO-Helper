@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\SeoHelper;
 
-use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
+use Arcanedev\Support\Providers\PackageServiceProvider as ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class     SeoHelperServiceProvider
@@ -8,7 +9,7 @@ use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
  * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SeoHelperServiceProvider extends ServiceProvider
+class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -22,13 +23,6 @@ class SeoHelperServiceProvider extends ServiceProvider
      */
     protected $package = 'seo-helper';
 
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer   = true;
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -37,24 +31,23 @@ class SeoHelperServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
 
         $this->registerConfig();
 
-        $this->registerProvider(Providers\UtilityServiceProvider::class);
-
-        $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
+        $this->registerSeoHelperService();
+        $this->registerSeoMetaService();
+        $this->registerSeoOpenGraphService();
+        $this->registerSeoTwitterService();
     }
 
     /**
      * Boot the service provider.
      */
-    public function boot()
+    public function boot(): void
     {
-        parent::boot();
-
         $this->publishConfig();
     }
 
@@ -63,10 +56,55 @@ class SeoHelperServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             Contracts\SeoHelper::class,
+            Contracts\SeoMeta::class,
+            Contracts\SeoOpenGraph::class,
+            Contracts\SeoTwitter::class,
         ];
+    }
+
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
+     */
+    /**
+     * Register SeoHelper service.
+     */
+    private function registerSeoHelperService(): void
+    {
+        $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
+    }
+
+    /**
+     * Register SeoMeta service.
+     */
+    private function registerSeoMetaService(): void
+    {
+        $this->singleton(Contracts\SeoMeta::class, function ($app) {
+            return new SeoMeta($app['config']->get('seo-helper'));
+        });
+    }
+
+    /**
+     * Register SeoOpenGraph service.
+     */
+    private function registerSeoOpenGraphService(): void
+    {
+        $this->singleton(Contracts\SeoOpenGraph::class, function ($app) {
+            return new SeoOpenGraph($app['config']->get('seo-helper'));
+        });
+    }
+
+    /**
+     * Register SeoTwitter service.
+     */
+    private function registerSeoTwitterService(): void
+    {
+        $this->singleton(Contracts\SeoTwitter::class, function ($app) {
+            return new SeoTwitter($app['config']->get('seo-helper'));
+        });
     }
 }
