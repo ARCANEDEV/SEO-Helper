@@ -11,7 +11,7 @@ SEO Helper is a package that provides tools and helpers for SEO (Search Engine O
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `5.0` to `6.0` are supported.
+  * Laravel `5.x | 6.x` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents

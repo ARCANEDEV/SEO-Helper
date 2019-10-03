@@ -289,7 +289,7 @@ class Card implements CardContract
      *
      * @throws \Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException
      */
-    private function checkType(&$type)
+    private function checkType(&$type): void
     {
         if ( ! is_string($type)) {
             throw new InvalidTwitterCardException(
@@ -309,7 +309,7 @@ class Card implements CardContract
      *
      * @param  string  $site
      */
-    private function checkSite(&$site)
+    private function checkSite(string &$site): void
     {
         $site = $this->prepareUsername($site);
     }
@@ -326,7 +326,7 @@ class Card implements CardContract
      *
      * @return string
      */
-    private function prepareUsername($username)
+    private function prepareUsername(string $username): string
     {
         return Str::startsWith($username, '@')
             ? $username :

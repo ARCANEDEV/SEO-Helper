@@ -47,8 +47,9 @@ class SeoHelperServiceProviderTest extends TestCase
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
-            \Arcanedev\Support\ServiceProvider::class,
-            \Arcanedev\Support\PackageServiceProvider::class,
+            \Illuminate\Contracts\Support\DeferrableProvider::class,
+            \Arcanedev\Support\Providers\ServiceProvider::class,
+            \Arcanedev\Support\Providers\PackageServiceProvider::class,
             \Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
         ];
 
@@ -62,6 +63,9 @@ class SeoHelperServiceProviderTest extends TestCase
     {
         $expected = [
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
+            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
+            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
+            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
         ];
 
         static::assertSame($expected, $this->provider->provides());

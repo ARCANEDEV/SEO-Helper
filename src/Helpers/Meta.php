@@ -207,14 +207,12 @@ class Meta implements MetaContract
      *
      * @return string
      */
-    private function renderLink()
+    private function renderLink(): string
     {
-        return Element::withTag('link')
-            ->attributes([
-                'rel'  => $this->getName(false),
-                'href' => $this->getContent(),
-            ])
-            ->toHtml();
+        return Element::withTag('link')->attributes([
+            'rel'  => $this->getName(false),
+            'href' => $this->getContent(),
+        ])->toHtml();
     }
 
     /**
@@ -222,7 +220,7 @@ class Meta implements MetaContract
      *
      * @return string
      */
-    private function renderMeta()
+    private function renderMeta(): string
     {
         $content = Arr::wrap($this->getContent());
 
@@ -279,7 +277,7 @@ class Meta implements MetaContract
      *
      * @throws InvalidArgumentException
      */
-    private function checkNameProperty(&$nameProperty)
+    private function checkNameProperty(&$nameProperty): void
     {
         if ( ! is_string($nameProperty)) {
             throw new InvalidArgumentException(

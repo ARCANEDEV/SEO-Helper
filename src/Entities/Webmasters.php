@@ -81,7 +81,7 @@ class Webmasters implements WebmastersContract
      *
      * @param  string  $webmaster
      *
-     * @return string
+     * @return string|null
      */
     private function getWebmasterName($webmaster)
     {
@@ -177,7 +177,7 @@ class Webmasters implements WebmastersContract
      *
      * @return bool
      */
-    private function isSupported($webmaster)
+    private function isSupported(string $webmaster): bool
     {
         return array_key_exists($webmaster, $this->supported);
     }

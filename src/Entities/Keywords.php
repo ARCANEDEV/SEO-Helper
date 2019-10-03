@@ -183,7 +183,7 @@ class Keywords implements KeywordsContract
      *
      * @return bool
      */
-    private function hasContent()
+    private function hasContent(): bool
     {
         return ! empty($this->getContent());
     }
@@ -200,7 +200,7 @@ class Keywords implements KeywordsContract
      *
      * @return string
      */
-    private function clean($value)
+    private function clean(string $value): string
     {
         return trim(strip_tags($value));
     }
