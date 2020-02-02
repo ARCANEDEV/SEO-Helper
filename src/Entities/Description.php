@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
@@ -94,7 +98,7 @@ class Description implements DescriptionContract
      *
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function set($content)
     {
@@ -118,7 +122,7 @@ class Description implements DescriptionContract
      *
      * @param  int  $max
      *
-     * @return self
+     * @return $this
      */
     public function setMax($max)
     {
@@ -140,7 +144,7 @@ class Description implements DescriptionContract
      * @param  string  $content
      * @param  int     $max
      *
-     * @return self
+     * @return $this
      */
     public static function make($content, $max = 155)
     {

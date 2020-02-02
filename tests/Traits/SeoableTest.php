@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Traits;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Traits;
 
 use Arcanedev\SeoHelper\Tests\Stubs\Dummy;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -44,7 +48,7 @@ class SeoableTest extends TestCase
      */
 
     /** @test */
-    public function it_can_get_main_helper()
+    public function it_can_get_main_helper(): void
     {
         $seoHelper = $this->dummy->seo();
 
@@ -60,7 +64,7 @@ class SeoableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_meta_helper()
+    public function it_can_get_meta_helper(): void
     {
         $seoMeta = $this->dummy->seoMeta();
 
@@ -76,7 +80,7 @@ class SeoableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_open_graph_helper()
+    public function it_can_get_open_graph_helper(): void
     {
         $seoOpenGraph = $this->dummy->seoGraph();
 
@@ -92,7 +96,7 @@ class SeoableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_twitter_card_helper()
+    public function it_can_get_twitter_card_helper(): void
     {
         $seoTwitter   = $this->dummy->seoCard();
         $expectations = [
@@ -107,7 +111,7 @@ class SeoableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_title()
+    public function it_can_set_and_render_title(): void
     {
         $title        = 'Hello World';
         $siteName     = 'ARCANEDEV';
@@ -130,7 +134,7 @@ class SeoableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_description()
+    public function it_can_set_and_render_description(): void
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
@@ -151,7 +155,7 @@ class SeoableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_keywords()
+    public function it_can_set_and_render_keywords(): void
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
         $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';

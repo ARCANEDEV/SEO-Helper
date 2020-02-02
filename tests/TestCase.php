@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -36,24 +40,10 @@ abstract class TestCase extends BaseTestCase
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             \Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
-        ];
-    }
-
-    /**
-     * Get package aliases.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            //
         ];
     }
 
@@ -62,7 +52,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @param  \Illuminate\Foundation\Application  $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         // Keywords
         $app['config']->set('seo-helper.keywords', [
@@ -94,7 +84,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * Get Config instance.
      *
-     * @return \Illuminate\Config\Repository
+     * @return \Illuminate\Contracts\Config\Repository
      */
     protected function config()
     {

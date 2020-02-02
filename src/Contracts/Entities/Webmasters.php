@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -32,7 +36,7 @@ interface Webmasters extends Renderable
      *
      * @param  array  $webmasters
      *
-     * @return self
+     * @return $this
      */
     public static function make(array $webmasters = []);
 
@@ -42,14 +46,14 @@ interface Webmasters extends Renderable
      * @param  string  $webmaster
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function add($webmaster, $content);
 
     /**
      * Reset the webmaster collection.
      *
-     * @return self
+     * @return $this
      */
     public function reset();
 }

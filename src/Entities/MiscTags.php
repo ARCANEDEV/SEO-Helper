@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
 use Arcanedev\Support\Traits\Configurable;
@@ -85,7 +89,7 @@ class MiscTags implements MiscTagsContract
      *
      * @param  string  $url
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     public function setUrl($url)
     {
@@ -115,7 +119,7 @@ class MiscTags implements MiscTagsContract
      *
      * @param  array  $defaults
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     public static function make(array $defaults = [])
     {
@@ -128,7 +132,7 @@ class MiscTags implements MiscTagsContract
      * @param  string  $name
      * @param  string  $content
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     public function add($name, $content)
     {
@@ -142,7 +146,7 @@ class MiscTags implements MiscTagsContract
      *
      * @param  array  $metas
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     public function addMany(array $metas)
     {
@@ -156,7 +160,7 @@ class MiscTags implements MiscTagsContract
      *
      * @param  array|string  $names
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     public function remove($names)
     {
@@ -168,7 +172,7 @@ class MiscTags implements MiscTagsContract
     /**
      * Reset the meta collection.
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     public function reset()
     {
@@ -240,7 +244,7 @@ class MiscTags implements MiscTagsContract
     /**
      * Add the robots meta.
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     private function addRobotsMeta(): self
     {
@@ -253,7 +257,7 @@ class MiscTags implements MiscTagsContract
     /**
      * Add the canonical link.
      *
-     * @return \Arcanedev\SeoHelper\Entities\MiscTags
+     * @return $this
      */
     private function addCanonical(): self
     {

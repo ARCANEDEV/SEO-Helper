@@ -1,11 +1,17 @@
-<?php namespace Arcanedev\SeoHelper;
+<?php
 
-use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
-use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper;
+
+use Arcanedev\SeoHelper\Contracts\Entities\{
+    Analytics as AnalyticsContract,
+    Description as DescriptionContract,
+    Keywords as KeywordsContract,
+    MiscTags as MiscTagsContract,
+    Title as TitleContract,
+    Webmasters as WebmastersContract
+};
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
 use Arcanedev\Support\Traits\Configurable;
 
@@ -97,7 +103,7 @@ class SeoMeta implements SeoMetaContract
     /**
      * Start the engine.
      */
-    private function init()
+    private function init(): void
     {
         $this->title(
             new Entities\Title($this->getConfig('title', []))
@@ -289,7 +295,7 @@ class SeoMeta implements SeoMetaContract
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return $this
      */
     public function setSiteName($siteName)
     {
@@ -313,7 +319,7 @@ class SeoMeta implements SeoMetaContract
     /**
      * Show site name.
      *
-     * @return self
+     * @return $this
      */
     public function showSiteName()
     {

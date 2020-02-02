@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\SeoTwitter;
 
@@ -44,7 +48,7 @@ class SeoTwitterTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\SeoTwitter::class,
@@ -58,7 +62,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_defaults()
+    public function it_can_render_defaults(): void
     {
         $output = $this->seoTwitter->render();
 
@@ -74,7 +78,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_type()
+    public function it_can_set_and_render_type(): void
     {
         $this->seoTwitter->setType('app');
 
@@ -85,7 +89,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_site()
+    public function it_can_set_and_render_site(): void
     {
         $this->seoTwitter->setSite('Arcanedev');
 
@@ -96,7 +100,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_title()
+    public function it_can_set_and_render_title(): void
     {
         $this->seoTwitter->setTitle('ARCANEDEV super title');
 
@@ -107,7 +111,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_description()
+    public function it_can_set_and_render_description(): void
     {
         $this->seoTwitter->setDescription('ARCANEDEV super description');
 
@@ -118,7 +122,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_render_image()
+    public function it_can_add_and_render_image(): void
     {
         $this->seoTwitter->addImage('http://example.com/img/avatar.png');
 
@@ -129,7 +133,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_reset_card()
+    public function it_can_reset_card(): void
     {
         $expected = $this->seoTwitter->render();
 
@@ -146,7 +150,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_render_a_meta()
+    public function it_can_add_and_render_a_meta(): void
     {
         $this->seoTwitter->addMeta('creator', '@Arcanedev');
 
@@ -157,7 +161,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_render_many_metas()
+    public function it_can_add_and_render_many_metas(): void
     {
         $metas = [
             'creator' => '@Arcanedev',
@@ -179,7 +183,7 @@ class SeoTwitterTest extends TestCase
     }
 
     /** @test */
-    public function it_can_enable_and_disable()
+    public function it_can_enable_and_disable(): void
     {
         static::assertTrue($this->seoTwitter->isEnabled());
         static::assertFalse($this->seoTwitter->isDisabled());

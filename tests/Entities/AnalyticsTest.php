@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Analytics;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -45,7 +49,7 @@ class AnalyticsTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
@@ -59,7 +63,7 @@ class AnalyticsTest extends TestCase
     }
 
     /** @test */
-    public function it_must_render_empty_on_init()
+    public function it_must_render_empty_on_init(): void
     {
         $this->analytics = new Analytics;
 
@@ -67,7 +71,7 @@ class AnalyticsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render()
+    public function it_can_render(): void
     {
         $expectations = [
             '<script>',

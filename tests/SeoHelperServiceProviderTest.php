@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\SeoHelperServiceProvider;
 
@@ -43,7 +47,7 @@ class SeoHelperServiceProviderTest extends TestCase
      */
 
     /** @test */
-    public function it_can_get_service_provider()
+    public function it_can_get_service_provider(): void
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
@@ -59,7 +63,7 @@ class SeoHelperServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_provides()
+    public function it_can_provides(): void
     {
         $expected = [
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,

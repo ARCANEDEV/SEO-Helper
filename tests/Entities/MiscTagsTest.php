@@ -1,6 +1,9 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
 
-use Arcanedev\SeoHelper\Contracts\Renderable;
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
+
 use Arcanedev\SeoHelper\Entities\MiscTags;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -48,7 +51,7 @@ class MiscTagsTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Entities\MiscTags::class,
@@ -62,7 +65,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_canonical()
+    public function it_can_render_canonical(): void
     {
         $this->misc->setUrl($url = 'http://laravel.com');
 
@@ -78,7 +81,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_robots()
+    public function it_can_render_robots(): void
     {
         $expected = '<meta name="robots" content="noindex, nofollow">';
 
@@ -92,7 +95,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_links()
+    public function it_can_render_links(): void
     {
         $author    = 'https://plus.google.com/+AuthorProfile';
         $publisher = 'https://plus.google.com/+PublisherProfile';
@@ -113,7 +116,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render()
+    public function it_can_render(): void
     {
         $robots    = '<meta name="robots" content="noindex, nofollow">';
         $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
@@ -150,7 +153,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_remove_and_reset_tags()
+    public function it_can_add_remove_and_reset_tags(): void
     {
         static::assertNotEmpty($this->misc->render());
 
@@ -215,7 +218,7 @@ class MiscTagsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make()
+    public function it_can_make(): void
     {
         $this->misc = MiscTags::make([
             'copyright'       => 'ARCANEDEV',
@@ -251,7 +254,7 @@ class MiscTagsTest extends TestCase
      *
      * @return array
      */
-    private function getMiscConfig()
+    private function getMiscConfig(): array
     {
         return $this->getSeoHelperConfig('misc', []);
     }

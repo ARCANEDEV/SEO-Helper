@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -14,12 +18,13 @@ interface OpenGraph extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the open graph prefix.
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return $this
      */
     public function setPrefix($prefix);
 
@@ -28,7 +33,7 @@ interface OpenGraph extends Renderable
      *
      * @param  string  $type
      *
-     * @return self
+     * @return $this
      */
     public function setType($type);
 
@@ -37,7 +42,7 @@ interface OpenGraph extends Renderable
      *
      * @param  string  $title
      *
-     * @return self
+     * @return $this
      */
     public function setTitle($title);
 
@@ -46,7 +51,7 @@ interface OpenGraph extends Renderable
      *
      * @param  string  $description
      *
-     * @return self
+     * @return $this
      */
     public function setDescription($description);
 
@@ -55,7 +60,7 @@ interface OpenGraph extends Renderable
      *
      * @param  string  $url
      *
-     * @return self
+     * @return $this
      */
     public function setUrl($url);
 
@@ -64,7 +69,7 @@ interface OpenGraph extends Renderable
      *
      * @param  string  $image
      *
-     * @return self
+     * @return $this
      */
     public function setImage($image);
 
@@ -73,7 +78,7 @@ interface OpenGraph extends Renderable
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return $this
      */
     public function setSiteName($siteName);
 
@@ -100,7 +105,7 @@ interface OpenGraph extends Renderable
      *
      * @param  array  $properties
      *
-     * @return self
+     * @return $this
      */
     public function addProperties(array $properties);
 
@@ -110,7 +115,7 @@ interface OpenGraph extends Renderable
      * @param  string        $property
      * @param  string|array  $content
      *
-     * @return self
+     * @return $this
      */
     public function addProperty($property, $content);
 }

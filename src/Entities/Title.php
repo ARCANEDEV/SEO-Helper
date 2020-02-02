@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\Html\Elements\Element;
 use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
@@ -118,7 +122,7 @@ class Title implements TitleContract
      *
      * @param  string  $title
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function set($title)
     {
@@ -143,7 +147,7 @@ class Title implements TitleContract
      *
      * @param  string  $siteName
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function setSiteName($siteName)
     {
@@ -156,7 +160,7 @@ class Title implements TitleContract
     /**
      * Hide the site name.
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function hideSiteName()
     {
@@ -166,7 +170,7 @@ class Title implements TitleContract
     /**
      * Show the site name.
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function showSiteName()
     {
@@ -178,7 +182,7 @@ class Title implements TitleContract
      *
      * @param  bool  $visible
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function setSiteNameVisibility($visible)
     {
@@ -202,7 +206,7 @@ class Title implements TitleContract
      *
      * @param  string  $separator
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function setSeparator($separator)
     {
@@ -215,7 +219,7 @@ class Title implements TitleContract
     /**
      * Set title first.
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function setFirst()
     {
@@ -225,7 +229,7 @@ class Title implements TitleContract
     /**
      * Set title last.
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function setLast()
     {
@@ -237,7 +241,7 @@ class Title implements TitleContract
      *
      * @param  bool  $first
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     private function switchPosition($first)
     {
@@ -271,7 +275,7 @@ class Title implements TitleContract
      *
      * @param  int  $max
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public function setMax($max)
     {
@@ -294,7 +298,7 @@ class Title implements TitleContract
      * @param  string  $siteName
      * @param  string  $separator
      *
-     * @return \Arcanedev\SeoHelper\Entities\Title
+     * @return $this
      */
     public static function make($title, $siteName = '', $separator = '-')
     {

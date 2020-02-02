@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts;
 
 /**
  * Interface  SeoHelper
@@ -24,7 +28,7 @@ interface SeoHelper extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
      *
-     * @return self
+     * @return $this
      */
     public function setSeoMeta(SeoMeta $seoMeta);
 
@@ -49,7 +53,7 @@ interface SeoHelper extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
      *
-     * @return self
+     * @return $this
      */
     public function setSeoOpenGraph(SeoOpenGraph $seoOpenGraph);
 
@@ -65,7 +69,7 @@ interface SeoHelper extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
      *
-     * @return self
+     * @return $this
      */
     public function setSeoTwitter(SeoTwitter $seoTwitter);
 
@@ -76,7 +80,7 @@ interface SeoHelper extends Renderable
      * @param  string|null  $siteName
      * @param  string|null  $separator
      *
-     * @return self
+     * @return $this
      */
     public function setTitle($title, $siteName = null, $separator = null);
 
@@ -85,21 +89,21 @@ interface SeoHelper extends Renderable
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return $this
      */
     public function setSiteName($siteName);
 
     /**
      * Hide the site name.
      *
-     * @return self
+     * @return $this
      */
     public function hideSiteName();
 
     /**
      * Show the site name.
      *
-     * @return self
+     * @return $this
      */
     public function showSiteName();
 
@@ -108,7 +112,7 @@ interface SeoHelper extends Renderable
      *
      * @param  string  $description
      *
-     * @return self
+     * @return $this
      */
     public function setDescription($description);
 
@@ -117,7 +121,7 @@ interface SeoHelper extends Renderable
      *
      * @param  array|string  $keywords
      *
-     * @return self
+     * @return $this
      */
     public function setKeywords($keywords);
 
@@ -153,28 +157,28 @@ interface SeoHelper extends Renderable
     /**
      * Enable the OpenGraph.
      *
-     * @return self
+     * @return $this
      */
     public function enableOpenGraph();
 
     /**
      * Disable the OpenGraph.
      *
-     * @return self
+     * @return $this
      */
     public function disableOpenGraph();
 
     /**
      * Enable the Twitter Card.
      *
-     * @return self
+     * @return $this
      */
     public function enableTwitter();
 
     /**
      * Disable the Twitter Card.
      *
-     * @return self
+     * @return $this
      */
     public function disableTwitter();
 }

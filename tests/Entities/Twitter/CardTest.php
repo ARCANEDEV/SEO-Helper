@@ -1,6 +1,11 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities\Twitter;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities\Twitter;
 
 use Arcanedev\SeoHelper\Entities\Twitter\Card;
+use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
 /**
@@ -45,7 +50,7 @@ class CardTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
@@ -59,7 +64,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_type_and_render()
+    public function it_can_set_type_and_render(): void
     {
         $supported = [
             'app', 'gallery', 'photo', 'player', 'product', 'summary', 'summary_large_image'
@@ -76,25 +81,25 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_invalid_twitter_card_exception_on_invalid_type()
+    public function it_must_throw_invalid_twitter_card_exception_on_invalid_type(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException::class);
+        $this->expectException(InvalidTwitterCardException::class);
         $this->expectExceptionMessage('The Twitter card type must be a string value, [boolean] was given.');
 
         $this->card->setType(true);
     }
 
     /** @test */
-    public function it_must_throw_invalid_twitter_card_exception_on_unsupported_type()
+    public function it_must_throw_invalid_twitter_card_exception_on_unsupported_type(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException::class);
+        $this->expectException(InvalidTwitterCardException::class);
         $this->expectExceptionMessage('The Twitter card type [selfie] is not supported.');
 
         $this->card->setType('selfie');
     }
 
     /** @test */
-    public function it_can_set_prefix()
+    public function it_can_set_prefix(): void
     {
         $prefix     = 'twt:';
         $this->card = new Card([
@@ -109,7 +114,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_title()
+    public function it_can_set_and_render_title(): void
     {
         $title = 'Hello world';
         $this->card->setTitle($title);
@@ -121,7 +126,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_description()
+    public function it_can_set_and_render_description(): void
     {
         $description = 'Hello world description';
         $this->card->setDescription($description);
@@ -133,7 +138,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_site()
+    public function it_can_set_and_render_site(): void
     {
         $site     = 'Arcanedev';
         $excepted = '<meta name="twitter:site" content="@'.$site.'">';
@@ -150,7 +155,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_render_one_image()
+    public function it_can_add_and_render_one_image(): void
     {
         $avatar   = 'http://example.com/img/avatar.png';
         $this->card->addImage($avatar);
@@ -161,7 +166,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_render_multiple_images()
+    public function it_can_add_and_render_multiple_images(): void
     {
         $avatar = 'http://example.com/img/avatar.png';
         $number = range(0, 4);
@@ -180,7 +185,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_and_render_many_metas()
+    public function it_can_add_and_render_many_metas(): void
     {
         $metas = [
             'creator' => '@Arcanedev',
@@ -202,7 +207,7 @@ class CardTest extends TestCase
     }
 
     /** @test */
-    public function it_can_reset()
+    public function it_can_reset(): void
     {
         $expected = $this->card->render();
 

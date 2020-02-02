@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities\Twitter;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities\Twitter;
 
 use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
 

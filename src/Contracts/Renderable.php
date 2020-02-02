@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts;
 
 /**
  * Interface  Renderable

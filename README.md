@@ -1,6 +1,6 @@
 # SEO Helper [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo]
 
-[![Travis Status][badge_build]][link-travis]
+[![Github Workflow Status][badge_build]][link-github-status]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
@@ -51,7 +51,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 
 [badge_php]:          https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/seo-helper.svg?style=flat-square
-[badge_build]:        https://img.shields.io/travis/ARCANEDEV/SEO-Helper.svg?style=flat-square
+[badge_build]:        https://img.shields.io/github/workflow/status/ARCANEDEV/SEO-Helper/run-tests?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/73e1a779-7ca7-4a75-b6d3-452d7852187e.svg?style=flat-square
@@ -62,6 +62,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 
 [link-author]:        https://github.com/arcanedev-maroc
 [link-github-repo]:   https://github.com/ARCANEDEV/SEO-Helper
+[link-github-status]: https://github.com/ARCANEDEV/SEO-Helper/actions
 [link-github-issues]: https://github.com/ARCANEDEV/SEO-Helper/issues
 [link-contributors]:  https://github.com/ARCANEDEV/SEO-Helper/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/seo-helper

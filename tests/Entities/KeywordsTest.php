@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -45,7 +49,7 @@ class KeywordsTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
@@ -59,7 +63,7 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_default_content()
+    public function it_can_get_default_content(): void
     {
         $content = $this->getDefaultContent();
 
@@ -68,7 +72,7 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_content()
+    public function it_can_set_and_get_content(): void
     {
         $content = $this->getDefaultContent();
 
@@ -95,7 +99,7 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_a_keyword()
+    public function it_can_add_a_keyword(): void
     {
         $content = $this->getDefaultContent();
 
@@ -112,7 +116,7 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_many_keywords()
+    public function it_can_add_many_keywords(): void
     {
         $content = $this->getDefaultContent();
 
@@ -131,7 +135,7 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render()
+    public function it_can_render(): void
     {
         $content  = $this->getDefaultContent();
         $expected = '<meta name="keywords" content="'.implode(', ', $content).'">';
@@ -166,7 +170,7 @@ class KeywordsTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make()
+    public function it_can_make(): void
     {
         $keywords       = $this->getDefaultContent();
         $this->keywords = Keywords::make($keywords);
@@ -189,7 +193,7 @@ class KeywordsTest extends TestCase
      *
      * @return array
      */
-    private function getKeywordsConfig()
+    private function getKeywordsConfig(): array
     {
         return $this->getSeoHelperConfig('keywords', []);
     }

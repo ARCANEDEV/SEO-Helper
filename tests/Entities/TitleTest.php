@@ -1,6 +1,11 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Title;
+use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Tests\TestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -47,7 +52,7 @@ class TitleTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
@@ -61,7 +66,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_default_title()
+    public function it_can_get_default_title(): void
     {
         static::assertSame(
             $this->getDefaultTitle(),
@@ -70,7 +75,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_title()
+    public function it_can_set_and_get_title(): void
     {
         $title = 'Awesome Title';
 
@@ -80,7 +85,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_default_site_name()
+    public function it_can_get_default_site_name(): void
     {
         static::assertSame(
             $this->getDefaultSiteName(),
@@ -89,7 +94,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_site_name()
+    public function it_can_set_and_get_site_name(): void
     {
         $siteName = 'Company name';
 
@@ -99,7 +104,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_default_separator()
+    public function it_can_get_default_separator(): void
     {
         static::assertSame(
             $this->getDefaultSeparator(),
@@ -108,7 +113,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_and_set_separator()
+    public function it_can_get_and_set_separator(): void
     {
         $separator = '|';
         $this->title->setSeparator($separator);
@@ -122,7 +127,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_default_title_position()
+    public function it_can_get_default_title_position(): void
     {
         static::assertSame(
             Arr::get($this->getTitleConfig(), 'first', true),
@@ -131,7 +136,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_switch_title_position()
+    public function it_can_switch_title_position(): void
     {
         static::assertTrue($this->title->isTitleFirst());
 
@@ -145,7 +150,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_default_title()
+    public function it_can_render_default_title(): void
     {
         $title    = $this->getDefaultTitle();
         $siteName = $this->getDefaultSiteName();
@@ -156,7 +161,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_custom_titles()
+    public function it_can_render_custom_titles(): void
     {
         $title     = 'Awesome Title';
         $siteName  = 'Company name';
@@ -221,7 +226,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make_title_tag()
+    public function it_can_make_title_tag(): void
     {
         $title     = 'Awesome title';
         $siteName  = 'Company Name';
@@ -242,7 +247,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_toggle_site_name_visibility()
+    public function it_can_toggle_site_name_visibility(): void
     {
         $title     = 'Awesome title';
         $siteName  = 'Company Name';
@@ -271,25 +276,25 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_title_exception_on_invalid_type()
+    public function it_must_throw_title_exception_on_invalid_type(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The title must be a string value, [NULL] is given.');
 
         $this->title->set(null);
     }
 
     /** @test */
-    public function it_must_throw_title_exception_on_empty_title()
+    public function it_must_throw_title_exception_on_empty_title(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The title is required and must not be empty.');
 
         $this->title->set('  ');
     }
 
     /** @test */
-    public function it_can_set_and_get_max_length()
+    public function it_can_set_and_get_max_length(): void
     {
         $this->title->setMax($max = 50);
 
@@ -297,7 +302,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_long_title()
+    public function it_can_render_long_title(): void
     {
         $title = 'This is my long and awesome title that gonna blown your mind.';
         $max   = $this->getDefaultMax();
@@ -311,7 +316,7 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_title_with_accents()
+    public function it_can_render_title_with_accents(): void
     {
         $this->title->set('Ce package est intuitif, exceptionnel et bien sûr opérationnel');
 
@@ -322,18 +327,18 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_invalid_max_length_type()
+    public function it_must_throw_invalid_max_length_type(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The title maximum length must be integer.');
 
         $this->title->setMax(null);
     }
 
     /** @test */
-    public function it_must_throw_invalid_max_length_value()
+    public function it_must_throw_invalid_max_length_value(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The title maximum length must be greater 0.');
 
         $this->title->setMax(0);
@@ -349,7 +354,7 @@ class TitleTest extends TestCase
      *
      * @return array
      */
-    private function getTitleConfig()
+    private function getTitleConfig(): array
     {
         return $this->getSeoHelperConfig('title', []);
     }
@@ -361,7 +366,7 @@ class TitleTest extends TestCase
      *
      * @return string
      */
-    private function getDefaultTitle($default = '')
+    private function getDefaultTitle($default = ''): string
     {
         return $this->getSeoHelperConfig('title.default', $default);
     }
@@ -373,7 +378,7 @@ class TitleTest extends TestCase
      *
      * @return string
      */
-    private function getDefaultSiteName($default = '')
+    private function getDefaultSiteName($default = ''): string
     {
         return $this->getSeoHelperConfig('title.site-name', $default);
     }
@@ -385,7 +390,7 @@ class TitleTest extends TestCase
      *
      * @return string
      */
-    private function getDefaultSeparator($default = '-')
+    private function getDefaultSeparator($default = '-'): string
     {
         return $this->getSeoHelperConfig('title.separator', $default);
     }
@@ -397,7 +402,7 @@ class TitleTest extends TestCase
      *
      * @return int
      */
-    private function getDefaultMax($default = 55)
+    private function getDefaultMax($default = 55): int
     {
         return $this->getSeoHelperConfig('title.max', $default);
     }

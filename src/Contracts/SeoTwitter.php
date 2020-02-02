@@ -1,6 +1,10 @@
-<?php namespace Arcanedev\SeoHelper\Contracts;
+<?php
 
-use \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts;
+
+use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 
 /**
  * Interface  SeoTwitter
@@ -19,7 +23,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard  $card
      *
-     * @return self
+     * @return $this
      */
     public function setCard(CardContract $card);
 
@@ -28,7 +32,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  string  $type
      *
-     * @return self
+     * @return $this
      */
     public function setType($type);
 
@@ -37,7 +41,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  string  $site
      *
-     * @return self
+     * @return $this
      */
     public function setSite($site);
 
@@ -46,7 +50,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  string  $title
      *
-     * @return self
+     * @return $this
      */
     public function setTitle($title);
 
@@ -55,7 +59,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  string  $description
      *
-     * @return self
+     * @return $this
      */
     public function setDescription($description);
 
@@ -64,7 +68,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  string  $url
      *
-     * @return self
+     * @return $this
      */
     public function addImage($url);
 
@@ -73,7 +77,7 @@ interface SeoTwitter extends Renderable
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return $this
      */
     public function addMetas(array $metas);
 
@@ -83,7 +87,7 @@ interface SeoTwitter extends Renderable
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function addMeta($name, $content);
 
@@ -94,21 +98,21 @@ interface SeoTwitter extends Renderable
     /**
      * Reset the twitter card.
      *
-     * @return self
+     * @return $this
      */
     public function reset();
 
     /**
      * Enable the Twitter Card.
      *
-     * @return self
+     * @return $this
      */
     public function enable();
 
     /**
      * Disable the Twitter Card.
      *
-     * @return self
+     * @return $this
      */
     public function disable();
 

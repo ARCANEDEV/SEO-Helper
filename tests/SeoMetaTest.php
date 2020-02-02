@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
 use Arcanedev\SeoHelper\SeoMeta;
@@ -47,7 +51,7 @@ class SeoMetaTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Renderable::class,
@@ -63,7 +67,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_instantiated_by_container()
+    public function it_can_be_instantiated_by_container(): void
     {
         $this->seoMeta = $this->app[SeoMetaContract::class];
 
@@ -73,7 +77,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_and_render_title()
+    public function it_can_set_and_get_and_render_title(): void
     {
         $title    = 'Awesome Title';
         $siteName = $this->getSeoHelperConfig('title.site-name');
@@ -118,7 +122,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_and_render_description()
+    public function it_can_set_and_get_and_render_description(): void
     {
         $description = 'Awesome Description';
         $this->seoMeta->setDescription($description);
@@ -143,7 +147,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_and_render_keywords()
+    public function it_can_set_and_get_and_render_keywords(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
 
@@ -183,7 +187,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_one_keyword()
+    public function it_can_add_one_keyword(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
         $this->seoMeta->setKeywords($keywords);
@@ -203,7 +207,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_many_keywords()
+    public function it_can_add_many_keywords(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
         $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
@@ -223,7 +227,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_remove_reset_and_render_a_misc_tag()
+    public function it_can_add_remove_reset_and_render_a_misc_tag(): void
     {
         $expectations = [
             '<meta name="robots" content="noindex, nofollow">',
@@ -306,7 +310,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_add_reset_webmasters()
+    public function it_can_render_add_reset_webmasters(): void
     {
         $expectations = [
             '<meta name="google-site-verification" content="site-verification-code">',
@@ -350,7 +354,7 @@ class SeoMetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_google_analytics()
+    public function it_can_set_and_render_google_analytics(): void
     {
         static::assertStringContainsString(
             "ga('create', 'UA-12345678-9', 'auto');",
@@ -386,7 +390,7 @@ class SeoMetaTest extends TestCase
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection  $metas
      */
-    protected static function assertMetaCollection($metas)
+    protected static function assertMetaCollection($metas): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection::class,

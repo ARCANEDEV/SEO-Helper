@@ -1,5 +1,10 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Helpers;
+<?php
 
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Helpers;
+
+use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -17,7 +22,7 @@ class MetaTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $results = [
             Meta::make('name', 'Hello world'),
@@ -41,7 +46,7 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_valid()
+    public function it_can_valid(): void
     {
         $valids = [
             Meta::make('name', 'Hello world')
@@ -67,7 +72,7 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render()
+    public function it_can_render(): void
     {
         static::assertSame(
             '<meta name="name" content="Hello world">',
@@ -91,7 +96,7 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make_meta_with_prefix()
+    public function it_can_make_meta_with_prefix(): void
     {
         $meta = Meta::make('hello', 'Hello World', 'name', 'say:');
 
@@ -109,7 +114,7 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_clean_and_render()
+    public function it_can_clean_and_render(): void
     {
         $name    = '<b>Awesome name</b>';
         $content = 'Harmless <script>alert("Danger Zone");</script>';
@@ -121,7 +126,7 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make_meta_with_custom_name_property()
+    public function it_can_make_meta_with_custom_name_property(): void
     {
         $meta = Meta::make('title', 'Hello World', 'property', 'og:');
 
@@ -132,7 +137,7 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_name_property()
+    public function it_can_set_name_property(): void
     {
         $meta = Meta::make('title', 'Hello World');
 
@@ -146,25 +151,25 @@ class MetaTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_an_invalid_argument_exception_on_invalid_type()
+    public function it_must_throw_an_invalid_argument_exception_on_invalid_type(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The meta name property is must be a string value, NULL is given.');
 
         Meta::make('title', 'Hello World')->setNameProperty(null);
     }
 
     /** @test */
-    public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name()
+    public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("The meta name property [foo] is not supported, the allowed name properties are ['charset', 'http-equiv', 'itemprop', 'name', 'property'].");
 
         Meta::make('title', 'Hello World')->setNameProperty('foo');
     }
 
     /** @test */
-    public function it_can_render_array_content()
+    public function it_can_render_array_content(): void
     {
         $meta = Meta::make('locale:alternate', ['fr_FR', 'es_ES', 'en_GB']);
 

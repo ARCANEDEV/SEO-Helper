@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Exceptions;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Exceptions;
 
 /**
  * Class     InvalidArgumentException

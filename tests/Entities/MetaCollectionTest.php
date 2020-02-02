@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\MetaCollection;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -44,7 +48,7 @@ class MetaCollectionTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\MetaCollection::class,
@@ -60,7 +64,7 @@ class MetaCollectionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_meta()
+    public function it_can_add_meta(): void
     {
         $this->metas->addOne('robots', 'noindex, nofollow');
 
@@ -72,7 +76,7 @@ class MetaCollectionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_meta_tags()
+    public function it_can_render_meta_tags(): void
     {
         $this->metas->addOne('robots', 'noindex, nofollow');
 
@@ -83,7 +87,7 @@ class MetaCollectionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_link_tags()
+    public function it_can_render_link_tags(): void
     {
         $this->metas->addOne('canonical', $this->baseUrl);
 

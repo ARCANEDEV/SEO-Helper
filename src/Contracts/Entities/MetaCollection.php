@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -11,16 +15,17 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface MetaCollection extends Renderable
 {
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add a meta to collection.
      *
      * @param  string        $name
      * @param  string|array  $content
      *
-     * @return self
+     * @return $this
      */
     public function addOne($name, $content);
 
@@ -29,7 +34,7 @@ interface MetaCollection extends Renderable
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return $this
      */
     public function addMany(array $metas);
 
@@ -38,7 +43,7 @@ interface MetaCollection extends Renderable
      *
      * @param  array|string  $names
      *
-     * @return self
+     * @return $this
      */
     public function remove($names);
 }

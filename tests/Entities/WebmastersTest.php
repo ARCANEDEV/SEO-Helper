@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Webmasters;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -45,7 +49,7 @@ class WebmastersTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Webmasters::class,
@@ -59,7 +63,7 @@ class WebmastersTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_defaults()
+    public function it_can_render_defaults(): void
     {
         $expectations = [
             '<meta name="google-site-verification" content="site-verification-code">',
@@ -76,7 +80,7 @@ class WebmastersTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make_and_add()
+    public function it_can_make_and_add(): void
     {
         $this->webmasters = Webmasters::make([
             'google'  => 'site-verification-code'
@@ -96,7 +100,7 @@ class WebmastersTest extends TestCase
     }
 
     /** @test */
-    public function it_can_skip_unsupported_webmasters()
+    public function it_can_skip_unsupported_webmasters(): void
     {
         $this->webmasters = Webmasters::make([
             'duckduckgo'  => 'site-verification-code'
@@ -107,7 +111,7 @@ class WebmastersTest extends TestCase
     }
 
     /** @test */
-    public function it_can_reset()
+    public function it_can_reset(): void
     {
         static::assertNotEmpty($this->webmasters->render());
         static::assertNotEmpty((string) $this->webmasters);

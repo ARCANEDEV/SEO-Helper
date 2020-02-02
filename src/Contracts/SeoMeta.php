@@ -1,11 +1,17 @@
-<?php namespace Arcanedev\SeoHelper\Contracts;
+<?php
 
-use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
-use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
-use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts;
+
+use Arcanedev\SeoHelper\Contracts\Entities\{
+    Analytics as AnalyticsContract,
+    Description as DescriptionContract,
+    Keywords as KeywordsContract,
+    MiscTags as MiscTagsContract,
+    Title as TitleContract,
+    Webmasters as WebmastersContract
+};
 
 /**
  * Interface  SeoMeta
@@ -24,7 +30,7 @@ interface SeoMeta extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Title  $title
      *
-     * @return self
+     * @return $this
      */
     public function title(TitleContract $title);
 
@@ -40,7 +46,7 @@ interface SeoMeta extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Description  $description
      *
-     * @return self
+     * @return $this
      */
     public function description(DescriptionContract $description);
 
@@ -56,7 +62,7 @@ interface SeoMeta extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Keywords  $keywords
      *
-     * @return self
+     * @return $this
      */
     public function keywords(KeywordsContract $keywords);
 
@@ -72,7 +78,7 @@ interface SeoMeta extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags  $misc
      *
-     * @return self
+     * @return $this
      */
     public function misc(MiscTagsContract $misc);
 
@@ -88,7 +94,7 @@ interface SeoMeta extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters  $webmasters
      *
-     * @return self
+     * @return $this
      */
     public function webmasters(WebmastersContract $webmasters);
 
@@ -122,7 +128,7 @@ interface SeoMeta extends Renderable
      * @param  string  $siteName
      * @param  string  $separator
      *
-     * @return self
+     * @return $this
      */
     public function setTitle($title, $siteName = null, $separator = null);
 
@@ -131,21 +137,21 @@ interface SeoMeta extends Renderable
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return $this
      */
     public function setSiteName($siteName);
 
     /**
      * Hide site name.
      *
-     * @return self
+     * @return $this
      */
     public function hideSiteName();
 
     /**
      * Show site name.
      *
-     * @return self
+     * @return $this
      */
     public function showSiteName();
 
@@ -154,7 +160,7 @@ interface SeoMeta extends Renderable
      *
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function setDescription($content);
 
@@ -163,7 +169,7 @@ interface SeoMeta extends Renderable
      *
      * @param  array|string  $content
      *
-     * @return self
+     * @return $this
      */
     public function setKeywords($content);
 
@@ -172,7 +178,7 @@ interface SeoMeta extends Renderable
      *
      * @param  string  $keyword
      *
-     * @return self
+     * @return $this
      */
     public function addKeyword($keyword);
 
@@ -181,7 +187,7 @@ interface SeoMeta extends Renderable
      *
      * @param  array  $keywords
      *
-     * @return self
+     * @return $this
      */
     public function addKeywords(array $keywords);
 
@@ -191,7 +197,7 @@ interface SeoMeta extends Renderable
      * @param  string  $webmaster
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function addWebmaster($webmaster, $content);
 
@@ -200,7 +206,7 @@ interface SeoMeta extends Renderable
      *
      * @param  string  $url
      *
-     * @return self
+     * @return $this
      */
     public function setUrl($url);
 
@@ -209,7 +215,7 @@ interface SeoMeta extends Renderable
      *
      * @param  string  $code
      *
-     * @return self
+     * @return $this
      */
     public function setGoogleAnalytics($code);
 
@@ -223,7 +229,7 @@ interface SeoMeta extends Renderable
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function addMeta($name, $content);
 
@@ -232,7 +238,7 @@ interface SeoMeta extends Renderable
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return $this
      */
     public function addMetas(array $metas);
 
@@ -241,21 +247,21 @@ interface SeoMeta extends Renderable
      *
      * @param  string|array  $names
      *
-     * @return self
+     * @return $this
      */
     public function removeMeta($names);
 
     /**
      * Reset the meta collection except the description and keywords metas.
      *
-     * @return self
+     * @return $this
      */
     public function resetMetas();
 
     /**
      * Reset all webmaster tool site verifier metas.
      *
-     * @return self
+     * @return $this
      */
     public function resetWebmasters();
 }

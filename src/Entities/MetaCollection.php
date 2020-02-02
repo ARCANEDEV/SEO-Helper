@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
 use Arcanedev\SeoHelper\Helpers\Meta;
@@ -37,7 +41,7 @@ class MetaCollection extends BaseMetaCollection
      * @param  string  $name
      * @param  string  $content
      *
-     * @return \Arcanedev\SeoHelper\Entities\MetaCollection
+     * @return $this
      */
     public function addOne($name, $content)
     {

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -14,6 +18,7 @@ interface Keywords extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get content.
      *
@@ -26,20 +31,21 @@ interface Keywords extends Renderable
      *
      * @param  array|string  $content
      *
-     * @return self
+     * @return $this
      */
     public function set($content);
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Keywords instance.
      *
      * @param  array|string  $keywords
      *
-     * @return self
+     * @return $this
      */
     public static function make($keywords);
 
@@ -48,7 +54,7 @@ interface Keywords extends Renderable
      *
      * @param  string  $keyword
      *
-     * @return self
+     * @return $this
      */
     public function add($keyword);
 
@@ -57,7 +63,7 @@ interface Keywords extends Renderable
      *
      * @param  array  $keywords
      *
-     * @return self
+     * @return $this
      */
     public function addMany(array $keywords);
 }
