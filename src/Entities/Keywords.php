@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
@@ -84,19 +88,17 @@ class Keywords implements KeywordsContract
      *
      * @param  array|string  $content
      *
-     * @return self
+     * @return $this
      */
     public function set($content)
     {
-        if (is_string($content))
+        if (is_string($content)) {
             $content = explode(',', $content);
-
-        if ( ! is_array($content))
-            $content = (array) $content;
+        }
 
         $this->content = array_map(function ($keyword) {
             return $this->clean($keyword);
-        }, $content);
+        }, (array) $content);
 
         return $this;
     }
@@ -111,7 +113,7 @@ class Keywords implements KeywordsContract
      *
      * @param  array|string  $keywords
      *
-     * @return self
+     * @return $this
      */
     public static function make($keywords)
     {
@@ -123,7 +125,7 @@ class Keywords implements KeywordsContract
      *
      * @param  string  $keyword
      *
-     * @return self
+     * @return $this
      */
     public function add($keyword)
     {
@@ -137,7 +139,7 @@ class Keywords implements KeywordsContract
      *
      * @param  array  $keywords
      *
-     * @return self
+     * @return $this
      */
     public function addMany(array $keywords)
     {

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities\Twitter;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities\Twitter;
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
@@ -67,7 +71,7 @@ class Card implements CardContract
     /**
      * Start the engine.
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     private function init()
     {
@@ -90,7 +94,7 @@ class Card implements CardContract
      *
      * @param  string  $prefix
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     private function setPrefix($prefix)
     {
@@ -104,7 +108,7 @@ class Card implements CardContract
      *
      * @param  string  $type
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function setType($type)
     {
@@ -121,7 +125,7 @@ class Card implements CardContract
      *
      * @param  string  $site
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function setSite($site)
     {
@@ -137,7 +141,7 @@ class Card implements CardContract
      *
      * @param  string  $title
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -149,7 +153,7 @@ class Card implements CardContract
      *
      * @param  string  $description
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -161,7 +165,7 @@ class Card implements CardContract
      *
      * @param  string  $url
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function addImage($url)
     {
@@ -177,7 +181,7 @@ class Card implements CardContract
      *
      * @param  array  $metas
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function addMetas(array $metas)
     {
@@ -192,7 +196,7 @@ class Card implements CardContract
      * @param  string        $name
      * @param  string|array  $content
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function addMeta($name, $content)
     {
@@ -225,25 +229,9 @@ class Card implements CardContract
      */
 
     /**
-     * Render card images.
-     */
-    private function loadImages()
-    {
-        if (count($this->images) == 1) {
-            $this->addMeta('image', $this->images[0]);
-
-            return;
-        }
-
-        foreach ($this->images as $number => $url) {
-            $this->addMeta("image{$number}", $url);
-        }
-    }
-
-    /**
      * Reset the card.
      *
-     * @return \Arcanedev\SeoHelper\Entities\Twitter\Card
+     * @return $this
      */
     public function reset()
     {
@@ -318,6 +306,22 @@ class Card implements CardContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
+    /**
+     * Render card images.
+     */
+    private function loadImages(): void
+    {
+        if (count($this->images) == 1) {
+            $this->addMeta('image', $this->images[0]);
+
+            return;
+        }
+
+        foreach ($this->images as $number => $url) {
+            $this->addMeta("image{$number}", $url);
+        }
+    }
 
     /**
      * Prepare username.

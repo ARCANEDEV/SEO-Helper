@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities\OpenGraph;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities\OpenGraph;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 use Arcanedev\Support\Traits\Configurable;
@@ -71,7 +75,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $prefix
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setPrefix($prefix)
     {
@@ -85,7 +89,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $type
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setType($type)
     {
@@ -97,7 +101,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $title
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -109,7 +113,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $description
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -121,7 +125,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $url
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setUrl($url)
     {
@@ -133,7 +137,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $image
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setImage($image)
     {
@@ -145,7 +149,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $siteName
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setSiteName($siteName)
     {
@@ -157,7 +161,7 @@ class Graph implements OpenGraphContract
      *
      * @param  string  $locale
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setLocale($locale)
     {
@@ -169,7 +173,7 @@ class Graph implements OpenGraphContract
      *
      * @param  array  $locales
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function setAlternativeLocales(array $locales)
     {
@@ -181,7 +185,7 @@ class Graph implements OpenGraphContract
      *
      * @param  array  $properties
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function addProperties(array $properties)
     {
@@ -196,7 +200,7 @@ class Graph implements OpenGraphContract
      * @param  string        $property
      * @param  string|array  $content
      *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
     public function addProperty($property, $content)
     {

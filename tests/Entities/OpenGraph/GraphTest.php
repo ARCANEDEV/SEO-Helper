@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities\OpenGraph;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities\OpenGraph;
 
 use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -45,7 +49,7 @@ class GraphTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\OpenGraph\Graph::class,
@@ -59,7 +63,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_defaults()
+    public function it_can_render_defaults(): void
     {
         $output   = $this->og->render();
         $expected = '<meta property="og:type" content="website">'.
@@ -70,7 +74,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_type()
+    public function it_can_set_and_render_type(): void
     {
         $types = [
             'article',
@@ -90,7 +94,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_title()
+    public function it_can_set_and_render_title(): void
     {
         $title = 'Hello World';
 
@@ -103,7 +107,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_description()
+    public function it_can_set_and_render_description(): void
     {
         $description = 'Hello World detailed description.';
 
@@ -116,7 +120,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_url()
+    public function it_can_set_and_render_url(): void
     {
         $url = 'http://www.imdb.com/title/tt0080339/';
 
@@ -129,7 +133,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_image()
+    public function it_can_set_and_render_image(): void
     {
         $image = 'http://ia.media-imdb.com/images/M/MV5BNDU2MjE4MTcwNl5BMl5BanBnXkFtZTgwNDExOTMxMDE@._V1_UY1200_CR90,0,630,1200_AL_.jpg';
 
@@ -142,7 +146,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_site_name()
+    public function it_can_set_and_render_site_name(): void
     {
         $siteName = 'My site name';
 
@@ -155,7 +159,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_render_property()
+    public function it_can_add_render_property(): void
     {
         $locale = 'en_GB';
 
@@ -168,7 +172,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_render_properties()
+    public function it_can_add_render_properties(): void
     {
         $properties = [
             'locale'           => 'en_GB',
@@ -190,7 +194,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_locale_property()
+    public function it_can_set_and_render_locale_property(): void
     {
         $locales = ['fr_FR', 'en_GB', 'es_ES'];
 
@@ -203,7 +207,7 @@ class GraphTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_alternative_properties()
+    public function it_can_set_and_render_alternative_properties(): void
     {
         $this->og->setAlternativeLocales(['fr_FR', 'en_GB', 'es_ES']);
 

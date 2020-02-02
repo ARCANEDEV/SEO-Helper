@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Helpers;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Helpers;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -14,6 +18,7 @@ interface Meta extends Renderable
      |  Getters and Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the meta name.
      *
@@ -26,7 +31,7 @@ interface Meta extends Renderable
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return $this
      */
     public function setPrefix($prefix);
 
@@ -35,7 +40,7 @@ interface Meta extends Renderable
      *
      * @param  string  $nameProperty
      *
-     * @return self
+     * @return $this
      */
     public function setNameProperty($nameProperty);
 
@@ -43,6 +48,7 @@ interface Meta extends Renderable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Meta instance.
      *
@@ -51,7 +57,7 @@ interface Meta extends Renderable
      * @param  string        $propertyName
      * @param  string        $prefix
      *
-     * @return self
+     * @return $this
      */
     public static function make($name, $content, $propertyName = 'name', $prefix = '');
 

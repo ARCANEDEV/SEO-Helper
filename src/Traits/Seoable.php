@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Traits;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Traits;
 
 /**
  * Trait     Seoable

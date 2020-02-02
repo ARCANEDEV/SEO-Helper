@@ -19,7 +19,7 @@
     "require": {
         "php":                ">=7.2.0",
         "arcanedev/php-html": "^3.0",
-        "arcanedev/support":  "^5.0"
+        "arcanedev/support":  "^5.1"
     },
     "require-dev": {
         "ext-dom":             "*",

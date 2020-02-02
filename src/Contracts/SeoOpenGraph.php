@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 
@@ -19,7 +23,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph  $openGraph
      *
-     * @return self
+     * @return $this
      */
     public function setOpenGraph(OpenGraphContract $openGraph);
 
@@ -28,7 +32,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $prefix
      *
-     * @return self
+     * @return $this
      */
     public function setPrefix($prefix);
 
@@ -37,7 +41,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $type
      *
-     * @return self
+     * @return $this
      */
     public function setType($type);
 
@@ -46,7 +50,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $title
      *
-     * @return self
+     * @return $this
      */
     public function setTitle($title);
 
@@ -55,7 +59,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $description
      *
-     * @return self
+     * @return $this
      */
     public function setDescription($description);
 
@@ -64,7 +68,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $url
      *
-     * @return self
+     * @return $this
      */
     public function setUrl($url);
 
@@ -73,7 +77,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $image
      *
-     * @return self
+     * @return $this
      */
     public function setImage($image);
 
@@ -82,7 +86,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return $this
      */
     public function setSiteName($siteName);
 
@@ -109,7 +113,7 @@ interface SeoOpenGraph extends Renderable
      *
      * @param  array  $properties
      *
-     * @return self
+     * @return $this
      */
     public function addProperties(array $properties);
 
@@ -119,7 +123,7 @@ interface SeoOpenGraph extends Renderable
      * @param  string  $property
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function addProperty($property, $content);
 
@@ -130,14 +134,14 @@ interface SeoOpenGraph extends Renderable
     /**
      * Enable the OpenGraph.
      *
-     * @return self
+     * @return $this
      */
     public function enable();
 
     /**
      * Disable the OpenGraph.
      *
-     * @return self
+     * @return $this
      */
     public function disable();
 

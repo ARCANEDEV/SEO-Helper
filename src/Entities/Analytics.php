@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
 use Arcanedev\Support\Traits\Configurable;
@@ -57,7 +61,7 @@ class Analytics implements AnalyticsContract
      *
      * @param  string  $code
      *
-     * @return \Arcanedev\SeoHelper\Entities\Analytics
+     * @return $this
      */
     public function setGoogle($code)
     {

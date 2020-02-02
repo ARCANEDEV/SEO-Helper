@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -14,6 +18,7 @@ interface Description extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get raw description content.
      *
@@ -33,7 +38,7 @@ interface Description extends Renderable
      *
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function set($content);
 
@@ -49,7 +54,7 @@ interface Description extends Renderable
      *
      * @param  int  $max
      *
-     * @return self
+     * @return $this
      */
     public function setMax($max);
 
@@ -57,13 +62,14 @@ interface Description extends Renderable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a description instance.
      *
      * @param  string  $content
      * @param  int     $max
      *
-     * @return self
+     * @return $this
      */
     public static function make($content, $max = 155);
 }

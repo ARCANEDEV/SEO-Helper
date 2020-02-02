@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper;
 
 use Arcanedev\Support\Providers\PackageServiceProvider as ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;

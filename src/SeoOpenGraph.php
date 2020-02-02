@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
@@ -62,20 +66,6 @@ class SeoOpenGraph implements SeoOpenGraphContract
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
-
-    /**
-     * Set the enabled status for the OpenGraph.
-     *
-     * @param  bool  $enabled
-     *
-     * @return \Arcanedev\SeoHelper\SeoOpenGraph
-     */
-    private function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
 
     /**
      * Set the Open Graph instance.
@@ -242,6 +232,20 @@ class SeoOpenGraph implements SeoOpenGraphContract
     public function addProperty($property, $content)
     {
         $this->openGraph->addProperty($property, $content);
+
+        return $this;
+    }
+
+    /**
+     * Set the enabled status for the OpenGraph.
+     *
+     * @param  bool  $enabled
+     *
+     * @return \Arcanedev\SeoHelper\SeoOpenGraph
+     */
+    private function setEnabled(bool $enabled)
+    {
+        $this->enabled = $enabled;
 
         return $this;
     }

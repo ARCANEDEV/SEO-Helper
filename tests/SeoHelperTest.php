@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 
@@ -43,7 +47,7 @@ class SeoHelperTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
@@ -57,7 +61,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_instantiated_with_helper()
+    public function it_can_be_instantiated_with_helper(): void
     {
         $this->seoHelper = seo_helper();
         $expectations    = [
@@ -72,7 +76,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_seo_meta()
+    public function it_can_get_seo_meta(): void
     {
         $seoMeta = $this->seoHelper->meta();
 
@@ -88,7 +92,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_seo_open_graph()
+    public function it_can_get_seo_open_graph(): void
     {
         $ogs = [
             $this->seoHelper->openGraph(),
@@ -109,7 +113,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_title()
+    public function it_can_set_and_render_title(): void
     {
         $title        = 'Hello World';
         $siteName     = 'ARCANEDEV';
@@ -130,7 +134,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_site_name()
+    public function it_can_set_and_render_site_name(): void
     {
         $title        = 'My Application';
         $siteName     = 'ARCANEDEV';
@@ -151,7 +155,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_toggle_site_name_visibility()
+    public function it_can_toggle_site_name_visibility(): void
     {
         $title    = 'My Application';
         $siteName = 'ARCANEDEV';
@@ -179,7 +183,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_description()
+    public function it_can_set_and_render_description(): void
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
@@ -197,7 +201,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_keywords()
+    public function it_can_set_and_render_keywords(): void
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
         $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
@@ -214,7 +218,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_render_image()
+    public function it_can_set_and_render_image(): void
     {
         $this->seoHelper->setImage($imageUrl = 'http://localhost/assets/img/logo.png');
 
@@ -229,9 +233,9 @@ class SeoHelperTest extends TestCase
             static::assertStringContainsString($expected, $rendered);
         }
     }
-    
+
     /** @test */
-    public function it_can_set_and_render_url()
+    public function it_can_set_and_render_url(): void
     {
         $this->seoHelper->setUrl($url = 'http://localhost/path');
 
@@ -248,7 +252,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_all()
+    public function it_can_render_all(): void
     {
         $output = $this->seoHelper->render();
 
@@ -256,7 +260,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_all_with_html_string_object()
+    public function it_can_render_all_with_html_string_object(): void
     {
         $output = $this->seoHelper->renderHtml();
 
@@ -265,7 +269,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_enable_and_disable_open_graph()
+    public function it_can_enable_and_disable_open_graph(): void
     {
         $needle = '<meta property="og:';
 
@@ -299,7 +303,7 @@ class SeoHelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_enable_and_disable_twitter_card()
+    public function it_can_enable_and_disable_twitter_card(): void
     {
         $needle = '<meta name="twitter:';
 

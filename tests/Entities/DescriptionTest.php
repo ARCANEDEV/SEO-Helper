@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Description;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -46,7 +50,7 @@ class DescriptionTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Arcanedev\SeoHelper\Entities\Description::class,
@@ -60,7 +64,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_make()
+    public function it_can_make(): void
     {
         $this->description = Description::make('Cool description about this package');
 
@@ -76,7 +80,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_default_description()
+    public function it_can_get_default_description(): void
     {
         $content = $this->getDefaultContent();
 
@@ -84,7 +88,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_content()
+    public function it_can_set_and_get_content(): void
     {
         $content = 'Cool description about this package';
 
@@ -94,7 +98,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_set_and_get_max_length()
+    public function it_can_set_and_get_max_length(): void
     {
         $max = 150;
 
@@ -104,7 +108,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_invalid_max_length_type()
+    public function it_must_throw_invalid_max_length_type(): void
     {
         $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
         $this->expectExceptionMessage('The description maximum length must be integer.');
@@ -113,7 +117,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_invalid_max_length_value()
+    public function it_must_throw_invalid_max_length_value(): void
     {
         $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
         $this->expectExceptionMessage('The description maximum length must be greater 0.');
@@ -122,7 +126,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render()
+    public function it_can_render(): void
     {
         $this->description->set(
             $description = 'Cool description about this package'
@@ -135,7 +139,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_empty_description()
+    public function it_can_render_empty_description(): void
     {
         $this->description->set('');
 
@@ -144,7 +148,7 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_can_render_long_title()
+    public function it_can_render_long_title(): void
     {
         $content = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ullamco laboris aliquip commodo.';
         $max     = $this->getDefaultMax();
@@ -167,7 +171,7 @@ class DescriptionTest extends TestCase
      *
      * @return array
      */
-    private function getDescriptionConfig()
+    private function getDescriptionConfig(): array
     {
         return $this->getSeoHelperConfig('description', []);
     }
@@ -179,7 +183,7 @@ class DescriptionTest extends TestCase
      *
      * @return string
      */
-    private function getDefaultContent($default = '')
+    private function getDefaultContent($default = ''): string
     {
         return $this->getSeoHelperConfig('description.default', $default);
     }
@@ -191,7 +195,7 @@ class DescriptionTest extends TestCase
      *
      * @return int
      */
-    private function getDefaultMax($default = 155)
+    private function getDefaultMax($default = 155): int
     {
         return $this->getSeoHelperConfig('description.max', $default);
     }

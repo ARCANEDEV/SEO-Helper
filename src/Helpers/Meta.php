@@ -89,7 +89,7 @@ class Meta implements MetaContract
      *
      * @param  string  $prefix
      *
-     * @return \Arcanedev\SeoHelper\Helpers\Meta
+     * @return $this
      */
     public function setPrefix($prefix)
     {
@@ -103,7 +103,7 @@ class Meta implements MetaContract
      *
      * @param  string  $nameProperty
      *
-     * @return \Arcanedev\SeoHelper\Helpers\Meta
+     * @return $this
      */
     public function setNameProperty($nameProperty)
     {
@@ -132,7 +132,7 @@ class Meta implements MetaContract
      *
      * @param  string  $name
      *
-     * @return \Arcanedev\SeoHelper\Helpers\Meta
+     * @return $this
      */
     private function setName($name)
     {
@@ -159,7 +159,7 @@ class Meta implements MetaContract
      *
      * @param  string|array  $content
      *
-     * @return \Arcanedev\SeoHelper\Helpers\Meta
+     * @return $this
      */
     private function setContent($content)
     {
@@ -172,9 +172,10 @@ class Meta implements MetaContract
     }
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make Meta instance.
      *
@@ -183,7 +184,7 @@ class Meta implements MetaContract
      * @param  string        $propertyName
      * @param  string        $prefix
      *
-     * @return \Arcanedev\SeoHelper\Helpers\Meta
+     * @return $this
      */
     public static function make($name, $content, $propertyName = 'name', $prefix = '')
     {

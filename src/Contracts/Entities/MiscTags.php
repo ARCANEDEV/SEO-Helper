@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -27,7 +31,7 @@ interface MiscTags extends Renderable
      *
      * @param  string  $url
      *
-     * @return self
+     * @return $this
      */
     public function setUrl($url);
 
@@ -48,7 +52,7 @@ interface MiscTags extends Renderable
      *
      * @param  array  $defaults
      *
-     * @return self
+     * @return $this
      */
     public static function make(array $defaults = []);
 
@@ -58,7 +62,7 @@ interface MiscTags extends Renderable
      * @param  string  $name
      * @param  string  $content
      *
-     * @return self
+     * @return $this
      */
     public function add($name, $content);
 
@@ -67,7 +71,7 @@ interface MiscTags extends Renderable
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return $this
      */
     public function addMany(array $metas);
 
@@ -76,14 +80,14 @@ interface MiscTags extends Renderable
      *
      * @param  array|string  $names
      *
-     * @return self
+     * @return $this
      */
     public function remove($names);
 
     /**
      * Reset the meta collection.
      *
-     * @return self
+     * @return $this
      */
     public function reset();
 }

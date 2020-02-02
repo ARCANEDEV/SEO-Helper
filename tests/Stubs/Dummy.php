@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Tests\Stubs;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Tests\Stubs;
 
 use Arcanedev\SeoHelper\Traits\Seoable;
 

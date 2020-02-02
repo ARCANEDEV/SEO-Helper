@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -14,6 +18,7 @@ interface TwitterCard extends Renderable
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const TYPE_APP                 = 'app';
     const TYPE_GALLERY             = 'gallery';
     const TYPE_PHOTO               = 'photo';
@@ -26,12 +31,13 @@ interface TwitterCard extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the card type.
      *
      * @param  string  $type
      *
-     * @return self
+     * @return $this
      */
     public function setType($type);
 
@@ -40,7 +46,7 @@ interface TwitterCard extends Renderable
      *
      * @param  string  $site
      *
-     * @return self
+     * @return $this
      */
     public function setSite($site);
 
@@ -49,7 +55,7 @@ interface TwitterCard extends Renderable
      *
      * @param  string  $title
      *
-     * @return self
+     * @return $this
      */
     public function setTitle($title);
 
@@ -58,7 +64,7 @@ interface TwitterCard extends Renderable
      *
      * @param  string  $description
      *
-     * @return self
+     * @return $this
      */
     public function setDescription($description);
 
@@ -67,7 +73,7 @@ interface TwitterCard extends Renderable
      *
      * @param  string  $url
      *
-     * @return self
+     * @return $this
      */
     public function addImage($url);
 
@@ -76,7 +82,7 @@ interface TwitterCard extends Renderable
      *
      * @param  array  $metas
      *
-     * @return self
+     * @return $this
      */
     public function addMetas(array $metas);
 
@@ -86,7 +92,7 @@ interface TwitterCard extends Renderable
      * @param  string        $name
      * @param  string|array  $content
      *
-     * @return self
+     * @return $this
      */
     public function addMeta($name, $content);
 
@@ -101,10 +107,11 @@ interface TwitterCard extends Renderable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Reset the card.
      *
-     * @return self
+     * @return $this
      */
     public function reset();
 }

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Bases;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Bases;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
@@ -57,7 +61,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      *
      * @param  string  $prefix
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     public function setPrefix($prefix)
     {
@@ -67,7 +71,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     }
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
 
@@ -76,7 +80,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      *
      * @param  array  $metas
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     public function addMany(array $metas)
     {
@@ -93,7 +97,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      * @param  string        $name
      * @param  string|array  $content
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     public function addOne($name, $content)
     {
@@ -109,7 +113,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      * @param  string        $name
      * @param  string|array  $content
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     protected function addMeta($name, $content)
     {
@@ -123,7 +127,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      *
      * @param  array|string  $names
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     public function remove($names)
     {
@@ -149,7 +153,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     /**
      * Reset the collection.
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     public function reset()
     {
@@ -195,7 +199,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      *
      * @param  string|array  $keys
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     public function forget($keys)
     {
@@ -209,7 +213,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
     /**
      * Refresh meta collection items.
      *
-     * @return \Arcanedev\SeoHelper\Bases\MetaCollection
+     * @return $this
      */
     private function refresh()
     {

@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Entities\OpenGraph;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Entities\OpenGraph;
 
 use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
 

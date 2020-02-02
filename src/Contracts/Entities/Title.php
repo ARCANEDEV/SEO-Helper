@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\SeoHelper\Contracts\Entities;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\SeoHelper\Contracts\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Renderable;
 
@@ -14,6 +18,7 @@ interface Title extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get title only (without site name or separator).
      *
@@ -26,7 +31,7 @@ interface Title extends Renderable
      *
      * @param  string  $title
      *
-     * @return self
+     * @return $this
      */
     public function set($title);
 
@@ -42,21 +47,21 @@ interface Title extends Renderable
      *
      * @param  string  $siteName
      *
-     * @return self
+     * @return $this
      */
     public function setSiteName($siteName);
 
     /**
      * Hide the site name.
      *
-     * @return self
+     * @return $this
      */
     public function hideSiteName();
 
     /**
      * Show the site name.
      *
-     * @return self
+     * @return $this
      */
     public function showSiteName();
 
@@ -65,7 +70,7 @@ interface Title extends Renderable
      *
      * @param  bool  $visible
      *
-     * @return self
+     * @return $this
      */
     public function setSiteNameVisibility($visible);
 
@@ -81,21 +86,21 @@ interface Title extends Renderable
      *
      * @param  string  $separator
      *
-     * @return self
+     * @return $this
      */
     public function setSeparator($separator);
 
     /**
      * Set title first.
      *
-     * @return self
+     * @return $this
      */
     public function setFirst();
 
     /**
      * Set title last.
      *
-     * @return self
+     * @return $this
      */
     public function setLast();
 
@@ -107,7 +112,7 @@ interface Title extends Renderable
     public function isTitleFirst();
 
     /**
-     * Get title max lenght.
+     * Get title max length.
      *
      * @return int
      */
@@ -118,7 +123,7 @@ interface Title extends Renderable
      *
      * @param  int  $max
      *
-     * @return self
+     * @return $this
      */
     public function setMax($max);
 
@@ -126,6 +131,7 @@ interface Title extends Renderable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a Title instance.
      *
@@ -133,7 +139,7 @@ interface Title extends Renderable
      * @param  string  $siteName
      * @param  string  $separator
      *
-     * @return self
+     * @return $this
      */
     public static function make($title, $siteName = '', $separator = '-');
 }
