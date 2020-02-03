@@ -66,6 +66,5 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-github-issues]: https://github.com/ARCANEDEV/SEO-Helper/issues
 [link-contributors]:  https://github.com/ARCANEDEV/SEO-Helper/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/seo-helper
-[link-travis]:        https://travis-ci.org/ARCANEDEV/SEO-Helper
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/SEO-Helper/?branch=master
 [link-insight]:       https://insight.sensiolabs.com/projects/73e1a779-7ca7-4a75-b6d3-452d7852187e
