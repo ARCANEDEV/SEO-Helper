@@ -24,7 +24,6 @@
     "require-dev": {
         "ext-dom":             "*",
         "orchestra/testbench": "^4.0",
-        "phpunit/phpcov":      "^6.0",
         "phpunit/phpunit":     "^8.0"
     },
     "autoload": {

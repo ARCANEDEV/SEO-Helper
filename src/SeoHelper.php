@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\{
-    SeoHelper as SeoHelperContract,
-    SeoMeta as SeoMetaContract,
-    SeoOpenGraph as SeoOpenGraphContract,
-    SeoTwitter as SeoTwitterContract
-};
+use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Illuminate\Support\HtmlString;
 
 /**
