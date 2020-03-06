@@ -6,7 +6,7 @@ namespace Arcanedev\SeoHelper\Entities\Twitter;
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 use Illuminate\Support\Str;
 
 /**

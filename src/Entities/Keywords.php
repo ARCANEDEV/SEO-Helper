@@ -6,7 +6,7 @@ namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Keywords

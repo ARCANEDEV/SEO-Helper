@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper;
 
+use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Arcanedev\Support\Providers\PackageServiceProvider as ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
@@ -52,7 +56,9 @@ class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProv
      */
     public function boot(): void
     {
-        $this->publishConfig();
+        if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+        }
     }
 
     /**
@@ -63,10 +69,10 @@ class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProv
     public function provides(): array
     {
         return [
-            Contracts\SeoHelper::class,
-            Contracts\SeoMeta::class,
-            Contracts\SeoOpenGraph::class,
-            Contracts\SeoTwitter::class,
+            SeoHelperContract::class,
+            SeoMetaContract::class,
+            SeoOpenGraphContract::class,
+            SeoTwitterContract::class,
         ];
     }
 
@@ -74,12 +80,13 @@ class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProv
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register SeoHelper service.
      */
     private function registerSeoHelperService(): void
     {
-        $this->singleton(Contracts\SeoHelper::class, SeoHelper::class);
+        $this->singleton(SeoHelperContract::class, SeoHelper::class);
     }
 
     /**
@@ -87,7 +94,7 @@ class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerSeoMetaService(): void
     {
-        $this->singleton(Contracts\SeoMeta::class, function ($app) {
+        $this->singleton(SeoMetaContract::class, function ($app) {
             return new SeoMeta($app['config']->get('seo-helper'));
         });
     }
@@ -97,7 +104,7 @@ class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerSeoOpenGraphService(): void
     {
-        $this->singleton(Contracts\SeoOpenGraph::class, function ($app) {
+        $this->singleton(SeoOpenGraphContract::class, function ($app) {
             return new SeoOpenGraph($app['config']->get('seo-helper'));
         });
     }
@@ -107,7 +114,7 @@ class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerSeoTwitterService(): void
     {
-        $this->singleton(Contracts\SeoTwitter::class, function ($app) {
+        $this->singleton(SeoTwitterContract::class, function ($app) {
             return new SeoTwitter($app['config']->get('seo-helper'));
         });
     }

@@ -54,15 +54,18 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app): void
     {
+        /** @var  \Illuminate\Contracts\Config\Repository  $config */
+        $config = $app['config'];
+
         // Keywords
-        $app['config']->set('seo-helper.keywords', [
+        $config->set('seo-helper.keywords', [
             'default'   => [
                 'keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'
             ],
         ]);
 
         // Webmasters
-        $app['config']->set('seo-helper.webmasters', [
+        $config->set('seo-helper.webmasters', [
             'google'    => 'site-verification-code',
             'bing'      => 'site-verification-code',
             'alexa'     => 'site-verification-code',
@@ -71,7 +74,7 @@ abstract class TestCase extends BaseTestCase
         ]);
 
         // Analytics
-        $app['config']->set('seo-helper.analytics', [
+        $config->set('seo-helper.analytics', [
             'google'    => 'UA-12345678-9',
         ]);
     }
@@ -80,16 +83,6 @@ abstract class TestCase extends BaseTestCase
      |  Other Methods
      | -----------------------------------------------------------------
      */
-
-    /**
-     * Get Config instance.
-     *
-     * @return \Illuminate\Contracts\Config\Repository
-     */
-    protected function config()
-    {
-        return $this->app['config'];
-    }
 
     /**
      * Get SeoHelper config.
@@ -101,8 +94,10 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getSeoHelperConfig($name = null, $default = null)
     {
+        $config = $this->app['config'];
+
         return is_null($name)
-            ? $this->config()->get('seo-helper', [])
-            : $this->config()->get("seo-helper.$name", $default);
+            ? $config->get('seo-helper', [])
+            : $config->get("seo-helper.$name", $default);
     }
 }

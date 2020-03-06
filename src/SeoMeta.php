@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper;
 
-use Arcanedev\SeoHelper\Contracts\Entities\{
-    Analytics as AnalyticsContract,
-    Description as DescriptionContract,
-    Keywords as KeywordsContract,
-    MiscTags as MiscTagsContract,
-    Title as TitleContract,
-    Webmasters as WebmastersContract
-};
+use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     SeoMeta

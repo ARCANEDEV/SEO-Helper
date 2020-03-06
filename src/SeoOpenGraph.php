@@ -6,7 +6,7 @@ namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     SeoOpenGraph

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
 use Arcanedev\SeoHelper\Helpers\Meta;
 
 /**
  * Class     MetaCollection
  *
- * @package  Arcanedev\SeoHelper\Bases
+ * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class MetaCollection extends BaseMetaCollection
+class MetaCollection extends AbstractMetaCollection
 {
     /* -----------------------------------------------------------------
      |  Properties

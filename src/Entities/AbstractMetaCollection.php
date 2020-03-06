@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Arcanedev\SeoHelper\Bases;
+namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
@@ -16,7 +16,7 @@ use Illuminate\Support\Collection;
  * @package  Arcanedev\SeoHelper\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-abstract class MetaCollection extends Collection implements MetaCollectionContract
+abstract class AbstractMetaCollection extends Collection implements MetaCollectionContract
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -131,9 +131,9 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      */
     public function remove($names)
     {
-        return $this->forget(
-            $this->prepareName($names)
-        );
+        $names = static::prepareName($names);
+
+        return $this->forget($names);
     }
 
     /**
@@ -195,22 +195,6 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      */
 
     /**
-     * Remove an item from the collection by key.
-     *
-     * @param  string|array  $keys
-     *
-     * @return $this
-     */
-    public function forget($keys)
-    {
-        foreach ((array) $keys as $key) {
-            $this->offsetUnset($key);
-        }
-
-        return $this;
-    }
-
-    /**
      * Refresh meta collection items.
      *
      * @return $this
@@ -229,7 +213,7 @@ abstract class MetaCollection extends Collection implements MetaCollectionContra
      *
      * @return array
      */
-    protected function prepareName($names)
+    protected static function prepareName($names)
     {
         return array_map(function ($name) {
             return strtolower(trim($name));
