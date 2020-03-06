@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Webmasters

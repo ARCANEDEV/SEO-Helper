@@ -7,7 +7,7 @@ namespace Arcanedev\SeoHelper\Entities;
 use Arcanedev\Html\Elements\Meta;
 use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 use Illuminate\Support\Str;
 
 /**

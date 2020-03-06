@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\SeoHelper\Entities\OpenGraph;
 
 use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Graph

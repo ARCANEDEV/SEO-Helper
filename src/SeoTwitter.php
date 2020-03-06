@@ -6,7 +6,7 @@ namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     SeoTwitter

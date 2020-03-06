@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\SeoHelper\Entities;
 
 use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
-use Arcanedev\Support\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
  * Class     Analytics

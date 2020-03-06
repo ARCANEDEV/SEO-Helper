@@ -21,7 +21,7 @@ return [
 
     'title' => [
         'default'   => 'Default Title',
-        'site-name' => config('app.name', 'My Application'),
+        'site-name' => env('APP_NAME', 'Laravel'),
         'separator' => '-',
         'first'     => true,
         'max'       => 55,
@@ -55,7 +55,7 @@ return [
 
     'misc'      => [
         'canonical' => true,
-        'robots'    => config('app.env') !== 'production', // Tell robots not to index the content if it's not on production
+        'robots'    => env('APP_ENV', 'production') !== 'production', // Tell robots not to index the content if it's not on production
         'default'   => [
             'viewport'  => 'width=device-width, initial-scale=1', // Responsive design thing
             'author'    => '', // https://plus.google.com/[YOUR PERSONAL G+ PROFILE HERE]

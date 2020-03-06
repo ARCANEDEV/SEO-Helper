@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Entities\OpenGraph;
 
-use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
+use Arcanedev\SeoHelper\Entities\AbstractMetaCollection;
 
 /**
  * Class     MetaCollection
@@ -12,7 +12,7 @@ use Arcanedev\SeoHelper\Bases\MetaCollection as BaseMetaCollection;
  * @package  Arcanedev\SeoHelper\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class MetaCollection extends BaseMetaCollection
+class MetaCollection extends AbstractMetaCollection
 {
     /* -----------------------------------------------------------------
      |  Properties
