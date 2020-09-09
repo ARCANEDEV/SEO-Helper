@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 /**
  * Interface  MetaCollection
  *
- * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface MetaCollection extends Renderable

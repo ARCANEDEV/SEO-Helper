@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 /**
  * Class     Description
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Description implements DescriptionContract

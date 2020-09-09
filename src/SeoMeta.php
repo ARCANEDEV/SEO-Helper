@@ -16,7 +16,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     SeoMeta
  *
- * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoMeta implements SeoMetaContract

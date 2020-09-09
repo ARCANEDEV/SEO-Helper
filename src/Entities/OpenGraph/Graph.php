@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     Graph
  *
- * @package  Arcanedev\SeoHelper\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Graph implements OpenGraphContract

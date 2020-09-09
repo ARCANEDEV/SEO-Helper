@@ -11,10 +11,7 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     SeoTwitter
  *
- * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
- *
- * @link     https://dev.twitter.com/cards/overview
  */
 class SeoTwitter implements SeoTwitterContract
 {

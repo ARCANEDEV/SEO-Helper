@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Tests\TestCase;
 /**
  * Class     GraphTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class GraphTest extends TestCase

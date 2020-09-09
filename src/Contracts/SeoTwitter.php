@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 /**
  * Interface  SeoTwitter
  *
- * @package   Arcanedev\SeoHelper\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface SeoTwitter extends Renderable

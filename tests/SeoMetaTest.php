@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\SeoMeta;
 /**
  * Class     SeoMetaTest
  *
- * @package  Arcanedev\SeoHelper\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoMetaTest extends TestCase

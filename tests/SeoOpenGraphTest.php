@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\SeoOpenGraph;
 /**
  * Class     SeoOpenGraphTest
  *
- * @package  Arcanedev\SeoHelper\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoOpenGraphTest extends TestCase

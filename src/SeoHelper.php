@@ -13,7 +13,6 @@ use Illuminate\Support\HtmlString;
 /**
  * Class     SeoHelper
  *
- * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoHelper implements SeoHelperContract

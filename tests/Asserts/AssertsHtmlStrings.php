@@ -9,7 +9,6 @@ use DOMDocument;
 /**
  * Trait     AssertsHtmlStrings
  *
- * @package  Arcanedev\SeoHelper\Tests\Asserts
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait AssertsHtmlStrings

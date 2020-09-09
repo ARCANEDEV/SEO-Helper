@@ -4,13 +4,11 @@ use Arcanedev\Html\Elements\Element;
 use Arcanedev\Html\Elements\Meta as HtmlMeta;
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Arr, Str};
 
 /**
  * Class     Meta
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Meta implements MetaContract

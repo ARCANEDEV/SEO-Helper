@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Tests\TestCase;
 /**
  * Class     MiscTagsTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MiscTagsTest extends TestCase

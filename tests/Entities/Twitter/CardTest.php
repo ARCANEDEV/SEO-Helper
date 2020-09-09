@@ -11,7 +11,6 @@ use Arcanedev\SeoHelper\Tests\TestCase;
 /**
  * Class     CardTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Entities\Twitter
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class CardTest extends TestCase

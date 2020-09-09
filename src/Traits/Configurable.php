@@ -9,7 +9,6 @@ use Illuminate\Support\Arr;
 /**
  * Trait     Configurable
  *
- * @package  Arcanedev\SeoHelper\Traits
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait Configurable

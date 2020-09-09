@@ -17,14 +17,14 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php":                "^7.2.5",
-        "arcanedev/php-html": "^4.0",
-        "arcanedev/support":  "^7.0"
+        "php": "^7.3",
+        "arcanedev/php-html": "^5.0",
+        "arcanedev/support": "^8.0"
     },
     "require-dev": {
-        "ext-dom":             "*",
-        "orchestra/testbench": "^5.0",
-        "phpunit/phpunit":     "^8.5|^9.0"
+        "ext-dom": "*",
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3"
     },
     "autoload": {
         "psr-4": {
@@ -37,12 +37,22 @@
             "Arcanedev\\SeoHelper\\Tests\\": "tests/"
         }
     },
+    "scripts": {
+        "test": "phpunit",
+        "coverage": "phpunit --coverage-html build/coverage/html"
+    },
     "extra": {
+        "branch-alias": {
+            "dev-develop": "4.x-dev"
+        },
         "laravel": {
             "providers": [
                 "Arcanedev\\SeoHelper\\SeoHelperServiceProvider"
             ]
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true
