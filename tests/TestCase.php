@@ -9,7 +9,6 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 /**
  * Class     TestCase
  *
- * @package  Arcanedev\SeoHelper\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class TestCase extends BaseTestCase

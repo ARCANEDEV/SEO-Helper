@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Entities\AbstractMetaCollection;
 /**
  * Class     MetaCollection
  *
- * @package  Arcanedev\SeoHelper\Entities\OpenGraph
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetaCollection extends AbstractMetaCollection

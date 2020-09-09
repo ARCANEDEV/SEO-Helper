@@ -11,7 +11,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     SeoOpenGraph
  *
- * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoOpenGraph implements SeoOpenGraphContract

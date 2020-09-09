@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 /**
  * Class     Card
  *
- * @package  Arcanedev\SeoHelper\Entities\Twitter
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Card implements CardContract

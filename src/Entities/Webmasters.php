@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     Webmasters
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Webmasters implements WebmastersContract

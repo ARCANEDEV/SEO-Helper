@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 /**
  * Interface  Description
  *
- * @package   Arcanedev\SeoHelper\Contracts\Entities
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Description extends Renderable

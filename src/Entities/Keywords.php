@@ -11,7 +11,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     Keywords
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Keywords implements KeywordsContract

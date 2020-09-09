@@ -7,13 +7,11 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Tests\TestCase;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Illuminate\Support\{Arr, Str};
 
 /**
  * Class     TitleTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class TitleTest extends TestCase

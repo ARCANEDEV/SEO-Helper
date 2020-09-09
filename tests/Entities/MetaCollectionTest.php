@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Tests\TestCase;
 /**
  * Class     MetaCollectionTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetaCollectionTest extends TestCase

@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Tests\TestCase;
 /**
  * Class     SeoableTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Traits
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoableTest extends TestCase

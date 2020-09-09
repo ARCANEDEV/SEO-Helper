@@ -14,7 +14,6 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 /**
  * Class     SeoHelperServiceProvider
  *
- * @package  Arcanedev\SeoHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoHelperServiceProvider extends ServiceProvider implements DeferrableProvider

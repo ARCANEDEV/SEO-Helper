@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 /**
  * Class     DescriptionTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class DescriptionTest extends TestCase

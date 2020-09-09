@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     Analytics
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Analytics implements AnalyticsContract

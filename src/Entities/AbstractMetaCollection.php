@@ -11,9 +11,8 @@ use Arcanedev\SeoHelper\Helpers\Meta;
 use Illuminate\Support\Collection;
 
 /**
- * Class     MetaCollection
+ * Class     AbstractMetaCollection
  *
- * @package  Arcanedev\SeoHelper\Bases
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 abstract class AbstractMetaCollection extends Collection implements MetaCollectionContract

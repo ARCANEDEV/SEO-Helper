@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
 /**
  * Class     SeoHelperTest
  *
- * @package  Arcanedev\SeoHelper\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoHelperTest extends TestCase

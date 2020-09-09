@@ -11,7 +11,6 @@ use Arcanedev\SeoHelper\Tests\TestCase;
 /**
  * Class     MetaTest
  *
- * @package  Arcanedev\SeoHelper\Tests\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetaTest extends TestCase

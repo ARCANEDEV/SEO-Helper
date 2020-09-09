@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\SeoTwitter;
 /**
  * Class     SeoTwitterTest
  *
- * @package  Arcanedev\SeoHelper\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SeoTwitterTest extends TestCase

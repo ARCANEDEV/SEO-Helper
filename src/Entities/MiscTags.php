@@ -10,7 +10,6 @@ use Arcanedev\SeoHelper\Traits\Configurable;
 /**
  * Class     MiscTags
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MiscTags implements MiscTagsContract

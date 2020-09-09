@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 /**
  * Class     Title
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Title implements TitleContract

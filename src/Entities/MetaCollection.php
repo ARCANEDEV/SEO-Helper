@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Helpers\Meta;
 /**
  * Class     MetaCollection
  *
- * @package  Arcanedev\SeoHelper\Entities
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class MetaCollection extends AbstractMetaCollection

@@ -9,7 +9,6 @@ use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 /**
  * Interface  SeoOpenGraph
  *
- * @package   Arcanedev\SeoHelper\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface SeoOpenGraph extends Renderable
