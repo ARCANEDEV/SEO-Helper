@@ -163,7 +163,7 @@ echo $title->render();
 
 To reset the title position, use `setFirst()` method.
 
-> :information_source: Keep in mind that the title must be optimized for the SEO, the optimal length is **55** characters long, so i make it as a default max lenght to render.
+> :information_source: Keep in mind that the title must be optimized for the SEO, the optimal length is **55** characters long, so i make it as a default max length to render.
 
 ```php
 use Arcanedev\SeoHelper\Entities\Title;
