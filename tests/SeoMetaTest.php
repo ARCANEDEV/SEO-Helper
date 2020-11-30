@@ -6,6 +6,7 @@ namespace Arcanedev\SeoHelper\Tests;
 
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
 use Arcanedev\SeoHelper\SeoMeta;
+use Arcanedev\SeoHelper\Tests\Traits\CanAssertsGoogleAnalytics;
 
 /**
  * Class     SeoMetaTest
@@ -14,6 +15,13 @@ use Arcanedev\SeoHelper\SeoMeta;
  */
 class SeoMetaTest extends TestCase
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAssertsGoogleAnalytics;
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
@@ -355,17 +363,11 @@ class SeoMetaTest extends TestCase
     /** @test */
     public function it_can_set_and_render_google_analytics(): void
     {
-        static::assertStringContainsString(
-            "ga('create', 'UA-12345678-9', 'auto');",
-            $this->seoMeta->render()
-        );
+        static::assertGoogleAnalytics('UA-12345678-9', $this->seoMeta->render());
 
         $this->seoMeta->setGoogleAnalytics('UA-98765432-1');
 
-        static::assertStringContainsString(
-            "ga('create', 'UA-98765432-1', 'auto');",
-            $this->seoMeta->render()
-        );
+        static::assertGoogleAnalytics('UA-98765432-1', $this->seoMeta->render());
 
         // Entity
         $analyticsEntity = $this->seoMeta->getAnalyticsEntity();

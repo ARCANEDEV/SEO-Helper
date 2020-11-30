@@ -114,11 +114,10 @@ class Analytics implements AnalyticsContract
         return <<<EOT
 <script async src="https://www.googletagmanager.com/gtag/js?id=$this->google"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '$this->google');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '$this->google');
 </script>
 EOT;
     }
