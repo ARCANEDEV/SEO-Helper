@@ -6,6 +6,7 @@ namespace Arcanedev\SeoHelper\Tests\Entities;
 
 use Arcanedev\SeoHelper\Entities\Analytics;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use Arcanedev\SeoHelper\Tests\Traits\CanAssertsGoogleAnalytics;
 
 /**
  * Class     AnalyticsTest
@@ -14,6 +15,13 @@ use Arcanedev\SeoHelper\Tests\TestCase;
  */
 class AnalyticsTest extends TestCase
 {
+    /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use CanAssertsGoogleAnalytics;
+
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
@@ -72,15 +80,7 @@ class AnalyticsTest extends TestCase
     /** @test */
     public function it_can_render(): void
     {
-        $expectations = [
-            '<script>',
-                "ga('create', 'UA-12345678-9', 'auto');",
-            '</script>',
-        ];
-
-        foreach ($expectations as $expected) {
-            static::assertStringContainsString($expected, $this->analytics->render());
-            static::assertStringContainsString($expected, (string) $this->analytics);
-        }
+        static::assertGoogleAnalytics('UA-12345678-9', $this->analytics->render());
+        static::assertGoogleAnalytics('UA-12345678-9', (string) $this->analytics);
     }
 }
