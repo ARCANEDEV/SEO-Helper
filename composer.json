@@ -25,7 +25,7 @@
         "ext-dom": "*",
         "laravel/framework": "^9.0",
         "orchestra/testbench-core": "^7.0",
-        "phpunit/phpunit": "^9.5.8"
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
