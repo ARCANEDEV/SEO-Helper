@@ -9,6 +9,7 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     MetaTest
@@ -22,7 +23,7 @@ class MetaTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $results = [
@@ -46,7 +47,7 @@ class MetaTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_valid(): void
     {
         $validMetas = [
@@ -69,7 +70,7 @@ class MetaTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         static::assertSame(
@@ -93,7 +94,7 @@ class MetaTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make_meta_with_prefix(): void
     {
         $meta = Meta::make('hello', 'Hello World', 'name', 'say:');
@@ -111,7 +112,7 @@ class MetaTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_clean_and_render(): void
     {
         $name    = '<b>Awesome name</b>';
@@ -123,7 +124,7 @@ class MetaTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make_meta_with_custom_name_property(): void
     {
         $meta = Meta::make('title', 'Hello World', 'property', 'og:');
@@ -134,7 +135,7 @@ class MetaTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_name_property(): void
     {
         $meta = Meta::make('title', 'Hello World');
@@ -148,7 +149,7 @@ class MetaTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_must_throw_an_invalid_argument_exception_on_not_allowed_name(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -157,7 +158,7 @@ class MetaTest extends TestCase
         Meta::make('title', 'Hello World')->setNameProperty('foo');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_array_content(): void
     {
         $meta = Meta::make('locale:alternate', ['fr_FR', 'es_ES', 'en_GB']);

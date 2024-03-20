@@ -8,6 +8,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     KeywordsTest
@@ -49,7 +50,7 @@ class KeywordsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -63,7 +64,7 @@ class KeywordsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_content(): void
     {
         $content = $this->getDefaultContent();
@@ -72,7 +73,7 @@ class KeywordsTest extends TestCase
         static::assertSame($content, $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_content(): void
     {
         $content = $this->getDefaultContent();
@@ -94,7 +95,7 @@ class KeywordsTest extends TestCase
         static::assertSame([$keyword], $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_a_keyword(): void
     {
         $content = $this->getDefaultContent();
@@ -111,7 +112,7 @@ class KeywordsTest extends TestCase
         static::assertSame($content, $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_many_keywords(): void
     {
         $content = $this->getDefaultContent();
@@ -130,7 +131,7 @@ class KeywordsTest extends TestCase
         static::assertSame($content, $this->keywords->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         $content  = $this->getDefaultContent();
@@ -160,7 +161,7 @@ class KeywordsTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make(): void
     {
         $keywords       = $this->getDefaultContent();

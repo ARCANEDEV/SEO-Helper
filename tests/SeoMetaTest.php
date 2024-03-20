@@ -22,6 +22,7 @@ use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Entities\Webmasters;
 use Arcanedev\SeoHelper\SeoMeta;
 use Arcanedev\SeoHelper\Tests\Traits\CanAssertsGoogleAnalytics;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     SeoMetaTest
@@ -71,7 +72,7 @@ class SeoMetaTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -87,7 +88,7 @@ class SeoMetaTest extends TestCase
         static::assertNotEmpty($this->seoMeta->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated_by_container(): void
     {
         $this->seoMeta = $this->app[SeoMetaContract::class];
@@ -97,7 +98,7 @@ class SeoMetaTest extends TestCase
         static::assertNotEmpty((string) $this->seoMeta);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_and_render_title(): void
     {
         $title    = 'Awesome Title';
@@ -142,7 +143,7 @@ class SeoMetaTest extends TestCase
         static::assertSame($separator, $titleEntity->getSeparator());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_and_render_description(): void
     {
         $description = 'Awesome Description';
@@ -167,7 +168,7 @@ class SeoMetaTest extends TestCase
         static::assertSame($description, $descriptionEntity->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_and_render_keywords(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
@@ -202,7 +203,7 @@ class SeoMetaTest extends TestCase
         static::assertSame($keywords, $keywordsEntity->getContent());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_one_keyword(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
@@ -222,7 +223,7 @@ class SeoMetaTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoMeta);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_many_keywords(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
@@ -242,7 +243,7 @@ class SeoMetaTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoMeta);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_remove_reset_and_render_a_misc_tag(): void
     {
         $expectations = [
@@ -325,7 +326,7 @@ class SeoMetaTest extends TestCase
         static::assertMetaCollection($miscEntity->all());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_add_reset_webmasters(): void
     {
         $expectations = [
@@ -369,7 +370,7 @@ class SeoMetaTest extends TestCase
         static::assertMetaCollection($webmastersEntity->all());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_google_analytics(): void
     {
         static::assertGoogleAnalytics('UA-12345678-9', $this->seoMeta->render());

@@ -8,6 +8,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\MiscTags;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     MiscTagsTest
@@ -51,7 +52,7 @@ class MiscTagsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -65,7 +66,7 @@ class MiscTagsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_canonical(): void
     {
         $this->misc->setUrl($url = 'http://laravel.com');
@@ -81,7 +82,7 @@ class MiscTagsTest extends TestCase
         static::assertEmpty((string) $this->misc);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_robots(): void
     {
         $expected = '<meta name="robots" content="noindex, nofollow">';
@@ -95,7 +96,7 @@ class MiscTagsTest extends TestCase
         static::assertEmpty((string) $this->misc);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_links(): void
     {
         $author    = 'https://plus.google.com/+AuthorProfile';
@@ -116,7 +117,7 @@ class MiscTagsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render(): void
     {
         $robots    = '<meta name="robots" content="noindex, nofollow">';
@@ -153,7 +154,7 @@ class MiscTagsTest extends TestCase
         ]), $this->misc->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_remove_and_reset_tags(): void
     {
         static::assertNotEmpty($this->misc->render());
@@ -218,7 +219,7 @@ class MiscTagsTest extends TestCase
         static::assertEmpty($this->misc->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make(): void
     {
         $this->misc = MiscTags::make([

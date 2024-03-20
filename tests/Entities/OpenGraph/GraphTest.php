@@ -8,6 +8,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     GraphTest
@@ -49,7 +50,7 @@ class GraphTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -63,7 +64,7 @@ class GraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_defaults(): void
     {
         $output   = $this->og->render();
@@ -74,7 +75,7 @@ class GraphTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $output);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_type(): void
     {
         $types = [
@@ -94,7 +95,7 @@ class GraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_title(): void
     {
         $title = 'Hello World';
@@ -107,7 +108,7 @@ class GraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->og);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_description(): void
     {
         $description = 'Hello World detailed description.';
@@ -120,7 +121,7 @@ class GraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->og);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_url(): void
     {
         $url = 'http://www.imdb.com/title/tt0080339/';
@@ -133,7 +134,7 @@ class GraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->og);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_image(): void
     {
         $image = 'http://ia.media-imdb.com/images/M/MV5BNDU2MjE4MTcwNl5BMl5BanBnXkFtZTgwNDExOTMxMDE@._V1_UY1200_CR90,0,630,1200_AL_.jpg';
@@ -146,7 +147,7 @@ class GraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->og);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_site_name(): void
     {
         $siteName = 'My site name';
@@ -159,7 +160,7 @@ class GraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->og);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_render_property(): void
     {
         $locale = 'en_GB';
@@ -172,7 +173,7 @@ class GraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->og);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_render_properties(): void
     {
         $properties = [
@@ -194,7 +195,7 @@ class GraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_locale_property(): void
     {
         $locales = ['fr_FR', 'en_GB', 'es_ES'];
@@ -207,7 +208,7 @@ class GraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_alternative_properties(): void
     {
         $this->og->setAlternativeLocales(['fr_FR', 'en_GB', 'es_ES']);

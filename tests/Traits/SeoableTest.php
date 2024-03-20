@@ -15,6 +15,7 @@ use Arcanedev\SeoHelper\SeoOpenGraph;
 use Arcanedev\SeoHelper\SeoTwitter;
 use Arcanedev\SeoHelper\Tests\Stubs\Dummy;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     SeoableTest
@@ -54,7 +55,7 @@ class SeoableTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_get_main_helper(): void
     {
         $seoHelper = $this->dummy->seo();
@@ -70,7 +71,7 @@ class SeoableTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_meta_helper(): void
     {
         $seoMeta = $this->dummy->seoMeta();
@@ -86,7 +87,7 @@ class SeoableTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_open_graph_helper(): void
     {
         $seoOpenGraph = $this->dummy->seoGraph();
@@ -102,7 +103,7 @@ class SeoableTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_twitter_card_helper(): void
     {
         $seoTwitter   = $this->dummy->seoCard();
@@ -117,7 +118,7 @@ class SeoableTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_title(): void
     {
         $title = 'Hello World';
@@ -140,7 +141,7 @@ class SeoableTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_description(): void
     {
         $description  = 'ARCANEDEV super description';
@@ -161,7 +162,7 @@ class SeoableTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_keywords(): void
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');

@@ -9,6 +9,7 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Twitter\Card;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     CardTest
@@ -50,7 +51,7 @@ class CardTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -64,7 +65,7 @@ class CardTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_type_and_render(): void
     {
         $supported = [
@@ -81,7 +82,7 @@ class CardTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_must_throw_invalid_twitter_card_exception_on_unsupported_type(): void
     {
         $this->expectException(InvalidTwitterCardException::class);
@@ -90,7 +91,7 @@ class CardTest extends TestCase
         $this->card->setType('selfie');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_prefix(): void
     {
         $prefix     = 'twt:';
@@ -105,7 +106,7 @@ class CardTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->card);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_title(): void
     {
         $title = 'Hello world';
@@ -117,7 +118,7 @@ class CardTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->card);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_description(): void
     {
         $description = 'Hello world description';
@@ -129,7 +130,7 @@ class CardTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->card);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_site(): void
     {
         $site     = 'Arcanedev';
@@ -146,7 +147,7 @@ class CardTest extends TestCase
         static::assertStringContainsString($excepted, (string) $this->card);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_and_render_one_image(): void
     {
         $avatar   = 'http://example.com/img/avatar.png';
@@ -157,7 +158,7 @@ class CardTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->card);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_and_render_multiple_images(): void
     {
         $avatar = 'http://example.com/img/avatar.png';
@@ -176,7 +177,7 @@ class CardTest extends TestCase
         static::assertStringNotContainsString('twitter:image4', $output);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_and_render_many_metas(): void
     {
         $metas = [
@@ -198,7 +199,7 @@ class CardTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_reset(): void
     {
         $expected = $this->card->render();
