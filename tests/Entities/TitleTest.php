@@ -10,6 +10,7 @@ use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Tests\TestCase;
 use Illuminate\Support\{Arr, Str};
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     TitleTest
@@ -51,7 +52,7 @@ class TitleTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -65,7 +66,7 @@ class TitleTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_title(): void
     {
         static::assertSame(
@@ -74,7 +75,7 @@ class TitleTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_title(): void
     {
         $title = 'Awesome Title';
@@ -84,7 +85,7 @@ class TitleTest extends TestCase
         static::assertSame($title, $this->title->getTitleOnly());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_site_name(): void
     {
         static::assertSame(
@@ -93,7 +94,7 @@ class TitleTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_site_name(): void
     {
         $siteName = 'Company name';
@@ -103,7 +104,7 @@ class TitleTest extends TestCase
         static::assertSame($siteName, $this->title->getSiteName());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_separator(): void
     {
         static::assertSame(
@@ -112,7 +113,7 @@ class TitleTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_and_set_separator(): void
     {
         $separator = '|';
@@ -126,7 +127,7 @@ class TitleTest extends TestCase
         static::assertSame(trim($separator), $this->title->getSeparator());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_default_title_position(): void
     {
         static::assertSame(
@@ -135,7 +136,7 @@ class TitleTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_can_switch_title_position(): void
     {
         static::assertTrue($this->title->isTitleFirst());
@@ -149,7 +150,7 @@ class TitleTest extends TestCase
         static::assertTrue($this->title->isTitleFirst());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_default_title(): void
     {
         $title    = $this->getDefaultTitle();
@@ -160,7 +161,7 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_custom_titles(): void
     {
         $title     = 'Awesome Title';
@@ -225,7 +226,7 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_make_title_tag(): void
     {
         $title     = 'Awesome title';
@@ -246,7 +247,7 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_toggle_site_name_visibility(): void
     {
         $title     = 'Awesome title';
@@ -275,7 +276,7 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_must_throw_title_exception_on_empty_title(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -284,7 +285,7 @@ class TitleTest extends TestCase
         $this->title->set('  ');
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_get_max_length(): void
     {
         $this->title->setMax($max = 50);
@@ -292,7 +293,7 @@ class TitleTest extends TestCase
         static::assertSame($max, $this->title->getMax());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_long_title(): void
     {
         $title = 'This is my long and awesome title that gonna blown your mind.';
@@ -306,7 +307,7 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_title_with_accents(): void
     {
         $this->title->set('Ce package est intuitif, exceptionnel et bien sûr opérationnel');
@@ -317,7 +318,7 @@ class TitleTest extends TestCase
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_must_throw_invalid_max_length_value(): void
     {
         $this->expectException(InvalidArgumentException::class);

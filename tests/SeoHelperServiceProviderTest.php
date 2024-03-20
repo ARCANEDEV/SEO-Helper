@@ -9,6 +9,7 @@ use Arcanedev\SeoHelper\SeoHelperServiceProvider;
 use Arcanedev\Support\Providers\{PackageServiceProvider, ServiceProvider};
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     SeoHelperServiceProviderTest
@@ -48,7 +49,7 @@ class SeoHelperServiceProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_get_service_provider(): void
     {
         $expectations = [
@@ -64,7 +65,7 @@ class SeoHelperServiceProviderTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_provides(): void
     {
         $expected = [

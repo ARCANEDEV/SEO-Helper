@@ -7,6 +7,7 @@ namespace Arcanedev\SeoHelper\Tests;
 use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Arcanedev\SeoHelper\SeoOpenGraph;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class     SeoOpenGraphTest
@@ -48,7 +49,7 @@ class SeoOpenGraphTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[Test]
     public function it_can_be_instantiated(): void
     {
         $expectations = [
@@ -62,7 +63,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_render_defaults(): void
     {
         $expectations = [
@@ -77,7 +78,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_prefix(): void
     {
         $this->seoOpenGraph->setPrefix('open-graph:');
@@ -94,7 +95,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_type(): void
     {
         $types = [
@@ -114,7 +115,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_title(): void
     {
         $title = 'Hello World';
@@ -127,7 +128,7 @@ class SeoOpenGraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_description(): void
     {
         $description = 'Hello World detailed description.';
@@ -140,7 +141,7 @@ class SeoOpenGraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_url(): void
     {
         $url = 'http://www.imdb.com/title/tt0080339/';
@@ -153,7 +154,7 @@ class SeoOpenGraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_image(): void
     {
         $image = 'http://ia.media-imdb.com/images/M/MV5BNDU2MjE4MTcwNl5BMl5BanBnXkFtZTgwNDExOTMxMDE@._V1_UY1200_CR90,0,630,1200_AL_.jpg';
@@ -166,7 +167,7 @@ class SeoOpenGraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_site_name(): void
     {
         $siteName = 'My site name';
@@ -179,7 +180,7 @@ class SeoOpenGraphTest extends TestCase
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_and_render_property(): void
     {
         $locales = [
@@ -196,7 +197,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_add_render_properties(): void
     {
         $properties = [
@@ -218,7 +219,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_enable_and_disable(): void
     {
         static::assertTrue($this->seoOpenGraph->isEnabled());
@@ -238,7 +239,7 @@ class SeoOpenGraphTest extends TestCase
         static::assertNotEmpty($this->seoOpenGraph->render());
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_locale_property(): void
     {
         $locales = ['fr_FR', 'en_GB', 'es_ES'];
@@ -251,7 +252,7 @@ class SeoOpenGraphTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_and_render_alternative_properties(): void
     {
         $this->seoOpenGraph->setAlternativeLocales(['fr_FR', 'en_GB', 'es_ES']);
