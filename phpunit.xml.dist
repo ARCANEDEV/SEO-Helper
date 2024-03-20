@@ -6,12 +6,12 @@
 >
     <testsuites>
         <testsuite name="Package Test Suite">
-            <directory suffix=".php">./tests/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
-    <coverage processUncoveredFiles="true">
+    <coverage>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory>./src</directory>
         </include>
         <report>
             <clover outputFile="build/coverage/clover.xml"/>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Entities;
 
-use Arcanedev\Html\Elements\Element;
+use Arcanedev\Html\Elements\HtmlElement;
 use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Traits\Configurable;
@@ -268,7 +268,7 @@ class Title implements TitleContract
             $this->isTitleFirst() ? $this->renderTitleFirst() : $this->renderTitleLast()
         );
 
-        return Element::withTag('title')->html($title)->toHtml();
+        return HtmlElement::withTag('title')->html($title)->toHtml();
     }
 
     /**
