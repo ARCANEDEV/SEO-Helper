@@ -23,7 +23,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `5.x` to `9.x` are supported.
+  * Laravel `5.x` to `10.x` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents

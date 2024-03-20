@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Helpers;
 
-use Arcanedev\Html\Elements\Element;
+use Arcanedev\Html\Elements\HtmlElement;
 use Arcanedev\Html\Elements\Meta as HtmlMeta;
 use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
@@ -222,7 +222,7 @@ class Meta implements MetaContract
      */
     private function renderLink(): string
     {
-        return Element::withTag('link')->attributes([
+        return HtmlElement::withTag('link')->attributes([
             'rel'  => $this->getName(false),
             'href' => $this->getContent(),
         ])->toHtml();
