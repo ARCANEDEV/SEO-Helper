@@ -17,7 +17,7 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.1",
         "arcanedev/php-html": "^6.0",
         "arcanedev/support": "^9.0"
     },
