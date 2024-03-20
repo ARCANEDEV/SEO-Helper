@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use Arcanedev\SeoHelper\Contracts\SeoHelper;
 
 if ( ! function_exists('seo_helper')) {
     /**
      * Get the SeoHelper instance.
      *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
+     * @return SeoHelper
      */
     function seo_helper(): SeoHelper
     {

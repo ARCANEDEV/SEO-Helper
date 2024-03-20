@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities\Twitter;
 
+use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as TwitterCardContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Twitter\Card;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -20,8 +22,7 @@ class CardTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard */
-    private $card;
+    private TwitterCardContract $card;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -32,8 +33,9 @@ class CardTest extends TestCase
     {
         parent::setUp();
 
-        $config     = $this->getSeoHelperConfig('twitter');
-        $this->card = new Card($config);
+        $this->card = new Card(
+            $this->getSeoHelperConfig('twitter')
+        );
     }
 
     public function tearDown(): void
@@ -52,9 +54,9 @@ class CardTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard::class,
-            \Arcanedev\SeoHelper\Entities\Twitter\Card::class,
+            Renderable::class,
+            TwitterCardContract::class,
+            Card::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -72,20 +74,11 @@ class CardTest extends TestCase
         foreach ($supported as $type) {
             $this->card->setType($type);
 
-            $expected = '<meta name="twitter:card" content="'.$type.'">';
+            $expected = '<meta name="twitter:card" content="' . $type . '">';
 
             static::assertStringContainsString($expected, $this->card->render());
             static::assertStringContainsString($expected, (string) $this->card);
         }
-    }
-
-    /** @test */
-    public function it_must_throw_invalid_twitter_card_exception_on_invalid_type(): void
-    {
-        $this->expectException(InvalidTwitterCardException::class);
-        $this->expectExceptionMessage('The Twitter card type must be a string value, [boolean] was given.');
-
-        $this->card->setType(true);
     }
 
     /** @test */
@@ -106,7 +99,7 @@ class CardTest extends TestCase
             'card'   => 'summary',
         ]);
 
-        $expected   = '<meta name="'.$prefix.'card" content="summary">';
+        $expected   = '<meta name="' . $prefix . 'card" content="summary">';
 
         static::assertStringContainsString($expected, $this->card->render());
         static::assertStringContainsString($expected, (string) $this->card);
@@ -118,7 +111,7 @@ class CardTest extends TestCase
         $title = 'Hello world';
         $this->card->setTitle($title);
 
-        $expected = '<meta name="twitter:title" content="'.$title.'">';
+        $expected = '<meta name="twitter:title" content="' . $title . '">';
 
         static::assertStringContainsString($expected, $this->card->render());
         static::assertStringContainsString($expected, (string) $this->card);
@@ -130,7 +123,7 @@ class CardTest extends TestCase
         $description = 'Hello world description';
         $this->card->setDescription($description);
 
-        $expected = '<meta name="twitter:description" content="'.$description.'">';
+        $expected = '<meta name="twitter:description" content="' . $description . '">';
 
         static::assertStringContainsString($expected, $this->card->render());
         static::assertStringContainsString($expected, (string) $this->card);
@@ -140,9 +133,9 @@ class CardTest extends TestCase
     public function it_can_set_and_render_site(): void
     {
         $site     = 'Arcanedev';
-        $excepted = '<meta name="twitter:site" content="@'.$site.'">';
+        $excepted = '<meta name="twitter:site" content="@' . $site . '">';
 
-        $this->card->setSite('@'.$site);
+        $this->card->setSite('@' . $site);
 
         static::assertStringContainsString($excepted, $this->card->render());
         static::assertStringContainsString($excepted, (string) $this->card);
@@ -158,7 +151,7 @@ class CardTest extends TestCase
     {
         $avatar   = 'http://example.com/img/avatar.png';
         $this->card->addImage($avatar);
-        $expected = '<meta name="twitter:image" content="'.$avatar.'">';
+        $expected = '<meta name="twitter:image" content="' . $avatar . '">';
 
         static::assertStringContainsString($expected, $this->card->render());
         static::assertStringContainsString($expected, (string) $this->card);
@@ -177,7 +170,7 @@ class CardTest extends TestCase
         $output = $this->card->render();
 
         foreach (range(0, 3) as $expected) {
-            static::assertStringContainsString('twitter:image'.$expected, $output);
+            static::assertStringContainsString('twitter:image' . $expected, $output);
         }
 
         static::assertStringNotContainsString('twitter:image4', $output);
@@ -194,7 +187,7 @@ class CardTest extends TestCase
         $expectations = [];
 
         foreach ($metas as $name => $content) {
-            $expectations[] = '<meta name="twitter:'.$name.'" content="'.$content.'">';
+            $expectations[] = '<meta name="twitter:' . $name . '" content="' . $content . '">';
         }
 
         $this->card->addMetas($metas);

@@ -14,27 +14,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface Keywords extends Renderable
 {
     /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get content.
-     *
-     * @return array
-     */
-    public function getContent();
-
-    /**
-     * Set description content.
-     *
-     * @param  array|string  $content
-     *
-     * @return $this
-     */
-    public function set($content);
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -42,27 +21,43 @@ interface Keywords extends Renderable
     /**
      * Make Keywords instance.
      *
-     * @param  array|string  $keywords
+     * @return $this
+     */
+    public static function make(array|string $keywords): static;
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get content.
+     */
+    public function getContent(): array;
+
+    /**
+     * Get the keywords content.
+     */
+    public function get(): string;
+
+    /**
+     * Set description content.
      *
      * @return $this
      */
-    public static function make($keywords);
+    public function set(array|string $content): static;
 
     /**
      * Add a keyword to the content.
      *
-     * @param  string  $keyword
-     *
      * @return $this
      */
-    public function add($keyword);
+    public function add(string $keyword): static;
 
     /**
      * Add many keywords to the content.
      *
-     * @param  array  $keywords
-     *
      * @return $this
      */
-    public function addMany(array $keywords);
+    public function addMany(array $keywords): static;
 }

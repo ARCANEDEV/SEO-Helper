@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
 use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
@@ -28,10 +29,8 @@ class Webmasters implements WebmastersContract
 
     /**
      * The supported webmasters.
-     *
-     * @var array
      */
-    protected $supported = [
+    protected array $supported = [
         'google'    => 'google-site-verification',
         'bing'      => 'msvalidate.01',
         'alexa'     => 'alexaVerifyID',
@@ -41,10 +40,8 @@ class Webmasters implements WebmastersContract
 
     /**
      * The meta collection.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
-    protected $metas;
+    protected MetaCollectionContract $metas;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -53,109 +50,12 @@ class Webmasters implements WebmastersContract
 
     /**
      * Create Webmasters instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-
         $this->reset();
         $this->init();
-    }
-
-    /**
-     * Start the engine.
-     */
-    private function init()
-    {
-        foreach ($this->configs as $webmaster => $content) {
-            $this->add($webmaster, $content);
-        }
-    }
-
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the webmaster meta name.
-     *
-     * @param  string  $webmaster
-     *
-     * @return string|null
-     */
-    private function getWebmasterName($webmaster)
-    {
-        return $this->isSupported($webmaster)
-            ? $this->supported[$webmaster]
-            : null;
-    }
-
-    /**
-     * Get all the metas collection.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
-     */
-    public function all()
-    {
-        return $this->metas;
-    }
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-    /**
-     * Make Webmaster instance.
-     *
-     * @param  array  $webmasters
-     *
-     * @return \Arcanedev\SeoHelper\Entities\Webmasters
-     */
-    public static function make(array $webmasters = [])
-    {
-        return new self($webmasters);
-    }
-
-    /**
-     * Add a webmaster to collection.
-     *
-     * @param  string  $webmaster
-     * @param  string  $content
-     *
-     * @return \Arcanedev\SeoHelper\Entities\Webmasters
-     */
-    public function add($webmaster, $content)
-    {
-        if ( ! is_null($name = $this->getWebmasterName($webmaster))) {
-            $this->metas->addOne($name, $content);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Reset the webmaster collection.
-     *
-     * @return \Arcanedev\SeoHelper\Entities\Webmasters
-     */
-    public function reset()
-    {
-        $this->metas = new MetaCollection;
-
-        return $this;
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        return $this->metas->render();
     }
 
     /**
@@ -169,16 +69,94 @@ class Webmasters implements WebmastersContract
     }
 
     /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Make Webmaster instance.
+     *
+     * @return $this
+     */
+    public static function make(array $webmasters = []): static
+    {
+        return new static($webmasters);
+    }
+
+    /**
+     * Get all the metas' collection.
+     */
+    public function all(): MetaCollectionContract
+    {
+        return $this->metas;
+    }
+
+    /**
+     * Add a webmaster to collection.
+     *
+     * @return $this
+     */
+    public function add(string $webmaster, string $content): static
+    {
+        if (($name = $this->getWebmasterName($webmaster)) !== null) {
+            $this->metas->addOne($name, $content);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Reset the webmaster collection.
+     *
+     * @return $this
+     */
+    public function reset(): static
+    {
+        $this->metas = new MetaCollection();
+
+        return $this;
+    }
+
+    /**
+     * Render the tag.
+     */
+    public function render(): string
+    {
+        return $this->metas->render();
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init(): void
+    {
+        foreach ($this->configs as $webmaster => $content) {
+            $this->add($webmaster, $content);
+        }
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the webmaster meta name.
+     */
+    private function getWebmasterName(string $webmaster): ?string
+    {
+        return $this->isSupported($webmaster)
+            ? $this->supported[$webmaster]
+            : null;
+    }
+
+    /* -----------------------------------------------------------------
      |  Check Methods
      | -----------------------------------------------------------------
      */
 
     /**
      * Check if the webmaster is supported.
-     *
-     * @param  string  $webmaster
-     *
-     * @return bool
      */
     private function isSupported(string $webmaster): bool
     {

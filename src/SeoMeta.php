@@ -11,6 +11,12 @@ use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
 use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
 use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Entities\Analytics;
+use Arcanedev\SeoHelper\Entities\Description;
+use Arcanedev\SeoHelper\Entities\Keywords;
+use Arcanedev\SeoHelper\Entities\MiscTags;
+use Arcanedev\SeoHelper\Entities\Title;
+use Arcanedev\SeoHelper\Entities\Webmasters;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
 /**
@@ -34,52 +40,38 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Current URL.
-     *
-     * @var string
      */
-    protected $currentUrl = '';
+    protected string $currentUrl = '';
 
     /**
      * The Title instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\Title
      */
-    protected $title;
+    protected TitleContract $title;
 
     /**
      * The Description instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\Description
      */
-    protected $description;
+    protected DescriptionContract $description;
 
     /**
      * The Keywords instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\Keywords
      */
-    protected $keywords;
+    protected KeywordsContract $keywords;
 
     /**
      * The MiscTags instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MiscTags
      */
-    protected $misc;
+    protected MiscTagsContract $misc;
 
     /**
      * The Webmasters instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\Webmasters
      */
-    protected $webmasters;
+    protected WebmastersContract $webmasters;
 
     /**
      * The Analytics instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\Analytics
      */
-    protected $analytics;
+    protected AnalyticsContract $analytics;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -88,8 +80,6 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Make SeoMeta instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs)
     {
@@ -98,28 +88,13 @@ class SeoMeta implements SeoMetaContract
     }
 
     /**
-     * Start the engine.
+     * Render all seo tags.
+     *
+     * @return string
      */
-    private function init(): void
+    public function __toString()
     {
-        $this->title(
-            new Entities\Title($this->getConfig('title', []))
-        );
-        $this->description(
-            new Entities\Description($this->getConfig('description', []))
-        );
-        $this->keywords(
-            new Entities\Keywords($this->getConfig('keywords', []))
-        );
-        $this->misc(
-            new Entities\MiscTags($this->getConfig('misc', []))
-        );
-        $this->webmasters(
-            new Entities\Webmasters($this->getConfig('webmasters', []))
-        );
-        $this->analytics(
-            new Entities\Analytics($this->getConfig('analytics', []))
-        );
+        return $this->render();
     }
 
     /* -----------------------------------------------------------------
@@ -130,11 +105,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the Title instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Title  $title
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function title(TitleContract $title)
+    public function title(TitleContract $title): static
     {
         $this->title = $title;
 
@@ -143,10 +116,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Get the Title instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\Title
      */
-    public function getTitleEntity()
+    public function getTitleEntity(): TitleContract
     {
         return $this->title;
     }
@@ -154,11 +125,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the Description instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Description  $description
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function description(DescriptionContract $description)
+    public function description(DescriptionContract $description): static
     {
         $this->description = $description;
 
@@ -167,10 +136,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Get the Description instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\Description
      */
-    public function getDescriptionEntity()
+    public function getDescriptionEntity(): DescriptionContract
     {
         return $this->description;
     }
@@ -178,11 +145,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the Keywords instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Keywords  $keywords
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function keywords(KeywordsContract $keywords)
+    public function keywords(KeywordsContract $keywords): static
     {
         $this->keywords = $keywords;
 
@@ -191,10 +156,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Get the Keywords instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\Keywords
      */
-    public function getKeywordsEntity()
+    public function getKeywordsEntity(): KeywordsContract
     {
         return $this->keywords;
     }
@@ -202,11 +165,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the MiscTags instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags  $misc
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function misc(MiscTagsContract $misc)
+    public function misc(MiscTagsContract $misc): static
     {
         $this->misc = $misc;
 
@@ -215,10 +176,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Get the MiscTags instance.
-     *
-     * @return  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags
      */
-    public function getMiscEntity()
+    public function getMiscEntity(): MiscTagsContract
     {
         return $this->misc;
     }
@@ -226,11 +185,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the Webmasters instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters  $webmasters
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function webmasters(WebmastersContract $webmasters)
+    public function webmasters(WebmastersContract $webmasters): static
     {
         $this->webmasters = $webmasters;
 
@@ -239,10 +196,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Get the Webmasters instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\Webmasters
      */
-    public function getWebmastersEntity()
+    public function getWebmastersEntity(): WebmastersContract
     {
         return $this->webmasters;
     }
@@ -250,11 +205,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the Analytics instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\Analytics  $analytics
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function analytics(AnalyticsContract $analytics)
+    public function analytics(AnalyticsContract $analytics): static
     {
         $this->analytics = $analytics;
 
@@ -263,10 +216,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Get the Analytics instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\Analytics
      */
-    public function getAnalyticsEntity()
+    public function getAnalyticsEntity(): AnalyticsContract
     {
         return $this->analytics;
     }
@@ -274,27 +225,25 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the title.
      *
-     * @param  string  $title
-     * @param  string  $siteName
-     * @param  string  $separator
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function setTitle($title, $siteName = null, $separator = null)
+    public function setTitle(string $title, ?string $siteName = null, ?string $separator = null): static
     {
-        $this->title->set($title)->setSeparator($separator);
+        $this->title
+            ->set($title)
+            ->setSeparator($separator)
+            ->setSiteName($siteName)
+        ;
 
-        return $this->setSiteName($siteName);
+        return $this;
     }
 
     /**
      * Set the site name.
      *
-     * @param  string  $siteName
-     *
      * @return $this
      */
-    public function setSiteName($siteName)
+    public function setSiteName(string $siteName): static
     {
         $this->title->setSiteName($siteName);
 
@@ -304,9 +253,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Hide site name.
      *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function hideSiteName()
+    public function hideSiteName(): static
     {
         $this->title->hideSiteName();
 
@@ -318,7 +267,7 @@ class SeoMeta implements SeoMetaContract
      *
      * @return $this
      */
-    public function showSiteName()
+    public function showSiteName(): static
     {
         $this->title->showSiteName();
 
@@ -328,11 +277,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the description content.
      *
-     * @param  string  $content
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function setDescription($content)
+    public function setDescription(string $content): static
     {
         $this->description->set($content);
 
@@ -342,11 +289,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the keywords content.
      *
-     * @param  array|string  $content
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function setKeywords($content)
+    public function setKeywords(array|string $content): static
     {
         $this->keywords->set($content);
 
@@ -356,11 +301,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Add a keyword.
      *
-     * @param  string  $keyword
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function addKeyword($keyword)
+    public function addKeyword(string $keyword): static
     {
         $this->keywords->add($keyword);
 
@@ -370,11 +313,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Add many keywords.
      *
-     * @param  array  $keywords
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function addKeywords(array $keywords)
+    public function addKeywords(array $keywords): static
     {
         $this->keywords->addMany($keywords);
 
@@ -384,12 +325,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Add a webmaster tool site verifier.
      *
-     * @param  string  $webmaster
-     * @param  string  $content
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function addWebmaster($webmaster, $content)
+    public function addWebmaster(string $webmaster, string $content): static
     {
         $this->webmasters->add($webmaster, $content);
 
@@ -399,11 +337,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the current URL.
      *
-     * @param  string  $url
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function setUrl($url)
+    public function setUrl(string $url): static
     {
         $this->currentUrl = $url;
         $this->misc->setUrl($url);
@@ -414,11 +350,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Set the Google Analytics code.
      *
-     * @param  string  $code
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function setGoogleAnalytics($code)
+    public function setGoogleAnalytics(string $code): static
     {
         $this->analytics->setGoogle($code);
 
@@ -433,12 +367,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Add a meta tag.
      *
-     * @param  string  $name
-     * @param  string  $content
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function addMeta($name, $content)
+    public function addMeta(string $name, string $content): static
     {
         $this->misc->add($name, $content);
 
@@ -448,11 +379,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Add many meta tags.
      *
-     * @param  array  $metas
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function addMetas(array $metas)
+    public function addMetas(array $metas): static
     {
         $this->misc->addMany($metas);
 
@@ -462,11 +391,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Remove a meta from the meta collection by key.
      *
-     * @param  string|array  $names
-     *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function removeMeta($names)
+    public function removeMeta(array|string $names): static
     {
         $this->misc->remove($names);
 
@@ -476,9 +403,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Reset the meta collection except the description and keywords metas.
      *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function resetMetas()
+    public function resetMetas(): static
     {
         $this->misc->reset();
 
@@ -488,9 +415,9 @@ class SeoMeta implements SeoMetaContract
     /**
      * Reset all webmaster tool site verifier metas.
      *
-     * @return \Arcanedev\SeoHelper\SeoMeta
+     * @return $this
      */
-    public function resetWebmasters()
+    public function resetWebmasters(): static
     {
         $this->webmasters->reset();
 
@@ -499,10 +426,8 @@ class SeoMeta implements SeoMetaContract
 
     /**
      * Render all seo tags.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         return implode(PHP_EOL, array_filter([
             $this->title->render(),
@@ -515,12 +440,17 @@ class SeoMeta implements SeoMetaContract
     }
 
     /**
-     * Render all seo tags.
-     *
-     * @return string
+     * Start the engine.
      */
-    public function __toString()
+    private function init(): void
     {
-        return $this->render();
+        $this
+            ->title(new Title($this->getConfig('title', [])))
+            ->description(new Description($this->getConfig('description', [])))
+            ->keywords(new Keywords($this->getConfig('keywords', [])))
+            ->misc(new MiscTags($this->getConfig('misc', [])))
+            ->webmasters(new Webmasters($this->getConfig('webmasters', [])))
+            ->analytics(new Analytics($this->getConfig('analytics', [])))
+        ;
     }
 }

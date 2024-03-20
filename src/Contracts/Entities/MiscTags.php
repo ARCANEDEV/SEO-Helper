@@ -14,34 +14,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface MiscTags extends Renderable
 {
     /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the current URL.
-     *
-     * @return string
-     */
-    public function getUrl();
-
-    /**
-     * Set the current URL.
-     *
-     * @param  string  $url
-     *
-     * @return $this
-     */
-    public function setUrl($url);
-
-    /**
-     * Get all the metas collection.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
-     */
-    public function all();
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -49,44 +21,57 @@ interface MiscTags extends Renderable
     /**
      * Make MiscTags instance.
      *
-     * @param  array  $defaults
+     * @return $this
+     */
+    public static function make(array $defaults = []): static;
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the current URL.
+     */
+    public function getUrl(): string;
+
+    /**
+     * Set the current URL.
      *
      * @return $this
      */
-    public static function make(array $defaults = []);
+    public function setUrl(string $url): static;
+
+    /**
+     * Get all the metas' collection.
+     */
+    public function all(): MetaCollection;
 
     /**
      * Add a meta tag.
      *
-     * @param  string  $name
-     * @param  string  $content
-     *
      * @return $this
      */
-    public function add($name, $content);
+    public function add(string $name, string $content): static;
 
     /**
      * Add many meta tags.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMany(array $metas);
+    public function addMany(array $metas): static;
 
     /**
      * Remove a meta from the meta collection by key.
      *
-     * @param  array|string  $names
-     *
      * @return $this
      */
-    public function remove($names);
+    public function remove(array|string $names): static;
 
     /**
      * Reset the meta collection.
      *
      * @return $this
      */
-    public function reset();
+    public function reset(): static;
 }

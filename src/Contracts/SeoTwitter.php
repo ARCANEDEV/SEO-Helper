@@ -17,119 +17,101 @@ interface SeoTwitter extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Set the twitter card instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard  $card
-     *
      * @return $this
      */
-    public function setCard(CardContract $card);
+    public function setCard(CardContract $card): static;
 
     /**
      * Set the card type.
      *
-     * @param  string  $type
-     *
      * @return $this
      */
-    public function setType($type);
+    public function setType(string $type): static;
 
     /**
      * Set the card site.
      *
-     * @param  string  $site
-     *
      * @return $this
      */
-    public function setSite($site);
+    public function setSite(string $site): static;
 
     /**
      * Set the card title.
      *
-     * @param  string  $title
-     *
      * @return $this
      */
-    public function setTitle($title);
+    public function setTitle(string $title): static;
 
     /**
      * Set the card description.
      *
-     * @param  string  $description
-     *
      * @return $this
      */
-    public function setDescription($description);
+    public function setDescription(string $description): static;
 
     /**
-     * Add image to the card.
-     *
-     * @param  string  $url
+     * Add the image to the card.
      *
      * @return $this
      */
-    public function addImage($url);
+    public function addImage(string $url): static;
 
     /**
      * Add many metas to the card.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMetas(array $metas);
+    public function addMetas(array $metas): static;
 
     /**
      * Add a meta to the twitter card.
      *
-     * @param  string  $name
-     * @param  string  $content
-     *
      * @return $this
      */
-    public function addMeta($name, $content);
+    public function addMeta(string $name, string $content): static;
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Reset the twitter card.
      *
      * @return $this
      */
-    public function reset();
+    public function reset(): static;
 
     /**
      * Enable the Twitter Card.
      *
      * @return $this
      */
-    public function enable();
+    public function enable(): static;
 
     /**
      * Disable the Twitter Card.
      *
      * @return $this
      */
-    public function disable();
+    public function disable(): static;
 
     /* -----------------------------------------------------------------
      |  Check Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Check if the Twitter Card is enabled.
-     *
-     * @return bool
      */
-    public function isEnabled();
+    public function isEnabled(): bool;
 
     /**
      * Check if the Twitter Card is disabled.
-     *
-     * @return bool
      */
-    public function isDisabled();
+    public function isDisabled(): bool;
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /* -----------------------------------------------------------------
@@ -32,7 +34,7 @@ return [
 
     'keywords'  => [
         'default'   => [
-            //
+
         ],
     ],
 
@@ -77,7 +79,7 @@ return [
         'description' => 'Default Open Graph description',
         'site-name'   => '',
         'properties'  => [
-            //
+
         ],
     ],
 
@@ -94,7 +96,7 @@ return [
         'site'    => 'Username',
         'title'   => 'Default Twitter Card title',
         'metas'   => [
-            //
+
         ],
     ],
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities\OpenGraph;
 
+use Arcanedev\SeoHelper\Contracts\Entities\OpenGraph as OpenGraphContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\OpenGraph\Graph;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -19,8 +21,7 @@ class GraphTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph */
-    private $og;
+    private OpenGraphContract $og;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -31,8 +32,9 @@ class GraphTest extends TestCase
     {
         parent::setUp();
 
-        $config   = $this->getSeoHelperConfig('open-graph');
-        $this->og = new Graph($config);
+        $this->og = new Graph(
+            $this->getSeoHelperConfig('open-graph')
+        );
     }
 
     public function tearDown(): void
@@ -51,9 +53,9 @@ class GraphTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\OpenGraph\Graph::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\OpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            Renderable::class,
+            OpenGraphContract::class,
+            Graph::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -65,8 +67,8 @@ class GraphTest extends TestCase
     public function it_can_render_defaults(): void
     {
         $output   = $this->og->render();
-        $expected = '<meta property="og:type" content="website">'.
-            '<meta property="og:title" content="Default Open Graph title">'.
+        $expected = '<meta property="og:type" content="website">' .
+            '<meta property="og:title" content="Default Open Graph title">' .
             '<meta property="og:description" content="Default Open Graph description">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $output);
@@ -85,7 +87,7 @@ class GraphTest extends TestCase
         foreach ($types as $type) {
             $this->og->setType($type);
 
-            $expected = '<meta property="og:type" content="'.$type.'">';
+            $expected = '<meta property="og:type" content="' . $type . '">';
 
             static::assertStringContainsString($expected, $this->og->render());
             static::assertStringContainsString($expected, (string) $this->og);
@@ -99,7 +101,7 @@ class GraphTest extends TestCase
 
         $this->og->setTitle($title);
 
-        $expected = '<meta property="og:title" content="'.$title.'">';
+        $expected = '<meta property="og:title" content="' . $title . '">';
 
         static::assertStringContainsString($expected, $this->og->render());
         static::assertStringContainsString($expected, (string) $this->og);
@@ -112,7 +114,7 @@ class GraphTest extends TestCase
 
         $this->og->setDescription($description);
 
-        $expected = '<meta property="og:description" content="'.$description.'">';
+        $expected = '<meta property="og:description" content="' . $description . '">';
 
         static::assertStringContainsString($expected, $this->og->render());
         static::assertStringContainsString($expected, (string) $this->og);
@@ -125,7 +127,7 @@ class GraphTest extends TestCase
 
         $this->og->setUrl($url);
 
-        $expected = '<meta property="og:url" content="'.$url.'">';
+        $expected = '<meta property="og:url" content="' . $url . '">';
 
         static::assertStringContainsString($expected, $this->og->render());
         static::assertStringContainsString($expected, (string) $this->og);
@@ -138,7 +140,7 @@ class GraphTest extends TestCase
 
         $this->og->setImage($image);
 
-        $expected = '<meta property="og:image" content="'.$image.'">';
+        $expected = '<meta property="og:image" content="' . $image . '">';
 
         static::assertStringContainsString($expected, $this->og->render());
         static::assertStringContainsString($expected, (string) $this->og);
@@ -151,7 +153,7 @@ class GraphTest extends TestCase
 
         $this->og->setSiteName($siteName);
 
-        $expected = '<meta property="og:site_name" content="'.$siteName.'">';
+        $expected = '<meta property="og:site_name" content="' . $siteName . '">';
 
         static::assertStringContainsString($expected, $this->og->render());
         static::assertStringContainsString($expected, (string) $this->og);
@@ -164,7 +166,7 @@ class GraphTest extends TestCase
 
         $this->og->addProperty('locale', $locale);
 
-        $expected = '<meta property="og:locale" content="'.$locale.'">';
+        $expected = '<meta property="og:locale" content="' . $locale . '">';
 
         static::assertStringContainsString($expected, $this->og->render());
         static::assertStringContainsString($expected, (string) $this->og);
@@ -181,7 +183,7 @@ class GraphTest extends TestCase
         $expectations = [];
 
         foreach ($properties as $property => $content) {
-            $expectations[] = '<meta property="og:'.$property.'" content="'.$content.'">';
+            $expectations[] = '<meta property="og:' . $property . '" content="' . $content . '">';
         }
 
         $this->og->addProperties($properties);
@@ -199,7 +201,7 @@ class GraphTest extends TestCase
 
         foreach ($locales as $locale) {
             static::assertStringContainsString(
-                '<meta property="og:locale" content="'.$locale.'">',
+                '<meta property="og:locale" content="' . $locale . '">',
                 $this->og->setLocale($locale)->render()
             );
         }

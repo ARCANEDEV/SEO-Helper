@@ -29,17 +29,13 @@ class Keywords implements KeywordsContract
 
     /**
      * The meta name.
-     *
-     * @var string
      */
-    protected $name    = 'keywords';
+    protected string $name = 'keywords';
 
     /**
      * The meta content.
-     *
-     * @var array
      */
-    protected $content = [];
+    protected array $content = [];
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -48,120 +44,11 @@ class Keywords implements KeywordsContract
 
     /**
      * Make Keywords instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
         $this->set($this->getConfig('default', []));
-    }
-
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get raw keywords content.
-     *
-     * @return array
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Get keywords content.
-     *
-     * @return string
-     */
-    public function get()
-    {
-        return implode(', ', $this->getContent());
-    }
-
-    /**
-     * Set keywords content.
-     *
-     * @param  array|string  $content
-     *
-     * @return $this
-     */
-    public function set($content)
-    {
-        if (is_string($content)) {
-            $content = explode(',', $content);
-        }
-
-        $this->content = array_map(function ($keyword) {
-            return $this->clean($keyword);
-        }, (array) $content);
-
-        return $this;
-    }
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Make Keywords instance.
-     *
-     * @param  array|string  $keywords
-     *
-     * @return $this
-     */
-    public static function make($keywords)
-    {
-        return new self(['default' => $keywords]);
-    }
-
-    /**
-     * Add a keyword to the content.
-     *
-     * @param  string  $keyword
-     *
-     * @return $this
-     */
-    public function add($keyword)
-    {
-        $this->content[] = $this->clean($keyword);
-
-        return $this;
-    }
-
-    /**
-     * Add many keywords to the content.
-     *
-     * @param  array  $keywords
-     *
-     * @return $this
-     */
-    public function addMany(array $keywords)
-    {
-        foreach ($keywords as $keyword) {
-            $this->add($keyword);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        if ( ! $this->hasContent())
-            return '';
-
-        return Meta::make()
-            ->attributes(['name' => $this->name, 'content' => $this->get()])
-            ->toHtml();
     }
 
     /**
@@ -175,14 +62,105 @@ class Keywords implements KeywordsContract
     }
 
     /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Make Keywords instance.
+     *
+     * @return $this
+     */
+    public static function make(array|string $keywords): static
+    {
+        return new static(['default' => $keywords]);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the raw keywords content.
+     */
+    public function getContent(): array
+    {
+        return $this->content;
+    }
+
+    /**
+     * Get the keywords content.
+     */
+    public function get(): string
+    {
+        return implode(', ', $this->getContent());
+    }
+
+    /**
+     * Set the keywords content.
+     *
+     * @return $this
+     */
+    public function set(array|string $content): static
+    {
+        if (is_string($content)) {
+            $content = explode(',', $content);
+        }
+
+        $this->content = array_map(fn($keyword) => $this->clean($keyword), (array) $content);
+
+        return $this;
+    }
+
+    /**
+     * Add a keyword to the content.
+     *
+     * @return $this
+     */
+    public function add(string $keyword): static
+    {
+        $this->content[] = $this->clean($keyword);
+
+        return $this;
+    }
+
+    /**
+     * Add many keywords to the content.
+     *
+     * @return $this
+     */
+    public function addMany(array $keywords): static
+    {
+        foreach ($keywords as $keyword) {
+            $this->add($keyword);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Render the tag.
+     */
+    public function render(): string
+    {
+        if ( ! $this->hasContent()) {
+            return '';
+        }
+
+        return Meta::make()
+            ->attributes(['name' => $this->name, 'content' => $this->get()])
+            ->toHtml()
+        ;
+    }
+
+    /* -----------------------------------------------------------------
      |  Check Methods
      | -----------------------------------------------------------------
      */
 
     /**
      * Check if keywords has content.
-     *
-     * @return bool
      */
     private function hasContent(): bool
     {
@@ -196,10 +174,6 @@ class Keywords implements KeywordsContract
 
     /**
      * Clean the string.
-     *
-     * @param  string  $value
-     *
-     * @return string
      */
     private function clean(string $value): string
     {

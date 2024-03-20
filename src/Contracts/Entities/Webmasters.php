@@ -14,18 +14,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface Webmasters extends Renderable
 {
     /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get all the metas collection.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
-     */
-    public function all();
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -33,26 +21,31 @@ interface Webmasters extends Renderable
     /**
      * Make Webmaster instance.
      *
-     * @param  array  $webmasters
-     *
      * @return $this
      */
-    public static function make(array $webmasters = []);
+    public static function make(array $webmasters = []): static;
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get all the metas' collection.
+     */
+    public function all(): MetaCollection;
 
     /**
      * Add a webmaster to collection.
      *
-     * @param  string  $webmaster
-     * @param  string  $content
-     *
      * @return $this
      */
-    public function add($webmaster, $content);
+    public function add(string $webmaster, string $content): static;
 
     /**
      * Reset the webmaster collection.
      *
      * @return $this
      */
-    public function reset();
+    public function reset(): static;
 }

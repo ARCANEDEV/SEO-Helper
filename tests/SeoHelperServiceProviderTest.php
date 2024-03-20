@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests;
 
+use Arcanedev\SeoHelper\Contracts\{SeoHelper, SeoMeta, SeoOpenGraph, SeoTwitter};
 use Arcanedev\SeoHelper\SeoHelperServiceProvider;
+use Arcanedev\Support\Providers\{PackageServiceProvider, ServiceProvider};
+use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
 /**
  * Class     SeoHelperServiceProviderTest
@@ -18,8 +22,7 @@ class SeoHelperServiceProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\SeoHelperServiceProvider */
-    private $provider;
+    private ?SeoHelperServiceProvider $provider;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -49,11 +52,11 @@ class SeoHelperServiceProviderTest extends TestCase
     public function it_can_get_service_provider(): void
     {
         $expectations = [
-            \Illuminate\Support\ServiceProvider::class,
-            \Illuminate\Contracts\Support\DeferrableProvider::class,
-            \Arcanedev\Support\Providers\ServiceProvider::class,
-            \Arcanedev\Support\Providers\PackageServiceProvider::class,
-            \Arcanedev\SeoHelper\SeoHelperServiceProvider::class,
+            IlluminateServiceProvider::class,
+            DeferrableProvider::class,
+            ServiceProvider::class,
+            PackageServiceProvider::class,
+            SeoHelperServiceProvider::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -65,10 +68,10 @@ class SeoHelperServiceProviderTest extends TestCase
     public function it_can_provides(): void
     {
         $expected = [
-            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
+            SeoHelper::class,
+            SeoMeta::class,
+            SeoOpenGraph::class,
+            SeoTwitter::class,
         ];
 
         static::assertSame($expected, $this->provider->provides());

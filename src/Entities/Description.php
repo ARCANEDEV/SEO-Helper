@@ -31,24 +31,18 @@ class Description implements DescriptionContract
 
     /**
      * The meta name.
-     *
-     * @var string
      */
-    protected $name = 'description';
+    protected string $name = 'description';
 
     /**
      * The meta content.
-     *
-     * @var string
      */
-    protected $content = '';
+    protected string $content = '';
 
     /**
      * The description max length.
-     *
-     * @var int
      */
-    protected $max = 155;
+    protected int $max = 155;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -57,112 +51,12 @@ class Description implements DescriptionContract
 
     /**
      * Make Description instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
         $this->set($this->getConfig('default', ''));
         $this->setMax($this->getConfig('max', 155));
-    }
-
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get raw description content.
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Get description content.
-     *
-     * @return string
-     */
-    public function get()
-    {
-        return Str::limit($this->getContent(), $this->getMax());
-    }
-
-    /**
-     * Set description content.
-     *
-     * @param  string  $content
-     *
-     * @return $this
-     */
-    public function set($content)
-    {
-        $this->content = trim(strip_tags($content));
-
-        return $this;
-    }
-
-    /**
-     * Get description max length.
-     *
-     * @return int
-     */
-    public function getMax()
-    {
-        return $this->max;
-    }
-
-    /**
-     * Set description max length.
-     *
-     * @param  int  $max
-     *
-     * @return $this
-     */
-    public function setMax($max)
-    {
-        $this->checkMax($max);
-
-        $this->max = $max;
-
-        return $this;
-    }
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Make a description instance.
-     *
-     * @param  string  $content
-     * @param  int     $max
-     *
-     * @return $this
-     */
-    public static function make($content, $max = 155)
-    {
-        return new self(['default' => $content, 'max' => $max]);
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        if ( ! $this->hasContent())
-            return '';
-
-        return Meta::make()
-            ->attributes(['name' => $this->name, 'content' => $this->get()])
-            ->toHtml();
     }
 
     /**
@@ -176,14 +70,96 @@ class Description implements DescriptionContract
     }
 
     /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Make a description instance.
+     *
+     * @return $this
+     */
+    public static function make(string $content, int $max = 155): static
+    {
+        return new static(['default' => $content, 'max' => $max]);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the raw description content.
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * Get the description content.
+     */
+    public function get(): string
+    {
+        return Str::limit($this->getContent(), $this->getMax());
+    }
+
+    /**
+     * Set the description content.
+     *
+     * @return $this
+     */
+    public function set(string $content): static
+    {
+        $this->content = trim(strip_tags($content));
+
+        return $this;
+    }
+
+    /**
+     * Get the description max length.
+     */
+    public function getMax(): int
+    {
+        return $this->max;
+    }
+
+    /**
+     * Set the description max length.
+     *
+     * @return $this
+     */
+    public function setMax(int $max): static
+    {
+        $this->checkMax($max);
+
+        $this->max = $max;
+
+        return $this;
+    }
+
+    /**
+     * Render the tag.
+     */
+    public function render(): string
+    {
+        if ( ! $this->hasContent()) {
+            return '';
+        }
+
+        return Meta::make()
+            ->attributes(['name' => $this->name, 'content' => $this->get()])
+            ->toHtml();
+    }
+
+    /* -----------------------------------------------------------------
      |  Check Methods
      | -----------------------------------------------------------------
      */
 
     /**
      * Check if description has content.
-     *
-     * @return bool
      */
     private function hasContent(): bool
     {
@@ -193,18 +169,10 @@ class Description implements DescriptionContract
     /**
      * Check title max length.
      *
-     * @param  int  $max
-     *
-     * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    private function checkMax($max): void
+    private function checkMax(int $max): void
     {
-        if ( ! is_int($max)) {
-            throw new InvalidArgumentException(
-                'The description maximum length must be integer.'
-            );
-        }
-
         if ($max <= 0) {
             throw new InvalidArgumentException(
                 'The description maximum length must be greater 0.'

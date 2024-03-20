@@ -85,18 +85,13 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Get SeoHelper config.
-     *
-     * @param  string      $name
-     * @param  mixed|null  $default
-     *
-     * @return mixed
      */
-    protected function getSeoHelperConfig($name = null, $default = null)
+    protected function getSeoHelperConfig(string $name = null, mixed $default = null): mixed
     {
         $config = $this->app['config'];
 
-        return is_null($name)
+        return $name === null
             ? $config->get('seo-helper', [])
-            : $config->get("seo-helper.$name", $default);
+            : $config->get("seo-helper.{$name}", $default);
     }
 }

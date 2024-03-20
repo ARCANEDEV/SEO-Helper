@@ -6,7 +6,9 @@ namespace Arcanedev\SeoHelper;
 
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
+use Arcanedev\SeoHelper\Entities\Twitter\Card;
 use Arcanedev\SeoHelper\Traits\Configurable;
+use Arcanedev\SeoHelper\Traits\HasEnabled;
 
 /**
  * Class     SeoTwitter
@@ -21,6 +23,7 @@ class SeoTwitter implements SeoTwitterContract
      */
 
     use Configurable;
+    use HasEnabled;
 
     /* -----------------------------------------------------------------
      |  Properties
@@ -28,18 +31,9 @@ class SeoTwitter implements SeoTwitterContract
      */
 
     /**
-     * Enable or Disable the Twitter Card.
-     *
-     * @var bool
-     */
-    protected $enabled;
-
-    /**
      * The Twitter Card instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard
      */
-    protected $card;
+    protected CardContract $card;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -54,11 +48,18 @@ class SeoTwitter implements SeoTwitterContract
     public function __construct(array $configs)
     {
         $this->setConfigs($configs);
-
         $this->setEnabled($this->getConfig('twitter.enabled', false));
-        $this->setCard(
-            new Entities\Twitter\Card($this->getConfig('twitter', []))
-        );
+        $this->setCard(new Card($this->getConfig('twitter', [])));
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 
     /* -----------------------------------------------------------------
@@ -69,11 +70,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Set the Twitter Card instance.
      *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\TwitterCard  $card
-     *
      * @return $this
      */
-    public function setCard(CardContract $card)
+    public function setCard(CardContract $card): static
     {
         $this->card = $card;
 
@@ -83,11 +82,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Set the card type.
      *
-     * @param  string  $type
-     *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): static
     {
         $this->card->setType($type);
 
@@ -97,11 +94,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Set the card site.
      *
-     * @param  string  $site
-     *
      * @return $this
      */
-    public function setSite($site)
+    public function setSite(string $site): static
     {
         $this->card->setSite($site);
 
@@ -111,11 +106,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Set the card title.
      *
-     * @param  string  $title
-     *
      * @return $this
      */
-    public function setTitle($title)
+    public function setTitle(string $title): static
     {
         $this->card->setTitle($title);
 
@@ -125,11 +118,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Set the card description.
      *
-     * @param  string  $description
-     *
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description): static
     {
         $this->card->setDescription($description);
 
@@ -139,11 +130,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Add image to the card.
      *
-     * @param  string  $url
-     *
      * @return $this
      */
-    public function addImage($url)
+    public function addImage(string $url): static
     {
         $this->card->addImage($url);
 
@@ -153,11 +142,9 @@ class SeoTwitter implements SeoTwitterContract
     /**
      * Add many metas to the card.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMetas(array $metas)
+    public function addMetas(array $metas): static
     {
         $this->card->addMetas($metas);
 
@@ -165,30 +152,13 @@ class SeoTwitter implements SeoTwitterContract
     }
 
     /**
-     * Add a meta to the Twitter Card.
-     *
-     * @param  string  $name
-     * @param  string  $content
+     * Add a meta to the Twitter Card.x
      *
      * @return $this
      */
-    public function addMeta($name, $content)
+    public function addMeta(string $name, string $content): static
     {
         $this->card->addMeta($name, $content);
-
-        return $this;
-    }
-
-    /**
-     * Set the enabled status for the Twitter Card.
-     *
-     * @param  bool  $enabled
-     *
-     * @return $this
-     */
-    private function setEnabled(bool $enabled)
-    {
-        $this->enabled = $enabled;
 
         return $this;
     }
@@ -203,7 +173,7 @@ class SeoTwitter implements SeoTwitterContract
      *
      * @return $this
      */
-    public function reset()
+    public function reset(): static
     {
         $this->card->reset();
 
@@ -212,66 +182,9 @@ class SeoTwitter implements SeoTwitterContract
 
     /**
      * Render the tag.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         return $this->isEnabled() ? $this->card->render() : '';
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->render();
-    }
-
-    /**
-     * Enable the Twitter Card.
-     *
-     * @return $this
-     */
-    public function enable()
-    {
-        return $this->setEnabled(true);
-    }
-
-    /**
-     * Disable the Twitter Card.
-     *
-     * @return $this
-     */
-    public function disable()
-    {
-        return $this->setEnabled(false);
-    }
-
-    /* -----------------------------------------------------------------
-     |  Check Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Check if the Twitter Card is enabled.
-     *
-     * @return bool
-     */
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * Check if the Twitter Card is disabled.
-     *
-     * @return bool
-     */
-    public function isDisabled()
-    {
-        return ! $this->isEnabled();
     }
 }

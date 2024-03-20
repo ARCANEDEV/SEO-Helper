@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Traits;
 
+use Arcanedev\SeoHelper\Contracts\Renderable;
+use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
+use Arcanedev\SeoHelper\SeoHelper;
+use Arcanedev\SeoHelper\SeoMeta;
+use Arcanedev\SeoHelper\SeoOpenGraph;
+use Arcanedev\SeoHelper\SeoTwitter;
 use Arcanedev\SeoHelper\Tests\Stubs\Dummy;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -19,8 +28,7 @@ class SeoableTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Tests\Stubs\Dummy */
-    private $dummy;
+    private Dummy $dummy;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -31,7 +39,7 @@ class SeoableTest extends TestCase
     {
         parent::setUp();
 
-        $this->dummy = new Dummy;
+        $this->dummy = new Dummy();
     }
 
     public function tearDown(): void
@@ -52,9 +60,9 @@ class SeoableTest extends TestCase
         $seoHelper = $this->dummy->seo();
 
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoHelper::class,
+            Renderable::class,
+            SeoHelperContract::class,
+            SeoHelper::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -68,9 +76,9 @@ class SeoableTest extends TestCase
         $seoMeta = $this->dummy->seoMeta();
 
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoMeta::class,
+            Renderable::class,
+            SeoMetaContract::class,
+            SeoMeta::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -84,9 +92,9 @@ class SeoableTest extends TestCase
         $seoOpenGraph = $this->dummy->seoGraph();
 
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoOpenGraph::class,
+            Renderable::class,
+            SeoOpenGraphContract::class,
+            SeoOpenGraph::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -99,9 +107,9 @@ class SeoableTest extends TestCase
     {
         $seoTwitter   = $this->dummy->seoCard();
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoTwitter::class,
+            Renderable::class,
+            SeoTwitterContract::class,
+            SeoTwitter::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -112,13 +120,13 @@ class SeoableTest extends TestCase
     /** @test */
     public function it_can_set_and_render_title(): void
     {
-        $title        = 'Hello World';
-        $siteName     = 'ARCANEDEV';
-        $separator    = '|';
+        $title = 'Hello World';
+        $siteName = 'ARCANEDEV';
+        $separator = '|';
         $expectations = [
-            "<title>$title $separator $siteName</title>",
-            '<meta property="og:title" content="'.$title.'">',
-            '<meta name="twitter:title" content="'.$title.'">',
+            "<title>{$title} {$separator} {$siteName}</title>",
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
         ];
 
         $this->dummy->setTitle($title, $siteName, $separator);
@@ -137,9 +145,9 @@ class SeoableTest extends TestCase
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
-            '<meta name="description" content="'.$description.'">',
-            '<meta property="og:description" content="'.$description.'">',
-            '<meta name="twitter:description" content="'.$description.'">',
+            '<meta name="description" content="' . $description . '">',
+            '<meta property="og:description" content="' . $description . '">',
+            '<meta name="twitter:description" content="' . $description . '">',
         ];
 
         $this->dummy->setDescription($description);
@@ -157,7 +165,7 @@ class SeoableTest extends TestCase
     public function it_can_set_and_render_keywords(): void
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         $this->dummy->setKeywords($keywords); // Array
 

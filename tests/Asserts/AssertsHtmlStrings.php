@@ -20,12 +20,8 @@ trait AssertsHtmlStrings
 
     /**
      * Assert two Html strings are equals.
-     *
-     * @param  string        $expected
-     * @param  string|mixed  $actual
-     * @param  string        $message
      */
-    public static function assertHtmlStringEqualsHtmlString(string $expected, $actual, string $message = ''): void
+    public static function assertHtmlStringEqualsHtmlString(string $expected, mixed $actual, string $message = ''): void
     {
         static::assertEqualsCanonicalizing(
             static::convertToDomDocument($expected),
@@ -41,17 +37,12 @@ trait AssertsHtmlStrings
 
     /**
      * Convert string to DOMDocument.
-     *
-     * @param  string  $html
-     *
-     * @return \DOMDocument
      */
-    protected static function convertToDomDocument($html): DOMDocument
+    protected static function convertToDomDocument(string $html): DOMDocument
     {
-        return tap(new DOMDocument, function (DOMDocument $dom) use ($html) {
+        return tap(new DOMDocument(), function (DOMDocument $dom) use ($html): void {
             $dom->loadHTML(preg_replace('/>\s+</', '><', $html));
             $dom->preserveWhiteSpace = false;
         });
     }
 }
-

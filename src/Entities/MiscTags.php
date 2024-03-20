@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
 use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
 use Arcanedev\SeoHelper\Traits\Configurable;
 
@@ -28,17 +29,13 @@ class MiscTags implements MiscTagsContract
 
     /**
      * Current URL.
-     *
-     * @var string
      */
-    protected $currentUrl = '';
+    protected string $currentUrl = '';
 
     /**
      * Meta collection.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
-    protected $metas;
+    protected MetaCollectionContract $metas;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -47,147 +44,13 @@ class MiscTags implements MiscTagsContract
 
     /**
      * Make MiscTags instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-        $this->metas   = new MetaCollection;
+        $this->metas = new MetaCollection();
 
         $this->init();
-    }
-
-    /**
-     * Start the engine.
-     */
-    private function init()
-    {
-        $this->addCanonical();
-        $this->addRobotsMeta();
-        $this->addMany($this->getConfig('default', []));
-    }
-
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the current URL.
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->currentUrl;
-    }
-
-    /**
-     * Set the current URL.
-     *
-     * @param  string  $url
-     *
-     * @return $this
-     */
-    public function setUrl($url)
-    {
-        $this->currentUrl = $url;
-        $this->addCanonical();
-
-        return $this;
-    }
-
-    /**
-     * Get all the metas collection.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
-     */
-    public function all()
-    {
-        return $this->metas;
-    }
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Make MiscTags instance.
-     *
-     * @param  array  $defaults
-     *
-     * @return $this
-     */
-    public static function make(array $defaults = [])
-    {
-        return new self(['default' => $defaults]);
-    }
-
-    /**
-     * Add a meta tag.
-     *
-     * @param  string  $name
-     * @param  string  $content
-     *
-     * @return $this
-     */
-    public function add($name, $content)
-    {
-        $this->metas->addOne($name, $content);
-
-        return $this;
-    }
-
-    /**
-     * Add many meta tags.
-     *
-     * @param  array  $metas
-     *
-     * @return $this
-     */
-    public function addMany(array $metas)
-    {
-        $this->metas->addMany($metas);
-
-        return $this;
-    }
-
-    /**
-     * Remove a meta from the meta collection by key.
-     *
-     * @param  array|string  $names
-     *
-     * @return $this
-     */
-    public function remove($names)
-    {
-        $this->metas->remove($names);
-
-        return $this;
-    }
-
-    /**
-     * Reset the meta collection.
-     *
-     * @return $this
-     */
-    public function reset()
-    {
-        $this->metas->reset();
-
-        return $this;
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        return $this->metas->render();
     }
 
     /**
@@ -201,14 +64,129 @@ class MiscTags implements MiscTagsContract
     }
 
     /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Make MiscTags instance.
+     *
+     * @return $this
+     */
+    public static function make(array $defaults = []): static
+    {
+        return new static(['default' => $defaults]);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the current URL.
+     */
+    public function getUrl(): string
+    {
+        return $this->currentUrl;
+    }
+
+    /**
+     * Set the current URL.
+     *
+     * @return $this
+     */
+    public function setUrl(string $url): static
+    {
+        $this->currentUrl = $url;
+        $this->addCanonical();
+
+        return $this;
+    }
+
+    /**
+     * Get all the metas' collection.
+     */
+    public function all(): MetaCollectionContract
+    {
+        return $this->metas;
+    }
+
+    /**
+     * Add a meta tag.
+     *
+     * @return $this
+     */
+    public function add(string $name, string $content): static
+    {
+        $this->metas->addOne($name, $content);
+
+        return $this;
+    }
+
+    /**
+     * Add many meta tags.
+     *
+     * @return $this
+     */
+    public function addMany(array $metas): static
+    {
+        $this->metas->addMany($metas);
+
+        return $this;
+    }
+
+    /**
+     * Remove a meta from the meta collection by key.
+     *
+     * @return $this
+     */
+    public function remove(array|string $names): static
+    {
+        $this->metas->remove($names);
+
+        return $this;
+    }
+
+    /**
+     * Reset the meta collection.
+     *
+     * @return $this
+     */
+    public function reset(): static
+    {
+        $this->metas->reset();
+
+        return $this;
+    }
+
+    /**
+     * Render the tag.
+     */
+    public function render(): string
+    {
+        return $this->metas->render();
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init(): void
+    {
+        $this
+            ->addCanonical()
+            ->addRobotsMeta()
+            ->addMany($this->getConfig('default', []))
+        ;
+    }
+
+    /* -----------------------------------------------------------------
      |  Check Methods
      | -----------------------------------------------------------------
      */
 
     /**
-     * Check if has the current URL.
-     *
-     * @return bool
+     * Check if it has the current URL.
      */
     private function hasUrl(): bool
     {
@@ -217,8 +195,6 @@ class MiscTags implements MiscTagsContract
 
     /**
      * Check if canonical is enabled.
-     *
-     * @return bool
      */
     private function isCanonicalEnabled(): bool
     {
@@ -227,8 +203,6 @@ class MiscTags implements MiscTagsContract
 
     /**
      * Check if blocking robots is enabled.
-     *
-     * @return bool
      */
     private function isRobotsEnabled(): bool
     {
@@ -245,10 +219,11 @@ class MiscTags implements MiscTagsContract
      *
      * @return $this
      */
-    private function addRobotsMeta(): self
+    private function addRobotsMeta(): static
     {
-        if ($this->isRobotsEnabled())
+        if ($this->isRobotsEnabled()) {
             $this->add('robots', 'noindex, nofollow');
+        }
 
         return $this;
     }
@@ -258,10 +233,11 @@ class MiscTags implements MiscTagsContract
      *
      * @return $this
      */
-    private function addCanonical(): self
+    private function addCanonical(): static
     {
-        if ($this->isCanonicalEnabled() && $this->hasUrl())
+        if ($this->isCanonicalEnabled() && $this->hasUrl()) {
             $this->add('canonical', $this->currentUrl);
+        }
 
         return $this;
     }

@@ -14,36 +14,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface Meta extends Renderable
 {
     /* -----------------------------------------------------------------
-     |  Getters and Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the meta name.
-     *
-     * @return string
-     */
-    public function key();
-
-    /**
-     * Set the meta prefix name.
-     *
-     * @param  string  $prefix
-     *
-     * @return $this
-     */
-    public function setPrefix($prefix);
-
-    /**
-     * Set the meta property name.
-     *
-     * @param  string  $nameProperty
-     *
-     * @return $this
-     */
-    public function setNameProperty($nameProperty);
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -51,19 +21,36 @@ interface Meta extends Renderable
     /**
      * Make Meta instance.
      *
-     * @param  string        $name
-     * @param  string|array  $content
-     * @param  string        $propertyName
-     * @param  string        $prefix
+     * @return $this
+     */
+    public static function make(string $name, array|string $content, string $propertyName = 'name', string $prefix = ''): static;
+
+    /* -----------------------------------------------------------------
+     |  Getters and Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the meta name.
+     */
+    public function key(): string;
+
+    /**
+     * Set the meta prefix name.
      *
      * @return $this
      */
-    public static function make($name, $content, $propertyName = 'name', $prefix = '');
+    public function setPrefix(string $prefix): static;
+
+    /**
+     * Set the meta property name.
+     *
+     * @return $this
+     */
+    public function setNameProperty(string $nameProperty): static;
 
     /**
      * Check if meta is valid.
-     *
-     * @return bool
      */
-    public function isValid();
+    public function isValid(): bool;
 }

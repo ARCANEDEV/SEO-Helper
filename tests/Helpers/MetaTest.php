@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Helpers;
 
+use Arcanedev\SeoHelper\Contracts\Helpers\Meta as MetaContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Helpers\Meta;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -28,9 +30,9 @@ class MetaTest extends TestCase
             new Meta('name', 'Hello world'),
         ];
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Helpers\Meta::class,
-            \Arcanedev\SeoHelper\Helpers\Meta::class,
+            Renderable::class,
+            MetaContract::class,
+            Meta::class,
         ];
 
         foreach ($results as $actual) {
@@ -47,24 +49,21 @@ class MetaTest extends TestCase
     /** @test */
     public function it_can_valid(): void
     {
-        $valids = [
+        $validMetas = [
             Meta::make('name', 'Hello world')
         ];
 
-        foreach ($valids as $meta) {
+        foreach ($validMetas as $meta) {
             /** @var Meta $meta */
             static::assertTrue($meta->isValid());
         }
 
-        $invalids = [
+        $invalidMetas = [
             Meta::make('name', ''),
-            Meta::make('name', null),
             Meta::make('name', []),   // You shall not pass !
-            Meta::make('name', true),
-            Meta::make('name', 123),
         ];
 
-        foreach ($invalids as $meta) {
+        foreach ($invalidMetas as $meta) {
             /** @var Meta $meta */
             static::assertFalse($meta->isValid());
         }
@@ -147,15 +146,6 @@ class MetaTest extends TestCase
             '<meta property="og:title" content="Hello World">',
             $meta->render()
         );
-    }
-
-    /** @test */
-    public function it_must_throw_an_invalid_argument_exception_on_invalid_type(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The meta name property is must be a string value, NULL is given.');
-
-        Meta::make('title', 'Hello World')->setNameProperty(null);
     }
 
     /** @test */

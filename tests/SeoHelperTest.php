@@ -4,7 +4,14 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests;
 
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Contracts\SeoHelper as SeoHelperContract;
+use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
+use Arcanedev\SeoHelper\SeoHelper;
+use Arcanedev\SeoHelper\SeoMeta;
+use Arcanedev\SeoHelper\SeoOpenGraph;
+use Illuminate\Support\HtmlString;
 
 /**
  * Class     SeoHelperTest
@@ -18,8 +25,7 @@ class SeoHelperTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\SeoHelper */
-    private $seoHelper;
+    private SeoHelperContract $seoHelper;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -49,9 +55,9 @@ class SeoHelperTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoHelper::class,
+            Renderable::class,
+            SeoHelperContract::class,
+            SeoHelper::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -64,9 +70,9 @@ class SeoHelperTest extends TestCase
     {
         $this->seoHelper = seo_helper();
         $expectations    = [
-            \Arcanedev\SeoHelper\Contracts\SeoHelper::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoHelper::class,
+            Renderable::class,
+            SeoHelperContract::class,
+            SeoHelper::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -80,9 +86,9 @@ class SeoHelperTest extends TestCase
         $seoMeta = $this->seoHelper->meta();
 
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoMeta::class,
+            Renderable::class,
+            SeoMetaContract::class,
+            SeoMeta::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -99,9 +105,9 @@ class SeoHelperTest extends TestCase
         ];
 
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\SeoOpenGraph::class,
+            Renderable::class,
+            SeoOpenGraphContract::class,
+            SeoOpenGraph::class,
         ];
 
         foreach ($ogs as $seoOpenGraph) {
@@ -118,10 +124,10 @@ class SeoHelperTest extends TestCase
         $siteName     = 'ARCANEDEV';
         $separator    = '|';
         $expectations = [
-            "<title>$title $separator $siteName</title>",
-            '<meta property="og:title" content="'.$title.'">',
-            '<meta property="og:site_name" content="'.$siteName.'">',
-            '<meta name="twitter:title" content="'.$title.'">',
+            "<title>{$title} {$separator} {$siteName}</title>",
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta property="og:site_name" content="' . $siteName . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
         ];
 
         $this->seoHelper->setTitle($title, $siteName, $separator);
@@ -139,13 +145,14 @@ class SeoHelperTest extends TestCase
         $siteName     = 'ARCANEDEV';
         $expectations = [
             "<title>{$title} - {$siteName}</title>",
-            '<meta property="og:title" content="'.$title.'">',
-            '<meta property="og:site_name" content="'.$siteName.'">',
-            '<meta name="twitter:title" content="'.$title.'">',
+            '<meta property="og:title" content="' . $title . '">',
+            '<meta property="og:site_name" content="' . $siteName . '">',
+            '<meta name="twitter:title" content="' . $title . '">',
         ];
 
-        $this->seoHelper->setSiteName($siteName)
-                        ->setTitle($title);
+        $this->seoHelper
+            ->setSiteName($siteName)
+            ->setTitle($title);
 
         foreach ($expectations as $expected) {
             static::assertStringContainsString($expected, $this->seoHelper->render());
@@ -186,9 +193,9 @@ class SeoHelperTest extends TestCase
     {
         $description  = 'ARCANEDEV super description';
         $expectations = [
-            '<meta name="description" content="'.$description.'">',
-            '<meta property="og:description" content="'.$description.'">',
-            '<meta name="twitter:description" content="'.$description.'">',
+            '<meta name="description" content="' . $description . '">',
+            '<meta property="og:description" content="' . $description . '">',
+            '<meta name="twitter:description" content="' . $description . '">',
         ];
 
         $this->seoHelper->setDescription($description);
@@ -203,7 +210,7 @@ class SeoHelperTest extends TestCase
     public function it_can_set_and_render_keywords(): void
     {
         $keywords = $this->getSeoHelperConfig('keywords.default');
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         $this->seoHelper->setKeywords($keywords); // Array
 
@@ -222,8 +229,8 @@ class SeoHelperTest extends TestCase
         $this->seoHelper->setImage($imageUrl = 'http://localhost/assets/img/logo.png');
 
         $expectations = [
-            '<meta property="og:image" content="'.$imageUrl.'">',
-            '<meta name="twitter:image" content="'.$imageUrl.'">'
+            '<meta property="og:image" content="' . $imageUrl . '">',
+            '<meta name="twitter:image" content="' . $imageUrl . '">'
         ];
 
         $rendered = $this->seoHelper->render();
@@ -239,8 +246,8 @@ class SeoHelperTest extends TestCase
         $this->seoHelper->setUrl($url = 'http://localhost/path');
 
         $expectations = [
-            '<link rel="canonical" href="'.$url.'">',
-            '<meta property="og:url" content="'.$url.'">'
+            '<link rel="canonical" href="' . $url . '">',
+            '<meta property="og:url" content="' . $url . '">'
         ];
 
         $rendered = $this->seoHelper->render();
@@ -263,7 +270,7 @@ class SeoHelperTest extends TestCase
     {
         $output = $this->seoHelper->renderHtml();
 
-        static::assertInstanceOf(\Illuminate\Support\HtmlString::class, $output);
+        static::assertInstanceOf(HtmlString::class, $output);
         static::assertNotEmpty($output->toHtml());
     }
 

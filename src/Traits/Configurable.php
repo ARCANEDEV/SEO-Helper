@@ -18,8 +18,7 @@ trait Configurable
      | -----------------------------------------------------------------
      */
 
-    /** @var array */
-    protected $configs = [];
+    protected array $configs = [];
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
@@ -27,27 +26,22 @@ trait Configurable
      */
 
     /**
+     * Get a config value.
+     */
+    public function getConfig(string $name, mixed $default = null): mixed
+    {
+        return Arr::get($this->configs, $name, $default);
+    }
+
+    /**
      * Set the configs.
-     *
-     * @param  array  $configs
      *
      * @return $this
      */
-    protected function setConfigs(array $configs)
+    protected function setConfigs(array $configs): static
     {
         $this->configs = $configs;
 
         return $this;
-    }
-
-    /**
-     * @param  string      $name
-     * @param  mixed|null  $default
-     *
-     * @return mixed
-     */
-    public function getConfig($name, $default = null)
-    {
-        return Arr::get($this->configs, $name, $default);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\MiscTags;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -19,8 +21,7 @@ class MiscTagsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\MiscTags */
-    private $misc;
+    private MiscTagsContract $misc;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -31,8 +32,9 @@ class MiscTagsTest extends TestCase
     {
         parent::setUp();
 
-        $config     = $this->getMiscConfig();
-        $this->misc = new MiscTags($config);
+        $this->misc = new MiscTags(
+            $this->getMiscConfig()
+        );
 
         $this->misc->setUrl($this->baseUrl);
     }
@@ -53,9 +55,9 @@ class MiscTagsTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Entities\MiscTags::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Entities\MiscTags::class,
+            Renderable::class,
+            MiscTagsContract::class,
+            MiscTags::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -68,7 +70,7 @@ class MiscTagsTest extends TestCase
     {
         $this->misc->setUrl($url = 'http://laravel.com');
 
-        $expected = '<link rel="canonical" href="'.$url.'">';
+        $expected = '<link rel="canonical" href="' . $url . '">';
 
         static::assertStringContainsString($expected, $this->misc->render());
         static::assertStringContainsString($expected, (string) $this->misc);
@@ -104,8 +106,8 @@ class MiscTagsTest extends TestCase
         ]);
 
         $expectations = [
-            '<link rel="author" href="'.$author.'">',
-            '<link rel="publisher" href="'.$publisher.'">',
+            '<link rel="author" href="' . $author . '">',
+            '<link rel="publisher" href="' . $publisher . '">',
         ];
 
         foreach ($expectations as $expected) {
@@ -118,7 +120,7 @@ class MiscTagsTest extends TestCase
     public function it_can_render(): void
     {
         $robots    = '<meta name="robots" content="noindex, nofollow">';
-        $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
+        $canonical = '<link rel="canonical" href="' . $this->baseUrl . '">';
         $viewport  = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
         $output = $this->misc->render();
@@ -137,17 +139,17 @@ class MiscTagsTest extends TestCase
 
         static::assertSame(implode(PHP_EOL, [
             $robots,
-            '<link rel="author" href="'.$author.'">',
-            '<link rel="publisher" href="'.$publisher.'">',
+            '<link rel="author" href="' . $author . '">',
+            '<link rel="publisher" href="' . $publisher . '">',
         ]), $this->misc->render());
 
         $this->misc->setUrl($this->baseUrl);
 
         static::assertSame(implode(PHP_EOL, [
             $robots,
-            '<link rel="author" href="'.$author.'">',
-            '<link rel="publisher" href="'.$publisher.'">',
-            '<link rel="canonical" href="'.$this->baseUrl.'">',
+            '<link rel="author" href="' . $author . '">',
+            '<link rel="publisher" href="' . $publisher . '">',
+            '<link rel="canonical" href="' . $this->baseUrl . '">',
         ]), $this->misc->render());
     }
 
@@ -157,7 +159,7 @@ class MiscTagsTest extends TestCase
         static::assertNotEmpty($this->misc->render());
 
         $robots    = '<meta name="robots" content="noindex, nofollow">';
-        $canonical = '<link rel="canonical" href="'.$this->baseUrl.'">';
+        $canonical = '<link rel="canonical" href="' . $this->baseUrl . '">';
         $viewport  = '<meta name="viewport" content="width=device-width, initial-scale=1">';
 
         $output = $this->misc->render();
@@ -250,8 +252,6 @@ class MiscTagsTest extends TestCase
 
     /**
      * Get misc config.
-     *
-     * @return array
      */
     private function getMiscConfig(): array
     {

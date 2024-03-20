@@ -20,15 +20,13 @@ class MetaCollection extends AbstractMetaCollection
 
     /**
      * Meta tag prefix.
-     *
-     * @var string
      */
-    protected $prefix       = 'og:';
+    protected string $prefix       = 'og:';
 
     /**
      * Meta tag name property.
      *
      * @var string
      */
-    protected $nameProperty = 'property';
+    protected string $nameProperty = 'property';
 }

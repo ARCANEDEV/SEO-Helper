@@ -15,12 +15,6 @@ interface Renderable
      |  Main Methods
      | -----------------------------------------------------------------
      */
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function render();
 
     /**
      * Render the tag.
@@ -28,4 +22,9 @@ interface Renderable
      * @return string
      */
     public function __toString();
+
+    /**
+     * Render the tag.
+     */
+    public function render(): string;
 }

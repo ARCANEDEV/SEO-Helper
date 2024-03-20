@@ -1,0 +1,23 @@
+name: Check & Fix styling
+
+on: [push]
+
+jobs:
+  cs-fixer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: "laravel-pint"
+        uses: aglipanci/laravel-pint-action@latest
+        with:
+          verboseMode: true
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Fix the code styling

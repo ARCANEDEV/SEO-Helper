@@ -1,8 +1,6 @@
 # SEO Helper [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo]
 
 [![Github Workflow Status][badge_build]][link-github-status]
-[![Coverage Status][badge_coverage]][link-scrutinizer]
-[![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
 [![Github Issues][badge_issues]][link-github-issues]
 
@@ -18,7 +16,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/SEO-Helper/re
 
 ### Features
 
-  * Framework agnostic package.
+  * Framework-agnostic package.
   * Open Graph &amp; Twitter Cards are supported.
   * Webmaster tools site verifier tags are supported.
   * Google Analytics tracking code is supported.
@@ -52,8 +50,6 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [badge_php]:          https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/seo-helper.svg?style=flat-square
 [badge_build]:        https://img.shields.io/github/workflow/status/ARCANEDEV/SEO-Helper/run-tests?style=flat-square
-[badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/SEO-Helper.svg?style=flat-square
-[badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/73e1a779-7ca7-4a75-b6d3-452d7852187e.svg?style=flat-square
 [badge_issues]:       https://img.shields.io/github/issues/ARCANEDEV/SEO-Helper.svg?style=flat-square
 [badge_package]:      https://img.shields.io/badge/package-arcanedev/seo--helper-blue.svg?style=flat-square
@@ -66,5 +62,4 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-github-issues]: https://github.com/ARCANEDEV/SEO-Helper/issues
 [link-contributors]:  https://github.com/ARCANEDEV/SEO-Helper/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/seo-helper
-[link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/SEO-Helper/?branch=master
 [link-insight]:       https://insight.sensiolabs.com/projects/73e1a779-7ca7-4a75-b6d3-452d7852187e

@@ -21,100 +21,77 @@ interface OpenGraph extends Renderable
     /**
      * Set the open graph prefix.
      *
-     * @param  string  $prefix
-     *
      * @return $this
      */
-    public function setPrefix($prefix);
+    public function setPrefix(string $prefix): static;
 
     /**
      * Set type property.
      *
-     * @param  string  $type
-     *
      * @return $this
      */
-    public function setType($type);
+    public function setType(string $type): static;
 
     /**
      * Set title property.
      *
-     * @param  string  $title
-     *
      * @return $this
      */
-    public function setTitle($title);
+    public function setTitle(string $title): static;
 
     /**
      * Set description property.
      *
-     * @param  string  $description
-     *
      * @return $this
      */
-    public function setDescription($description);
+    public function setDescription(string $description): static;
 
     /**
      * Set url property.
      *
-     * @param  string  $url
-     *
      * @return $this
      */
-    public function setUrl($url);
+    public function setUrl(string $url): static;
 
     /**
      * Set image property.
      *
-     * @param  string  $image
-     *
      * @return $this
      */
-    public function setImage($image);
+    public function setImage(string $image): static;
 
     /**
      * Set site name property.
      *
-     * @param  string  $siteName
-     *
      * @return $this
      */
-    public function setSiteName($siteName);
+    public function setSiteName(string $siteName): static;
 
     /**
      * Set the locale.
      *
-     * @param  string  $locale
-     *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
-    public function setLocale($locale);
+    public function setLocale(string $locale): static;
 
     /**
      * Set the alternative locales.
      *
-     * @param  array  $locales
-     *
-     * @return \Arcanedev\SeoHelper\Entities\OpenGraph\Graph
+     * @return $this
      */
-    public function setAlternativeLocales(array $locales);
+    public function setAlternativeLocales(array $locales): static;
 
     /**
      * Add many open graph properties.
      *
-     * @param  array  $properties
-     *
      * @return $this
      */
-    public function addProperties(array $properties);
+    public function addProperties(array $properties): static;
 
     /**
      * Add an open graph property.
      *
-     * @param  string        $property
-     * @param  string|array  $content
-     *
      * @return $this
      */
-    public function addProperty($property, $content);
+    public function addProperty(string $property, array|string $content): static;
 }

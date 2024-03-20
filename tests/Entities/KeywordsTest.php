@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Keywords;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -19,8 +21,7 @@ class KeywordsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Keywords */
-    private $keywords;
+    private KeywordsContract $keywords;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -31,8 +32,9 @@ class KeywordsTest extends TestCase
     {
         parent::setUp();
 
-        $config         = $this->getKeywordsConfig();
-        $this->keywords = new Keywords($config);
+        $this->keywords = new Keywords(
+            $this->getKeywordsConfig()
+        );
     }
 
     public function tearDown(): void
@@ -51,13 +53,13 @@ class KeywordsTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Keywords::class,
+            Renderable::class,
+            KeywordsContract::class,
             Keywords::class
         ];
 
         foreach ($expectations as $expected) {
-            static::assertInstanceOf($expected,   $this->keywords);
+            static::assertInstanceOf($expected, $this->keywords);
         }
     }
 
@@ -90,11 +92,6 @@ class KeywordsTest extends TestCase
 
         static::assertCount(1, $this->keywords->getContent());
         static::assertSame([$keyword], $this->keywords->getContent());
-
-        $this->keywords->set(null);
-
-        static::assertCount(0, $this->keywords->getContent());
-        static::assertEmpty($this->keywords->getContent());
     }
 
     /** @test */
@@ -137,7 +134,7 @@ class KeywordsTest extends TestCase
     public function it_can_render(): void
     {
         $content  = $this->getDefaultContent();
-        $expected = '<meta name="keywords" content="'.implode(', ', $content).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $content) . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
@@ -161,11 +158,6 @@ class KeywordsTest extends TestCase
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
-
-        $this->keywords->set(null);
-
-        static::assertEmpty((string) $this->keywords);
-        static::assertEmpty($this->keywords->render());
     }
 
     /** @test */
@@ -176,7 +168,7 @@ class KeywordsTest extends TestCase
 
         static::assertSame($keywords, $this->keywords->getContent());
 
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords);
         static::assertHtmlStringEqualsHtmlString($expected, $this->keywords->render());
@@ -189,8 +181,6 @@ class KeywordsTest extends TestCase
 
     /**
      * Get keywords config.
-     *
-     * @return array
      */
     private function getKeywordsConfig(): array
     {
@@ -199,10 +189,8 @@ class KeywordsTest extends TestCase
 
     /**
      * Get keywords default content.
-     *
-     * @return array|string
      */
-    private function getDefaultContent()
+    private function getDefaultContent(): array|string
     {
         return $this->getSeoHelperConfig('keywords.default', []);
     }

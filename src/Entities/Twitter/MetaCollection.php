@@ -20,8 +20,6 @@ class MetaCollection extends AbstractMetaCollection
 
     /**
      * Meta tag prefix.
-     *
-     * @var string
      */
-    protected $prefix = 'twitter:';
+    protected string $prefix = 'twitter:';
 }

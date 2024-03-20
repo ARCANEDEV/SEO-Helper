@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Contracts;
 
+use Illuminate\Support\HtmlString;
+
 /**
  * Interface  SeoHelper
  *
@@ -15,169 +17,139 @@ interface SeoHelper extends Renderable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
-    /**
-     * Get SeoMeta instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoMeta
-     */
-    public function meta();
 
     /**
-     * Set SeoMeta instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
+     * Get the SeoMeta instance.
+     */
+    public function meta(): SeoMeta;
+
+    /**
+     * Set the SeoMeta instance.
      *
      * @return $this
      */
-    public function setSeoMeta(SeoMeta $seoMeta);
+    public function setSeoMeta(SeoMeta $seoMeta): static;
 
     /**
-     * Get SeoOpenGraph instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
+     * Get the SeoOpenGraph instance.
      */
-    public function openGraph();
+    public function openGraph(): SeoOpenGraph;
 
     /**
-     * Get SeoOpenGraph instance (alias).
+     * Get the SeoOpenGraph instance (alias).
      *
      * @see  openGraph()
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
-    public function og();
+    public function og(): SeoOpenGraph;
 
     /**
-     * Get SeoOpenGraph instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
+     * Get the SeoOpenGraph instance.
      *
      * @return $this
      */
-    public function setSeoOpenGraph(SeoOpenGraph $seoOpenGraph);
+    public function setSeoOpenGraph(SeoOpenGraph $seoOpenGraph): static;
 
     /**
      * Get SeoTwitter instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoTwitter
      */
-    public function twitter();
+    public function twitter(): SeoTwitter;
 
     /**
-     * Set SeoTwitter instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
+     * Set the SeoTwitter instance.
      *
      * @return $this
      */
-    public function setSeoTwitter(SeoTwitter $seoTwitter);
+    public function setSeoTwitter(SeoTwitter $seoTwitter): static;
 
     /**
-     * Set title.
-     *
-     * @param  string       $title
-     * @param  string|null  $siteName
-     * @param  string|null  $separator
+     * Set the title.
      *
      * @return $this
      */
-    public function setTitle($title, $siteName = null, $separator = null);
+    public function setTitle(string $title, ?string $siteName = null, ?string $separator = null): static;
 
     /**
      * Set the site name.
      *
-     * @param  string  $siteName
-     *
      * @return $this
      */
-    public function setSiteName($siteName);
+    public function setSiteName(string $siteName): static;
 
     /**
      * Hide the site name.
      *
      * @return $this
      */
-    public function hideSiteName();
+    public function hideSiteName(): static;
 
     /**
      * Show the site name.
      *
      * @return $this
      */
-    public function showSiteName();
+    public function showSiteName(): static;
 
     /**
-     * Set description.
-     *
-     * @param  string  $description
+     * Set the description.
      *
      * @return $this
      */
-    public function setDescription($description);
+    public function setDescription(string $description): static;
 
     /**
-     * Set keywords.
-     *
-     * @param  array|string  $keywords
+     * Set the keywords.
      *
      * @return $this
      */
-    public function setKeywords($keywords);
+    public function setKeywords(array|string $keywords): static;
 
     /**
-     * Set Image.
+     * Set the Image.
      *
-     * @param  string  $imageUrl
-     *
-     * @return \Arcanedev\SeoHelper\SeoHelper
+     * @return $this
      */
-    public function setImage($imageUrl);
+    public function setImage(string $imageUrl): static;
 
     /**
      * Set the current URL.
-     *
-     * @param  string  $url
-     *
-     * @return \Arcanedev\SeoHelper\SeoHelper
      */
-    public function setUrl($url);
+    public function setUrl(string $url): static;
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Render all seo tags with HtmlString object.
-     *
-     * @return \Illuminate\Support\HtmlString
      */
-    public function renderHtml();
+    public function renderHtml(): HtmlString;
 
     /**
      * Enable the OpenGraph.
      *
      * @return $this
      */
-    public function enableOpenGraph();
+    public function enableOpenGraph(): static;
 
     /**
      * Disable the OpenGraph.
      *
      * @return $this
      */
-    public function disableOpenGraph();
+    public function disableOpenGraph(): static;
 
     /**
      * Enable the Twitter Card.
      *
      * @return $this
      */
-    public function enableTwitter();
+    public function enableTwitter(): static;
 
     /**
      * Disable the Twitter Card.
      *
      * @return $this
      */
-    public function disableTwitter();
+    public function disableTwitter(): static;
 }

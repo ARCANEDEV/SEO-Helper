@@ -20,10 +20,8 @@ class MetaCollection extends AbstractMetaCollection
 
     /**
      * Ignored tags, they have dedicated class.
-     *
-     * @var array
      */
-    protected $ignored = [
+    protected array $ignored = [
         'description',
         'keywords'
     ];
@@ -36,12 +34,9 @@ class MetaCollection extends AbstractMetaCollection
     /**
      * Add a meta to collection.
      *
-     * @param  string  $name
-     * @param  string  $content
-     *
      * @return $this
      */
-    public function addOne($name, $content)
+    public function addOne(string $name, array|string $content): static
     {
         $meta = Meta::make($name, $content);
 

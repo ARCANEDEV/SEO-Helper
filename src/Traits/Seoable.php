@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Traits;
 
+use Arcanedev\SeoHelper\Contracts\{SeoHelper, SeoMeta, SeoOpenGraph, SeoTwitter};
+
 /**
  * Trait     Seoable
  *
@@ -18,40 +20,32 @@ trait Seoable
 
     /**
      * Get the SeoHelper instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
      */
-    public function seo()
+    public function seo(): SeoHelper
     {
         return seo_helper();
     }
 
     /**
      * Get the SeoMeta instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoMeta
      */
-    public function seoMeta()
+    public function seoMeta(): SeoMeta
     {
         return $this->seo()->meta();
     }
 
     /**
      * Get the SeoOpenGraph instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
-    public function seoGraph()
+    public function seoGraph(): SeoOpenGraph
     {
         return $this->seo()->openGraph();
     }
 
     /**
      * Get the SeoTwitter instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoTwitter
      */
-    public function seoCard()
+    public function seoCard(): SeoTwitter
     {
         return $this->seo()->twitter();
     }
@@ -62,39 +56,25 @@ trait Seoable
      */
 
     /**
-     * Set title.
-     *
-     * @param  string       $title
-     * @param  string|null  $siteName
-     * @param  string|null  $separator
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
+     * Set the title.
      */
-    public function setTitle($title, $siteName = null, $separator = null)
+    public function setTitle(string $title, ?string $siteName = null, ?string $separator = null): SeoHelper
     {
         return $this->seo()->setTitle($title, $siteName, $separator);
     }
 
     /**
-     * Set description.
-     *
-     * @param  string  $description
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
+     * Set the description.
      */
-    public function setDescription($description)
+    public function setDescription(string $description): SeoHelper
     {
         return $this->seo()->setDescription($description);
     }
 
     /**
-     * Set keywords.
-     *
-     * @param  array|string  $keywords
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
+     * Set the keywords.
      */
-    public function setKeywords($keywords)
+    public function setKeywords(array|string $keywords): SeoHelper
     {
         return $this->seo()->setKeywords($keywords);
     }

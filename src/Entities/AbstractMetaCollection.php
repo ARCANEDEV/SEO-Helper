@@ -24,31 +24,28 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
 
     /**
      * Meta tag prefix.
-     *
-     * @var string
      */
-    protected $prefix = '';
+    protected string $prefix = '';
 
     /**
      * Meta tag name property.
-     *
-     * @var string
      */
-    protected $nameProperty = 'name';
-
-    /**
-     * The items contained in the collection.
-     *
-     * @var array
-     */
-    protected $items = [];
+    protected string $nameProperty = 'name';
 
     /**
      * Ignored tags, they have dedicated class.
-     *
-     * @var array
      */
-    protected $ignored = [];
+    protected array $ignored = [];
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
@@ -58,11 +55,9 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
     /**
      * Set meta prefix name.
      *
-     * @param  string  $prefix
-     *
      * @return $this
      */
-    public function setPrefix($prefix)
+    public function setPrefix(string $prefix): static
     {
         $this->prefix = $prefix;
 
@@ -77,11 +72,9 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
     /**
      * Add many meta tags.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMany(array $metas)
+    public function addMany(array $metas): static
     {
         foreach ($metas as $name => $content) {
             $this->addOne($name, $content);
@@ -93,60 +86,39 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
     /**
      * Add a meta to collection.
      *
-     * @param  string        $name
-     * @param  string|array  $content
-     *
      * @return $this
      */
-    public function addOne($name, $content)
+    public function addOne(string $name, array|string $content): static
     {
-        if (empty($name) || empty($content))
+        if (empty($name) || empty($content)) {
             return $this;
+        }
 
         return $this->addMeta($name, $content);
     }
 
     /**
-     * Make a meta and add it to collection.
-     *
-     * @param  string        $name
-     * @param  string|array  $content
-     *
-     * @return $this
-     */
-    protected function addMeta($name, $content)
-    {
-        $meta = Meta::make($name, $content, $this->nameProperty, $this->prefix);
-
-        return $this->put($meta->key(), $meta);
-    }
-
-    /**
      * Remove a meta from the collection by key.
      *
-     * @param  array|string  $names
-     *
      * @return $this
      */
-    public function remove($names)
+    public function remove(array|string $names): static
     {
-        $names = static::prepareName($names);
+        $names = static::prepareName((array) $names);
 
         return $this->forget($names);
     }
 
     /**
      * Render the tag.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
-        return $this->map(function (Renderable $meta) {
-                return $meta->render();
-            })
+        return $this
+            ->map(fn(Renderable $meta) => $meta->render())
             ->filter()
-            ->implode(PHP_EOL);
+            ->implode(PHP_EOL)
+        ;
     }
 
     /**
@@ -154,7 +126,7 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
      *
      * @return $this
      */
-    public function reset()
+    public function reset(): static
     {
         $this->items = [];
 
@@ -162,13 +134,23 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
     }
 
     /**
-     * Render the tag.
-     *
-     * @return string
+     * Prepare names.
      */
-    public function __toString()
+    protected static function prepareName(array $names): array
     {
-        return $this->render();
+        return array_map(fn($name) => mb_strtolower(trim($name)), $names);
+    }
+
+    /**
+     * Make a meta and add it to collection.
+     *
+     * @return $this
+     */
+    protected function addMeta(string $name, array|string $content): static
+    {
+        $meta = Meta::make($name, $content, $this->nameProperty, $this->prefix);
+
+        return $this->put($meta->key(), $meta);
     }
 
     /* -----------------------------------------------------------------
@@ -178,12 +160,8 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
 
     /**
      * Check if meta is ignored.
-     *
-     * @param  string  $name
-     *
-     * @return bool
      */
-    protected function isIgnored($name)
+    protected function isIgnored(string $name): bool
     {
         return in_array($name, $this->ignored);
     }
@@ -198,24 +176,8 @@ abstract class AbstractMetaCollection extends Collection implements MetaCollecti
      *
      * @return $this
      */
-    private function refresh()
+    private function refresh(): static
     {
-        return $this->map(function (MetaContract $meta) {
-            return $meta->setPrefix($this->prefix);
-        });
-    }
-
-    /**
-     * Prepare names.
-     *
-     * @param  array|string  $names
-     *
-     * @return array
-     */
-    protected static function prepareName($names)
-    {
-        return array_map(function ($name) {
-            return strtolower(trim($name));
-        }, (array) $names);
+        return $this->map(fn(MetaContract $meta) => $meta->setPrefix($this->prefix));
     }
 }

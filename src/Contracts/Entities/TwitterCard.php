@@ -18,13 +18,13 @@ interface TwitterCard extends Renderable
      | -----------------------------------------------------------------
      */
 
-    const TYPE_APP                 = 'app';
-    const TYPE_GALLERY             = 'gallery';
-    const TYPE_PHOTO               = 'photo';
-    const TYPE_PLAYER              = 'player';
-    const TYPE_PRODUCT             = 'product';
-    const TYPE_SUMMARY             = 'summary';
-    const TYPE_SUMMARY_LARGE_IMAGE = 'summary_large_image';
+    public const TYPE_APP                 = 'app';
+    public const TYPE_GALLERY             = 'gallery';
+    public const TYPE_PHOTO               = 'photo';
+    public const TYPE_PLAYER              = 'player';
+    public const TYPE_PRODUCT             = 'product';
+    public const TYPE_SUMMARY             = 'summary';
+    public const TYPE_SUMMARY_LARGE_IMAGE = 'summary_large_image';
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
@@ -34,73 +34,56 @@ interface TwitterCard extends Renderable
     /**
      * Set the card type.
      *
-     * @param  string  $type
-     *
      * @return $this
      */
-    public function setType($type);
+    public function setType(string $type): static;
 
     /**
-     * Set card site.
-     *
-     * @param  string  $site
+     * Set the card site.
      *
      * @return $this
      */
-    public function setSite($site);
+    public function setSite(string $site): static;
 
     /**
-     * Set card title.
-     *
-     * @param  string  $title
+     * Set the card title.
      *
      * @return $this
      */
-    public function setTitle($title);
+    public function setTitle(string $title): static;
 
     /**
-     * Set card description.
-     *
-     * @param  string  $description
+     * Set the card description.
      *
      * @return $this
      */
-    public function setDescription($description);
+    public function setDescription(string $description): static;
 
     /**
-     * Add image to the card.
-     *
-     * @param  string  $url
+     * Add the image to the card.
      *
      * @return $this
      */
-    public function addImage($url);
+    public function addImage(string $url): static;
 
     /**
      * Add many metas to the card.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMetas(array $metas);
+    public function addMetas(array $metas): static;
 
     /**
      * Add a meta to the card.
      *
-     * @param  string        $name
-     * @param  string|array  $content
-     *
      * @return $this
      */
-    public function addMeta($name, $content);
+    public function addMeta(string $name, array|string $content): static;
 
     /**
      * Get all supported card types.
-     *
-     * @return array
      */
-    public function types();
+    public function types(): array;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -112,5 +95,5 @@ interface TwitterCard extends Renderable
      *
      * @return $this
      */
-    public function reset();
+    public function reset(): static;
 }

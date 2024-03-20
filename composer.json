@@ -24,6 +24,7 @@
     "require-dev": {
         "ext-dom": "*",
         "laravel/framework": "^9.0",
+        "laravel/pint": "^1.14",
         "orchestra/testbench-core": "^7.0",
         "phpunit/phpunit": "^9.5.10"
     },
@@ -39,8 +40,11 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
-        "coverage": "phpunit --coverage-html build/coverage/html"
+        "test": "phpunit --colors=always",
+        "test:dox": "phpunit --testdox --colors=always",
+        "test:ci": "phpunit --coverage-text",
+        "cs:fix": "pint -v",
+        "cs:test": "pint --test -v"
     },
     "extra": {
         "branch-alias": {

@@ -24,24 +24,18 @@ class SeoHelper implements SeoHelperContract
 
     /**
      * The SeoMeta instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\SeoMeta
      */
-    private $seoMeta;
+    protected SeoMetaContract $seoMeta;
 
     /**
      * The SeoOpenGraph instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
-    private $seoOpenGraph;
+    protected SeoOpenGraphContract $seoOpenGraph;
 
     /**
      * The SeoTwitter instance.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\SeoTwitter
      */
-    private $seoTwitter;
+    protected SeoTwitterContract $seoTwitter;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -50,17 +44,25 @@ class SeoHelper implements SeoHelperContract
 
     /**
      * Make SeoHelper instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta       $seoMeta
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter    $seoTwitter
      */
     public function __construct(
-        SeoMetaContract $seoMeta, SeoOpenGraphContract $seoOpenGraph, SeoTwitterContract $seoTwitter
+        SeoMetaContract $seoMeta,
+        SeoOpenGraphContract $seoOpenGraph,
+        SeoTwitterContract $seoTwitter
     ) {
         $this->setSeoMeta($seoMeta);
         $this->setSeoOpenGraph($seoOpenGraph);
         $this->setSeoTwitter($seoTwitter);
+    }
+
+    /**
+     * Render the tag.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
     }
 
     /* -----------------------------------------------------------------
@@ -69,23 +71,19 @@ class SeoHelper implements SeoHelperContract
      */
 
     /**
-     * Get SeoMeta instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoMeta
+     * Get the SeoMeta instance.
      */
-    public function meta()
+    public function meta(): SeoMetaContract
     {
         return $this->seoMeta;
     }
 
     /**
-     * Set SeoMeta instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoMeta  $seoMeta
+     * Set the SeoMeta instance.
      *
      * @return $this
      */
-    public function setSeoMeta(SeoMetaContract $seoMeta)
+    public function setSeoMeta(SeoMetaContract $seoMeta): static
     {
         $this->seoMeta = $seoMeta;
 
@@ -93,35 +91,29 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
-     * Get SeoOpenGraph instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
+     * Get the SeoOpenGraph instance.
      */
-    public function openGraph()
+    public function openGraph(): SeoOpenGraphContract
     {
         return $this->seoOpenGraph;
     }
 
     /**
-     * Get SeoOpenGraph instance (alias).
+     * Get the SeoOpenGraph instance (alias).
      *
      * @see openGraph()
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoOpenGraph
      */
-    public function og()
+    public function og(): SeoOpenGraphContract
     {
         return $this->openGraph();
     }
 
     /**
-     * Get SeoOpenGraph instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph  $seoOpenGraph
+     * Get the SeoOpenGraph instance.
      *
      * @return $this
      */
-    public function setSeoOpenGraph(SeoOpenGraphContract $seoOpenGraph)
+    public function setSeoOpenGraph(SeoOpenGraphContract $seoOpenGraph): static
     {
         $this->seoOpenGraph = $seoOpenGraph;
 
@@ -129,23 +121,19 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
-     * Get SeoTwitter instance.
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoTwitter
+     * Get the SeoTwitter instance.
      */
-    public function twitter()
+    public function twitter(): SeoTwitterContract
     {
         return $this->seoTwitter;
     }
 
     /**
-     * Set SeoTwitter instance.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\SeoTwitter  $seoTwitter
+     * Set the SeoTwitter instance.
      *
      * @return $this
      */
-    public function setSeoTwitter(SeoTwitterContract $seoTwitter)
+    public function setSeoTwitter(SeoTwitterContract $seoTwitter): static
     {
         $this->seoTwitter = $seoTwitter;
 
@@ -153,17 +141,13 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
-     * Set title.
-     *
-     * @param  string       $title
-     * @param  string|null  $siteName
-     * @param  string|null  $separator
+     * Set the title.
      *
      * @return $this
      */
-    public function setTitle($title, $siteName = null, $separator = null)
+    public function setTitle(string $title, ?string $siteName = null, ?string $separator = null): static
     {
-        $this->meta()->setTitle($title, null, $separator);
+        $this->meta()->setTitle($title, $siteName, $separator);
         $this->openGraph()->setTitle($title);
         $this->twitter()->setTitle($title);
 
@@ -173,14 +157,14 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set the site name.
      *
-     * @param  string  $siteName
-     *
-     * @return self
+     * @return $this
      */
-    public function setSiteName($siteName)
+    public function setSiteName(?string $siteName): static
     {
-        $this->meta()->setSiteName($siteName);
-        $this->openGraph()->setSiteName($siteName);
+        if ( ! empty($siteName)) {
+            $this->meta()->setSiteName($siteName);
+            $this->openGraph()->setSiteName($siteName);
+        }
 
         return $this;
     }
@@ -188,9 +172,9 @@ class SeoHelper implements SeoHelperContract
     /**
      * Hide the site name.
      *
-     * @return self
+     * @return $this
      */
-    public function hideSiteName()
+    public function hideSiteName(): static
     {
         $this->meta()->hideSiteName();
 
@@ -200,9 +184,9 @@ class SeoHelper implements SeoHelperContract
     /**
      * Show the site name.
      *
-     * @return self
+     * @return $this
      */
-    public function showSiteName()
+    public function showSiteName(): static
     {
         $this->meta()->showSiteName();
 
@@ -210,13 +194,11 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
-     * Set description.
+     * Set the description.
      *
-     * @param  string  $description
-     *
-     * @return \Arcanedev\SeoHelper\Contracts\SeoHelper
+     * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description): static
     {
         $this->meta()->setDescription($description);
         $this->openGraph()->setDescription($description);
@@ -226,13 +208,11 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
-     * Set keywords.
-     *
-     * @param  array|string  $keywords
+     * Set the keywords.
      *
      * @return $this
      */
-    public function setKeywords($keywords)
+    public function setKeywords(array|string $keywords): static
     {
         $this->meta()->setKeywords($keywords);
 
@@ -242,11 +222,9 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set Image.
      *
-     * @param  string  $imageUrl
-     *
      * @return $this
      */
-    public function setImage($imageUrl)
+    public function setImage(string $imageUrl): static
     {
         $this->openGraph()->setImage($imageUrl);
         $this->twitter()->addImage($imageUrl);
@@ -257,11 +235,9 @@ class SeoHelper implements SeoHelperContract
     /**
      * Set the current URL.
      *
-     * @param  string  $url
-     *
      * @return $this
      */
-    public function setUrl($url)
+    public function setUrl(string $url): static
     {
         $this->meta()->setUrl($url);
         $this->openGraph()->setUrl($url);
@@ -276,10 +252,8 @@ class SeoHelper implements SeoHelperContract
 
     /**
      * Render all seo tags.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         return implode(PHP_EOL, array_filter([
             $this->meta()->render(),
@@ -290,10 +264,8 @@ class SeoHelper implements SeoHelperContract
 
     /**
      * Render all seo tags with HtmlString object.
-     *
-     * @return \Illuminate\Support\HtmlString
      */
-    public function renderHtml()
+    public function renderHtml(): HtmlString
     {
         return new HtmlString(
             $this->render()
@@ -301,21 +273,11 @@ class SeoHelper implements SeoHelperContract
     }
 
     /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->render();
-    }
-
-    /**
      * Enable the OpenGraph.
      *
      * @return $this
      */
-    public function enableOpenGraph()
+    public function enableOpenGraph(): static
     {
         $this->openGraph()->enable();
 
@@ -327,7 +289,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @return $this
      */
-    public function disableOpenGraph()
+    public function disableOpenGraph(): static
     {
         $this->openGraph()->disable();
 
@@ -339,7 +301,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @return $this
      */
-    public function enableTwitter()
+    public function enableTwitter(): static
     {
         $this->twitter()->enable();
 
@@ -351,7 +313,7 @@ class SeoHelper implements SeoHelperContract
      *
      * @return $this
      */
-    public function disableTwitter()
+    public function disableTwitter(): static
     {
         $this->twitter()->disable();
 

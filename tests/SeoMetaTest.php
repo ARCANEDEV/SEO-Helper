@@ -4,7 +4,22 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Keywords as KeywordsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
+use Arcanedev\SeoHelper\Contracts\Entities\MiscTags as MiscTagsContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
+use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Contracts\SeoMeta as SeoMetaContract;
+use Arcanedev\SeoHelper\Entities\Analytics;
+use Arcanedev\SeoHelper\Entities\Description;
+use Arcanedev\SeoHelper\Entities\Keywords;
+use Arcanedev\SeoHelper\Entities\MetaCollection;
+use Arcanedev\SeoHelper\Entities\MiscTags;
+use Arcanedev\SeoHelper\Entities\Title;
+use Arcanedev\SeoHelper\Entities\Webmasters;
 use Arcanedev\SeoHelper\SeoMeta;
 use Arcanedev\SeoHelper\Tests\Traits\CanAssertsGoogleAnalytics;
 
@@ -27,8 +42,7 @@ class SeoMetaTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\SeoMeta */
-    private $seoMeta;
+    private SeoMetaContract $seoMeta;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -39,9 +53,9 @@ class SeoMetaTest extends TestCase
     {
         parent::setUp();
 
-        $configs       = $this->getSeoHelperConfig();
-        $this->seoMeta = new SeoMeta($configs);
-
+        $this->seoMeta = new SeoMeta(
+            $this->getSeoHelperConfig()
+        );
         $this->seoMeta->setUrl($this->baseUrl);
     }
 
@@ -61,9 +75,9 @@ class SeoMetaTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\SeoMeta::class,
-            \Arcanedev\SeoHelper\SeoMeta::class,
+            Renderable::class,
+            SeoMetaContract::class,
+            SeoMeta::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -107,7 +121,7 @@ class SeoMetaTest extends TestCase
         $separator = '|';
         $this->seoMeta->setTitle($title, $siteName, $separator);
 
-        $expected = "<title>$title $separator $siteName</title>";
+        $expected = "<title>{$title} {$separator} {$siteName}</title>";
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
         static::assertStringContainsString($expected, (string) $this->seoMeta);
@@ -115,8 +129,8 @@ class SeoMetaTest extends TestCase
         // Entity
         $titleEntity  = $this->seoMeta->getTitleEntity();
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Entities\Title::class,
-            \Arcanedev\SeoHelper\Entities\Title::class,
+            TitleContract::class,
+            Title::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -134,7 +148,7 @@ class SeoMetaTest extends TestCase
         $description = 'Awesome Description';
         $this->seoMeta->setDescription($description);
 
-        $expected = '<meta name="description" content="'.$description.'">';
+        $expected = '<meta name="description" content="' . $description . '">';
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
         static::assertStringContainsString($expected, (string) $this->seoMeta);
@@ -142,8 +156,8 @@ class SeoMetaTest extends TestCase
         // Entity
         $descriptionEntity = $this->seoMeta->getDescriptionEntity();
         $expectations      = [
-            \Arcanedev\SeoHelper\Contracts\Entities\Description::class,
-            \Arcanedev\SeoHelper\Entities\Description::class,
+            DescriptionContract::class,
+            Description::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -160,30 +174,25 @@ class SeoMetaTest extends TestCase
 
         $this->seoMeta->setKeywords($keywords);
 
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
         static::assertStringContainsString($expected, (string) $this->seoMeta);
 
         $this->seoMeta->setKeywords(implode(',', $keywords));
 
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
         static::assertStringContainsString($expected, (string) $this->seoMeta);
-
-        $this->seoMeta->setKeywords(null);
-
-        static::assertStringNotContainsString('name="keywords"', $this->seoMeta->render());
-        static::assertStringNotContainsString('name="keywords"', (string) $this->seoMeta);
 
         // Entity
         $this->seoMeta->setKeywords($keywords);
 
         $keywordsEntity = $this->seoMeta->getKeywordsEntity();
         $expecations    = [
-            \Arcanedev\SeoHelper\Contracts\Entities\Keywords::class,
-            \Arcanedev\SeoHelper\Entities\Keywords::class,
+            KeywordsContract::class,
+            Keywords::class,
         ];
 
         foreach ($expecations as $expected) {
@@ -199,7 +208,7 @@ class SeoMetaTest extends TestCase
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
         $this->seoMeta->setKeywords($keywords);
 
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
         static::assertStringContainsString($expected, (string) $this->seoMeta);
@@ -207,7 +216,7 @@ class SeoMetaTest extends TestCase
         $keywords[] = $keyword = 'keyword-6';
         $this->seoMeta->addKeyword($keyword);
 
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
         static::assertStringContainsString($expected, (string) $this->seoMeta);
@@ -217,7 +226,7 @@ class SeoMetaTest extends TestCase
     public function it_can_add_many_keywords(): void
     {
         $keywords = ['keyword-1', 'keyword-2', 'keyword-3', 'keyword-4', 'keyword-5'];
-        $expected = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
         $this->seoMeta->setKeywords($keywords);
 
         static::assertStringContainsString($expected, $this->seoMeta->render());
@@ -225,7 +234,7 @@ class SeoMetaTest extends TestCase
 
         $new       = ['keyword-6', 'keyword-7', 'keyword-8'];
         $keywords  = array_merge($keywords, $new);
-        $expected  = '<meta name="keywords" content="'.implode(', ', $keywords).'">';
+        $expected  = '<meta name="keywords" content="' . implode(', ', $keywords) . '">';
 
         $this->seoMeta->addKeywords($new);
 
@@ -238,7 +247,7 @@ class SeoMetaTest extends TestCase
     {
         $expectations = [
             '<meta name="robots" content="noindex, nofollow">',
-            '<link rel="canonical" href="'.$this->baseUrl.'">'
+            '<link rel="canonical" href="' . $this->baseUrl . '">'
         ];
 
         foreach ($expectations as $expected) {
@@ -305,8 +314,8 @@ class SeoMetaTest extends TestCase
         // Entity
         $miscEntity   = $this->seoMeta->getMiscEntity();
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Entities\MiscTags::class,
-            \Arcanedev\SeoHelper\Entities\MiscTags::class,
+            MiscTagsContract::class,
+            MiscTags::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -349,8 +358,8 @@ class SeoMetaTest extends TestCase
         // Entity
         $webmastersEntity = $this->seoMeta->getWebmastersEntity();
         $expectations     = [
-            \Arcanedev\SeoHelper\Contracts\Entities\Webmasters::class,
-            \Arcanedev\SeoHelper\Entities\Webmasters::class,
+            WebmastersContract::class,
+            Webmasters::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -372,8 +381,8 @@ class SeoMetaTest extends TestCase
         // Entity
         $analyticsEntity = $this->seoMeta->getAnalyticsEntity();
         $expectations    = [
-            \Arcanedev\SeoHelper\Contracts\Entities\Analytics::class,
-            \Arcanedev\SeoHelper\Entities\Analytics::class,
+            AnalyticsContract::class,
+            Analytics::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -388,14 +397,12 @@ class SeoMetaTest extends TestCase
 
     /**
      * Assert the meta collection.
-     *
-     * @param  \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection  $metas
      */
-    protected static function assertMetaCollection($metas): void
+    protected static function assertMetaCollection(mixed $metas): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection::class,
-            \Arcanedev\SeoHelper\Entities\MetaCollection::class,
+            MetaCollectionContract::class,
+            MetaCollection::class,
         ];
 
         foreach ($expectations as $expected) {

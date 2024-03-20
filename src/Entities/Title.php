@@ -9,6 +9,7 @@ use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Traits\Configurable;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 /**
  * Class     Title
@@ -31,45 +32,33 @@ class Title implements TitleContract
 
     /**
      * The title content.
-     *
-     * @var string
      */
-    protected $title      = '';
+    protected string $title = '';
 
     /**
      * The site name.
-     *
-     * @var string
      */
-    protected $siteName   = '';
+    protected string $siteName = '';
 
     /**
      * The site name visibility.
-     *
-     * @var bool
      */
-    protected $siteNameVisibility = true;
+    protected bool $siteNameVisibility = true;
 
     /**
      * The title separator.
-     *
-     * @var string
      */
-    protected $separator  = '-';
+    protected string $separator = '-';
 
     /**
      * Display the title first.
-     *
-     * @var bool
      */
-    protected $titleFirst = true;
+    protected bool $titleFirst = true;
 
     /**
      * The maximum title length.
-     *
-     * @var int
      */
-    protected $max        = 55;
+    protected int $max = 55;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -78,262 +67,14 @@ class Title implements TitleContract
 
     /**
      * Make the Title instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
 
-        if ( ! empty($configs))
+        if ( ! empty($configs)) {
             $this->init();
-    }
-
-    /**
-     * Start the engine.
-     */
-    private function init()
-    {
-        $this->set($this->getConfig('default', ''));
-        $this->setSiteName($this->getConfig('site-name', ''));
-        $this->setSeparator($this->getConfig('separator', '-'));
-        $this->switchPosition($this->getConfig('first', true));
-        $this->setMax($this->getConfig('max', 55));
-    }
-
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get title only (without site name or separator).
-     *
-     * @return string
-     */
-    public function getTitleOnly()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set title.
-     *
-     * @param  string  $title
-     *
-     * @return $this
-     */
-    public function set($title)
-    {
-        $this->checkTitle($title);
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get site name.
-     *
-     * @return string
-     */
-    public function getSiteName()
-    {
-        return $this->siteName;
-    }
-
-    /**
-     * Set site name.
-     *
-     * @param  string  $siteName
-     *
-     * @return $this
-     */
-    public function setSiteName($siteName)
-    {
-        if ( ! is_null($siteName))
-            $this->siteName = $siteName;
-
-        return $this;
-    }
-
-    /**
-     * Hide the site name.
-     *
-     * @return $this
-     */
-    public function hideSiteName()
-    {
-        return $this->setSiteNameVisibility(false);
-    }
-
-    /**
-     * Show the site name.
-     *
-     * @return $this
-     */
-    public function showSiteName()
-    {
-        return $this->setSiteNameVisibility(true);
-    }
-
-    /**
-     * Set the site name visibility.
-     *
-     * @param  bool  $visible
-     *
-     * @return $this
-     */
-    public function setSiteNameVisibility($visible)
-    {
-        $this->siteNameVisibility = (bool) $visible;
-
-        return $this;
-    }
-
-    /**
-     * Get title separator.
-     *
-     * @return string
-     */
-    public function getSeparator()
-    {
-        return $this->separator;
-    }
-
-    /**
-     * Set title separator.
-     *
-     * @param  string  $separator
-     *
-     * @return $this
-     */
-    public function setSeparator($separator)
-    {
-        if ( ! is_null($separator))
-            $this->separator = trim($separator);
-
-        return $this;
-    }
-
-    /**
-     * Set title first.
-     *
-     * @return $this
-     */
-    public function setFirst()
-    {
-        return $this->switchPosition(true);
-    }
-
-    /**
-     * Set title last.
-     *
-     * @return $this
-     */
-    public function setLast()
-    {
-        return $this->switchPosition(false);
-    }
-
-    /**
-     * Switch title position.
-     *
-     * @param  bool  $first
-     *
-     * @return $this
-     */
-    private function switchPosition($first)
-    {
-        $this->titleFirst = boolval($first);
-
-        return $this;
-    }
-
-    /**
-     * Check if title is first.
-     *
-     * @return bool
-     */
-    public function isTitleFirst()
-    {
-        return $this->titleFirst;
-    }
-
-    /**
-     * Get title max length.
-     *
-     * @return int
-     */
-    public function getMax()
-    {
-        return $this->max;
-    }
-
-    /**
-     * Set title max length.
-     *
-     * @param  int  $max
-     *
-     * @return $this
-     */
-    public function setMax($max)
-    {
-        $this->checkMax($max);
-
-        $this->max = $max;
-
-        return $this;
-    }
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Make a Title instance.
-     *
-     * @param  string  $title
-     * @param  string  $siteName
-     * @param  string  $separator
-     *
-     * @return $this
-     */
-    public static function make($title, $siteName = '', $separator = '-')
-    {
-        return new self([
-            'default'   => $title,
-            'site-name' => $siteName,
-            'separator' => $separator,
-            'first'     => true
-        ]);
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        $separator = $this->renderSeparator();
-        $output    = $this->isTitleFirst()
-            ? $this->renderTitleFirst($separator)
-            : $this->renderTitleLast($separator);
-
-        return Element::withTag('title')->html(
-            $this->prepareTitleOutput($output)
-        )->toHtml();
-    }
-
-    /**
-     * Render the separator.
-     *
-     * @return string
-     */
-    protected function renderSeparator()
-    {
-        return empty($separator = $this->getSeparator()) ? ' ' : " $separator ";
+        }
     }
 
     /**
@@ -347,14 +88,230 @@ class Title implements TitleContract
     }
 
     /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Make a Title instance.
+     *
+     * @return $this
+     */
+    public static function make(string $title, string $siteName = '', string $separator = '-'): static
+    {
+        return new static([
+            'default'   => $title,
+            'site-name' => $siteName,
+            'separator' => $separator,
+            'first'     => true
+        ]);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the title only (without site name or separator).
+     */
+    public function getTitleOnly(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @return $this
+     */
+    public function set(string $title): static
+    {
+        $this->checkTitle($title);
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get the site name.
+     */
+    public function getSiteName(): string
+    {
+        return $this->siteName;
+    }
+
+    /**
+     * Set the site name.
+     *
+     * @return $this
+     */
+    public function setSiteName(?string $siteName): static
+    {
+        if ($siteName !== null) {
+            $this->siteName = $siteName;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Hide the site name.
+     *
+     * @return $this
+     */
+    public function hideSiteName(): static
+    {
+        return $this->setSiteNameVisibility(false);
+    }
+
+    /**
+     * Show the site name.
+     *
+     * @return $this
+     */
+    public function showSiteName(): static
+    {
+        return $this->setSiteNameVisibility(true);
+    }
+
+    /**
+     * Set the site name visibility.
+     *
+     * @return $this
+     */
+    public function setSiteNameVisibility(bool $visible): static
+    {
+        $this->siteNameVisibility = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Get the title separator.
+     */
+    public function getSeparator(): string
+    {
+        return $this->separator;
+    }
+
+    /**
+     * Set the title separator.
+     *
+     * @return $this
+     */
+    public function setSeparator(?string $separator): static
+    {
+        if ($separator !== null) {
+            $this->separator = trim($separator);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the title first.
+     *
+     * @return $this
+     */
+    public function setFirst(): static
+    {
+        return $this->switchPosition(true);
+    }
+
+    /**
+     * Set the title last.
+     *
+     * @return $this
+     */
+    public function setLast(): static
+    {
+        return $this->switchPosition(false);
+    }
+
+    /**
+     * Check if the title is first.
+     */
+    public function isTitleFirst(): bool
+    {
+        return $this->titleFirst;
+    }
+
+    /**
+     * Get the title max length.
+     */
+    public function getMax(): int
+    {
+        return $this->max;
+    }
+
+    /**
+     * Set the title max length.
+     *
+     * @return $this
+     */
+    public function setMax(int $max): static
+    {
+        $this->checkMax($max);
+
+        $this->max = $max;
+
+        return $this;
+    }
+
+    /**
+     * Render the tag.
+     */
+    public function render(): string
+    {
+        $title = $this->prepareTitleOutput(
+            $this->isTitleFirst() ? $this->renderTitleFirst() : $this->renderTitleLast()
+        );
+
+        return Element::withTag('title')->html($title)->toHtml();
+    }
+
+    /**
+     * Render the separator.
+     */
+    protected function renderSeparator(): string
+    {
+        return empty($separator = $this->getSeparator()) ? ' ' : " {$separator} ";
+    }
+
+    /**
+     * Start the engine.
+     */
+    private function init(): void
+    {
+        $this
+            ->set($this->getConfig('default', ''))
+            ->setSiteName($this->getConfig('site-name', ''))
+            ->setSeparator($this->getConfig('separator', '-'))
+            ->switchPosition($this->getConfig('first', true))
+            ->setMax($this->getConfig('max', 55))
+        ;
+    }
+
+    /**
+     * Switch the title's position.
+     *
+     * @return $this
+     */
+    private function switchPosition(bool $first): static
+    {
+        $this->titleFirst = $first;
+
+        return $this;
+    }
+
+    /* -----------------------------------------------------------------
      |  Check Methods
      | -----------------------------------------------------------------
      */
 
     /**
      * Check if site name exists.
-     *
-     * @return bool
      */
     private function hasSiteName(): bool
     {
@@ -364,18 +321,10 @@ class Title implements TitleContract
     /**
      * Check title.
      *
-     * @param  string  $title
-     *
-     * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    private function checkTitle(&$title): void
+    private function checkTitle(string &$title): void
     {
-        if ( ! is_string($title)) {
-            $type = gettype($title);
-
-            throw new InvalidArgumentException("The title must be a string value, [$type] is given.");
-        }
-
         $title = trim($title);
 
         if (empty($title)) {
@@ -386,16 +335,10 @@ class Title implements TitleContract
     /**
      * Check title max length.
      *
-     * @param  int  $max
-     *
-     * @throws \Arcanedev\SeoHelper\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    private function checkMax($max): void
+    private function checkMax(int $max): void
     {
-        if ( ! is_int($max)) {
-            throw new InvalidArgumentException('The title maximum length must be integer.');
-        }
-
         if ($max <= 0) {
             throw new InvalidArgumentException('The title maximum length must be greater 0.');
         }
@@ -408,56 +351,42 @@ class Title implements TitleContract
 
     /**
      * Render title first.
-     *
-     * @param  string  $separator
-     *
-     * @return string
      */
-    private function renderTitleFirst(string $separator): string
+    private function renderTitleFirst(): string
     {
-        $output   = [];
-        $output[] = $this->getTitleOnly();
-
-        if ($this->hasSiteName()) {
-            $output[] = $separator;
-            $output[] = $this->getSiteName();
-        }
-
-        return implode('', $output);
+        return Str::of($this->getTitleOnly())
+            ->when(
+                $this->hasSiteName(),
+                fn(Stringable $title): Stringable => $title->append($this->renderSeparator(), $this->getSiteName())
+            )
+            ->toString()
+        ;
     }
 
     /**
      * Render title last.
-     *
-     * @param  string  $separator
-     *
-     * @return string
      */
-    private function renderTitleLast(string $separator): string
+    private function renderTitleLast(): string
     {
-        $output = [];
-
-        if ($this->hasSiteName()) {
-            $output[] = $this->getSiteName();
-            $output[] = $separator;
-        }
-
-        $output[] = $this->getTitleOnly();
-
-        return implode('', $output);
+        return Str::of($this->getTitleOnly())
+            ->when(
+                $this->hasSiteName(),
+                fn(Stringable $title): Stringable => $title->prepend($this->getSiteName(), $this->renderSeparator())
+            )
+            ->toString()
+        ;
     }
 
     /**
      * Prepare the title output.
-     *
-     * @param  string  $output
-     *
-     * @return string
      */
     private function prepareTitleOutput(string $output): string
     {
         return htmlspecialchars(
-            Str::limit(strip_tags($output), $this->getMax()), ENT_QUOTES, 'UTF-8', false
+            Str::limit(strip_tags($output), $this->getMax()),
+            ENT_QUOTES,
+            'UTF-8',
+            false
         );
     }
 }

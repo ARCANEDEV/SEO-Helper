@@ -28,10 +28,8 @@ class Graph implements OpenGraphContract
 
     /**
      * The Open Graph meta collection.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
-    protected $metas;
+    protected MetaCollection $metas;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -40,28 +38,23 @@ class Graph implements OpenGraphContract
 
     /**
      * Make Graph instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-        $this->metas = new MetaCollection;
+        $this->metas = new MetaCollection();
 
         $this->init();
     }
 
     /**
-     * Start the engine.
+     * Render the tag.
+     *
+     * @return string
      */
-    private function init()
+    public function __toString()
     {
-        $this->setPrefix($this->getConfig('prefix', 'og:'));
-        $this->setType($this->getConfig('type', ''));
-        $this->setTitle($this->getConfig('title', ''));
-        $this->setDescription($this->getConfig('description', ''));
-        $this->setSiteName($this->getConfig('site-name', ''));
-        $this->addProperties($this->getConfig('properties', []));
+        return $this->render();
     }
 
     /* -----------------------------------------------------------------
@@ -72,11 +65,9 @@ class Graph implements OpenGraphContract
     /**
      * Set the open graph prefix.
      *
-     * @param  string  $prefix
-     *
      * @return $this
      */
-    public function setPrefix($prefix)
+    public function setPrefix(string $prefix): static
     {
         $this->metas->setPrefix($prefix);
 
@@ -84,73 +75,61 @@ class Graph implements OpenGraphContract
     }
 
     /**
-     * Set type property.
-     *
-     * @param  string  $type
+     * Set the type property.
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): static
     {
         return $this->addProperty('type', $type);
     }
 
     /**
-     * Set title property.
-     *
-     * @param  string  $title
+     * Set the title property.
      *
      * @return $this
      */
-    public function setTitle($title)
+    public function setTitle(string $title): static
     {
         return $this->addProperty('title', $title);
     }
 
     /**
-     * Set description property.
-     *
-     * @param  string  $description
+     * Set the description property.
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description): static
     {
         return $this->addProperty('description', $description);
     }
 
     /**
-     * Set url property.
-     *
-     * @param  string  $url
+     * Set the url property.
      *
      * @return $this
      */
-    public function setUrl($url)
+    public function setUrl(string $url): static
     {
         return $this->addProperty('url', $url);
     }
 
     /**
-     * Set image property.
-     *
-     * @param  string  $image
+     * Set the image property.
      *
      * @return $this
      */
-    public function setImage($image)
+    public function setImage(string $image): static
     {
         return $this->addProperty('image', $image);
     }
 
     /**
-     * Set site name property.
-     *
-     * @param  string  $siteName
+     * Set the site name property.
      *
      * @return $this
      */
-    public function setSiteName($siteName)
+    public function setSiteName(string $siteName): static
     {
         return $this->addProperty('site_name', $siteName);
     }
@@ -158,11 +137,9 @@ class Graph implements OpenGraphContract
     /**
      * Set the locale.
      *
-     * @param  string  $locale
-     *
      * @return $this
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale): static
     {
         return $this->addProperty('locale', $locale);
     }
@@ -170,11 +147,9 @@ class Graph implements OpenGraphContract
     /**
      * Set the alternative locales.
      *
-     * @param  array  $locales
-     *
      * @return $this
      */
-    public function setAlternativeLocales(array $locales)
+    public function setAlternativeLocales(array $locales): static
     {
         return $this->addProperty('locale:alternate', $locales);
     }
@@ -182,11 +157,9 @@ class Graph implements OpenGraphContract
     /**
      * Add many open graph properties.
      *
-     * @param  array  $properties
-     *
      * @return $this
      */
-    public function addProperties(array $properties)
+    public function addProperties(array $properties): static
     {
         $this->metas->addMany($properties);
 
@@ -196,12 +169,9 @@ class Graph implements OpenGraphContract
     /**
      * Add an open graph property.
      *
-     * @param  string        $property
-     * @param  string|array  $content
-     *
      * @return $this
      */
-    public function addProperty($property, $content)
+    public function addProperty(string $property, array|string $content): static
     {
         $this->metas->addOne($property, $content);
 
@@ -215,21 +185,24 @@ class Graph implements OpenGraphContract
 
     /**
      * Render the tag.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         return $this->metas->render();
     }
 
     /**
-     * Render the tag.
-     *
-     * @return string
+     * Start the engine.
      */
-    public function __toString()
+    private function init(): void
     {
-        return $this->render();
+        $this
+            ->setPrefix($this->getConfig('prefix', 'og:'))
+            ->setType($this->getConfig('type', ''))
+            ->setTitle($this->getConfig('title', ''))
+            ->setDescription($this->getConfig('description', ''))
+            ->setSiteName($this->getConfig('site-name', ''))
+            ->addProperties($this->getConfig('properties', []))
+        ;
     }
 }

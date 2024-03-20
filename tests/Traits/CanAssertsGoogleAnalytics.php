@@ -16,14 +16,10 @@ trait CanAssertsGoogleAnalytics
      | -----------------------------------------------------------------
      */
 
-    /**
-     * @param  string  $id
-     * @param  string  $actual
-     */
     public static function assertGoogleAnalytics(string $id, string $actual): void
     {
         $expectations = [
-            '<script async src="https://www.googletagmanager.com/gtag/js?id='.$id.'"></script>',
+            '<script async src="https://www.googletagmanager.com/gtag/js?id=' . $id . '"></script>',
             "gtag('config', '{$id}');",
         ];
 

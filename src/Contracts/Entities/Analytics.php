@@ -21,9 +21,9 @@ interface Analytics extends Renderable
     /**
      * Set Google Analytics code.
      *
-     * @param  string  $code
+     * @param string $code
      *
-     * @return self
+     * @return $this
      */
-    public function setGoogle($code);
+    public function setGoogle(string $code): static;
 }

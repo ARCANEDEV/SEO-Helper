@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests;
 
+use Arcanedev\SeoHelper\Contracts\Renderable;
+use Arcanedev\SeoHelper\Contracts\SeoTwitter as SeoTwitterContract;
 use Arcanedev\SeoHelper\SeoTwitter;
 
 /**
@@ -18,8 +20,7 @@ class SeoTwitterTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var \Arcanedev\SeoHelper\Contracts\SeoTwitter */
-    private $seoTwitter;
+    private SeoTwitterContract $seoTwitter;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -30,8 +31,9 @@ class SeoTwitterTest extends TestCase
     {
         parent::setUp();
 
-        $configs          = $this->getSeoHelperConfig();
-        $this->seoTwitter = new SeoTwitter($configs);
+        $this->seoTwitter = new SeoTwitter(
+            $this->getSeoHelperConfig()
+        );
     }
 
     public function tearDown(): void
@@ -50,9 +52,9 @@ class SeoTwitterTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\SeoTwitter::class,
-            \Arcanedev\SeoHelper\Contracts\SeoTwitter::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            Renderable::class,
+            SeoTwitterContract::class,
+            SeoTwitter::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -170,7 +172,7 @@ class SeoTwitterTest extends TestCase
         $expectations = [];
 
         foreach ($metas as $name => $content) {
-            $expectations[] = '<meta name="twitter:'.$name.'" content="'.$content.'">';
+            $expectations[] = '<meta name="twitter:' . $name . '" content="' . $content . '">';
         }
 
         $this->seoTwitter->addMetas($metas);

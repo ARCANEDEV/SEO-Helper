@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Analytics as AnalyticsContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Analytics;
 use Arcanedev\SeoHelper\Tests\TestCase;
 use Arcanedev\SeoHelper\Tests\Traits\CanAssertsGoogleAnalytics;
@@ -27,8 +29,7 @@ class AnalyticsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Analytics */
-    private $analytics;
+    private AnalyticsContract $analytics;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -39,8 +40,9 @@ class AnalyticsTest extends TestCase
     {
         parent::setUp();
 
-        $config          = $this->getSeoHelperConfig('analytics', []);
-        $this->analytics = new Analytics($config);
+        $this->analytics = new Analytics(
+            $this->getSeoHelperConfig('analytics', [])
+        );
     }
 
     public function tearDown(): void
@@ -59,9 +61,9 @@ class AnalyticsTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Analytics::class,
-            \Arcanedev\SeoHelper\Entities\Analytics::class,
+            Renderable::class,
+            AnalyticsContract::class,
+            Analytics::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -72,7 +74,7 @@ class AnalyticsTest extends TestCase
     /** @test */
     public function it_must_render_empty_on_init(): void
     {
-        $this->analytics = new Analytics;
+        $this->analytics = new Analytics();
 
         static::assertEmpty($this->analytics->render());
     }

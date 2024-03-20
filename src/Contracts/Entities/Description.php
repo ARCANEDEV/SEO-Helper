@@ -14,50 +14,6 @@ use Arcanedev\SeoHelper\Contracts\Renderable;
 interface Description extends Renderable
 {
     /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get raw description content.
-     *
-     * @return string
-     */
-    public function getContent();
-
-    /**
-     * Get description content.
-     *
-     * @return string
-     */
-    public function get();
-
-    /**
-     * Set description content.
-     *
-     * @param  string  $content
-     *
-     * @return $this
-     */
-    public function set($content);
-
-    /**
-     * Get description max length.
-     *
-     * @return int
-     */
-    public function getMax();
-
-    /**
-     * Set description max length.
-     *
-     * @param  int  $max
-     *
-     * @return $this
-     */
-    public function setMax($max);
-
-    /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
@@ -65,10 +21,41 @@ interface Description extends Renderable
     /**
      * Make a description instance.
      *
-     * @param  string  $content
-     * @param  int     $max
+     * @return $this
+     */
+    public static function make(string $content, int $max = 155): static;
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Get the raw description content.
+     */
+    public function getContent(): string;
+
+    /**
+     * Get the description content.
+     */
+    public function get(): string;
+
+    /**
+     * Set the description content.
      *
      * @return $this
      */
-    public static function make($content, $max = 155);
+    public function set(string $content): static;
+
+    /**
+     * Get the description max length.
+     */
+    public function getMax(): int;
+
+    /**
+     * Set the description max length.
+     *
+     * @return $this
+     */
+    public function setMax(int $max): static;
 }

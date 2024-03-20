@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Title as TitleContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Title;
 use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Tests\TestCase;
@@ -21,8 +23,7 @@ class TitleTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Title */
-    protected $title;
+    protected TitleContract $title;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -33,8 +34,9 @@ class TitleTest extends TestCase
     {
         parent::setUp();
 
-        $config      = $this->getTitleConfig();
-        $this->title = new Title($config);
+        $this->title = new Title(
+            $this->getTitleConfig()
+        );
     }
 
     public function tearDown(): void
@@ -53,9 +55,9 @@ class TitleTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Title::class,
-            \Arcanedev\SeoHelper\Entities\Title::class,
+            Renderable::class,
+            TitleContract::class,
+            Title::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -170,38 +172,38 @@ class TitleTest extends TestCase
             ->setSiteName($siteName)
             ->setSeparator($separator);
 
-        $expected = "<title>$title $separator $siteName</title>";
+        $expected = "<title>{$title} {$separator} {$siteName}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setLast();
-        $expected = "<title>$siteName $separator $title</title>";
+        $expected = "<title>{$siteName} {$separator} {$title}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $separator = '|';
         $this->title->setSeparator($separator);
-        $expected  = "<title>$siteName $separator $title</title>";
+        $expected  = "<title>{$siteName} {$separator} {$title}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setFirst();
-        $expected = "<title>$title $separator $siteName</title>";
+        $expected = "<title>{$title} {$separator} {$siteName}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setSiteName('');
-        $expected = "<title>$title</title>";
+        $expected = "<title>{$title}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setLast();
-        $expected = "<title>$title</title>";
+        $expected = "<title>{$title}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
@@ -211,13 +213,13 @@ class TitleTest extends TestCase
             ->setSeparator('')
             ->setFirst();
 
-        $expected = "<title>$title $siteName</title>";
+        $expected = "<title>{$title} {$siteName}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
 
         $this->title->setLast();
-        $expected = "<title>$siteName $title</title>";
+        $expected = "<title>{$siteName} {$title}</title>";
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
@@ -234,8 +236,8 @@ class TitleTest extends TestCase
 
         static::assertInstanceOf(Title::class, $this->title);
 
-        static::assertSame($title,     $this->title->getTitleOnly());
-        static::assertSame($siteName,  $this->title->getSiteName());
+        static::assertSame($title, $this->title->getTitleOnly());
+        static::assertSame($siteName, $this->title->getSiteName());
         static::assertSame($separator, $this->title->getSeparator());
 
         $expected = '<title>Awesome title | Company Name</title>';
@@ -274,15 +276,6 @@ class TitleTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_title_exception_on_invalid_type(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The title must be a string value, [NULL] is given.');
-
-        $this->title->set(null);
-    }
-
-    /** @test */
     public function it_must_throw_title_exception_on_empty_title(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -307,7 +300,7 @@ class TitleTest extends TestCase
 
         $this->title->set($title)->setMax($max);
 
-        $expected = '<title>'.Str::limit($title, $max).'</title>';
+        $expected = '<title>' . Str::limit($title, $max) . '</title>';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
@@ -322,15 +315,6 @@ class TitleTest extends TestCase
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->title);
         static::assertHtmlStringEqualsHtmlString($expected, $this->title->render());
-    }
-
-    /** @test */
-    public function it_must_throw_invalid_max_length_type(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The title maximum length must be integer.');
-
-        $this->title->setMax(null);
     }
 
     /** @test */
@@ -349,8 +333,6 @@ class TitleTest extends TestCase
 
     /**
      * Get Title config.
-     *
-     * @return array
      */
     private function getTitleConfig(): array
     {
@@ -359,48 +341,32 @@ class TitleTest extends TestCase
 
     /**
      * Get default title.
-     *
-     * @param  string  $default
-     *
-     * @return string
      */
-    private function getDefaultTitle($default = ''): string
+    private function getDefaultTitle(string $default = ''): string
     {
         return $this->getSeoHelperConfig('title.default', $default);
     }
 
     /**
      * Get default site name.
-     *
-     * @param  string  $default
-     *
-     * @return string
      */
-    private function getDefaultSiteName($default = ''): string
+    private function getDefaultSiteName(string $default = ''): string
     {
         return $this->getSeoHelperConfig('title.site-name', $default);
     }
 
     /**
      * Get default separator.
-     *
-     * @param  string  $default
-     *
-     * @return string
      */
-    private function getDefaultSeparator($default = '-'): string
+    private function getDefaultSeparator(string $default = '-'): string
     {
         return $this->getSeoHelperConfig('title.separator', $default);
     }
 
     /**
      * Get title max length.
-     *
-     * @param  int  $default
-     *
-     * @return int
      */
-    private function getDefaultMax($default = 55): int
+    private function getDefaultMax(int $default = 55): int
     {
         return $this->getSeoHelperConfig('title.max', $default);
     }

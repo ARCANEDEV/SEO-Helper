@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Entities\Twitter;
 
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
 use Arcanedev\SeoHelper\Contracts\Entities\TwitterCard as CardContract;
 use Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException;
 use Arcanedev\SeoHelper\Traits\Configurable;
@@ -30,24 +31,18 @@ class Card implements CardContract
 
     /**
      * Card type.
-     *
-     * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * Card meta collection.
-     *
-     * @var \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection
      */
-    protected $metas;
+    protected MetaCollectionContract $metas;
 
     /**
      * Card images.
-     *
-     * @var array
      */
-    protected $images  = [];
+    protected array $images  = [];
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -56,62 +51,35 @@ class Card implements CardContract
 
     /**
      * Make the twitter card instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-        $this->metas = new MetaCollection;
+        $this->metas = new MetaCollection();
 
         $this->init();
     }
 
     /**
-     * Start the engine.
+     * Render the tag.
      *
-     * @return $this
+     * @return string
      */
-    private function init()
+    public function __toString()
     {
-        $this->setPrefix($this->getConfig('prefix', 'twitter:'));
-        $this->setType($this->getConfig('card', static::TYPE_SUMMARY));
-        $this->setSite($this->getConfig('site', ''));
-        $this->setTitle($this->getConfig('title', ''));
-        $this->addMetas($this->getConfig('metas', []));
-
-        return $this;
-    }
-
-    /* -----------------------------------------------------------------
-     |  Getters & Setters
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Set meta prefix name.
-     *
-     * @param  string  $prefix
-     *
-     * @return $this
-     */
-    private function setPrefix($prefix)
-    {
-        $this->metas->setPrefix($prefix);
-
-        return $this;
+        return $this->render();
     }
 
     /**
      * Set the card type.
      *
-     * @param  string  $type
-     *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): static
     {
-        if (empty($type)) return $this;
+        if (empty($type)) {
+            return $this;
+        }
 
         $this->checkType($type);
         $this->type = $type;
@@ -120,15 +88,15 @@ class Card implements CardContract
     }
 
     /**
-     * Set card site.
-     *
-     * @param  string  $site
+     * Set the card site.
      *
      * @return $this
      */
-    public function setSite($site)
+    public function setSite(string $site): static
     {
-        if (empty($site)) return $this;
+        if (empty($site)) {
+            return $this;
+        }
 
         $this->checkSite($site);
 
@@ -136,37 +104,31 @@ class Card implements CardContract
     }
 
     /**
-     * Set card title.
-     *
-     * @param  string  $title
+     * Set the card title.
      *
      * @return $this
      */
-    public function setTitle($title)
+    public function setTitle(string $title): static
     {
         return $this->addMeta('title', $title);
     }
 
     /**
-     * Set card description.
-     *
-     * @param  string  $description
+     * Set the card description.
      *
      * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description): static
     {
         return $this->addMeta('description', $description);
     }
 
     /**
-     * Add image to the card.
-     *
-     * @param  string  $url
+     * Add the image to the card.
      *
      * @return $this
      */
-    public function addImage($url)
+    public function addImage(string $url): static
     {
         if (count($this->images) < 4) {
             $this->images[] = $url;
@@ -178,11 +140,9 @@ class Card implements CardContract
     /**
      * Add many metas to the card.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMetas(array $metas)
+    public function addMetas(array $metas): static
     {
         $this->metas->addMany($metas);
 
@@ -192,12 +152,9 @@ class Card implements CardContract
     /**
      * Add a meta to the card.
      *
-     * @param  string        $name
-     * @param  string|array  $content
-     *
      * @return $this
      */
-    public function addMeta($name, $content)
+    public function addMeta(string $name, array|string $content): static
     {
         $this->metas->addOne($name, $content);
 
@@ -206,10 +163,8 @@ class Card implements CardContract
 
     /**
      * Get all supported card types.
-     *
-     * @return array
      */
-    public function types()
+    public function types(): array
     {
         return [
             static::TYPE_APP,
@@ -232,7 +187,7 @@ class Card implements CardContract
      *
      * @return $this
      */
-    public function reset()
+    public function reset(): static
     {
         $this->metas->reset();
         $this->images = [];
@@ -242,10 +197,8 @@ class Card implements CardContract
 
     /**
      * Render the twitter card.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         if ( ! empty($this->images)) {
             $this->loadImages();
@@ -255,13 +208,36 @@ class Card implements CardContract
     }
 
     /**
-     * Render the tag.
+     * Start the engine.
      *
-     * @return string
+     * @return $this
      */
-    public function __toString()
+    private function init(): static
     {
-        return $this->render();
+        return $this
+            ->setPrefix($this->getConfig('prefix', 'twitter:'))
+            ->setType($this->getConfig('card', static::TYPE_SUMMARY))
+            ->setSite($this->getConfig('site', ''))
+            ->setTitle($this->getConfig('title', ''))
+            ->addMetas($this->getConfig('metas', []))
+        ;
+    }
+
+    /* -----------------------------------------------------------------
+     |  Getters & Setters
+     | -----------------------------------------------------------------
+     */
+
+    /**
+     * Set meta prefix name.
+     *
+     * @return $this
+     */
+    private function setPrefix(string $prefix): static
+    {
+        $this->metas->setPrefix($prefix);
+
+        return $this;
     }
 
     /* -----------------------------------------------------------------
@@ -272,29 +248,19 @@ class Card implements CardContract
     /**
      * Check the card type.
      *
-     * @param  string  $type
-     *
-     * @throws \Arcanedev\SeoHelper\Exceptions\InvalidTwitterCardException
+     * @throws InvalidTwitterCardException
      */
-    private function checkType(&$type): void
+    private function checkType(string &$type): void
     {
-        if ( ! is_string($type)) {
-            throw new InvalidTwitterCardException(
-                'The Twitter card type must be a string value, [' . gettype($type) . '] was given.'
-            );
-        }
-
-        $type = strtolower(trim($type));
+        $type = mb_strtolower(trim($type));
 
         if ( ! in_array($type, $this->types())) {
-            throw new InvalidTwitterCardException("The Twitter card type [$type] is not supported.");
+            throw new InvalidTwitterCardException("The Twitter card type [{$type}] is not supported.");
         }
     }
 
     /**
      * Check the card site.
-     *
-     * @param  string  $site
      */
     private function checkSite(string &$site): void
     {
@@ -311,7 +277,7 @@ class Card implements CardContract
      */
     private function loadImages(): void
     {
-        if (count($this->images) == 1) {
+        if (count($this->images) === 1) {
             $this->addMeta('image', $this->images[0]);
 
             return;
@@ -324,15 +290,9 @@ class Card implements CardContract
 
     /**
      * Prepare username.
-     *
-     * @param  string  $username
-     *
-     * @return string
      */
     private function prepareUsername(string $username): string
     {
-        return Str::startsWith($username, '@')
-            ? $username :
-            "@{$username}";
+        return Str::startsWith($username, '@') ? $username : "@{$username}";
     }
 }

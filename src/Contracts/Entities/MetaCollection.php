@@ -21,28 +21,21 @@ interface MetaCollection extends Renderable
     /**
      * Add a meta to collection.
      *
-     * @param  string        $name
-     * @param  string|array  $content
-     *
      * @return $this
      */
-    public function addOne($name, $content);
+    public function addOne(string $name, array|string $content): static;
 
     /**
      * Add many meta tags.
      *
-     * @param  array  $metas
-     *
      * @return $this
      */
-    public function addMany(array $metas);
+    public function addMany(array $metas): static;
 
     /**
      * Remove a meta from the meta collection by key.
      *
-     * @param  array|string  $names
-     *
      * @return $this
      */
-    public function remove($names);
+    public function remove(array|string $names): static;
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Webmasters as WebmastersContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Webmasters;
 use Arcanedev\SeoHelper\Tests\TestCase;
 
@@ -19,8 +21,7 @@ class WebmastersTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Webmasters */
-    private $webmasters;
+    private WebmastersContract $webmasters;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -31,8 +32,9 @@ class WebmastersTest extends TestCase
     {
         parent::setUp();
 
-        $configs          = $this->getSeoHelperConfig('webmasters');
-        $this->webmasters = new Webmasters($configs);
+        $this->webmasters = new Webmasters(
+            $this->getSeoHelperConfig('webmasters')
+        );
     }
 
     public function tearDown(): void
@@ -51,9 +53,9 @@ class WebmastersTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\Webmasters::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Webmasters::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            Renderable::class,
+            WebmastersContract::class,
+            Webmasters::class,
         ];
 
         foreach ($expectations as $expected) {

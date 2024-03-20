@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests;
 
+use Arcanedev\SeoHelper\Contracts\Renderable;
+use Arcanedev\SeoHelper\Contracts\SeoOpenGraph as SeoOpenGraphContract;
 use Arcanedev\SeoHelper\SeoOpenGraph;
 
 /**
@@ -18,8 +20,7 @@ class SeoOpenGraphTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\SeoOpenGraph */
-    private $seoOpenGraph;
+    private SeoOpenGraphContract $seoOpenGraph;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -30,8 +31,9 @@ class SeoOpenGraphTest extends TestCase
     {
         parent::setUp();
 
-        $configs            = $this->getSeoHelperConfig();
-        $this->seoOpenGraph = new SeoOpenGraph($configs);
+        $this->seoOpenGraph = new SeoOpenGraph(
+            $this->getSeoHelperConfig()
+        );
     }
 
     public function tearDown(): void
@@ -50,9 +52,9 @@ class SeoOpenGraphTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\SeoOpenGraph::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
+            Renderable::class,
+            SeoOpenGraphContract::class,
+            SeoOpenGraph::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -105,7 +107,7 @@ class SeoOpenGraphTest extends TestCase
         foreach ($types as $type) {
             $this->seoOpenGraph->setType($type);
 
-            $expected = '<meta property="og:type" content="'.$type.'">';
+            $expected = '<meta property="og:type" content="' . $type . '">';
 
             static::assertStringContainsString($expected, $this->seoOpenGraph->render());
             static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -119,7 +121,7 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setTitle($title);
 
-        $expected = '<meta property="og:title" content="'.$title.'">';
+        $expected = '<meta property="og:title" content="' . $title . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -132,7 +134,7 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setDescription($description);
 
-        $expected = '<meta property="og:description" content="'.$description.'">';
+        $expected = '<meta property="og:description" content="' . $description . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -145,7 +147,7 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setUrl($url);
 
-        $expected = '<meta property="og:url" content="'.$url.'">';
+        $expected = '<meta property="og:url" content="' . $url . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -158,7 +160,7 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setImage($image);
 
-        $expected = '<meta property="og:image" content="'.$image.'">';
+        $expected = '<meta property="og:image" content="' . $image . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -171,7 +173,7 @@ class SeoOpenGraphTest extends TestCase
 
         $this->seoOpenGraph->setSiteName($siteName);
 
-        $expected = '<meta property="og:site_name" content="'.$siteName.'">';
+        $expected = '<meta property="og:site_name" content="' . $siteName . '">';
 
         static::assertStringContainsString($expected, $this->seoOpenGraph->render());
         static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -187,7 +189,7 @@ class SeoOpenGraphTest extends TestCase
         foreach ($locales as $locale) {
             $this->seoOpenGraph->addProperty('locale', $locale);
 
-            $expected = '<meta property="og:locale" content="'.$locale.'">';
+            $expected = '<meta property="og:locale" content="' . $locale . '">';
 
             static::assertStringContainsString($expected, $this->seoOpenGraph->render());
             static::assertStringContainsString($expected, (string) $this->seoOpenGraph);
@@ -205,7 +207,7 @@ class SeoOpenGraphTest extends TestCase
         $expectations = [];
 
         foreach ($properties as $property => $content) {
-            $expectations[] = '<meta property="og:'.$property.'" content="'.$content.'">';
+            $expectations[] = '<meta property="og:' . $property . '" content="' . $content . '">';
         }
 
         $this->seoOpenGraph->addProperties($properties);
@@ -243,7 +245,7 @@ class SeoOpenGraphTest extends TestCase
 
         foreach ($locales as $locale) {
             static::assertStringContainsString(
-                '<meta property="og:locale" content="'.$locale.'">',
+                '<meta property="og:locale" content="' . $locale . '">',
                 $this->seoOpenGraph->setLocale($locale)->render()
             );
         }

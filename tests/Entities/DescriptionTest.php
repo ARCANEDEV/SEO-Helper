@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\Description as DescriptionContract;
+use Arcanedev\SeoHelper\Contracts\Renderable;
 use Arcanedev\SeoHelper\Entities\Description;
+use Arcanedev\SeoHelper\Exceptions\InvalidArgumentException;
 use Arcanedev\SeoHelper\Tests\TestCase;
 use Illuminate\Support\Str;
 
@@ -20,8 +23,7 @@ class DescriptionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\Description */
-    private $description;
+    private DescriptionContract $description;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -32,8 +34,9 @@ class DescriptionTest extends TestCase
     {
         parent::setUp();
 
-        $config            = $this->getDescriptionConfig();
-        $this->description = new Description($config);
+        $this->description = new Description(
+            $this->getDescriptionConfig()
+        );
     }
 
     public function tearDown(): void
@@ -52,9 +55,9 @@ class DescriptionTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\Description::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Description::class,
+            Renderable::class,
+            DescriptionContract::class,
+            Description::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -68,9 +71,9 @@ class DescriptionTest extends TestCase
         $this->description = Description::make('Cool description about this package');
 
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\Description::class,
-            \Arcanedev\SeoHelper\Contracts\Renderable::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\Description::class,
+            Renderable::class,
+            DescriptionContract::class,
+            Description::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -107,18 +110,9 @@ class DescriptionTest extends TestCase
     }
 
     /** @test */
-    public function it_must_throw_invalid_max_length_type(): void
-    {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The description maximum length must be integer.');
-
-        $this->description->setMax(null);
-    }
-
-    /** @test */
     public function it_must_throw_invalid_max_length_value(): void
     {
-        $this->expectException(\Arcanedev\SeoHelper\Exceptions\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The description maximum length must be greater 0.');
 
         $this->description->setMax(0);
@@ -131,7 +125,7 @@ class DescriptionTest extends TestCase
             $description = 'Cool description about this package'
         );
 
-        $expected = '<meta name="description" content="'.$description.'">';
+        $expected = '<meta name="description" content="' . $description . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->description);
         static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());
@@ -154,7 +148,7 @@ class DescriptionTest extends TestCase
 
         $this->description->set($content)->setMax($max);
 
-        $expected = '<meta name="description" content="'.Str::limit($content, $max).'">';
+        $expected = '<meta name="description" content="' . Str::limit($content, $max) . '">';
 
         static::assertHtmlStringEqualsHtmlString($expected, $this->description);
         static::assertHtmlStringEqualsHtmlString($expected, $this->description->render());
@@ -167,8 +161,6 @@ class DescriptionTest extends TestCase
 
     /**
      * Get description config.
-     *
-     * @return array
      */
     private function getDescriptionConfig(): array
     {
@@ -177,24 +169,16 @@ class DescriptionTest extends TestCase
 
     /**
      * Get default description content.
-     *
-     * @param  string  $default
-     *
-     * @return string
      */
-    private function getDefaultContent($default = ''): string
+    private function getDefaultContent(string $default = ''): string
     {
         return $this->getSeoHelperConfig('description.default', $default);
     }
 
     /**
      * Get default description max length.
-     *
-     * @param  int  $default
-     *
-     * @return int
      */
-    private function getDefaultMax($default = 155): int
+    private function getDefaultMax(int $default = 155): int
     {
         return $this->getSeoHelperConfig('description.max', $default);
     }

@@ -28,10 +28,8 @@ class Analytics implements AnalyticsContract
 
     /**
      * Google Analytics code.
-     *
-     * @var string
      */
-    protected $google = '';
+    protected string $google = '';
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -40,13 +38,10 @@ class Analytics implements AnalyticsContract
 
     /**
      * Make an Analytics instance.
-     *
-     * @param  array  $configs
      */
     public function __construct(array $configs = [])
     {
         $this->setConfigs($configs);
-
         $this->setGoogle($this->getConfig('google', ''));
     }
 
@@ -56,13 +51,31 @@ class Analytics implements AnalyticsContract
      */
 
     /**
-     * Set Google Analytics code.
+     * Render the tag.
      *
-     * @param  string  $code
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
+
+    /**
+     * Make Analytics instance.
      *
      * @return $this
      */
-    public function setGoogle($code)
+    public static function make(array $configs): static
+    {
+        return new static($configs);
+    }
+
+    /**
+     * Set Google Analytics code.
+     *
+     * @return $this
+     */
+    public function setGoogle(string $code): static
     {
         $this->google = $code;
 
@@ -76,24 +89,12 @@ class Analytics implements AnalyticsContract
 
     /**
      * Render the tag.
-     *
-     * @return string
      */
-    public function render()
+    public function render(): string
     {
         return implode(PHP_EOL, array_filter([
             $this->renderGoogleScript(),
         ]));
-    }
-
-    /**
-     * Render the tag.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->render();
     }
 
     /* -----------------------------------------------------------------
@@ -103,21 +104,20 @@ class Analytics implements AnalyticsContract
 
     /**
      * Render the Google Analytics tracking script.
-     *
-     * @return string
      */
-    protected function renderGoogleScript()
+    protected function renderGoogleScript(): string
     {
-        if (empty($this->google))
+        if (empty($this->google)) {
             return '';
+        }
 
         return <<<EOT
-<script async src="https://www.googletagmanager.com/gtag/js?id=$this->google"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={$this->google}"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', '$this->google');
+    gtag('config', '{$this->google}');
 </script>
 EOT;
     }

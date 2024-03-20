@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Arcanedev\SeoHelper\Tests\Entities;
 
+use Arcanedev\SeoHelper\Contracts\Entities\MetaCollection as MetaCollectionContract;
 use Arcanedev\SeoHelper\Entities\MetaCollection;
 use Arcanedev\SeoHelper\Tests\TestCase;
+use Illuminate\Support\Collection;
 
 /**
  * Class     MetaCollectionTest
@@ -19,8 +21,7 @@ class MetaCollectionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var  \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection */
-    private $metas;
+    private MetaCollectionContract $metas;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -31,7 +32,7 @@ class MetaCollectionTest extends TestCase
     {
         parent::setUp();
 
-        $this->metas = new MetaCollection;
+        $this->metas = new MetaCollection();
     }
 
     public function tearDown(): void
@@ -50,9 +51,9 @@ class MetaCollectionTest extends TestCase
     public function it_can_be_instantiated(): void
     {
         $expectations = [
-            \Arcanedev\SeoHelper\Entities\MetaCollection::class,
-            \Arcanedev\SeoHelper\Contracts\Entities\MetaCollection::class,
-            \Illuminate\Support\Collection::class,
+            Collection::class,
+            MetaCollectionContract::class,
+            MetaCollection::class,
         ];
 
         foreach ($expectations as $expected) {
@@ -91,7 +92,7 @@ class MetaCollectionTest extends TestCase
         $this->metas->addOne('canonical', $this->baseUrl);
 
         static::assertSame(
-            '<link rel="canonical" href="'.$this->baseUrl.'">',
+            '<link rel="canonical" href="' . $this->baseUrl . '">',
             $this->metas->render()
         );
     }
