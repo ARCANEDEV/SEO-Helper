@@ -12,6 +12,7 @@
 
 | Laravel                        | SEO-Helper                             |
 |:-------------------------------|:---------------------------------------|
+| ![Laravel v11.x][laravel_11_x] | ![SEO-Helper v7.x][seo_helper_7_x]     |
 | ![Laravel v10.x][laravel_10_x] | ![SEO-Helper v6.x][seo_helper_6_x]     |
 | ![Laravel v9.x][laravel_9_x]   | ![SEO-Helper v5.x][seo_helper_5_x]     |
 | ![Laravel v8.x][laravel_8_x]   | ![SEO-Helper v4.x][seo_helper_4_x]     |
@@ -27,6 +28,7 @@
 | ![Laravel v5.1][laravel_5_1]   | ![SEO-Helper v1.2.x][seo_helper_1_2_x] |
 | ![Laravel v5.0][laravel_5_0]   | ![SEO-Helper v1.1.x][seo_helper_1_1_x] |
 
+[laravel_11_x]:  https://img.shields.io/badge/v11.x-supported-brightgreen.svg?style=flat-square "Laravel v11.x"
 [laravel_10_x]:  https://img.shields.io/badge/v10.x-supported-brightgreen.svg?style=flat-square "Laravel v10.x"
 [laravel_9_x]:  https://img.shields.io/badge/v9.x-supported-brightgreen.svg?style=flat-square "Laravel v9.x"
 [laravel_8_x]:  https://img.shields.io/badge/v8.x-supported-brightgreen.svg?style=flat-square "Laravel v8.x"
@@ -42,6 +44,7 @@
 [laravel_5_1]:  https://img.shields.io/badge/v5.1-supported-brightgreen.svg?style=flat-square "Laravel v5.1"
 [laravel_5_0]:  https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
 
+[seo_helper_7_x]:   https://img.shields.io/badge/version-7.x-blue.svg?style=flat-square "SEO-Helper v7.x"
 [seo_helper_6_x]:   https://img.shields.io/badge/version-6.x-blue.svg?style=flat-square "SEO-Helper v6.x"
 [seo_helper_5_x]:   https://img.shields.io/badge/version-5.x-blue.svg?style=flat-square "SEO-Helper v5.x"
 [seo_helper_4_x]:   https://img.shields.io/badge/version-4.x-blue.svg?style=flat-square "SEO-Helper v4.x"
