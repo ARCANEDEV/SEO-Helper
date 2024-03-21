@@ -18,14 +18,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "arcanedev/php-html": "^8.0",
-        "arcanedev/support": "^11.0"
+        "arcanedev/php-html": "^9.0",
+        "arcanedev/support": "^12.0"
     },
     "require-dev": {
         "ext-dom": "*",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/pint": "^1.14",
-        "orchestra/testbench-core": "^9.0",
+        "orchestra/testbench-core": "^10.0",
         "phpunit/phpunit": "^10.5|^11.0"
     },
     "autoload": {
@@ -48,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "7.x-dev"
+            "dev-develop": "8.x-dev"
         },
         "laravel": {
             "providers": [
